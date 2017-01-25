@@ -11,13 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['middleware' => ['web']], function (){
+
+	Route::get('/', function () {
+		return view('welcome');
+	});
+
+	Auth::routes();
+
+	Route::get('/home', 'HomeController@index');
+
+	//DASHBOARD
+	Route::get('dashboard', 'DashboardController@index');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
 
 // DUMMIES VIEW
 Route::get('dummies/dashboard', 'Dummies@Dashboard');

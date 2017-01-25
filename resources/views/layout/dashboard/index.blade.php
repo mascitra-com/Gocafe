@@ -59,22 +59,27 @@
 									<li><a href="#">Another action</a></li>
 								</ul>
 							</li>
-							<li><a href="#"><i class="fa fa-fw fa-power-off"></i></a></li>
-						</ul>
-					</div><!-- /.navbar-collapse -->
-				</div><!-- /.container-fluid -->
-			</nav>
-			<div id="content">
-				<div class="container-fluid">
-					@yield('content')
+							<li><a href="{{ url('/logout') }}" onclick="event.preventDefault();
+								document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off"></i></a></li>
+
+								<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+									{{ csrf_field() }}
+								</form>
+							</ul>
+						</div><!-- /.navbar-collapse -->
+					</div><!-- /.container-fluid -->
+				</nav>
+				<div id="content">
+					<div class="container-fluid">
+						@yield('content')
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</body>
-<script src="{{URL::asset('plugins/jquery/jquery-3.1.1.min.js')}}"></script>
-<script src="{{URL::asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
-<script src="{{URL::asset('js/theme-dashboard.js')}}"></script>
-<script src="{{URL::asset('js/theme-helper.js')}}"></script>
-@yield('javascripts')
-</html>
+	</body>
+	<script src="{{URL::asset('plugins/jquery/jquery-3.1.1.min.js')}}"></script>
+	<script src="{{URL::asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+	<script src="{{URL::asset('js/theme-dashboard.js')}}"></script>
+	<script src="{{URL::asset('js/theme-helper.js')}}"></script>
+	@yield('javascripts')
+	</html>

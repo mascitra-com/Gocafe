@@ -28,6 +28,12 @@ class CreateOwnersTable extends Migration
             $table->integer('deleted_by')->unsigned()->index();
             $table->softDeletes();
         });
+
+        Schema::table('owners', function (Blueprint $table) {
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
+            $table->string('deleted_by')->nullable();
+        });
     }
 
     /**

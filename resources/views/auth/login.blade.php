@@ -19,26 +19,41 @@
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-4" id="form-right">
 				<h3 class="form-title">MEMBER LOGIN</h3>
-				<form action="#" method="post">
-					<div class="form-group">
-						<label for="">email</label>
-						<input type="text" class="form-control" placeholder="email">
+				<form action="#" method="post" role="form" action="{{ url('/login') }}">
+					{{ csrf_field() }}
+					<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+						<label for="email">email</label>
+						<input name="email" type="text" class="form-control" placeholder="email" value="{{ old('email') }}" required autofocus>
+
+						@if ($errors->has('email'))
+						<span class="help-block">
+							<strong>{{ $errors->first('email') }}</strong>
+						</span>
+						@endif
+
 					</div>
-					<div class="form-group">
-						<label for="">password</label>
-						<input type="password" class="form-control" placeholder="password">
+					<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+						<label for="password">password</label>
+						<input name="password" type="password" class="form-control" placeholder="password" required>
+
+						@if ($errors->has('password'))
+						<span class="help-block">
+							<strong>{{ $errors->first('password') }}</strong>
+						</span>
+						@endif
+
 					</div>
 					<div class="form-group">
 						<div class="btn-group btn-group-justified">
 							<div class="btn-group" role="group">
-								<button class="btn btn-primary btn-round">login</button>
+								<button class="btn btn-primary btn-round" type="submit">login</button>
 							</div>
 							<div class="btn-group" role="group">
 								<button class="btn btn-warning btn-round">reset</button>
 							</div>
 						</div>
 					</div>
-					<div class="form-roup">
+					<div class="form-roup" href="{{ url('/password/reset') }}>
 						<a href="#" class="link">lupa password?</a>
 					</div>
 				</form>
