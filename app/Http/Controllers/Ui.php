@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Dummies extends Controller
+class Ui extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,6 +23,11 @@ class Dummies extends Controller
 
     public function dashboard()
     {
-        return view('cafe/tes');
+        return view('dashboard/tes');
+    }
+
+    public function profile()
+    {
+        return view('profile/owner2');
     }
 }
