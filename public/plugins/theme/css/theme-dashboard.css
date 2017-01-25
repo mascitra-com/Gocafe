@@ -60,6 +60,7 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 #nav-side-thumbnail{
 	width: 100%;
 	margin:0 auto;
+	margin-bottom: 20px;
 	padding: calc(var(--nav-top-padding) - 13px) var(--navside-left-padding);
 	background-color: #EF6C40;
 	color: #FFF;

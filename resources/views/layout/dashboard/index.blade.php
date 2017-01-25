@@ -20,25 +20,20 @@
 				</div>
 				<ul class="nav">
 					<li class="nav-close"><a href="#"><i class="fa fa-fw fa-close"></i></a></li>
-					<li class="nav-title">Main</li>
 					<li class="nav-active"><a href="#"><i class="fa fa-fw fa-home"></i><span class="hidden-sm">Dashboard</span></a></li>
-					<li><a href="#"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Profile</span></a></li>
-					<li><a href="#"><i class="fa fa-fw fa-power-off"></i><span class="hidden-sm">logout</span></a></li>
-					<li class="nav-title">Additional</li>
-					<li><a href="#"><i class="fa fa-fw fa-credit-card"></i><span class="hidden-sm">Transaction</span></a></li>
-					<li><a href="#"><i class="fa fa-fw fa-cart-plus"></i><span class="hidden-sm">Cart</span></a></li>
-					<li><a href="#"><i class="fa fa-fw fa-bell"></i><span class="hidden-sm">Announcement</span></a></li>
-					<li class="nav-title">Other</li>
-					<li>
+					<li class="nav-title">Information</li>
+					<li><a href="#"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Owner Profile</span></a></li>
+					<li><a href="#"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Cafe Profile</span></a></li>
+					<li class="nav-title">Staff</li>
+					<li><a href="#"><i class="fa fa-fw fa-users"></i><span class="hidden-sm">Staff Management</span></a></li>
+
+					<!-- <li>
 						<a href="#menu-dropdown" data-toggle="collapse" aria-controls="collapse-post"><i class="fa fa-fw fa-bars"></i><span class="hidden-sm">Dropdown</span></a>
 						<ul class="collapse collapseable" id="menu-dropdown">
 							<li><a href="#"><i class="fa fa-fw fa-bars"></i><span class="hidden-sm">Menu1</span></a></li>
 							<li><a href="#"><i class="fa fa-fw fa-bars"></i><span class="hidden-sm">Menu1</span></a></li>
 						</ul>
-					</li>
-					<li class="nav-title">Report</li>
-					<li><a href="#"><i class="fa fa-fw fa-calendar"></i><span class="hidden-sm">Monthly</span></a></li>
-					<li><a href="#"><i class="fa fa-fw fa-file-excel-o"></i><span class="hidden-sm">Annual Sales</span></a></li>
+					</li> -->
 				</ul>
 			</div>
 		</div>
