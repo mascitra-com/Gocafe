@@ -16,8 +16,13 @@ class Dummies extends Controller
         //
     }
 
-   public function dashboard()
-   {
+    public function login()
+    {
+        return view('auth/login');
+    }
+
+    public function dashboard()
+    {
         return view('cafe/tes');
-   }
+    }
 }

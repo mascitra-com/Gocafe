@@ -15,4 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dummy/dashboard', 'Dummy@Dashboard');
+// DUMMIES VIEW
+Route::get('dummies/dashboard', 'Dummies@Dashboard');
+Route::get('dummies/login', 'Dummies@Login');

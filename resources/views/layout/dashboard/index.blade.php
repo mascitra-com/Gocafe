@@ -77,9 +77,9 @@
 		</div>
 	</div>
 </body>
-<script src="assets/plugins/jquery/jquery-3.1.1.min.js"></script>
-<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/theme-dashboard.js"></script>
-<script src="assets/js/theme-helper.js"></script>
+<script src="{{URL::asset('plugins/jquery/jquery-3.1.1.min.js')}}"></script>
+<script src="{{URL::asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{URL::asset('js/theme-dashboard.js')}}"></script>
+<script src="{{URL::asset('js/theme-helper.js')}}"></script>
 @yield('javascripts')
 </html>
