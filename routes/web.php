@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+// DUMMIES VIEW
+Route::get('dummies/dashboard', 'Dummies@Dashboard');
+Route::get('dummies/login', 'Dummies@Login');

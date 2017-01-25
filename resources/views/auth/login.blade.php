@@ -1,68 +1,52 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : ''}}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<link rel="stylesheet" href="{{URL::asset('plugins/bootstrap/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-sign.css')}}">
+	<link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-helper.css')}}">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400" rel="stylesheet"> 
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row form-big" id="form-container">
+			<div class="col-xs-12 col-sm-6 col-md-8 background-img image-fade" id="form-left" data-image="{{URL::asset('images/bg4.png')}}">
+				<h2>DIGITAL CAFE<br>MARKETPLACE</h2>
+				<p class="text-size-20">Your perfect place to manage and promote<br>your favorite Cafe</p>
+				<div class="break-50"></div>
+				<button class="btn btn-default btn-round">daftar sekarang!</button>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4" id="form-right">
+				<h3 class="form-title">MEMBER LOGIN</h3>
+				<form action="#" method="post">
+					<div class="form-group">
+						<label for="">email</label>
+						<input type="text" class="form-control" placeholder="email">
+					</div>
+					<div class="form-group">
+						<label for="">password</label>
+						<input type="password" class="form-control" placeholder="password">
+					</div>
+					<div class="form-group">
+						<div class="btn-group btn-group-justified">
+							<div class="btn-group" role="group">
+								<button class="btn btn-primary btn-round">login</button>
+							</div>
+							<div class="btn-group" role="group">
+								<button class="btn btn-warning btn-round">reset</button>
+							</div>
+						</div>
+					</div>
+					<div class="form-roup">
+						<a href="#" class="link">lupa password?</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="{{URL::asset('plugins/jquery/jquery-3.1.1.min.js')}}"></script>
+<script src="{{URL::asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{URL::asset('plugins/theme/js/theme-helper.js')}}"></script>
+</html>
