@@ -15,6 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard', function(){
-	return view('')
-});
+Route::get('dummy/dashboard', 'Dummy@Dashboard');
