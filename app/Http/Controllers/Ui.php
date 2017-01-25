@@ -13,7 +13,7 @@ class Ui extends Controller
      */
     public function index()
     {
-        //
+       return view('ui');
     }
 
     public function login()
@@ -28,6 +28,26 @@ class Ui extends Controller
 
     public function profile()
     {
-        return view('profile/owner2');
+        return view('owner/owner_profile');
+    }
+
+    public function cafe()
+    {
+        return view('cafe/cafe_profile');
+    }
+
+    public function staff()
+    {
+        return view('staff/staff');
+    }
+
+    public function staff_create()
+    {
+        return view('staff/create');
+    }
+
+    public function staff_detail()
+    {
+        return view('staff/detail');
     }
 }

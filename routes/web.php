@@ -16,6 +16,11 @@ Route::get('/', function () {
 });
 
 // DUMMIES VIEW
+Route::get('ui/', 'Ui@Index');
 Route::get('ui/dashboard', 'Ui@Dashboard');
 Route::get('ui/login', 'Ui@Login');
 Route::get('ui/profile', 'Ui@Profile');
+Route::get('ui/cafe', 'Ui@Cafe');
+Route::get('ui/staff', 'Ui@Staff');
+Route::get('ui/staff/add', 'Ui@Staff_create');
+Route::get('ui/staff/detail', 'Ui@Staff_detail');
