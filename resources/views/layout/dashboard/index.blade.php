@@ -76,10 +76,12 @@
 				</div>
 			</div>
 		</div>
-	</body>
-	<script src="{{URL::asset('plugins/jquery/jquery-3.1.1.min.js')}}"></script>
-	<script src="{{URL::asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
-	<script src="{{URL::asset('js/theme-dashboard.js')}}"></script>
-	<script src="{{URL::asset('js/theme-helper.js')}}"></script>
-	@yield('javascripts')
-	</html>
+	</div>
+	@yield('modal')
+</body>
+<script src="{{URL::asset('plugins/jquery/jquery-3.1.1.min.js')}}"></script>
+<script src="{{URL::asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{URL::asset('js/theme-dashboard.js')}}"></script>
+<script src="{{URL::asset('js/theme-helper.js')}}"></script>
+@yield('javascripts')
+</html>

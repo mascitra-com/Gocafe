@@ -27,5 +27,6 @@ Route::group(['middleware' => ['web']], function (){
 });
 
 // DUMMIES VIEW
-Route::get('dummies/dashboard', 'Dummies@Dashboard');
-Route::get('dummies/login', 'Dummies@Login');
+Route::get('ui/dashboard', 'Ui@Dashboard');
+Route::get('ui/login', 'Ui@Login');
+Route::get('ui/profile', 'Ui@Profile');
