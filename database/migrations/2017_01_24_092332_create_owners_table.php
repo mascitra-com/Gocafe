@@ -22,17 +22,14 @@ class CreateOwnersTable extends Migration
             $table->enum('gender', ['0', '1']);
             $table->date('birthdate');
             $table->string('phone', 20);
+            $table->string('facebook');
+            $table->string('twitter');
+            $table->string('instagram');
             $table->timestamps();
             $table->integer('created_by')->unsigned()->index();
-            $table->integer('updated_by')->unsigned()->index();
-            $table->integer('deleted_by')->unsigned()->index();
+            $table->integer('updated_by')->unsigned()->index()->nullable();
+            $table->integer('deleted_by')->unsigned()->index()->nullable();
             $table->softDeletes();
-        });
-
-        Schema::table('owners', function (Blueprint $table) {
-            $table->string('created_by');
-            $table->string('updated_by')->nullable();
-            $table->string('deleted_by')->nullable();
         });
     }
 

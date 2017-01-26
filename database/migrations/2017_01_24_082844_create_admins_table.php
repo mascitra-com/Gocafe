@@ -14,12 +14,12 @@ class CreateAdminsTable extends Migration
     public function up()
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->string('id', 20)->primary();
-            $table->integer('user_id')->unsigned()->index();
+            $table->increments('id');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
+            $table->enum('level', ['0', '1']); //0 = Owner, 1= Staff
             $table->timestamps();
-            $table->integer('created_by')->unsigned()->index();
-            $table->integer('updated_by')->unsigned()->index();
-            $table->integer('deleted_by')->unsigned()->index();
             $table->softDeletes();
         });
     }

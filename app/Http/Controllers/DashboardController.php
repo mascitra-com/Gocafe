@@ -13,6 +13,6 @@ class DashboardController extends Controller
 
     public function index()
     {
-    	return view('cafe.tes');
+    	return view('dashboard.tes');
     }
 }
