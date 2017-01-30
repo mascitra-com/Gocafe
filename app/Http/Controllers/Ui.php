@@ -13,41 +13,46 @@ class Ui extends Controller
      */
     public function index()
     {
-       return view('ui');
+       return view('_ui/index');
     }
 
     public function login()
     {
-        return view('auth/login');
+        return view('_ui/auth/login');
     }
 
     public function dashboard()
     {
-        return view('dashboard/tes');
+        return view('_ui/dashboard/tes');
     }
 
     public function profile()
     {
-        return view('owner/owner_profile');
+        return view('_ui/owner/owner_profile');
     }
 
     public function cafe()
     {
-        return view('cafe/cafe_profile');
+        return view('_ui/cafe/cafe_profile');
     }
 
     public function staff()
     {
-        return view('staff/staff');
+        return view('_ui/staff/staff');
     }
 
     public function staff_create()
     {
-        return view('staff/create');
+        return view('_ui/staff/create');
     }
 
     public function staff_detail()
     {
-        return view('staff/detail');
+        return view('_ui/staff/detail');
+    }
+
+    public function branch()
+    {
+        return view('_ui/cafe/cafe_branch');
     }
 }

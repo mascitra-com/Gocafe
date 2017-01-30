@@ -26,6 +26,8 @@
 					<li class="nav-title">Cafe</li>
 					<li><a href="#"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Cafe Profile</span></a></li>
 					<li><a href="#"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Cafe Branches</span></a></li>
+					<li class="nav-title">Cafe Branches</li>
+					<li><a href="#"><i class="fa fa-fw fa-users"></i><span class="hidden-sm">Branch Management</span></a></li>
 					<li class="nav-title">Staff</li>
 					<li><a href="#"><i class="fa fa-fw fa-users"></i><span class="hidden-sm">Staff Management</span></a></li>
 
