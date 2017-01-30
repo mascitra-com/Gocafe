@@ -9,7 +9,7 @@
 				<h4 class="panel-title">Profile Picture</h4>
 				<img src="{{URL::asset('images/blank-avatar.png')}}" class="image-fit img-circle" width="80%" alt="foto">
 				<div class="break-10"></div>
-				<h4>Adrew Andersons</h4>
+				<h4>{{ $profile->first_name.' '.$profile->last_name }}</h4>
 				<div class="break-10"></div>
 				<button class="btn btn-primary btn-sm btn-round">Change Profile Picture</button>
 				<div class="break-5"></div>
@@ -25,23 +25,23 @@
 					<div class="row">
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
-								<label for="">First Name</label>
-								<input type="text" name="first_name" class="form-control" placeholder="first name">
+								<label for="first_name">First Name</label>
+								<input type="text" name="first_name" class="form-control" placeholder="first name" value="{{ $profile->first_name }}">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
-								<label for="">Last Name</label>
-								<input type="text" name="last_name" class="form-control" placeholder="Last name">
+								<label for="last_name">Last Name</label>
+								<input type="text" name="last_name" class="form-control" placeholder="Last name" value={{ $profile->last_name }}>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="">Address</label>
-						<textarea name="address" class="form-control" placeholder="address"></textarea>
+						<label for="address">Address</label>
+						<textarea name="address" class="form-control" placeholder="address">{{ $profile->address }}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="">Birth Date</label>
+						<label for="birthdate">Birth Date</label>
 						<div class="row">
 							<div class="col-xs-3">
 								<select name="birthdate_day" class="form-control">
@@ -67,12 +67,12 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="">Gender</label><br>
+						<label for="gender">Gender</label><br>
 						<label class="radio-inline">
-							<input type="radio" name="gender" value="0"> Male
+							<input type="radio" name="gender" value="0" @if ($profile->gender === '0') {{ 'checked' }}@endif> Male
 						</label>
 						<label class="radio-inline">
-							<input type="radio" name="gender" value="1"> Female
+							<input type="radio" name="gender" value="1" @if ($profile->gender === '1') {{ 'checked' }}@endif> Female
 						</label>
 					</div>
 					<div class="break-50"></div>
@@ -90,23 +90,23 @@
 				<h4 class="panel-title">Contact Info</h4>
 				<form action="#">
 					<div class="form-group">
-						<label for="">Email</label>
+						<label for="email">Email</label>
 						<input type="text" class="form-control" name="email" placeholder="email address">
 					</div>
 					<div class="form-group">
-						<label for="">Phone Number</label>
+						<label for="phone">Phone Number</label>
 						<input type="text" class="form-control" name="phone" placeholder="phone number">
 					</div>
 					<div class="form-group">
-						<label for="">Facebook</label>
+						<label for="facebook">Facebook</label>
 						<input type="text" class="form-control" name="facebook" placeholder="facebook (optional)">
 					</div>
 					<div class="form-group">
-						<label for="">Twitter</label>
+						<label for="twitter">Twitter</label>
 						<input type="text" class="form-control" name="twitter" placeholder="twitter (optional)">
 					</div>
 					<div class="form-group">
-						<label for="">Instagram</label>
+						<label for="instagram">Instagram</label>
 						<input type="text" class="form-control" name="instagram" placeholder="instagram (optional)">
 					</div>
 					<div class="break-20"></div>

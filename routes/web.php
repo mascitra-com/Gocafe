@@ -24,6 +24,9 @@ Route::group(['middleware' => ['web']], function (){
 
 	//DASHBOARD
 	Route::get('dashboard', 'DashboardController@index');
+
+	//PROFILE
+	Route::resource('profile', 'ProfileController');
 });
 
 // DUMMIES VIEW
