@@ -1,4 +1,4 @@
-@extends('layout/dashboard/index')
+@extends('_layout/dashboard/index')
 @section('page_title', 'Owner Profile')
 
 @section('content')
@@ -134,7 +134,6 @@
 	}
 
 	.panel-title{
-		color:#AAA;
 		margin-bottom: 20px;
 	}
 
@@ -142,15 +141,6 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-	}
-	.btn-xs{
-		padding: 3px 10px;
-	}
-
-	.radio-inline{
-		border: 1px #AAA solid;
-		border-radius: 10px;
-		padding: 3px 10px 3px 25px;
 	}
 </style>
 @endsection
