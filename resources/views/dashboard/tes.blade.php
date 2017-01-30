@@ -1,4 +1,4 @@
-@extends('layout/dashboard/index')
+@extends('_layout/dashboard/index')
 @section('page_title','Dashboard')
 
 @section('content')
