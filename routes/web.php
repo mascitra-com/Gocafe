@@ -24,3 +24,4 @@ Route::get('ui/cafe', 'Ui@Cafe');
 Route::get('ui/staff', 'Ui@Staff');
 Route::get('ui/staff/add', 'Ui@Staff_create');
 Route::get('ui/staff/detail', 'Ui@Staff_detail');
+Route::get('ui/branch', 'Ui@Branch');
