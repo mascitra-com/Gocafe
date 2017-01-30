@@ -13,6 +13,7 @@
 							<th>#</th>
 							<th>Nama View</th>
 							<th>Detail</th>
+							<th>Folder</th>
 							<th>Link</th>
 							<th class="text-center">Status</th>
 						</tr>
@@ -22,71 +23,81 @@
 							<td>01</td>
 							<td>List UI</td>
 							<td>Menampilkan semua daftar tampilan yang sudah atau sedang dikerjakan (tidak ada hubungan dengan sistem)</td>
-							<td><a class="btn btn-default btn-xs" href="#">ui</a></td>
+							<td>/</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui')}}">ui</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
 							<td>02</td>
 							<td>Profile Owner</td>
 							<td>Halaman edit &amp menampilkan informasi owner</td>
-							<td><a class="btn btn-default btn-xs" href="#">ui/profile</a></td>
+							<td>owner</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/profile')}}">ui/profile</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
 							<td>03</td>
 							<td>Profil Cafe</td>
 							<td>Halaman edit &amp menampilkan informasi Cafe</td>
-							<td><a class="btn btn-default btn-xs" href="#">ui/cafe</a></td>
+							<td>cafe</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/cafe')}}">ui/cafe</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
 							<td>04</td>
 							<td>Staff</td>
 							<td>Menampilkan daftar staff</td>
-							<td><a class="btn btn-default btn-xs" href="#">ui/staff</a></td>
+							<td>staff</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/staff')}}">ui/staff</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
 							<td>05</td>
 							<td>Import Staff</td>
 							<td>Halaman modal untuk mengimport data staff</td>
-							<td><a class="btn btn-default btn-xs" href="#">ui/staff</a></td>
+							<td>staff</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/staff')}}">ui/staff</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
 							<td>06</td>
 							<td>Tambah Staff</td>
 							<td>Halaman form untuk menambah staff baru</td>
-							<td><a class="btn btn-default btn-xs" href="#">ui/staff/add</a></td>
+							<td>staff</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/staff/add')}}">ui/staff/add</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
 							<td>07</td>
 							<td>Detail Staff</td>
 							<td>Halaman form untuk melihat detail staff sekaligus sebagai halaman edit</td>
-							<td><a class="btn btn-default btn-xs" href="#">ui/staff/detail</a></td>
+							<td>staff</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/staff/detail')}}">ui/staff/detail</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
 							<td>08</td>
 							<td>Branches</td>
 							<td>Menampilkan daftar branch cafe</td>
-							<td><a class="btn btn-default btn-xs" href="#">ui/brach</a></td>
-							<td class="text-center"><i class="fa fa-circle text-red"></i></td>
+							<td>branch</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/branch')}}">ui/brach</a></td>
+							<td class="text-center"><i class="fa fa-circle text-orange"></i></td>
 						</tr>
 						<tr>
 							<td>09</td>
 							<td>Tambah brach</td>
 							<td>Halaman form untuk menambah brach baru</td>
-							<td><a class="btn btn-default btn-xs" href="#">ui/brach/add</a></td>
-							<td class="text-center"><i class="fa fa-circle text-red"></i></td>
+							<td>branch</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/branch/add')}}">ui/brach/add</a></td>
+							<td class="text-center"><i class="fa fa-circle text-orange"></i></td>
 						</tr>
 						<tr>
 							<td>10</td>
 							<td>Detail brach</td>
 							<td>Halaman form untuk melihat detail brach sekaligus sebagai halaman edit</td>
-							<td><a class="btn btn-default btn-xs" href="#">ui/brach/detail</a></td>
-							<td class="text-center"><i class="fa fa-circle text-red"></i></td>
+							<td>branch</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/branch/detail')}}">ui/brach/detail</a></td>
+							<td class="text-center"><i class="fa fa-circle text-orange"></i></td>
 						</tr>
 					</tbody>
 				</table>
