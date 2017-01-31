@@ -19,6 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::resource('/cafe/profile', 'CafeProfileController');
+Route::patch('/cafe/profile/updateContact/{contact}', 'CafeProfileController@updateContact');
+
 // DUMMIES VIEW
 Route::get('ui/', 'Ui@Index');
 Route::get('ui/dashboard', 'Ui@Dashboard');
