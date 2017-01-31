@@ -80,23 +80,23 @@
 							<td>Branches</td>
 							<td>Menampilkan daftar branch cafe</td>
 							<td>branch</td>
-							<td><a class="btn btn-default btn-xs" href="{{URL('ui/branch')}}">ui/brach</a></td>
-							<td class="text-center"><i class="fa fa-circle text-orange"></i></td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/branch')}}">ui/branch</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
 							<td>09</td>
 							<td>Tambah brach</td>
 							<td>Halaman form untuk menambah brach baru</td>
 							<td>branch</td>
-							<td><a class="btn btn-default btn-xs" href="{{URL('ui/branch/add')}}">ui/brach/add</a></td>
-							<td class="text-center"><i class="fa fa-circle text-orange"></i></td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/branch/add')}}">ui/branch</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
 							<td>10</td>
 							<td>Detail brach</td>
 							<td>Halaman form untuk melihat detail brach sekaligus sebagai halaman edit</td>
 							<td>branch</td>
-							<td><a class="btn btn-default btn-xs" href="{{URL('ui/branch/detail')}}">ui/brach/detail</a></td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/branch/detail')}}">ui/branch/detail</a></td>
 							<td class="text-center"><i class="fa fa-circle text-orange"></i></td>
 						</tr>
 					</tbody>
