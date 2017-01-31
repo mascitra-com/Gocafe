@@ -21,7 +21,9 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h4 class="panel-title">Personal Info</h4>
-				<form action="#">
+				<form action="{{ url('profile/personal'.$profile->id) }}" method="POST">
+				{{ method_field('PATCH') }}
+				{{ csrf_field() }}
 					<div class="row">
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
@@ -46,21 +48,21 @@
 							<div class="col-xs-3">
 								<select name="birthdate_day" class="form-control">
 									@for($i=1;$i<=31;$i++)
-									<option value="{{$i}}"><?php echo str_pad($i,2,'0',STR_PAD_LEFT)?></option>
+									<option value="{{$i}}" @if($i == date('d' , strtotime($profile->birthdate))) {{ 'selected' }} @endif><?php echo str_pad($i,2,'0',STR_PAD_LEFT)?></option>
 									@endfor
 								</select>
 							</div>
 							<div class="col-xs-5">
 								<select name="birthdate_month" class="form-control">
 									@for($i=1;$i<=12;$i++)
-									<option value="{{$i}}"><?php echo date('F', strtotime('1-'.$i.'-2000')) ?></option>
+									<option value="{{$i}}" @if($i == date('m' , strtotime($profile->birthdate))) {{ 'selected' }} @endif><?php echo date('F', strtotime('1-'.$i.'-2000')) ?></option>
 									@endfor
 								</select>
 							</div>
 							<div class="col-xs-4">
 								<select name="birthdate_year" class="form-control">
 									@for($i=date('Y');$i>=1945;$i--)
-									<option value="{{$i}}">{{$i}}</option>
+									<option value="{{$i}}" @if($i == date('Y' , strtotime($profile->birthdate))) {{ 'selected' }} @endif>{{$i}}</option>
 									@endfor
 								</select>
 							</div>
@@ -77,7 +79,7 @@
 					</div>
 					<div class="break-50"></div>
 					<div class="form-group">
-						<button class="btn btn-primary"><i class="fa fa-save"></i> Save Changes</button>
+						<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save Changes</button>
 						<button class="btn btn-default"><i class="fa fa-refresh"></i> Reset</button>
 					</div>
 				</form>
@@ -88,30 +90,32 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h4 class="panel-title">Contact Info</h4>
-				<form action="#">
+				<form action="{{ url('profile/contact'.$profile->id) }}" method="POST">
+				{{ method_field('PATCH') }}
+				{{ csrf_field() }}
 					<div class="form-group">
-						<label for="email">Email</label>
-						<input type="text" class="form-control" name="email" placeholder="email address">
+						<label for="email">Public Email</label>
+						<input type="text" class="form-control" name="email" placeholder="email address" value={{ Auth::user()->email }}>
 					</div>
 					<div class="form-group">
 						<label for="phone">Phone Number</label>
-						<input type="text" class="form-control" name="phone" placeholder="phone number">
+						<input type="text" class="form-control" name="phone" placeholder="phone number" value= {{ $profile->phone }}>
 					</div>
 					<div class="form-group">
 						<label for="facebook">Facebook</label>
-						<input type="text" class="form-control" name="facebook" placeholder="facebook (optional)">
+						<input type="text" class="form-control" name="facebook" placeholder="facebook (optional)" value= {{ $profile->facebook }}>
 					</div>
 					<div class="form-group">
 						<label for="twitter">Twitter</label>
-						<input type="text" class="form-control" name="twitter" placeholder="twitter (optional)">
+						<input type="text" class="form-control" name="twitter" placeholder="twitter (optional)" value= {{ $profile->twitter }}>
 					</div>
 					<div class="form-group">
 						<label for="instagram">Instagram</label>
-						<input type="text" class="form-control" name="instagram" placeholder="instagram (optional)">
+						<input type="text" class="form-control" name="instagram" placeholder="instagram (optional)" value= {{ $profile->instagram }}>
 					</div>
 					<div class="break-20"></div>
 					<div class="form-group">
-						<button class="btn btn-primary"><i class="fa fa-save"></i> Save Changes</button>
+						<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save Changes</button>
 						<button class="btn btn-default"><i class="fa fa-refresh"></i> Reset</button>
 					</div>
 				</form>

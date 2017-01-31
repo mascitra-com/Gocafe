@@ -26,7 +26,9 @@ Route::group(['middleware' => ['web']], function (){
 	Route::get('dashboard', 'DashboardController@index');
 
 	//PROFILE
-	Route::resource('profile', 'ProfileController');
+	Route::get('profile', 'ProfileController@edit');
+	Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');
+	Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
 });
 
 // DUMMIES VIEW
