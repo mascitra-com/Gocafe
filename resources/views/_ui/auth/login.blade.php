@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="{{URL::asset('plugins/bootstrap/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-sign.css')}}">
 	<link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-helper.css')}}">
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400" rel="stylesheet"> 
 </head>
 <body>
 	<div class="container-fluid">

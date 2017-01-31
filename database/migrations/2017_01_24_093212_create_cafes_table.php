@@ -18,10 +18,10 @@ class CreateCafesTable extends Migration
             $table->string('owner_id', 20)->index();
             $table->string('name');
             $table->text('description');
-            $table->string('facebook');
-            $table->string('twitter');
-            $table->string('instagram');
-            $table->string('phone', 20);
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('phone', 20)->nullable();
             $table->string('open_hours', 10);
             $table->string('close_hours', 10);
             $table->timestamps();
