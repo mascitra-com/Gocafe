@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::resource('/cafe/profile', 'CafeProfileController');
+
 // DUMMIES VIEW
 Route::get('ui/', 'Ui@Index');
 Route::get('ui/dashboard', 'Ui@Dashboard');
