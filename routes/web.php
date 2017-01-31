@@ -25,3 +25,6 @@ Route::get('ui/staff', 'Ui@Staff');
 Route::get('ui/staff/add', 'Ui@Staff_create');
 Route::get('ui/staff/detail', 'Ui@Staff_detail');
 Route::get('ui/branch', 'Ui@Branch');
+Route::get('ui/branch/detail', 'Ui@Branch_detail');
+Route::get('ui/position', 'Ui@Position');
+Route::get('ui/account', 'Ui@Account');

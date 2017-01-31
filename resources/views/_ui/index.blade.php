@@ -97,15 +97,15 @@
 							<td>Halaman form untuk melihat detail brach sekaligus sebagai halaman edit</td>
 							<td>branch</td>
 							<td><a class="btn btn-default btn-xs" href="{{URL('ui/branch/detail')}}">ui/branch/detail</a></td>
-							<td class="text-center"><i class="fa fa-circle text-orange"></i></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
 							<td>11</td>
 							<td>Positions</td>
 							<td>Halaman untuk menambah posisi</td>
 							<td>staff</td>
-							<td><a class="btn btn-default btn-xs" href="{{URL('ui/staff/add')}}">ui/position</a></td>
-							<td class="text-center"><i class="fa fa-circle text-orange"></i></td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/position')}}">ui/position</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
 							<td>12</td>
@@ -113,6 +113,22 @@
 							<td>Halaman untuk menambah posisi langsung pada form tambah staff</td>
 							<td>staff</td>
 							<td><a class="btn btn-default btn-xs" href="{{URL('ui/staff/add')}}">ui/staff/add</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
+						</tr>
+						<tr>
+							<td>13</td>
+							<td>Edit Posisi</td>
+							<td>Halaman untuk merubah data posisi</td>
+							<td>staff</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/position')}}">ui/position</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
+						</tr>
+						<tr>
+							<td>14</td>
+							<td>Akun</td>
+							<td>Halaman untuk managemen akun owner</td>
+							<td>auth</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/account')}}">ui/account</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 					</tbody>
