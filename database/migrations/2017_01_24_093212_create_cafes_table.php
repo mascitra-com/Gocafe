@@ -26,8 +26,8 @@ class CreateCafesTable extends Migration
             $table->string('close_hours', 10);
             $table->timestamps();
             $table->integer('created_by')->unsigned()->index();
-            $table->integer('updated_by')->unsigned()->index();
-            $table->integer('deleted_by')->unsigned()->index();
+            $table->integer('updated_by')->unsigned()->index()->nullable();
+            $table->integer('deleted_by')->unsigned()->index()->nullable();
             $table->softDeletes();
         });
     }

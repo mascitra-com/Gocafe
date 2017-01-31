@@ -11,10 +11,33 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['middleware' => ['web']], function (){
+
+	Route::get('/', function () {
+		return view('welcome');
+	});
+
+	Auth::routes();
+
+	Route::get('/home', 'HomeController@index');
+
+	//DASHBOARD
+	Route::get('dashboard', 'DashboardController@index');
+
+	//PROFILE
+	Route::get('profile', 'ProfileController@edit');
+	Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');
+	Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
+// DUMMIES VIEW
+Route::get('ui/', 'Ui@Index');
+Route::get('ui/dashboard', 'Ui@Dashboard');
+Route::get('ui/login', 'Ui@Login');
+Route::get('ui/profile', 'Ui@Profile');
+Route::get('ui/cafe', 'Ui@Cafe');
+Route::get('ui/staff', 'Ui@Staff');
+Route::get('ui/staff/add', 'Ui@Staff_create');
+Route::get('ui/staff/detail', 'Ui@Staff_detail');
+Route::get('ui/branch', 'Ui@Branch');
