@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::group(['middleware' => ['web']], function (){
+
+	Route::get('/', function () {
+		return view('welcome');
+	});
+
 
 Auth::routes();
 
@@ -21,6 +25,17 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('/cafe/profile', 'CafeProfileController');
 Route::patch('/cafe/profile/updateContact/{contact}', 'CafeProfileController@updateContact');
+
+	Route::get('/home', 'HomeController@index');
+
+	//DASHBOARD
+	Route::get('dashboard', 'DashboardController@index');
+
+	//PROFILE
+	Route::get('profile', 'ProfileController@edit');
+	Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');
+	Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
+});
 
 // DUMMIES VIEW
 Route::get('ui/', 'Ui@Index');

@@ -26,4 +26,22 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function get_role($id)
+    {
+        return $this->findOrFail($id)->first()->role;
+    }
+
+    //RELATIONS
+    public function owner()
+    {
+       return $this->hasOne(Owner::class);
+    }
+
+    public function staff()
+    {
+       return $this->hasOne(Staff::class);
+    }
+
 }

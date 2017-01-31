@@ -22,7 +22,7 @@
 					<li class="nav-close"><a href="#"><i class="fa fa-fw fa-close"></i></a></li>
 					<li class="nav-active"><a href="#"><i class="fa fa-fw fa-home"></i><span class="hidden-sm">Dashboard</span></a></li>
 					<li class="nav-title">Information</li>
-					<li><a href="#"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Owner Profile</span></a></li>
+					<li><a href="{{ url('profile') }}"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Owner Profile</span></a></li>
 					<li class="nav-title">Cafe</li>
 					<li><a href="#"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Cafe Profile</span></a></li>
 					<li><a href="#"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Cafe Branches</span></a></li>
@@ -63,14 +63,20 @@
 									<li><a href="#">Another action</a></li>
 								</ul>
 							</li>
-							<li><a href="#"><i class="fa fa-fw fa-power-off"></i></a></li>
-						</ul>
-					</div><!-- /.navbar-collapse -->
-				</div><!-- /.container-fluid -->
-			</nav>
-			<div id="content">
-				<div class="container-fluid">
-					@yield('content')
+							<li><a href="{{ url('/logout') }}" onclick="event.preventDefault();
+								document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off"></i></a></li>
+
+								<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+									{{ csrf_field() }}
+								</form>
+							</ul>
+						</div><!-- /.navbar-collapse -->
+					</div><!-- /.container-fluid -->
+				</nav>
+				<div id="content">
+					<div class="container-fluid">
+						@yield('content')
+					</div>
 				</div>
 			</div>
 		</div>
