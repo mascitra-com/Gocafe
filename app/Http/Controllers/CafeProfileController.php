@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\DB;
 class CafeProfileController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display Cafe Profile by owner id now logged in.
      *
      * @return \Illuminate\Http\Response
@@ -32,14 +42,12 @@ class CafeProfileController extends Controller
         $this->validate($request, [
             'name' => 'min:3|max:255|required',
             'description' => 'min:3|required',
-            'open_hours' => 'required',
-            'close_hours' => 'required',
             'phone' => 'max:20',
             'facebook' => 'max:255',
             'twitter' => 'max:255',
             'instagram' => 'max:255',
         ]);
-        $owner->id = 'OWN02131321';
+        $owner->id = $owner->getOwnerIdByUserIdNowLoggedIn();
         $cafe = new Cafe($request->all());
         $owner->addProfileCafe($cafe);
         return redirect('cafe/profile')->with('status', 'Profile updated!');
@@ -57,12 +65,10 @@ class CafeProfileController extends Controller
         $this->validate($request, [
             'name' => 'min:3|max:255|required',
             'description' => 'min:3|required',
-            'open_hours' => 'required',
-            'close_hours' => 'required',
         ]);
         $cafe = Cafe::find($id);
         $cafe->update($request->all());
-        return redirect('cafe/profile')->with('status', 'Profile updated!');
+        return redirect('cafe/profile')->with('status', 'Basic Info updated!');
     }
 
     /**
@@ -82,7 +88,7 @@ class CafeProfileController extends Controller
         ]);
         $cafe = Cafe::find($id);
         $cafe->update($request->all());
-        return redirect('cafe/profile')->with('status', 'Profile updated!');
+        return redirect('cafe/profile')->with('status', 'Contact Info updated!');
     }
 
 }

@@ -32,20 +32,6 @@
 							<label for="">Description</label>
 							<textarea name="description" class="form-control" placeholder="Cafe Description">{{ ($cafe == NULL) ? old('description') : $cafe->description }}</textarea>
 						</div>
-						<div class="row">
-							<div class="col-xs-6">
-								<div class="form-group">
-									<label for="">Opening Hours</label>
-									<input type="text" class="form-control" name="open_hours" placeholder="Open Hours" value="{{ ($cafe == NULL) ? old('open_hours') : $cafe->open_hours }}">
-								</div>
-							</div>
-							<div class="col-xs-6">
-								<div class="form-group">
-									<label for="">Closing Hours</label>
-									<input type="text" class="form-control" name="close_hours" placeholder="Close Hours" value="{{ ($cafe == NULL) ? old('close_hours') : $cafe->close_hours }}">
-								</div>
-							</div>
-						</div>
 						<div class="form-group">
 							<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save Basic Info</button>
 							<button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> Reset</button>

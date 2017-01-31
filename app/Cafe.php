@@ -17,7 +17,7 @@ class Cafe extends Model
 
     public function getNewId()
     {
-        return 'CF021321321';
+        return 'CAF'.random_int(100, 999).date('Ymdhis');
     }
 
 }
