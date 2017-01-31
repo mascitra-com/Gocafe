@@ -18,3 +18,17 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::resource('/cafe/profile', 'CafeProfileController');
+Route::patch('/cafe/profile/updateContact/{contact}', 'CafeProfileController@updateContact');
+
+// DUMMIES VIEW
+Route::get('ui/', 'Ui@Index');
+Route::get('ui/dashboard', 'Ui@Dashboard');
+Route::get('ui/login', 'Ui@Login');
+Route::get('ui/profile', 'Ui@Profile');
+Route::get('ui/cafe', 'Ui@Cafe');
+Route::get('ui/staff', 'Ui@Staff');
+Route::get('ui/staff/add', 'Ui@Staff_create');
+Route::get('ui/staff/detail', 'Ui@Staff_detail');
+Route::get('ui/branch', 'Ui@Branch');
