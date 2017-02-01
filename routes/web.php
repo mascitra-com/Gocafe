@@ -12,23 +12,29 @@
 */
 
 
-Route::group(['middleware' => ['web']], function (){
+Route::group(['middleware' => ['web']], function () {
 
-	Route::get('/', function () {
-		return view('welcome');
-	});
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-	Auth::routes();
 
-	Route::get('/home', 'HomeController@index');
+    Auth::routes();
 
-	//DASHBOARD
-	Route::get('dashboard', 'DashboardController@index');
+    Route::get('/home', 'HomeController@index');
 
-	//PROFILE
-	Route::get('profile', 'ProfileController@edit');
-	Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');
-	Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
+    Route::resource('/profile/cafe', 'CafeProfileController');
+    Route::patch('/profile/cafe/updateContact/{contact}', 'CafeProfileController@updateContact');
+
+    Route::get('/home', 'HomeController@index');
+
+    //DASHBOARD
+    Route::get('dashboard', 'DashboardController@index');
+
+    //PROFILE
+    Route::get('profile', 'ProfileController@edit');
+    Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');
+    Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
 });
 
 // DUMMIES VIEW
