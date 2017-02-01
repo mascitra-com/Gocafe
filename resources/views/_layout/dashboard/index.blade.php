@@ -24,10 +24,9 @@
 					<li class="nav-title">Information</li>
 					<li><a href="#"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Owner Profile</span></a></li>
 					<li class="nav-title">Cafe</li>
-					<li><a href="#"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Cafe Profile</span></a></li>
-					<li><a href="#"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Cafe Branches</span></a></li>
+					<li><a href="#"><i class="fa fa-fw fa-user"></i><span class="hidden-sm">Profile</span></a></li>
 					<li class="nav-title">Cafe Branches</li>
-					<li><a href="#"><i class="fa fa-fw fa-users"></i><span class="hidden-sm">Branch Management</span></a></li>
+					<li><a href="#"><i class="fa fa-fw fa-users"></i><span class="hidden-sm">Branches</span></a></li>
 					<li class="nav-title">Staff</li>
 					<li><a href="#"><i class="fa fa-fw fa-users"></i><span class="hidden-sm">Staff Management</span></a></li>
 
@@ -51,7 +50,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="#" id="btn-menu" data-menu="#nav-side"><i class="fa fa-bars btn-responsive"></i>Dashboard</a>
+						<a class="navbar-brand" href="#" id="btn-menu" data-menu="#nav-side"><i class="fa fa-bars btn-responsive"></i>@yield('page_title')</a>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right">
