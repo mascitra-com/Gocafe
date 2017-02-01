@@ -11,7 +11,7 @@
 				<div class="break-10"></div>
 				<h4>Adrew Andersons</h4>
 				<div class="break-10"></div>
-				<button class="btn btn-primary btn-sm btn-round">Change Profile Picture</button>
+				<button class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-target="#upload">Change Profile Picture</button>
 				<div class="break-5"></div>
 				<button class="btn btn-default btn-xs btn-round">Delete</button>
 			</div>
@@ -114,6 +114,28 @@
 						<button class="btn btn-primary"><i class="fa fa-save"></i> Save Changes</button>
 						<button class="btn btn-default"><i class="fa fa-refresh"></i> Reset</button>
 					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+@endsection
+
+@section('modal')
+<div class="modal fade" tabindex="-1" role="dialog" id="upload">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Upload Foto</h4>
+			</div>
+			<div class="modal-body">
+				<form action="#">
+					<div class="form-group">
+						<label for=""> Pilih file</label>
+						<input type="file">
+					</div>
+					<button type="button" class="btn btn-primary">Upload</button>
 				</form>
 			</div>
 		</div>
