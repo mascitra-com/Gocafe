@@ -13,7 +13,6 @@ use App\Foo;
 use Storage;
 use Illuminate\Http\Response;
 
-
 class FooController extends Controller
 {
 	public function __construct(){
@@ -22,24 +21,15 @@ class FooController extends Controller
 
 	public function index()
 	{
-	// 	$entry = Foo::findOrFail(1)->firstOrFail();
-	// 	// $path = Storage::disk('owner')->url('owner/'.$filename);
-
-	// 	$file = Storage::disk('owner')->url($entry->filename);
- 
-	// 	return (new Response($file, 200))
- //              ->header('Content-Type', $entry->mime);
-
-		// return $path;
-		return view('_foo_andre.foo_upload', compact('path'));
+		$id = idWithPrefix(3);
+		return view('_foo_andre.foo_upload', compact('id'));
 	}
 
 	public function get()
 	{
 		$entry = Foo::findOrFail(1)->firstOrFail();
-		// $path = Storage::disk('owner')->url('owner/'.$filename);
 
-		$file = Storage::disk('owner')->url($entry->filename);
+		$file = Storage::disk('owner')->get('owner/'.$entry->filename);
  
 		return (new Response($file, 200))
               ->header('Content-Type', $entry->mime);

@@ -1,17 +1,22 @@
 @extends('_layout/dashboard/index')
 @section('page_title', 'Owner Profile')
 
+@section('styles')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
+@stop
+
 @section('content')
 <div class="row">
 	<div class="col-xs-12 col-md-3">
 		<div class="panel panel-default">
 			<div class="panel-body box-center">
 				<h4 class="panel-title">Profile Picture</h4>
-				<img src="{{URL::asset('images/blank-avatar.png')}}" class="image-fit img-circle" width="80%" alt="foto">
+				<img src="{{route('getAvatar')}}" class="image-fit img-circle" width="80%" alt="foto">
 				<div class="break-10"></div>
 				<h4>{{ $profile->first_name.' '.$profile->last_name }}</h4>
 				<div class="break-10"></div>
-				<button class="btn btn-primary btn-sm btn-round">Change Profile Picture</button>
+				<button class="btn btn-primary btn-sm btn-round" onclick="change_avatar('{{ encrypt(Auth::user()->id) }}')" id="btn-avt">Change Profile Picture</button>
 				<div class="break-5"></div>
 				<button class="btn btn-default btn-xs btn-round">Delete</button>
 			</div>
@@ -148,3 +153,7 @@
 	}
 </style>
 @endsection
+
+@section('javascripts')
+<script src="{{URL::asset('js/Profile/profile.js')}}"></script>
+@stop

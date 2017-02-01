@@ -7,8 +7,19 @@ use App\User;
 use App\Owner;
 use Auth;
 
+use Illuminate\Http\Response;
+use Illuminate\Contracts\Encryption\DecryptException;
+
 class ProfileController extends Controller
 {
+	public function showAvatar(User $user)
+	{
+		$avatar_instance = $user->getAvatar(Auth::user()->id, 'owner', 'owner');
+
+		return (new Response($avatar_instance[1], 200))
+              ->header('Content-Type', $avatar_instance[0]->mime);
+	}
+
 	public function edit(User $user)
 	{
 		$role = $user->get_role(Auth::user()->id);
@@ -40,5 +51,11 @@ class ProfileController extends Controller
 		Owner::findOrFail($id)->first()->update($request->all());
 
 		return redirect('profile');
+	}
+
+	public function updateAvatar($id)
+	{
+		// User::findOrFail(decrypt($id))->firstOrFail()->update($request->all());
+		return response()->json(['response' => decrypt($id)]);
 	}
 }

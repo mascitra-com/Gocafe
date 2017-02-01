@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Storage;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -27,10 +29,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
     public function get_role($id)
     {
         return $this->findOrFail($id)->first()->role;
+    }
+
+    public function getAvatar($id, $disk, $path)
+    {
+        $entry = $this->findOrFail($id)->firstOrFail();
+
+        $avatar = Storage::disk($disk)->get($path.'/'.$entry->avatar_name);
+ 
+        return array($entry, $avatar);
     }
 
     //RELATIONS
