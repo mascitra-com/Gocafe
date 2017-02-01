@@ -16,7 +16,7 @@
 				<div class="break-10"></div>
 				<h4>{{ $profile->first_name.' '.$profile->last_name }}</h4>
 				<div class="break-10"></div>
-				<button class="btn btn-primary btn-sm btn-round" onclick="change_avatar('{{ encrypt(Auth::user()->id) }}')" id="btn-avt">Change Profile Picture</button>
+				<button class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-target="#upload">Change Profile Picture</button>
 				<div class="break-5"></div>
 				<button class="btn btn-default btn-xs btn-round">Delete</button>
 			</div>
@@ -123,6 +123,28 @@
 						<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save Changes</button>
 						<button class="btn btn-default"><i class="fa fa-refresh"></i> Reset</button>
 					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+@endsection
+
+@section('modal')
+<div class="modal fade" tabindex="-1" role="dialog" id="upload">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Upload Foto</h4>
+			</div>
+			<div class="modal-body">
+				<form action="#">
+					<div class="form-group">
+						<label for="avatar"> Pilih file</label>
+						<input type="file" name="avatar">
+					</div>
+					<button type="button" class="btn btn-primary" onclick="change_avatar('{{ encrypt(Auth::user()->id) }}')" id="btn-avt">Upload</button>
 				</form>
 			</div>
 		</div>

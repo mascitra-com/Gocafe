@@ -7,6 +7,8 @@ use App\User;
 use App\Owner;
 use Auth;
 
+use App\Foo;
+
 use Illuminate\Http\Response;
 use Illuminate\Contracts\Encryption\DecryptException;
 
@@ -53,9 +55,34 @@ class ProfileController extends Controller
 		return redirect('profile');
 	}
 
-	public function updateAvatar($id)
+	public function updateAvatar(Request $request ,$id)
 	{
 		// User::findOrFail(decrypt($id))->firstOrFail()->update($request->all());
-		return response()->json(['response' => decrypt($id)]);
+		//checking file is present
+		if ($request->hasFile('avatar')) {
+    		//verify the file is uploading
+    		if ($request->file('avatar')->isValid()) {
+				$avatar_ori_name = $request->avatar->getClientOriginalName();
+
+    			//store to storage/app/owner
+				$request->avatar->storeAs('owner', $request->avatar->getClientOriginalName(), 'owner');
+
+				//store to Foos table
+				$input= array(
+					'filename' => $avatar_ori_name,
+					'mime' => $request->avatar->getClientMimeType(),
+					'original_filename' => $avatar_ori_name,
+					'user_id' => Auth::user()->id,
+				);
+				$request->merge($input);
+				Foo::create($request->except('avatar'));
+				return response()->json(['response' => 'sukses', 'status' => TRUE]);
+    		}else{
+    			return response()->json(['gagal' => decrypt($id), 'status' => FALSE]);
+    		}
+		}else{
+			return response()->json(['gagal' => decrypt($id), 'status' => FALSE]);
+		}
+		return response()->json(['response' => decrypt($id), 'status' => TRUE]);
 	}
 }
