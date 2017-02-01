@@ -21,7 +21,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h3 class="panel-title">Basic Info</h3>
-					<form action="{{ URL('cafe/profile/'.(($cafe != NULL) ? $cafe->id : '')) }}" method="POST">
+					<form action="{{ URL('profile/cafe/'.(($cafe != NULL) ? $cafe->id : '')) }}" method="POST">
                         {{ ($cafe != NULL) ? method_field('PATCH') : ''}}
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -44,7 +44,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h3 class="panel-title">Contact Info</h3>
-                    <form action="{{ URL('cafe/profile/updateContact/'.($cafe == NULL ? '' : $cafe->id)) }}" method="POST">
+                    <form action="{{ URL('profile/cafe/updateContact/'.($cafe == NULL ? '' : $cafe->id)) }}" method="POST">
                         {{ method_field('PATCH')}}
                         {{ csrf_field() }}
                         <div class="form-group">

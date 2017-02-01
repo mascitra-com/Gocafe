@@ -23,8 +23,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/home', 'HomeController@index');
 
-    Route::resource('/cafe/profile', 'CafeProfileController');
-    Route::patch('/cafe/profile/updateContact/{contact}', 'CafeProfileController@updateContact');
+    Route::resource('/profile/cafe', 'CafeProfileController');
+    Route::patch('/profile/cafe/updateContact/{contact}', 'CafeProfileController@updateContact');
 
     Route::get('/home', 'HomeController@index');
 

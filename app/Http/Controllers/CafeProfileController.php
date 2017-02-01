@@ -50,7 +50,7 @@ class CafeProfileController extends Controller
         $owner->id = $owner->getOwnerIdByUserIdNowLoggedIn();
         $cafe = new Cafe($request->all());
         $owner->addProfileCafe($cafe);
-        return redirect('cafe/profile')->with('status', 'Profile updated!');
+        return redirect('profile/cafe')->with('status', 'Profile updated!');
     }
 
     /**
@@ -68,7 +68,7 @@ class CafeProfileController extends Controller
         ]);
         $cafe = Cafe::find($id);
         $cafe->update($request->all());
-        return redirect('cafe/profile')->with('status', 'Basic Info updated!');
+        return redirect('profile/cafe')->with('status', 'Basic Info updated!');
     }
 
     /**
@@ -88,7 +88,7 @@ class CafeProfileController extends Controller
         ]);
         $cafe = Cafe::find($id);
         $cafe->update($request->all());
-        return redirect('cafe/profile')->with('status', 'Contact Info updated!');
+        return redirect('profile/cafe')->with('status', 'Contact Info updated!');
     }
 
 }
