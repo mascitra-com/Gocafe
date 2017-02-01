@@ -24,7 +24,7 @@ class ProfileController extends Controller
 	}
 
 	public function updatePersonal(Request $request ,$id)
-	{
+	{	
 		$birthdate = frmtPartDate($request->birthdate_day, $request->birthdate_month, $request->birthdate_year);
 
 		$request->merge(array('birthdate' => $birthdate));
@@ -37,12 +37,7 @@ class ProfileController extends Controller
 
 	public function updateContact(Request $request ,$id)
 	{
-		$birthdate = frmtPartDate($request->birthdate_day, $request->birthdate_month, $request->birthdate_year);
-
-		$request->merge(array('birthdate' => $birthdate));
-		$input = $request->except('birthdate_year', 'birthdate_month', 'birthdate_day');
-
-		Owner::findOrFail($id)->first()->update($input);
+		Owner::findOrFail($id)->first()->update($request->all());
 
 		return redirect('profile');
 	}

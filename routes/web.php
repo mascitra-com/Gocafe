@@ -29,6 +29,11 @@ Route::group(['middleware' => ['web']], function (){
 	Route::get('profile', 'ProfileController@edit');
 	Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');
 	Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
+
+	//FOO
+	Route::get('foo/upload', 'Foo\FooController@index');
+	Route::get('foo/upload/get', 'Foo\FooController@get');
+	Route::post('foo/upload/store', 'Foo\FooController@store');
 });
 
 // DUMMIES VIEW

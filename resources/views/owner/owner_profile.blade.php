@@ -21,7 +21,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h4 class="panel-title">Personal Info</h4>
-				<form action="{{ url('profile/personal'.$profile->id) }}" method="POST">
+				<form action="{{ url('profile/personal/'.$profile->id) }}" method="POST">
 				{{ method_field('PATCH') }}
 				{{ csrf_field() }}
 					<div class="row">
@@ -90,12 +90,12 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h4 class="panel-title">Contact Info</h4>
-				<form action="{{ url('profile/contact'.$profile->id) }}" method="POST">
+				<form action="{{ url('profile/contact/'.$profile->id) }}" method="POST">
 				{{ method_field('PATCH') }}
 				{{ csrf_field() }}
 					<div class="form-group">
 						<label for="email">Public Email</label>
-						<input type="text" class="form-control" name="email" placeholder="email address" value={{ Auth::user()->email }}>
+						<input type="text" class="form-control" name="email" placeholder="email address" value={{ $profile->email }}>
 					</div>
 					<div class="form-group">
 						<label for="phone">Phone Number</label>
