@@ -1,37 +1,61 @@
-var token =  $.ajaxSetup({
-	headers: {
-		'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-	}
-});
+var token = $('meta[name="csrf-token"]').attr('content');
 
+function ajax_config() {
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': token
+		}
+	});	
+}
 
 function change_avatar(id) {
-	console.log(id);
-	console.log(base_url+'/avatar/change/'+id);
-	var token = $('meta[name="csrf-token"]').attr('content');
-	console.log(token);
+
+	var formData = new FormData();
+	formData.append('avatar', $('#avatar')[0].files[0]);
+
+	ajax_config();
 
 	$.ajax({
-		url: base_url+'/avatar/change/'+id,
+		url: base_url+'/avatar/replace/'+id,
 		type: "POST",
-		data: {
-			'avatar':$("input[type=file][name=avatar]").val(),
-			'_method': 'POST',
-			'_token': token,
-		},
+		data: formData,
 		contentType: false,
 		cache: false,
 		processData: false,
 		dataType: "JSON",
 		success: function(data, status){
-			if (status) {
-				alert(data.response)
+			if (data.status) {
+				alert(data.status);
+				change_avatar_name(id ,data.avatar_name, data.avatar_mime);
 			}else{
 				alert('shet');
 			}
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert('error');
+		}
+	});
+}
+
+function change_avatar_name(id, avatar_name, avatar_mime) {
+	console.log('current user id:' + id);
+	console.log('current avatar name:' + avatar_name);
+
+	ajax_config();
+
+	$.post(base_url+'/avatar/change/'+id,
+	{
+		_method: 'put',
+		_token: $('meta[name="csrf-token"]').attr('content'),
+		avatar_name: avatar_name,
+		avatar_mime: avatar_mime
+	},
+	function(data, status){
+		if (data.status) {
+			// location.reload(true);
+			alert('sukses update avatar');
+		}else{
+			alert('artikel berhasil dihapus');
 		}
 	});
 }

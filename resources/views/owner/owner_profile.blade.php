@@ -139,10 +139,10 @@
 				<h4 class="modal-title">Upload Foto</h4>
 			</div>
 			<div class="modal-body">
-				<form action="#">
+				<form id="updateAvatar">
 					<div class="form-group">
 						<label for="avatar"> Pilih file</label>
-						<input type="file" name="avatar">
+						<input type="file" name="avatar" id="avatar">
 					</div>
 					<button type="button" class="btn btn-primary" onclick="change_avatar('{{ encrypt(Auth::user()->id) }}')" id="btn-avt">Upload</button>
 				</form>
@@ -177,5 +177,5 @@
 @endsection
 
 @section('javascripts')
-<script src="{{URL::asset('js/Profile/profile.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/Profile/profile.js')}}"></script>
 @stop

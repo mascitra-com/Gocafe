@@ -37,6 +37,7 @@ class FooController extends Controller
 
 	public function store(Request $request)
 	{
+		dd($request->all());
 		//checking file is present
 		if ($request->hasFile('avatar')) {
     		//verify the file is uploading
@@ -55,7 +56,7 @@ class FooController extends Controller
 				);
 				$request->merge($input);
 				Foo::create($request->except('avatar'));
-				return back();
+				return $request->avatar;
     		}else{
     			return 'not valid';
     		}

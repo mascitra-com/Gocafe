@@ -31,7 +31,8 @@ Route::group(['middleware' => ['web']], function (){
 	Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
 	Route::get('profile/avatar', [
 		'as' => 'getAvatar', 'uses' => 'ProfileController@showAvatar']); //get avatar's response
-	Route::post('profile/avatar/change/{id}', 'ProfileController@updateAvatar');
+	Route::post('profile/avatar/replace/{id}', 'ProfileController@updateAvatar');
+	Route::put('profile/avatar/change/{id}', 'ProfileController@updateAvatarName');
 
 	//FOO
 	Route::get('foo/upload', 'Foo\FooController@index');

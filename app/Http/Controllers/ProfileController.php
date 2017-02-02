@@ -19,7 +19,7 @@ class ProfileController extends Controller
 		$avatar_instance = $user->getAvatar(Auth::user()->id, 'owner', 'owner');
 
 		return (new Response($avatar_instance[1], 200))
-              ->header('Content-Type', $avatar_instance[0]->mime);
+		->header('Content-Type', $avatar_instance[0]->mime);
 	}
 
 	public function edit(User $user)
@@ -57,32 +57,36 @@ class ProfileController extends Controller
 
 	public function updateAvatar(Request $request ,$id)
 	{
-		// User::findOrFail(decrypt($id))->firstOrFail()->update($request->all());
 		//checking file is present
 		if ($request->hasFile('avatar')) {
     		//verify the file is uploading
-    		if ($request->file('avatar')->isValid()) {
+			if ($request->file('avatar')->isValid()) {
 				$avatar_ori_name = $request->avatar->getClientOriginalName();
-
+				$avatar_name = idWithPrefix(3);
+				$avatar_mime = $request->avatar->getClientMimeType();
     			//store to storage/app/owner
-				$request->avatar->storeAs('owner', $request->avatar->getClientOriginalName(), 'owner');
+				$request->avatar->storeAs('owner', $avatar_name, 'owner');
 
-				//store to Foos table
+				//update avatar_ users table
 				$input= array(
-					'filename' => $avatar_ori_name,
-					'mime' => $request->avatar->getClientMimeType(),
-					'original_filename' => $avatar_ori_name,
-					'user_id' => Auth::user()->id,
-				);
+					'avatar_name' => $avatar_name,
+					'avatar_mime' => $avatar_mime,
+					);
 				$request->merge($input);
-				Foo::create($request->except('avatar'));
-				return response()->json(['response' => 'sukses', 'status' => TRUE]);
-    		}else{
-    			return response()->json(['gagal' => decrypt($id), 'status' => FALSE]);
-    		}
+				User::findOrFail(decrypt($id))->firstOrFail()->update($request->except('avatar'));
+				return response()->json(['response' => 'sukses','avatar_name' => $avatar_name,'avatar_mime' => $avatar_mime ,'status' => TRUE]);
+			}else{
+				return response()->json(['response' => 'gagal upload', 'status' => FALSE]);
+			}
 		}else{
-			return response()->json(['gagal' => decrypt($id), 'status' => FALSE]);
+			return response()->json(['response' => 'file kosong', 'status' => FALSE]);
 		}
-		return response()->json(['response' => decrypt($id), 'status' => TRUE]);
+		return response()->json(['response' => 'sukses', 'status' => TRUE]);
+	}
+
+	public function updateAvatarName(Request $request ,$id)
+	{
+		User::findOrFail(1)->firstOrFail()->update($request->all());
+		return response()->json(['response' => 'sukses','status' => TRUE]);
 	}
 }
