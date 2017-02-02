@@ -3,6 +3,7 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\CafeBranch;
 
 class Province extends Model
 {
@@ -11,7 +12,7 @@ class Province extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = FALSE;
 
     /**
      * Indicates if the model primary key.
@@ -27,9 +28,11 @@ class Province extends Model
 
     public function cities()
     {
-        return $this->hasMany(
-            'App\Models\City',
-            'province_id'
-        );
+        return $this->hasMany('App\Models\City','province_id');
+    }
+
+    public function cafeBranch()
+    {
+        return $this->belongsToMany(CafeBranch::class);
     }
 }

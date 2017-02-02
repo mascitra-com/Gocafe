@@ -36,9 +36,22 @@ class Owner extends Model
         $this->cafe()->save($cafe);
     }
 
+    public function addBranch(CafeBranch $cafeBranch)
+    {
+        $cafeBranch->id = $cafeBranch->getNewId();
+        $cafeBranch->cafe_id = $this->getCafeIdByOwnerIdNowLoggedIn();
+        $cafeBranch->created_by = Auth::user()->id;
+        $this->cafe()->save($cafeBranch);
+    }
+
     public function getOwnerIdByUserIdNowLoggedIn()
     {
         return DB::table('owners')->where('user_id', Auth::user()->id)->first()->id;
+    }
+
+    public function getCafeIdByOwnerIdNowLoggedIn()
+    {
+        return DB::table('cafes')->where('owner_id', $this->getOwnerIdByUserIdNowLoggedIn())->first()->id;
     }
 
 }

@@ -15,6 +15,11 @@ class Cafe extends Model
         return $this->belongsTo(Owner::class);
     }
 
+    public function branch()
+    {
+        return $this->hasMany(CafeBranch::class);
+    }
+
     public function getNewId()
     {
         return 'CAF'.random_int(100, 999).date('Ymdhis');
