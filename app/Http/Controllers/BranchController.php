@@ -43,7 +43,6 @@ class BranchController extends Controller
             'phone' => 'max:20',
             'province_id' => 'required|exists:provinces',
             'city_id' => 'required|exists:cities',
-            'phone' => 'max:20',
             'open_hours' => 'required|max:10',
             'close_hours' => 'required|max:10',
         ]);

@@ -16,36 +16,36 @@
             {{ session('status') }}
         </div>
     @endif
-    <div class="content-title">Branches Insight</div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-4">
-            <div class="panel panel-default panel-md">
-                <div class="panel-body">
-                    <span class="text-grey">sub judul</span><br>
-                    <h4>Main Title</h4>
-                    <div class="break-5">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <div class="panel panel-default panel-md">
-                <div class="panel-body">
-                    <span class="text-grey">sub judul</span><br>
-                    <h4>Main Title</h4>
-                    <div class="break-5">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <div class="panel panel-default panel-md">
-                <div class="panel-body">
-                    <span class="text-grey">sub judul</span><br>
-                    <h4>Main Title</h4>
-                    <div class="break-5">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="content-title">Branches Management</div>
+    {{--<div class="row">--}}
+        {{--<div class="col-xs-12 col-sm-4">--}}
+            {{--<div class="panel panel-default panel-md">--}}
+                {{--<div class="panel-body">--}}
+                    {{--<span class="text-grey">sub judul</span><br>--}}
+                    {{--<h4>Main Title</h4>--}}
+                    {{--<div class="break-5">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="col-xs-12 col-sm-4">--}}
+            {{--<div class="panel panel-default panel-md">--}}
+                {{--<div class="panel-body">--}}
+                    {{--<span class="text-grey">sub judul</span><br>--}}
+                    {{--<h4>Main Title</h4>--}}
+                    {{--<div class="break-5">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="col-xs-12 col-sm-4">--}}
+            {{--<div class="panel panel-default panel-md">--}}
+                {{--<div class="panel-body">--}}
+                    {{--<span class="text-grey">sub judul</span><br>--}}
+                    {{--<h4>Main Title</h4>--}}
+                    {{--<div class="break-5">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 
     <div class="row break-20">
         <div class="col-xs-12 nopadding">
