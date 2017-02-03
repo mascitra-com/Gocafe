@@ -33,6 +33,11 @@ Route::group(['middleware' => ['web']], function (){
 		'as' => 'getAvatar', 'uses' => 'ProfileController@showAvatar']); //get avatar's response
 	Route::post('profile/avatar/replace/{id}', 'ProfileController@updateAvatar');
 	Route::put('profile/avatar/change/{id}', 'ProfileController@updateAvatarName');
+	//--END PROFILE
+
+	//STAFF
+	Route::resource('staff', 'StaffController');
+	//--END STAFF
 
 	//FOO
 	Route::get('foo/upload', 'Foo\FooController@index');
