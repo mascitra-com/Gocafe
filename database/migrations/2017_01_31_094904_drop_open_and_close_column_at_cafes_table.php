@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class DropOpenAndCloseColumnAtCafesTable extends Migration
 {
@@ -26,7 +26,9 @@ class DropOpenAndCloseColumnAtCafesTable extends Migration
      */
     public function down()
     {
-        $table->string('open_hours', 10);
-        $table->string('close_hours', 10);
+        Schema::table('cafes', function (Blueprint $table) {
+            $table->string('open_hours', 10);
+            $table->string('close_hours', 10);
+        });
     }
 }

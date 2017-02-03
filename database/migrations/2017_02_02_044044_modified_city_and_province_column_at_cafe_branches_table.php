@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class ModifiedCityAndProvinceColumnAtCafeBranchesTable extends Migration
 {
@@ -27,6 +27,10 @@ class ModifiedCityAndProvinceColumnAtCafeBranchesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('cafe_branches', function (Blueprint $table) {
+            $table->string('city');
+            $table->dropColumn('city_id');
+            $table->dropColumn('province_id');
+        });
     }
 }

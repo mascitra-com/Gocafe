@@ -25,6 +25,8 @@ class AddOwnerIdColumnAtCafeBranchesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('cafe_branches', function (Blueprint $table) {
+            $table->dropColumn('owner_id');
+        });
     }
 }
