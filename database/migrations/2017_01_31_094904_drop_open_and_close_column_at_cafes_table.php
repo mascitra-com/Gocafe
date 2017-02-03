@@ -26,6 +26,7 @@ class DropOpenAndCloseColumnAtCafesTable extends Migration
      */
     public function down()
     {
-        //
+        $table->string('open_hours', 10);
+        $table->string('close_hours', 10);
     }
 }
