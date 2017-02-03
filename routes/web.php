@@ -12,18 +12,16 @@
 */
 
 
-Route::group(['middleware' => ['web']], function (){
+Route::group(['middleware' => ['web']], function () {
 
-	Route::get('/', function () {
-		return view('welcome');
-	});
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-	Auth::routes();
 
-	Route::get('/home', 'HomeController@index');
+    Auth::routes();
 
-	//DASHBOARD
-	Route::get('dashboard', 'DashboardController@index');
+    Route::get('/home', 'HomeController@index');
 
 	//PROFILE
 	Route::get('profile', 'ProfileController@edit');
@@ -44,6 +42,8 @@ Route::group(['middleware' => ['web']], function (){
 	Route::get('avatar', [
 		'as' => 'get', 'uses' => 'Foo\FooController@get']);
 	Route::post('foo/upload/store', 'Foo\FooController@store');
+    Route::resource('/profile/cafe', 'CafeProfileController');
+    Route::patch('/profile/cafe/updateContact/{contact}', 'CafeProfileController@updateContact');
 });
 
 // DUMMIES VIEW
