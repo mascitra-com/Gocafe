@@ -49,6 +49,12 @@ if (! function_exists('idWithPrefix')) {
                 break;
             case 3: //id Image Profile
                 $pre = 'AVT';
+                break;            
+            case 4: //id CAFE
+                $pre = 'CFE';
+                break;                
+            case 5: //id CAFE'S BRANCH
+                $pre = 'CFB';
                 break;
             default:
                 $pre = 'IMG';

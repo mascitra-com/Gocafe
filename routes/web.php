@@ -37,13 +37,18 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('staff', 'StaffController');
 	//--END STAFF
 
+	//CAFE
+	//CAFE PROFILE
+    Route::resource('/profile/cafe', 'CafeProfileController');
+    Route::patch('/profile/cafe/updateContact/{contact}', 'CafeProfileController@updateContact');
+    //--END CAFE PROFILE
+    //--END CAFE
+
 	//FOO
 	Route::get('foo/upload', 'Foo\FooController@index');
 	Route::get('avatar', [
 		'as' => 'get', 'uses' => 'Foo\FooController@get']);
 	Route::post('foo/upload/store', 'Foo\FooController@store');
-    Route::resource('/profile/cafe', 'CafeProfileController');
-    Route::patch('/profile/cafe/updateContact/{contact}', 'CafeProfileController@updateContact');
 });
 
 // DUMMIES VIEW

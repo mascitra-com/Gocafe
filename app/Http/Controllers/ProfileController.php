@@ -14,6 +14,11 @@ use Illuminate\Contracts\Encryption\DecryptException;
 
 class ProfileController extends Controller
 {
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+	
 	public function showAvatar(User $user)
 	{
 		$avatar_instance = $user->getAvatar(Auth::user()->id, 'owner', 'owner');
