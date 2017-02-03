@@ -51,7 +51,12 @@ class Owner extends Model
 
     public function getCafeIdByOwnerIdNowLoggedIn()
     {
-        return DB::table('cafes')->where('owner_id', $this->getOwnerIdByUserIdNowLoggedIn())->first()->id;
+        $cafe = DB::table('cafes')->where('owner_id', $this->getOwnerIdByUserIdNowLoggedIn())->first();
+        if($cafe){
+            return $cafe->id;
+        } else {
+            return NULL;
+        }
     }
 
 }

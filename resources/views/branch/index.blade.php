@@ -17,36 +17,6 @@
         </div>
     @endif
     <div class="content-title">Branches Management</div>
-    {{--<div class="row">--}}
-        {{--<div class="col-xs-12 col-sm-4">--}}
-            {{--<div class="panel panel-default panel-md">--}}
-                {{--<div class="panel-body">--}}
-                    {{--<span class="text-grey">sub judul</span><br>--}}
-                    {{--<h4>Main Title</h4>--}}
-                    {{--<div class="break-5">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<div class="col-xs-12 col-sm-4">--}}
-            {{--<div class="panel panel-default panel-md">--}}
-                {{--<div class="panel-body">--}}
-                    {{--<span class="text-grey">sub judul</span><br>--}}
-                    {{--<h4>Main Title</h4>--}}
-                    {{--<div class="break-5">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<div class="col-xs-12 col-sm-4">--}}
-            {{--<div class="panel panel-default panel-md">--}}
-                {{--<div class="panel-body">--}}
-                    {{--<span class="text-grey">sub judul</span><br>--}}
-                    {{--<h4>Main Title</h4>--}}
-                    {{--<div class="break-5">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-
     <div class="row break-20">
         <div class="col-xs-12 nopadding">
             <div class="panel panel-theme">
@@ -67,6 +37,8 @@
                                 <td>Cabang {{ $branch->city->city_name }}</td>
                                 <td>{{ $branch->province->province_name }}</td>
                                 <td>{{ $branch->address }}</td>
+                                <td>{{ $branch->open_hours }}</td>
+                                <td>{{ $branch->close_hours }}</td>
                                 <td class="text-right"><a href="{{ url('branch/'.$branch->id.'/edit') }}" class="btn btn-xs btn-default"><i class="fa fa-info-circle fa-fw"></i> detail</a></td>
                             </tr>
                         @endforeach

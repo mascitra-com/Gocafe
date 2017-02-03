@@ -56,8 +56,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<button class="btn btn-primary"><i class="fa fa-save fa-fw"></i> perbaharui</button>
-						<button class="btn btn-default"><i class="fa fa-refresh fa-fw"></i> batal</button>
+						<button class="btn btn-primary" type="submit"><i class="fa fa-save fa-fw"></i> Perbaharui</button>
+						<a href="{{ url('branch') }}" class="btn btn-default"><i class="fa fa-refresh fa-fw"></i> Kembali</a>
 					</div>
 				</form>
 			</div>
