@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Owner;
+use App\Cafe;
 use App\CafeBranch;
-use Illuminate\Http\Request;
-use App\Models\City;
 use App\Models\Province;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 
 class BranchController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the Branches Profile.
      *
@@ -20,24 +27,19 @@ class BranchController extends Controller
      */
     public function index()
     {
-        if(!$provinces = Cache::get('provinces')){
-            $provinces = Province::all();
-            Cache::forever('provinces', $provinces);
-        }
-        $owner = new Owner();
-        $cafe_id = $owner->getCafeIdByOwnerIdNowLoggedIn();
-        $branches = CafeBranch::all()->where('cafe_id', $cafe_id);
-        $branches->load('city', 'province');
+        $provinces = Cache::get('provinces');
+        $branches = CafeBranch::all()->where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn());
         return view('branch.index', compact('provinces', 'branches'));
     }
 
     /**
      * Store a newly Branch Profile.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     * @param Cafe $cafe
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Cafe $cafe)
     {
         $this->validate($request, [
             'phone' => 'max:20',
@@ -46,58 +48,47 @@ class BranchController extends Controller
             'open_hours' => 'required|max:10',
             'close_hours' => 'required|max:10',
         ]);
-        $owner = new Owner();
-        $owner->id = $owner->getOwnerIdByUserIdNowLoggedIn();
         $cafeBranch = new CafeBranch($request->all());
-        $owner->addBranch($cafeBranch);
+        $cafe->addBranch($cafeBranch, Cafe::getCafeIdByOwnerIdNowLoggedIn());
         return redirect('branch')->with('status', 'Branch added!');
     }
 
     /**
      * Show the form for editing the Branch Profile.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $branch = CafeBranch::find($id);
-        if(!$provinces = Cache::get('provinces')){
-            $provinces = Province::all();
-            Cache::forever('provinces', $provinces);
-        }
+        $branch = CafeBranch::findOrFail($id);
+        $provinces = Province::all();
         $idProvince = $branch->province_id;
-        if(!$cities = Cache::get('cities-'.$idProvince)) {
-            $cities = Province::find($idProvince)->cities;
-            Cache::forever('cities-'.$idProvince, $cities);
-        }
+        $cities = Province::findOrFail($idProvince)->cities;
         return view('branch.detail', compact('provinces', 'cities', 'branch'));
     }
 
     /**
      * Update the Branch Profile.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         CafeBranch::findOrFail($id)->first()->update($request->all());
-        return redirect("branch")->with('status', 'Branch updated!');
+        return redirect('branch')->with('status', 'Branch updated!');
     }
 
 
     public function getCitiesByProvince(Request $request)
     {
         $idProvince = $request->input('idProvince');
-        if(!$cities = Cache::get('cities-'.$idProvince)) {
-            $cities = Province::find($idProvince)->cities;
-            Cache::forever('cities-'.$idProvince, $cities);
-        }
+        $cities = Province::findOrFail($idProvince)->cities;
         $data = array('<option>Pilih Kabupaten / Kota</option>');
         foreach ($cities as $list) {
-            array_push($data, "<option value='$list->city_id'>$list->city_name_full</option>");
+            $data[] = "<option value='$list->city_id'>$list->city_name_full</option>";
         }
         return json_encode($data);
     }

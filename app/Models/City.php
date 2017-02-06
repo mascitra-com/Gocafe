@@ -24,6 +24,7 @@ class City extends Model
     public function __construct()
     {
         $this->table = config('laraciproid.city');
+        parent::__construct();
     }
 
     public function province()

@@ -22,6 +22,6 @@ if (! function_exists('fooFormatText')) {
             $birthdate_month = $month;
         }
 
-        return $birthdate = $year.'-'.$birthdate_month.'-'.$birthdate_day;;
+        return $birthdate = $year.'-'.$birthdate_month.'-'.$birthdate_day;
     }
 }

@@ -29,34 +29,16 @@ class Owner extends Model
         return $this->hasOne(Cafe::class);
     }
 
-    public function addProfileCafe(Cafe $cafe)
+    public function addProfileCafe(Cafe $cafe, $owner_id)
     {
         $cafe->id = $cafe->getNewId();
         $cafe->created_by = Auth::user()->id;
-        $this->cafe()->save($cafe);
+        Owner::find($owner_id)->cafe()->save($cafe);
     }
 
-    public function addBranch(CafeBranch $cafeBranch)
-    {
-        $cafeBranch->id = $cafeBranch->getNewId();
-        $cafeBranch->cafe_id = $this->getCafeIdByOwnerIdNowLoggedIn();
-        $cafeBranch->created_by = Auth::user()->id;
-        $this->cafe()->save($cafeBranch);
-    }
-
-    public function getOwnerIdByUserIdNowLoggedIn()
+    public static function getOwnerIdNowLoggedIn()
     {
         return DB::table('owners')->where('user_id', Auth::user()->id)->first()->id;
-    }
-
-    public function getCafeIdByOwnerIdNowLoggedIn()
-    {
-        $cafe = DB::table('cafes')->where('owner_id', $this->getOwnerIdByUserIdNowLoggedIn())->first();
-        if($cafe){
-            return $cafe->id;
-        } else {
-            return NULL;
-        }
     }
 
 }
