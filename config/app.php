@@ -167,7 +167,7 @@ return [
          * Package Service Providers...
          */
 
-        //
+        Matriphe\Laraciproid\ServiceProvider::class,
 
         /*
          * Application Service Providers...

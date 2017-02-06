@@ -53,6 +53,21 @@ class Ui extends Controller
 
     public function branch()
     {
-        return view('_ui/cafe/cafe_branch');
+        return view('_ui/branch/branch');
+    }
+
+    public function branch_detail()
+    {
+        return view('_ui/branch/detail');
+    }
+
+    public function position()
+    {
+        return view('_ui/staff/position');
+    }
+
+    public function account()
+    {
+        return view('_ui/auth/account');
     }
 }

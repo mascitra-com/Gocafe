@@ -122,18 +122,18 @@
 
 /*PANEL CLASS*/
 
-.panel-100, .panel-150{
+.panel-sm, .panel-md{
 	border-left: 3px #EF6C40 solid;
 }
 
-.panel-100{
+.panel-sm{
 	height: 100px;
 	max-height: 100px;
 	overflow:auto;
 }
 
-.panel-150{
-	height: 150px;
+.panel-md{
+	height: 120px;
 	max-height: 150px;
 	overflow:auto;
 }

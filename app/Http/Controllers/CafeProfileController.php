@@ -26,8 +26,7 @@ class CafeProfileController extends Controller
      */
     public function index()
     {
-        $owner = new Owner();
-        $cafe = DB::table('cafes')->where('owner_id', $owner->getOwnerIdByUserIdNowLoggedIn())->first();
+        $cafe = DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first();
         return view('cafe.profile', compact('cafe'));
     }
 
@@ -47,9 +46,8 @@ class CafeProfileController extends Controller
             'twitter' => 'max:255',
             'instagram' => 'max:255',
         ]);
-        $owner->id = $owner->getOwnerIdByUserIdNowLoggedIn();
         $cafe = new Cafe($request->all());
-        $owner->addProfileCafe($cafe);
+        $owner->addProfileCafe($cafe, Owner::getOwnerIdNowLoggedIn());
         return redirect('profile/cafe')->with('status', 'Profile updated!');
     }
 
@@ -66,8 +64,7 @@ class CafeProfileController extends Controller
             'name' => 'min:3|max:255|required',
             'description' => 'min:3|required',
         ]);
-        $cafe = Cafe::find($id);
-        $cafe->update($request->all());
+        Cafe::findOrFail($id)->update($request->all());
         return redirect('profile/cafe')->with('status', 'Basic Info updated!');
     }
 
@@ -86,8 +83,7 @@ class CafeProfileController extends Controller
             'twitter' => 'max:255',
             'instagram' => 'max:255',
         ]);
-        $cafe = Cafe::find($id);
-        $cafe->update($request->all());
+        Cafe::findOrFail($id)->update($request->all());
         return redirect('profile/cafe')->with('status', 'Contact Info updated!');
     }
 

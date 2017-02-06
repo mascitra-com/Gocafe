@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0f16dd5962473d78e3e9796af8f6abbc",
-    "content-hash": "a3081d7d0e8761880e4c85bfc622e732",
+    "hash": "cdc94d8eb898df47dacfff5dc86c5281",
+    "content-hash": "8b73675be770bbaf52394311f9cb50ac",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -919,6 +919,59 @@
                 "storage"
             ],
             "time": "2016-10-19 20:38:46"
+        },
+        {
+            "name": "matriphe/laraciproid",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/matriphe/laraciproid.git",
+                "reference": "df22a86feefa55d8babd66bda9a631e880430ed2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/matriphe/laraciproid/zipball/df22a86feefa55d8babd66bda9a631e880430ed2",
+                "reference": "df22a86feefa55d8babd66bda9a631e880430ed2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-pdo": "*",
+                "illuminate/database": "^5.0",
+                "illuminate/support": "^5.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Matriphe\\Laraciproid\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muhammad Zamroni",
+                    "email": "halo@matriphe.com"
+                }
+            ],
+            "description": "Indonesia city and province data migration and seeder for Laravel.",
+            "keywords": [
+                "city",
+                "data",
+                "id",
+                "ina",
+                "indonesia",
+                "laravel",
+                "province",
+                "seeder"
+            ],
+            "time": "2016-05-21 06:41:58"
         },
         {
             "name": "monolog/monolog",

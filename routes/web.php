@@ -26,6 +26,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('/profile/cafe', 'CafeProfileController');
     Route::patch('/profile/cafe/updateContact/{contact}', 'CafeProfileController@updateContact');
 
+    Route::resource('/branch', 'BranchController');
+    Route::post('/branch/getCitiesByProvince', 'BranchController@getCitiesByProvince');
+
     Route::get('/home', 'HomeController@index');
 
     //DASHBOARD
@@ -47,3 +50,6 @@ Route::get('ui/staff', 'Ui@Staff');
 Route::get('ui/staff/add', 'Ui@Staff_create');
 Route::get('ui/staff/detail', 'Ui@Staff_detail');
 Route::get('ui/branch', 'Ui@Branch');
+Route::get('ui/branch/detail', 'Ui@Branch_detail');
+Route::get('ui/position', 'Ui@Position');
+Route::get('ui/account', 'Ui@Account');
