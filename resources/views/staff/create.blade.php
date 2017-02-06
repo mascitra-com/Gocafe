@@ -11,6 +11,24 @@
 			<div class="panel-body">
 				<form method="POST" action="{{ url('staff') }}">
 					{{ csrf_field() }}
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="email" class="form-control" name="email" placeholder="email staff">
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label for="password">Password</label>
+								<input type="password" class="form-control" name="password" placeholder="password">
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label for="confirm_password">Konfirmasi Password</label>
+								<input type="password" class="form-control" name="confirm_password" placeholder="konfirmasi password">
+							</div>
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-xs-6">
 							<div class="form-group">
@@ -68,7 +86,7 @@
 						<label for="phone">Nomor Handphone</label>
 						<div class="input-group">
 							<span class="input-group-addon">+62</span>
-							<input type="text" class="form-control" name="phone" placeholder="nomor handphone">
+							<input type="text" class="form-control" name="phone_input" placeholder="nomor handphone">
 						</div>
 					</div>
 					<div class="row">
@@ -76,9 +94,9 @@
 							<div class="form-group">
 								<label for="branch_id">Cabang</label>
 								<select name="branch_id" class="form-control">
-								@foreach ($branches as $branch)
-									<option value="{{ $branch->id }}">{{ $branch->city }}</option>
-								@endforeach
+									@foreach ($branches as $branch)
+									<option value="{{ $branch->id }}">{{ $branch->id }}</option>
+									@endforeach
 								</select>
 							</div>
 						</div>
@@ -87,9 +105,9 @@
 								<label for="position_id">Posisi</label>
 								<div class="input-group">
 									<select class="form-control" name="position_id">
-									@foreach ($positions as $position)
+										@foreach ($positions as $position)
 										<option value="{{ $position->id }}">{{ $position->title }}</option>
-									@endforeach
+										@endforeach
 									</select>
 									<span class="input-group-btn">
 										<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#position">baru</button>

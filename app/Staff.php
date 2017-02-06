@@ -16,7 +16,7 @@ class Staff extends Model
 
 	protected $dates = ['deleted_at'];
 
-    protected $guarded = ['id'];
+    protected $fillable = ['id', 'user_id', 'position_id', 'branch_id','gender', 'birthdate', 'first_name', 'last_name', 'address','phone', 'created_by'];    
 
     protected $hidden = ['id', 'user_id', 'position_id', 'branch_id', 'created_by', 'updated_by', 'deleted_by'];
 

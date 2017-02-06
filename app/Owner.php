@@ -19,7 +19,6 @@ class Owner extends Model
 
     protected $hidden = ['id'];
 
-
     public function addProfileCafe(Cafe $cafe)
     {
         $cafe->id = $cafe->getNewId();

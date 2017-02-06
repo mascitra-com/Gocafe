@@ -57,9 +57,15 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $staff = new Staff($request->all());
+        $user = new User($request->only(['email']));
+        $user_id = $user->addUser($user, $request->password, 'staff');
 
-        return $staff;
+        $birthdate = frmtPartDate($request->birthdate_day, $request->birthdate_month, $request->birthdate_year);
+        $phone = '+62'.$request->phone;
+        $request->merge(array('id' => idWithPrefix(2) ,'user_id' => $user_id, 'birthdate' => $birthdate, 'phone' => $phone, 'created_by' => Auth::user()->id));
+        Staff::create($request->except(['email', 'password', 'confirm_password', 'birthdate_day', 'birthdate_year', 'birthdate_month', 'phone_input']));
+
+        return redirect('staff');
     }
 
     /**

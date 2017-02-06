@@ -10,6 +10,7 @@ class Cafe extends Model
 
     protected $fillable = ['id', 'owner_id', 'name', 'description', 'open_hours', 'close_hours', 'phone', 'facebook', 'twitter', 'instagram'];
 
+    //RELATIONS
     public function owner()
     {
         return $this->belongsTo(Owner::class);

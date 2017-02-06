@@ -25,10 +25,17 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    // protected $hidden = [
+    //     'password', 'remember_token',
+    // ];
 
+    public function addUser(User $user, $password, $role)
+    {
+        $user->password = bcrypt($password);
+        $user->role = $role;
+        $this->save();
+        return $user->id;
+    }
 
     public function get_role($id)
     {
