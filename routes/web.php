@@ -23,6 +23,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/home', 'HomeController@index');
 
+    //DASHBOARD
+    Route::get('dashboard', 'DashboardController@index');
+    //--END DASHBOARD
+
 	//PROFILE
 	Route::get('profile', 'ProfileController@edit');
 	Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');

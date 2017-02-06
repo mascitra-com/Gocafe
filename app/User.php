@@ -29,6 +29,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
     public function get_role($id)
     {
         return $this->findOrFail($id)->first()->role;
@@ -43,6 +44,11 @@ class User extends Authenticatable
         return array($entry, $avatar);
     }
 
+    public function getOwnerByUserId($id)
+    {
+        return $this->findOrFail($id)->owner->firstOrFail();
+    }
+    
     //RELATIONS
     public function owner()
     {

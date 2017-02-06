@@ -4,16 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Staff;
+use App\User;
+use App\Owner;
+use App\Cafe;
+
+use Auth;
+
 class StaffController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user, Owner $owner)
     {
-        //
+        $owner_id = $user->getOwnerByUserId(Auth::user()->id)->id;
+        $cafe_id = $owner->getCafeByOwnerId($owner_id)->id;
+
+        $staffs = Cafe::findOrFail($cafe_id)->staffs;
+
+        return view('staff/staff', compact('staffs'));
     }
 
     /**
@@ -21,9 +38,15 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(User $user, Owner $owner)
     {
-        //
+        $owner_id = $user->getOwnerByUserId(Auth::user()->id)->id;
+        $cafe_id = $owner->getCafeByOwnerId($owner_id)->id;
+
+        $branches = Cafe::findOrFail($cafe_id)->branches;
+        $positions = Cafe::findOrFail($cafe_id)->positions;
+
+        return view('staff.create', compact('branches', 'positions'));
     }
 
     /**
@@ -34,7 +57,9 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $staff = new Staff($request->all());
+
+        return $staff;
     }
 
     /**

@@ -19,15 +19,6 @@ class Owner extends Model
 
     protected $hidden = ['id'];
 
-    public function user()
-    {
-    	return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function cafe()
-    {
-        return $this->hasOne(Cafe::class);
-    }
 
     public function addProfileCafe(Cafe $cafe)
     {
@@ -41,4 +32,24 @@ class Owner extends Model
         return DB::table('owners')->where('user_id', Auth::user()->id)->first()->id;
     }
 
+    public function getCafeByOwnerId($id)
+    {
+        return $this->findOrFail($id)->cafe->firstOrFail();
+    }
+
+    //RELATIONS
+    public function user()
+    {
+    	return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function cafe()
+    {
+        return $this->hasOne(Cafe::class);
+    }
+
+    public function branches()
+    {
+        return $this->hasManyThrough(CafeBranch::class, Cafe::class);
+    }
 }
