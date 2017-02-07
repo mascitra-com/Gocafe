@@ -31,7 +31,7 @@ class Cafe extends Model
     {
         $cafeBranch->id = $cafeBranch->getNewId();
         $cafeBranch->created_by = Auth::user()->id;
-        Cafe::find($cafeId)->branch()->save($cafeBranch);
+        self::find($cafeId)->branch()->save($cafeBranch);
     }
 
     public static function getCafeIdByOwnerIdNowLoggedIn()
