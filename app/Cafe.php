@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Cafe extends Model
 {
@@ -15,7 +17,7 @@ class Cafe extends Model
         return $this->belongsTo(Owner::class);
     }
 
-    public function branches()
+    public function branch()
     {
         return $this->hasMany(CafeBranch::class);
     }
@@ -33,6 +35,23 @@ class Cafe extends Model
     public function getNewId()
     {
         return 'CAF'.random_int(100, 999).date('Ymdhis');
+    }
+
+    public function addBranch(CafeBranch $cafeBranch, $cafeId)
+    {
+        $cafeBranch->id = $cafeBranch->getNewId();
+        $cafeBranch->created_by = Auth::user()->id;
+        self::find($cafeId)->branch()->save($cafeBranch);
+    }
+
+    public static function getCafeIdByOwnerIdNowLoggedIn()
+    {
+        $cafe = DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first();
+        if($cafe){
+            return $cafe->id;
+        } else {
+            return NULL;
+        }
     }
 
 }

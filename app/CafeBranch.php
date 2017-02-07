@@ -2,15 +2,18 @@
 
 namespace App;
 
+use App\models\City;
+use App\models\Province;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CafeBranch extends Model
 {
-    use SoftDeletes;
+  use SoftDeletes;
 
-    public $incrementing = false;
-
+  public $incrementing = FALSE;
+ 
+  protected $fillable = ['id', 'cafe_id', 'location_id', 'address', 'phone', 'open_hours', 'close_hours'];
 	protected $dates = ['deleted_at'];
 
 	protected $guarded= ['id'];
@@ -24,9 +27,8 @@ class CafeBranch extends Model
 	{
 		return $this->hasMany(Staff::class);
 	}
-
-	public function FunctionName($value='')
-	{
-		# code...
-	}
+    public function getNewId()
+    {
+        return 'CFB' . random_int(100, 999) . date('Ymdhis');
+    }
 }

@@ -20,14 +20,14 @@ class Owner extends Model
     protected $hidden = ['id'];
 
 
-    public function addProfileCafe(Cafe $cafe)
+    public function addProfileCafe(Cafe $cafe, $owner_id)
     {
         $cafe->id = $cafe->getNewId();
         $cafe->created_by = Auth::user()->id;
-        $this->cafe()->save($cafe);
+        Owner::find($owner_id)->cafe()->save($cafe);
     }
 
-    public function getOwnerIdByUserIdNowLoggedIn()
+    public static function getOwnerIdNowLoggedIn()
     {
         return DB::table('owners')->where('user_id', Auth::user()->id)->first()->id;
     }
