@@ -22,11 +22,11 @@ class CafeBranch extends Model
 
 	public function staffs()
 	{
-		return $this->hasMany(Staff::class);
+		return $this->hasMany(Staff::class, 'branch_id');
 	}
 
-	public function FunctionName($value='')
+	public function positions()
 	{
-		# code...
+		return $this->hasMany(Position::class, 'branch_id');
 	}
 }

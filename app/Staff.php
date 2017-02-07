@@ -23,7 +23,7 @@ class Staff extends Model
     //RELATIONS
     public function position()
     {
-    	return $this->belongsToMany(Position::class);
+    	return $this->belongsTo(Position::class);
     }
     
     public function user()
@@ -31,9 +31,9 @@ class Staff extends Model
     	return $this->belongsTo(User::class, 'user_id');
     }
     
-    public function branch()
+    public function branches()
     {
-    	return $this->belongsTo(Branch::class, 'branch_id');
+    	return $this->belongsTo(CafeBranch::class, 'branch_id');
     }
 
 }

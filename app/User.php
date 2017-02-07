@@ -51,7 +51,7 @@ class User extends Authenticatable
         return array($entry, $avatar);
     }
 
-    public function getOwnerByUserId($id)
+    public function getAccountByUserId($id)
     {
         return $this->findOrFail($id)->owner->firstOrFail();
     }
