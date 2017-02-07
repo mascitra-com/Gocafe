@@ -17,18 +17,20 @@
 						<div class="row">
 							<div class="col-xs-12 col-md-4">
 								<select name="province_id" class="form-control" id="provinces">
-									<option value="">Pilh Provinsi</option>
+									<option value="">Pilih Provinsi</option>
                                     @foreach($provinces as $province)
-                                        <option value="{{ $province->province_id }}" {{ $province->province_id == $branch->province_id ? 'selected' : ''}}>{{ $province->province_name_id }}</option>
+                                        <option value="{{ $province->id }}">{{ $province->name }}</option>
                                     @endforeach
 								</select>
                             </div>
                             <div class="col-xs-12 col-md-4">
                                 <select name="city_id" class="form-control" id="cities">
                                     <option value="">Pilih Kabupaten</option>
-                                    @foreach($cities as $city)
-                                        <option value="{{ $city->city_id }}" {{ $city->city_id == $branch->city_id ? 'selected' : ''}}>{{ $city->city_name_full }}</option>
-                                    @endforeach
+                                </select>
+							</div>
+                            <div class="col-xs-12 col-md-4">
+                                <select name="district_id" class="form-control" id="districts">
+                                    <option value="">Pilih Kecamatan</option>
                                 </select>
 							</div>
 						</div>
@@ -104,6 +106,34 @@
                 success: function (data) {
                     $("#cities").html(data);
                     $("#cities").prop('disabled', false);
+                }
+            });
+        });
+    </script>
+    <script>
+        var base_url = 'http://' + window.location.host;
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $("#cities").on('change', function () {
+            $("#districts").html("<option>Pilih Kabupaten / Kota</option>");
+            $("#districts").prop('disabled', true);
+            var id;
+            var x = document.getElementById("cities");
+            for (var i = 0; i < x.options.length; i++) {
+                if (x.options[i].selected) {
+                    id = x.options[i].value;
+                }
+            }
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': token }
+            });
+            $.ajax({
+                type: 'POST',
+                data: { 'idCity' : id },
+                dataType: "json",
+                url: base_url + "/branch/getDistrictByCity",
+                success: function (data) {
+                    $("#districts").html(data);
+                    $("#districts").prop('disabled', false);
                 }
             });
         });

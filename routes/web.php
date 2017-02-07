@@ -28,6 +28,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::resource('/branch', 'BranchController');
     Route::post('/branch/getCitiesByProvince', 'BranchController@getCitiesByProvince');
+    Route::post('/branch/getDistrictByCity', 'BranchController@getDistrictByCity');
 
     Route::get('/home', 'HomeController@index');
 

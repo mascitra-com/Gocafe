@@ -11,17 +11,7 @@ class CafeBranch extends Model
     public $incrementing = FALSE;
     protected $guarded = ['created_by'];
 
-    protected $fillable = ['id', 'cafe_id', 'city_id', 'province_id', 'address', 'phone', 'open_hours', 'close_hours'];
-
-    public function city()
-    {
-        return $this->hasOne(City::class, 'city_id', 'city_id');
-    }
-
-    public function province()
-    {
-        return $this->hasOne(Province::class, 'province_id', 'province_id');
-    }
+    protected $fillable = ['id', 'cafe_id', 'location_id', 'address', 'phone', 'open_hours', 'close_hours'];
 
     public function cafe()
     {
