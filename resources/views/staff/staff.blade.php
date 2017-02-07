@@ -9,7 +9,7 @@
 				<h3 class="panel-title pull-left"><i class="fa fa-fw fa-users"></i> Staff Management</h3>
 				<div class="btn-group btn-group-sm pull-right" role="group">
 					<a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh"></i> <span class="hidden-sm">refresh</span></a>
-					<a class="btn btn-default" href="#"><i class="fa fa-fw fa-plus"></i> <span class="hidden-sm">new</span></a>
+					<a class="btn btn-default" href="{{ url('staff/create') }}"><i class="fa fa-fw fa-plus"></i> <span class="hidden-sm">new</span></a>
 					<button class="btn btn-default" data-toggle="modal" data-target="#import-dialog"><i class="fa fa-fw fa-upload"></i> <span class="hidden-sm">import</span></button>
 				</div>
 				<!-- QUICK SEARCH -->
@@ -68,20 +68,20 @@
 							</form>
 						</tr>
 						<!-- DATA START HERE -->
-						@for($i=1;$i <= 5;$i++)
+						@foreach($staffs as $staff)
 						<tr>
-							<td class="text-center text-nowrap">stf00001</td>
-							<td>Ainul</td>
-							<td>Yakin</td>
-							<td class="text-center text-nowrap">Branch #{{$i}}</td>
-							<td class="text-center text-nowrap">Manager</td>
-							<td class="text-center text-nowrap">Male</td>
+							<td class="text-center text-nowrap">{{ $staff->id }}</td>
+							<td>{{ $staff->first_name }}</td>
+							<td>{{ $staff->last_name }}</td>
+							<td class="text-center text-nowrap">{{ $staff->branch_id }}</td>
+							<td class="text-center text-nowrap">{{ $staff->position_id }}</td>
+							<td class="text-center text-nowrap">@if($staff->gender === '0') Laki-Laki @else Perempuan @endif</td>
 							<td class="text-center text-nowrap">
 								<a href="#" class="btn btn-default btn-xs"><i class="fa fa-info-circle"></i></a>
 								<a href="#" class="btn btn-default btn-xs"><i class="fa fa-trash"></i></a>
 							</td>
 						</tr>
-						@endfor
+						@endforeach
 					</tbody>
 				</table>
 			</div>

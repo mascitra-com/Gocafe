@@ -22,6 +22,16 @@ class Cafe extends Model
         return $this->hasMany(CafeBranch::class);
     }
 
+    public function staffs()
+    {
+        return $this->hasManyThrough(Staff::class, CafeBranch::class, 'cafe_id', 'branch_id', 'id');
+    }
+
+    public function positions()
+    {
+        return $this->hasManyThrough(Position::class, CafeBranch::class, 'cafe_id', 'branch_id', 'id');
+    }
+
     public function getNewId()
     {
         return 'CAF'.random_int(100, 999).date('Ymdhis');

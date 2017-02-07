@@ -28,7 +28,14 @@
 					<li class="nav-title">Cafe Branches</li>
 					<li><a href="{{ url('branch') }}"><i class="fa fa-fw fa-users"></i><span class="hidden-sm">Branches</span></a></li>
 					<li class="nav-title">Staff</li>
-					<li><a href="#"><i class="fa fa-fw fa-users"></i><span class="hidden-sm">Staff Management</span></a></li>
+					<li><a href="{{ url('staff') }}"><i class="fa fa-fw fa-users"></i><span class="hidden-sm">Staff Management</span></a></li>
+					<!-- <li>
+						<a href="#menu-dropdown" data-toggle="collapse" aria-controls="collapse-post"><i class="fa fa-fw fa-bars"></i><span class="hidden-sm">Dropdown</span></a>
+						<ul class="collapse collapseable" id="menu-dropdown">
+							<li><a href="#"><i class="fa fa-fw fa-bars"></i><span class="hidden-sm">Menu1</span></a></li>
+							<li><a href="#"><i class="fa fa-fw fa-bars"></i><span class="hidden-sm">Menu1</span></a></li>
+						</ul>
+					</li> -->
 				</ul>
 			</div>
 		</div>

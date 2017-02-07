@@ -34,11 +34,34 @@ Route::group(['middleware' => ['web']], function () {
 
     //DASHBOARD
     Route::get('dashboard', 'DashboardController@index');
+    //--END DASHBOARD
 
-    //PROFILE
-    Route::get('profile', 'ProfileController@edit');
-    Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');
-    Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
+	//PROFILE
+	Route::get('profile', 'ProfileController@edit');
+	Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');
+	Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
+	Route::get('profile/avatar', [
+		'as' => 'getAvatar', 'uses' => 'ProfileController@showAvatar']); //get avatar's response
+	Route::post('profile/avatar/replace/{id}', 'ProfileController@updateAvatar');
+	Route::put('profile/avatar/change/{id}', 'ProfileController@updateAvatarName');
+	//--END PROFILE
+
+	//STAFF
+	Route::resource('staff', 'StaffController');
+	//--END STAFF
+
+	//CAFE
+	//CAFE PROFILE
+    Route::resource('/profile/cafe', 'CafeProfileController');
+    Route::patch('/profile/cafe/updateContact/{contact}', 'CafeProfileController@updateContact');
+    //--END CAFE PROFILE
+    //--END CAFE
+
+	//FOO
+	Route::get('foo/upload', 'Foo\FooController@index');
+	Route::get('avatar', [
+		'as' => 'get', 'uses' => 'Foo\FooController@get']);
+	Route::post('foo/upload/store', 'Foo\FooController@store');
 });
 
 // DUMMIES VIEW

@@ -1,17 +1,22 @@
 @extends('_layout/dashboard/index')
 @section('page_title', 'Owner Profile')
 
+@section('styles')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
+@stop
+
 @section('content')
 <div class="row">
 	<div class="col-xs-12 col-md-3">
 		<div class="panel panel-default">
 			<div class="panel-body box-center">
 				<h4 class="panel-title">Profile Picture</h4>
-				<img src="{{URL::asset('images/blank-avatar.png')}}" class="image-fit img-circle" width="80%" alt="foto">
+				<img src="{{route('getAvatar')}}" class="image-fit img-circle" width="80%" alt="foto">
 				<div class="break-10"></div>
 				<h4>{{ $profile->first_name.' '.$profile->last_name }}</h4>
 				<div class="break-10"></div>
-				<button class="btn btn-primary btn-sm btn-round">Change Profile Picture</button>
+				<button class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-target="#upload">Change Profile Picture</button>
 				<div class="break-5"></div>
 				<button class="btn btn-default btn-xs btn-round">Delete</button>
 			</div>
@@ -21,7 +26,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h4 class="panel-title">Personal Info</h4>
-				<form action="{{ url('profile/personal'.$profile->id) }}" method="POST">
+				<form action="{{ url('profile/personal/'.$profile->id) }}" method="POST">
 				{{ method_field('PATCH') }}
 				{{ csrf_field() }}
 					<div class="row">
@@ -90,12 +95,12 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h4 class="panel-title">Contact Info</h4>
-				<form action="{{ url('profile/contact'.$profile->id) }}" method="POST">
+				<form action="{{ url('profile/contact/'.$profile->id) }}" method="POST">
 				{{ method_field('PATCH') }}
 				{{ csrf_field() }}
 					<div class="form-group">
 						<label for="email">Public Email</label>
-						<input type="text" class="form-control" name="email" placeholder="email address" value={{ Auth::user()->email }}>
+						<input type="text" class="form-control" name="email" placeholder="email address" value={{ $profile->email }}>
 					</div>
 					<div class="form-group">
 						<label for="phone">Phone Number</label>
@@ -118,6 +123,28 @@
 						<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save Changes</button>
 						<button class="btn btn-default"><i class="fa fa-refresh"></i> Reset</button>
 					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+@endsection
+
+@section('modal')
+<div class="modal fade" tabindex="-1" role="dialog" id="upload">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Upload Foto</h4>
+			</div>
+			<div class="modal-body">
+				<form id="updateAvatar">
+					<div class="form-group">
+						<label for="avatar"> Pilih file</label>
+						<input type="file" name="avatar" id="avatar">
+					</div>
+					<button type="button" class="btn btn-primary" onclick="change_avatar('{{ encrypt(Auth::user()->id) }}')" id="btn-avt">Upload</button>
 				</form>
 			</div>
 		</div>
@@ -148,3 +175,7 @@
 	}
 </style>
 @endsection
+
+@section('javascripts')
+<script type="text/javascript" src="{{URL::asset('js/Profile/profile.js')}}"></script>
+@stop
