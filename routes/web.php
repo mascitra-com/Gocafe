@@ -23,6 +23,15 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/home', 'HomeController@index');
 
+    Route::resource('/profile/cafe', 'CafeProfileController');
+    Route::patch('/profile/cafe/updateContact/{contact}', 'CafeProfileController@updateContact');
+
+    Route::resource('/branch', 'BranchController');
+    Route::post('/branch/getCitiesByProvince', 'BranchController@getCitiesByProvince');
+    Route::post('/branch/getDistrictByCity', 'BranchController@getDistrictByCity');
+
+    Route::get('/home', 'HomeController@index');
+
     //DASHBOARD
     Route::get('dashboard', 'DashboardController@index');
     //--END DASHBOARD

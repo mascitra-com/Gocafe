@@ -24,7 +24,7 @@ if (! function_exists('frmtPartDate')) {
             $birthdate_month = $month;
         }
 
-        return $birthdate = $year.'-'.$birthdate_month.'-'.$birthdate_day;;
+        return $birthdate = $year.'-'.$birthdate_month.'-'.$birthdate_day;
     }
 }
 
