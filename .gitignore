@@ -3,6 +3,9 @@
 /storage/*.key
 /vendor
 /.idea
+/app/Http/Controllers/Foo
+/app/Foo.php
+/resources/views/_foo_andre
 Homestead.json
 Homestead.yaml
 .env
