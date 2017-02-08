@@ -9,25 +9,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CafeBranch extends Model
 {
-  use SoftDeletes;
+    use SoftDeletes;
 
-  public $incrementing = FALSE;
- 
-  protected $fillable = ['id', 'cafe_id', 'location_id', 'address', 'phone', 'open_hours', 'close_hours'];
-	protected $dates = ['deleted_at'];
+    public $incrementing = FALSE;
 
-	protected $guarded= ['id'];
+    protected $fillable = ['id', 'cafe_id', 'location_id', 'address', 'phone', 'open_hours', 'close_hours'];
+    protected $dates = ['deleted_at'];
 
-	public function cafe()
-	{
-		return $this->belongsTo(Cafe::class);
-	}
+    protected $guarded = ['id'];
 
-	public function staffs()
-	{
-		return $this->hasMany(Staff::class);
-	}
-    public function getNewId()
+    public function cafe()
+    {
+        return $this->belongsTo(Cafe::class);
+    }
+
+    public function staffs()
+    {
+        return $this->hasMany(Staff::class);
+    }
+
+    public function getNewId() // TODO Delete this soon after using helper
     {
         return 'CFB' . random_int(100, 999) . date('Ymdhis');
     }

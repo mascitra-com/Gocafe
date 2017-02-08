@@ -22,15 +22,16 @@ Route::group(['middleware' => ['web']], function () {
     Auth::routes();
 
     Route::get('/home', 'HomeController@index');
+    // CAFE
+    Route::resource('/profile/cafe', 'CafeController');
+    Route::patch('/profile/cafe/updateContact/{contact}', 'CafeController@updateContact');
+    //--END CAFE
 
-    Route::resource('/profile/cafe', 'CafeProfileController');
-    Route::patch('/profile/cafe/updateContact/{contact}', 'CafeProfileController@updateContact');
-
+    // BRANCH
     Route::resource('/branch', 'BranchController');
     Route::post('/branch/getCitiesByProvince', 'BranchController@getCitiesByProvince');
     Route::post('/branch/getDistrictByCity', 'BranchController@getDistrictByCity');
-
-    Route::get('/home', 'HomeController@index');
+    //--END BRANCH
 
     //DASHBOARD
     Route::get('dashboard', 'DashboardController@index');
@@ -49,13 +50,6 @@ Route::group(['middleware' => ['web']], function () {
 	//STAFF
 	Route::resource('staff', 'StaffController');
 	//--END STAFF
-
-	//CAFE
-	//CAFE PROFILE
-    Route::resource('/profile/cafe', 'CafeProfileController');
-    Route::patch('/profile/cafe/updateContact/{contact}', 'CafeProfileController@updateContact');
-    //--END CAFE PROFILE
-    //--END CAFE
 
 	//FOO
 	Route::get('foo/upload', 'Foo\FooController@index');

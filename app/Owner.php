@@ -9,38 +9,54 @@ use Illuminate\Support\Facades\DB;
 
 class Owner extends Model
 {
-	use SoftDeletes;
+    use SoftDeletes;
 
-	public $incrementing = false;
+    public $incrementing = false;
 
-	protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at'];
 
     protected $guarded = ['user_id', 'created_by'];
 
     protected $hidden = ['id'];
 
-
-    public function addProfileCafe(Cafe $cafe, $owner_id)
-    {
-        $cafe->id = $cafe->getNewId();
-        $cafe->created_by = Auth::user()->id;
-        Owner::find($owner_id)->cafe()->save($cafe);
-    }
-
+    /**
+     * Get Owner ID by User ID currently logged in
+     *
+     * @return mixed
+     */
     public static function getOwnerIdNowLoggedIn()
     {
         return DB::table('owners')->where('user_id', Auth::user()->id)->first()->id;
     }
 
+    /**
+     * Set Profile Cafe with Owner ID given in the parameter
+     *
+     * @param Cafe $cafe
+     * @param $owner_id
+     */
+    public function addProfileCafe(Cafe $cafe, $owner_id)
+    {
+        // TODO use helper instead to set New Cafe ID
+        $cafe->id = $cafe->getNewId();
+        $cafe->created_by = Auth::user()->id;
+        Owner::find($owner_id)->cafe()->save($cafe);
+    }
+
+    /**
+     * Get Cafe by Owner ID given in the parameter.
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getCafeByOwnerId($id)
     {
         return $this->findOrFail($id)->cafe->firstOrFail();
     }
 
-    //RELATIONS
     public function user()
     {
-    	return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function cafe()

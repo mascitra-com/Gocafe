@@ -12,6 +12,21 @@ class Cafe extends Model
 
     protected $fillable = ['id', 'owner_id', 'name', 'description', 'open_hours', 'close_hours', 'phone', 'facebook', 'twitter', 'instagram'];
 
+    /**
+     * Get Cafe ID with Owner ID currently logged in
+     *
+     * @return Cafe ID|null
+     */
+    public static function getCafeIdByOwnerIdNowLoggedIn()
+    {
+        $cafe = DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first();
+        if ($cafe) {
+            return $cafe->id;
+        } else {
+            return NULL;
+        }
+    }
+
     public function owner()
     {
         return $this->belongsTo(Owner::class);
@@ -32,26 +47,23 @@ class Cafe extends Model
         return $this->hasManyThrough(Position::class, CafeBranch::class, 'cafe_id', 'branch_id', 'id');
     }
 
-    public function getNewId()
+    public function getNewId() // TODO Delete this soon after using helper
     {
-        return 'CAF'.random_int(100, 999).date('Ymdhis');
+        return 'CAF' . random_int(100, 999) . date('Ymdhis');
     }
 
+    /**
+     * Add Newly Cafe Branch by Cafe ID given.
+     *
+     * @param CafeBranch $cafeBranch
+     * @param $cafeId
+     */
     public function addBranch(CafeBranch $cafeBranch, $cafeId)
     {
+        // TODO use helper instead to set new Branch ID
         $cafeBranch->id = $cafeBranch->getNewId();
         $cafeBranch->created_by = Auth::user()->id;
         self::find($cafeId)->branch()->save($cafeBranch);
-    }
-
-    public static function getCafeIdByOwnerIdNowLoggedIn()
-    {
-        $cafe = DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first();
-        if($cafe){
-            return $cafe->id;
-        } else {
-            return NULL;
-        }
     }
 
 }
