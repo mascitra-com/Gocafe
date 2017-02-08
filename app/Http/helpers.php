@@ -1,10 +1,8 @@
 <?php
 
-use Carbon\Carbon;
-
 if (! function_exists('frmtPartDate')) {
     /**
-     * Format partial date (day, month, year) to well formated Y-m-d.
+     * Format partial date (day, month, year) to well formatted Y-m-d.
      * day : 2, month: 4, year:1995 will be --> 1995-05-02
      *
      * @param  string  $day, $month, $year
@@ -31,15 +29,16 @@ if (! function_exists('frmtPartDate')) {
 
 if (! function_exists('idWithPrefix')) {
     /**
-     * Format partial date (day, month, year) to well formated Y-m-d.
-     * day : 2, month: 4, year:1995 will be --> 1995-05-02
+     * Id Generator
      *
-     * @param  string  $day, $month, $year
+     * @param int $prefix
+     * 1 - OWN | 2 - STF | 3 - AVT | 4 - CFE | 5 - CFB | Default - IMG
+     *
      * @return string
+     * @internal param string $day , $month, $year
      */
-    function idWithPrefix($prefix = 0)
+    function idWithPrefix($prefix)
     {
-        $pre = '';
         switch ($prefix) {
             case 1: //id OWNER
                 $pre = 'OWN';

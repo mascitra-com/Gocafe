@@ -9,19 +9,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CafeBranch extends Model
 {
-  use SoftDeletes;
+    use SoftDeletes;
 
-  public $incrementing = FALSE;
- 
-  protected $fillable = ['id', 'cafe_id', 'location_id', 'address', 'phone', 'open_hours', 'close_hours'];
-	protected $dates = ['deleted_at'];
+    public $incrementing = FALSE;
 
-	protected $guarded= ['id'];
+    protected $fillable = ['id', 'cafe_id', 'location_id', 'address', 'phone', 'open_hours', 'close_hours'];
+    protected $dates = ['deleted_at'];
 
-	public function cafe()
-	{
-		return $this->belongsTo(Cafe::class);
-	}
+    protected $guarded = ['id'];
+
+    public function cafe()
+    {
+        return $this->belongsTo(Cafe::class);
+    }
 
 	public function staffs()
 	{
@@ -33,8 +33,4 @@ class CafeBranch extends Model
 		return $this->hasMany(Position::class, 'branch_id');
 	}
 
-    public function getNewId()
-    {
-        return 'CFB' . random_int(100, 999) . date('Ymdhis');
-    }
 }
