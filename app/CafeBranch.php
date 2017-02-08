@@ -23,12 +23,17 @@ class CafeBranch extends Model
         return $this->belongsTo(Cafe::class);
     }
 
-    public function staffs()
-    {
-        return $this->hasMany(Staff::class);
-    }
+	public function staffs()
+	{
+		return $this->hasMany(Staff::class, 'branch_id');
+	}
 
-    public function getNewId() // TODO Delete this soon after using helper
+	public function positions()
+	{
+		return $this->hasMany(Position::class, 'branch_id');
+	}
+
+    public function getNewId()// TODO Delete this soon after using helper
     {
         return 'CFB' . random_int(100, 999) . date('Ymdhis');
     }

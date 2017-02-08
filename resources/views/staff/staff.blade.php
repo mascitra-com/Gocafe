@@ -1,6 +1,11 @@
 @extends('_layout/dashboard/index')
 @section('page_title', 'Staff Management')
 
+@section('styles')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
+@stop
+
 @section('content')
 <div class="row">
 	<div class="col-xs-12">
@@ -73,12 +78,12 @@
 							<td class="text-center text-nowrap">{{ $staff->id }}</td>
 							<td>{{ $staff->first_name }}</td>
 							<td>{{ $staff->last_name }}</td>
-							<td class="text-center text-nowrap">{{ $staff->branch_id }}</td>
-							<td class="text-center text-nowrap">{{ $staff->position_id }}</td>
+							<td class="text-center text-nowrap">{{ $staff->branches->id }}</td>
+							<td class="text-center text-nowrap">{{ $staff->position->title }}</td>
 							<td class="text-center text-nowrap">@if($staff->gender === '0') Laki-Laki @else Perempuan @endif</td>
 							<td class="text-center text-nowrap">
-								<a href="#" class="btn btn-default btn-xs"><i class="fa fa-info-circle"></i></a>
-								<a href="#" class="btn btn-default btn-xs"><i class="fa fa-trash"></i></a>
+								<a href="{{ url('staff/'.$staff->id.'/edit') }}" class="btn btn-default btn-xs"><i class="fa fa-info-circle"></i></a>
+								<button class="btn btn-default btn-xs" onclick="delete_staff('{{ $staff->id }}')" id="delete-staff"><i class="fa fa-trash"></i></button>
 							</td>
 						</tr>
 						@endforeach
@@ -151,3 +156,7 @@
 	}
 </style>
 @endsection
+
+@section('javascripts')
+<script type="text/javascript" src="{{URL::asset('js/Staff/staff.js')}}"></script>
+@stop
