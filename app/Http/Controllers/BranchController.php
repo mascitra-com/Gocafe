@@ -89,7 +89,7 @@ class BranchController extends Controller
         }
 
         // Set Location ID and add Location ID as request attribute
-        $location_id = $this->set_location_id($request->only('province_id', 'city_id', 'district_id'));
+        $location_id = $this->set_location_id($request);
         $request->request->add(array('location_id' => $location_id));
 
         // Save request except 3 parameters which won't be store to the database
@@ -141,7 +141,7 @@ class BranchController extends Controller
     public function update(Request $request, $id)
     {
         // Set Location ID and add Location ID as request attribute
-        $location_id = $this->set_location_id($request->only('province_id', 'city_id', 'district_id'));
+        $location_id = $this->set_location_id($request);
         $request->request->add(array('location_id' => $location_id));
 
         // Save request except 3 parameters which not include in database

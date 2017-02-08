@@ -47,11 +47,6 @@ class Cafe extends Model
         return $this->hasManyThrough(Position::class, CafeBranch::class, 'cafe_id', 'branch_id', 'id');
     }
 
-    public function getNewId() // TODO Delete this soon after using helper
-    {
-        return 'CAF' . random_int(100, 999) . date('Ymdhis');
-    }
-
     /**
      * Add Newly Cafe Branch by Cafe ID given.
      *
@@ -60,8 +55,7 @@ class Cafe extends Model
      */
     public function addBranch(CafeBranch $cafeBranch, $cafeId)
     {
-        // TODO use helper instead to set new Branch ID
-        $cafeBranch->id = $cafeBranch->getNewId();
+        $cafeBranch->id = idWithPrefix(5);
         $cafeBranch->created_by = Auth::user()->id;
         self::find($cafeId)->branch()->save($cafeBranch);
     }

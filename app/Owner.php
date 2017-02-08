@@ -37,8 +37,7 @@ class Owner extends Model
      */
     public function addProfileCafe(Cafe $cafe, $owner_id)
     {
-        // TODO use helper instead to set New Cafe ID
-        $cafe->id = $cafe->getNewId();
+        $cafe->id = idWithPrefix(4);
         $cafe->created_by = Auth::user()->id;
         Owner::find($owner_id)->cafe()->save($cafe);
     }

@@ -33,8 +33,4 @@ class CafeBranch extends Model
 		return $this->hasMany(Position::class, 'branch_id');
 	}
 
-    public function getNewId()// TODO Delete this soon after using helper
-    {
-        return 'CFB' . random_int(100, 999) . date('Ymdhis');
-    }
 }
