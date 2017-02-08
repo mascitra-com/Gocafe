@@ -1,10 +1,8 @@
 <?php
 
-use Carbon\Carbon;
-
 if (! function_exists('frmtPartDate')) {
     /**
-     * Format partial date (day, month, year) to well formated Y-m-d.
+     * Format partial date (day, month, year) to well formatted Y-m-d.
      * day : 2, month: 4, year:1995 will be --> 1995-05-02
      *
      * @param  string  $day, $month, $year
@@ -31,8 +29,7 @@ if (! function_exists('frmtPartDate')) {
 
 if (! function_exists('idWithPrefix')) {
     /**
-     * Format partial date (day, month, year) to well formated Y-m-d.
-     * day : 2, month: 4, year:1995 will be --> 1995-05-02
+     * Id Generator
      *
      * @param  string  $day, $month, $year
      * @return string
