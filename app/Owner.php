@@ -22,7 +22,7 @@ class Owner extends Model
     /**
      * Get Owner ID by User ID currently logged in
      *
-     * @return mixed
+     * @return Owner ID
      */
     public static function getOwnerIdNowLoggedIn()
     {
@@ -46,7 +46,7 @@ class Owner extends Model
      * Get Cafe by Owner ID given in the parameter.
      *
      * @param $id
-     * @return mixed
+     * @return Cafe Object
      */
     public function getCafeByOwnerId($id)
     {

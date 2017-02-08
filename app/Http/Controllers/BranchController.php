@@ -102,7 +102,7 @@ class BranchController extends Controller
      * Set Location ID by the last location selected. Left to Right Priority province_id|city_id|district_id.
      *
      * @param Request $request
-     * @return mixed
+     * @return Location ID
      */
     private function set_location_id(Request $request)
     {
@@ -154,7 +154,7 @@ class BranchController extends Controller
      *
      * @param Request $request
      * @param Indonesia $indonesia
-     * @return string
+     * @return string of Combo box attributes
      */
     public function getCitiesByProvince(Request $request, Indonesia $indonesia)
     {
@@ -174,7 +174,7 @@ class BranchController extends Controller
      *
      * @param Request $request
      * @param Indonesia $indonesia
-     * @return string
+     * @return string of Combo box attributes
      */
     public function getDistrictByCity(Request $request, Indonesia $indonesia)
     {
