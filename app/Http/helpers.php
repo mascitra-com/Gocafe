@@ -60,6 +60,6 @@ if (! function_exists('idWithPrefix')) {
                 $pre = 'IMG';
                 break;
         }
-        return $pre.random_int(100, 999).date('Ymdhis');
+        return $pre.str_random(3).date('Ymdhis');
     }
 }

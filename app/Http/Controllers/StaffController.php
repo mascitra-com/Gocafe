@@ -8,6 +8,8 @@ use App\Staff;
 use App\User;
 use App\Owner;
 use App\Cafe;
+use App\CafeBranch;
+
 
 use Auth;
 
@@ -25,10 +27,10 @@ class StaffController extends Controller
      */
     public function index(User $user, Owner $owner)
     {
-        $owner_id = $user->getOwnerByUserId(Auth::user()->id)->id;
+        $owner_id = $user->getAccountByUserId(Auth::user()->id)->id;
         $cafe_id = $owner->getCafeByOwnerId($owner_id)->id;
 
-        $staffs = Cafe::findOrFail($cafe_id)->staffs;
+        $staffs = Cafe::findOrFail($cafe_id)->staffs->load('branches', 'position');
 
         return view('staff/staff', compact('staffs'));
     }
@@ -40,7 +42,7 @@ class StaffController extends Controller
      */
     public function create(User $user, Owner $owner)
     {
-        $owner_id = $user->getOwnerByUserId(Auth::user()->id)->id;
+        $owner_id = $user->getAccountByUserId(Auth::user()->id)->id;
         $cafe_id = $owner->getCafeByOwnerId($owner_id)->id;
 
         $branches = Cafe::findOrFail($cafe_id)->branches;
@@ -57,9 +59,15 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $staff = new Staff($request->all());
+        $user = new User($request->only(['email']));
+        $user_id = $user->addUser($user, $request->password, 'staff');
 
-        return $staff;
+        $birthdate = frmtPartDate($request->birthdate_day, $request->birthdate_month, $request->birthdate_year);
+        $phone = '+62'.$request->phone_input;
+        $request->merge(array('id' => idWithPrefix(2) ,'user_id' => $user_id, 'birthdate' => $birthdate, 'phone' => $phone, 'created_by' => Auth::user()->id));
+        Staff::create($request->except(['email', 'password', 'confirm_password', 'birthdate_day', 'birthdate_year', 'birthdate_month', 'phone_input']));
+
+        return redirect('staff');
     }
 
     /**
@@ -79,9 +87,13 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user, Owner $owner, Staff $staff)
     {
-        //
+        $owner_id = $user->getAccountByUserId(Auth::user()->id)->id;
+        $cafe_id = $owner->getCafeByOwnerId($owner_id)->id;
+        $branches = Cafe::findOrFail($cafe_id)->branches;
+        $positions = Cafe::findOrFail($cafe_id)->positions;
+        return view('staff/detail', compact('staff', 'branches', 'positions'));
     }
 
     /**
@@ -91,9 +103,16 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Staff $staff)
     {
-        //
+        User::findOrFail($staff->user->id)->update($request->only(['email']));        
+
+        $birthdate = frmtPartDate($request->birthdate_day, $request->birthdate_month, $request->birthdate_year);
+        $phone = '+62'.$request->phone_input;
+        $request->merge(array('birthdate' => $birthdate, 'phone' => $phone, 'created_by' => Auth::user()->id));
+        Staff::findOrFail($staff->id)->update(($request->except(['email', 'password', 'confirm_password', 'birthdate_day', 'birthdate_year', 'birthdate_month', 'phone_input'])));
+
+        return redirect('staff');
     }
 
     /**
@@ -102,8 +121,8 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Staff $staff)
     {
-        //
+        $staff->delete();
     }
 }

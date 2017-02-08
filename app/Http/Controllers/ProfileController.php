@@ -48,14 +48,14 @@ class ProfileController extends Controller
 		$request->merge(array('birthdate' => $birthdate));
 		$input = $request->except('birthdate_year', 'birthdate_month', 'birthdate_day');
 
-		Owner::findOrFail($id)->first()->update($input);
+		Owner::findOrFail($id)->update($input);
 
 		return redirect('profile');
 	}
 
 	public function updateContact(Request $request ,$id)
 	{
-		Owner::findOrFail($id)->first()->update($request->all());
+		Owner::findOrFail($id)->update($request->all());
 
 		return redirect('profile');
 	}
@@ -78,7 +78,7 @@ class ProfileController extends Controller
 					'avatar_mime' => $avatar_mime,
 					);
 				$request->merge($input);
-				User::findOrFail(decrypt($id))->firstOrFail()->update($request->except('avatar'));
+				User::findOrFail(decrypt($id))->update($request->except('avatar'));
 				return response()->json(['response' => 'sukses','avatar_name' => $avatar_name,'avatar_mime' => $avatar_mime ,'status' => TRUE]);
 			}else{
 				return response()->json(['response' => 'gagal upload', 'status' => FALSE]);
@@ -91,7 +91,7 @@ class ProfileController extends Controller
 
 	public function updateAvatarName(Request $request ,$id)
 	{
-		User::findOrFail(1)->firstOrFail()->update($request->all());
+		User::findOrFail(1)->update($request->all());
 		return response()->json(['response' => 'sukses','status' => TRUE]);
 	}
 }

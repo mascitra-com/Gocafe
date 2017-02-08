@@ -22,11 +22,11 @@ class Position extends Model
 
 	public function staff()
     {
-    	return $this->belongsToMany(Staff::class);
+    	return $this->hasMany(Staff::class);
     }
 
-	public function branch()
+	public function branches()
     {
-    	return $this->belongsTo(Branch::class, 'branch_id');
+    	return $this->belongsTo(CafeBranch::class, 'branch_id');
     }
 }

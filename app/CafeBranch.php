@@ -25,8 +25,14 @@ class CafeBranch extends Model
 
 	public function staffs()
 	{
-		return $this->hasMany(Staff::class);
+		return $this->hasMany(Staff::class, 'branch_id');
 	}
+
+	public function positions()
+	{
+		return $this->hasMany(Position::class, 'branch_id');
+	}
+
     public function getNewId()
     {
         return 'CFB' . random_int(100, 999) . date('Ymdhis');
