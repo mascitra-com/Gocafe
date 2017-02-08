@@ -31,12 +31,14 @@ if (! function_exists('idWithPrefix')) {
     /**
      * Id Generator
      *
-     * @param  string  $day, $month, $year
+     * @param int $prefix
+     * 1 - OWN | 2 - STF | 3 - AVT | 4 - CFE | 5 - CFB | Default - IMG
+     *
      * @return string
+     * @internal param string $day , $month, $year
      */
-    function idWithPrefix($prefix = 0)
+    function idWithPrefix($prefix)
     {
-        $pre = '';
         switch ($prefix) {
             case 1: //id OWNER
                 $pre = 'OWN';
