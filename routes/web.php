@@ -49,6 +49,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	//STAFF
 	Route::resource('staff', 'StaffController');
+	Route::post('staff/import', 'StaffController@importExcel');
 	//--END STAFF
 
 	//FOO

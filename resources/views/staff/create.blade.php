@@ -95,7 +95,7 @@
 								<label for="branch_id">Cabang</label>
 								<select name="branch_id" class="form-control">
 									@foreach ($branches as $branch)
-									<option value="{{ $branch->id }}">{{ $branch->id }}</option>
+									<option value="{{ $branch->id }}">{{ $branch->location->name }}</option>
 									@endforeach
 								</select>
 							</div>
