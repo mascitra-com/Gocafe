@@ -42,6 +42,16 @@
 					<a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh"></i> <span class="hidden-sm">refresh</span></a>
 					<button class="btn btn-default" data-toggle="modal" data-target="#add-branches"><i class="fa fa-fw fa-plus"></i> <span class="hidden-sm">new</span></button>
 				</div>
+				<form action="#" class="pull-right">
+					<div class="form-group">
+						<div class="input-group">
+							<input type="text" class="form-control" name="search" placeholder="cari cepat">
+							<span class="input-group-btn">
+								<button class="btn btn-default"><i class="fa fa-search"></i></button>
+							</span>
+						</div>
+					</div>
+				</form>
 				<div class="clearfix"></div>
 			</div>
 			<div class="panel-body table-responsive table-full">
@@ -68,6 +78,35 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="panel-footer">
+				<span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 02/01/2016 18:00</span>
+				<nav aria-label="Page navigation" class="pull-right">
+					<ul class="pagination pagination-sm">
+						<li>
+							<span aria-hidden="true">Show</span>
+						</li>
+						<li><a href="#">10</a></li>
+						<li><a href="#">50</a></li>
+						<li><a href="#">100</a></li>
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<div class="clearfix"></div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -82,6 +121,10 @@
 	.table > tbody tr td{
 		padding-top: 20px;
 		padding-bottom: 15px;
+	}
+
+	ul.pagination{
+		margin: 0;
 	}
 </style>
 @endsection

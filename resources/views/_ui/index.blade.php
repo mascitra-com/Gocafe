@@ -131,6 +131,22 @@
 							<td><a class="btn btn-default btn-xs" href="{{URL('ui/account')}}">ui/account</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
+						<tr>
+							<td>15</td>
+							<td>Menu</td>
+							<td>Halaman untuk managemen menu cafe</td>
+							<td>menu</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/menu')}}">ui/menu</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
+						</tr>
+						<tr>
+							<td>16</td>
+							<td>Tambah Menu</td>
+							<td>Halaman untuk menambah menu cafe</td>
+							<td>menu</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/menu/add')}}">ui/menu/add</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
