@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyMenusTable extends Migration
+class DropCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class ModifyMenusTable extends Migration
      */
     public function up()
     {
-        Schema::table('menus', function (Blueprint $table) {
-            $table->string('id', 20)->primary()->before('cafe_id')->change();
-        });
+        Schema::dropIfExists('categories');
     }
 
     /**
@@ -25,8 +23,6 @@ class ModifyMenusTable extends Migration
      */
     public function down()
     {
-        Schema::table('menus', function (Blueprint $table) {
-            //
-        });
+        
     }
 }
