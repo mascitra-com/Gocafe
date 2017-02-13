@@ -57,7 +57,7 @@ class Cafe extends Model
     {
         $cafeBranch->id = idWithPrefix(5);
         $cafeBranch->created_by = Auth::user()->id;
-        self::find($cafeId)->branch()->save($cafeBranch);
+        self::find($cafeId)->branches()->save($cafeBranch);
     }
 
 }
