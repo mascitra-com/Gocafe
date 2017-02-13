@@ -37,6 +37,11 @@ class Cafe extends Model
         return $this->hasMany(CafeBranch::class);
     }
 
+    public function menuCategories()
+    {
+        return $this->hasMany(CategoryMenu::class);
+    }
+
     public function staffs()
     {
         return $this->hasManyThrough(Staff::class, CafeBranch::class, 'cafe_id', 'branch_id', 'id');
@@ -58,6 +63,19 @@ class Cafe extends Model
         $cafeBranch->id = idWithPrefix(5);
         $cafeBranch->created_by = Auth::user()->id;
         self::find($cafeId)->branch()->save($cafeBranch);
+    }
+
+    /**
+     * Add New Menu's Category by Cafe ID given.
+     *
+     * @param CategoryMenu $category
+     * @param $cafeId
+     */
+    public function addMenuCategory(CategoryMenu $category, $cafeId)
+    {
+        $category->id = idWithPrefix(6);
+        $category->created_by = Auth::user()->id;
+        self::find($cafeId)->menuCategories()->save($category);
     }
 
 }

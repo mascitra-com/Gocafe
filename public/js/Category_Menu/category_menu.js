@@ -10,9 +10,6 @@ function ajax_config() {
 
 function addCategory() {
 	ajax_config();
-
-	// alert($('#category_name').val() +" "+ $('#category_colour').val());
-
 	$.post(target_url+'/categories',
 	{
 		_method: 'POST',
@@ -21,10 +18,14 @@ function addCategory() {
 		colour: $('#category_colour').val()
 	},
 	function(data, status){
-		if (status) {
-			alert('sukses');
+		if (data.status) {
+			if (data.response == 'inserted') {
+				alert('kategori berhasil masuk ke db' + 'Nama kategori: '+ data.category_name + 'Warna kategori:' + data.category_colour);
+			}
 		}else{
-			alert('Gagal menambahkan kategori menu');
+			if (data.response == 'failure') {
+				alert('kategori tidak berhasil masuk ke db');
+			}
 		}
 	});
 }
