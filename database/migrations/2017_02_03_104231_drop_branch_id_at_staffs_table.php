@@ -14,7 +14,8 @@ class DropBranchIdAtStaffsTable extends Migration
     public function up()
     {
         Schema::table('staffs', function (Blueprint $table) {
-            $table->string('branch_id', 20)->index()->after('user_id');
+            $table->dropColumn('branch_id');
+
         });
     }
 
@@ -26,7 +27,7 @@ class DropBranchIdAtStaffsTable extends Migration
     public function down()
     {
         Schema::table('staffs', function (Blueprint $table) {
-            $table->dropColumn('branch_id');
+
         });
     }
 }

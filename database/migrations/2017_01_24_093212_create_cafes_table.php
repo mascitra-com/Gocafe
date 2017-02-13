@@ -22,8 +22,6 @@ class CreateCafesTable extends Migration
             $table->string('twitter')->nullable();
             $table->string('instagram')->nullable();
             $table->string('phone', 20)->nullable();
-            $table->string('open_hours', 10);
-            $table->string('close_hours', 10);
             $table->timestamps();
             $table->integer('created_by')->unsigned()->index();
             $table->integer('updated_by')->unsigned()->nullable()->index();
