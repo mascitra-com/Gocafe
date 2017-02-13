@@ -70,4 +70,14 @@ class Ui extends Controller
     {
         return view('_ui/auth/account');
     }
+
+    public function menu()
+    {
+        return view('_ui/menu/menu');
+    }
+
+    public function menu_create()
+    {
+        return view('_ui/menu/create');
+    }
 }

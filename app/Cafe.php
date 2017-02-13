@@ -32,7 +32,7 @@ class Cafe extends Model
         return $this->belongsTo(Owner::class);
     }
 
-    public function branch()
+    public function branches()
     {
         return $this->hasMany(CafeBranch::class);
     }

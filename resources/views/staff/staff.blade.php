@@ -135,12 +135,13 @@
 			<div class="modal-body">
 				<p>Import data staff dalam bentuk file excel. Gunakan format file yang telah disediakan dibawah</p>
 				<div class="break-50"></div>
-				<form action="#">
+				<form action="{{ url('staff/import') }}" method="POST" enctype="multipart/form-data">
+				{{ csrf_field() }}
 					<div class="form-group">
-						<label for=""> Pilih file</label>
-						<input type="file">
+						<label for="import_excel"> Pilih file</label>
+						<input type="file" name="import_excel">
 					</div>
-					<button type="button" class="btn btn-primary">Upload</button>
+					<button class="btn btn-primary" type="submit">Upload</button>
 					<a href="#" class="btn btn-default"><i class="fa fa-download"></i> download format file</a>
 				</form>
 			</div>

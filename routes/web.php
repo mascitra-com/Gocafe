@@ -49,6 +49,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	//STAFF
 	Route::resource('staff', 'StaffController');
+	Route::post('staff/import', 'StaffController@importExcel');
 	//--END STAFF
 
 	//FOO
@@ -71,3 +72,5 @@ Route::get('ui/branch', 'Ui@Branch');
 Route::get('ui/branch/detail', 'Ui@Branch_detail');
 Route::get('ui/position', 'Ui@Position');
 Route::get('ui/account', 'Ui@Account');
+Route::get('ui/menu', 'Ui@Menu');
+Route::get('ui/menu/add', 'Ui@Menu_create');

@@ -27,8 +27,8 @@
 			<div class="panel-body">
 				<h4 class="panel-title">Personal Info</h4>
 				<form action="{{ url('profile/personal/'.$profile->id) }}" method="POST">
-				{{ method_field('PATCH') }}
-				{{ csrf_field() }}
+					{{ method_field('PATCH') }}
+					{{ csrf_field() }}
 					<div class="row">
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
@@ -96,8 +96,8 @@
 			<div class="panel-body">
 				<h4 class="panel-title">Contact Info</h4>
 				<form action="{{ url('profile/contact/'.$profile->id) }}" method="POST">
-				{{ method_field('PATCH') }}
-				{{ csrf_field() }}
+					{{ method_field('PATCH') }}
+					{{ csrf_field() }}
 					<div class="form-group">
 						<label for="email">Public Email</label>
 						<input type="text" class="form-control" name="email" placeholder="email address" value={{ $profile->email }}>

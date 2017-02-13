@@ -9,7 +9,10 @@ use App\User;
 use App\Owner;
 use App\Cafe;
 use App\CafeBranch;
+use App\Position;
 
+use Laravolt\Indonesia\Indonesia;
+use Excel;
 
 use Auth;
 
@@ -40,14 +43,19 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(User $user, Owner $owner)
+    public function create(User $user, Owner $owner, Indonesia $indonesia)
     {
         $owner_id = $user->getAccountByUserId(Auth::user()->id)->id;
         $cafe_id = $owner->getCafeByOwnerId($owner_id)->id;
 
         $branches = Cafe::findOrFail($cafe_id)->branches;
+         // Get Location Name for each branch
+        if (isset($branches)) {
+            foreach ($branches as $branch) {
+                $this->get_location($branch, $indonesia);
+            }
+        }
         $positions = Cafe::findOrFail($cafe_id)->positions;
-
         return view('staff.create', compact('branches', 'positions'));
     }
 
@@ -124,5 +132,99 @@ class StaffController extends Controller
     public function destroy(Staff $staff)
     {
         $staff->delete();
+    }
+
+    /**
+     * Import excel file then insert values to database from the datasheets.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function importExcel(Request $request)
+    {
+        //checking file is present
+        if ($request->hasFile('import_excel')) {
+            //verify the file is uploading
+            if ($request->file('import_excel')->isValid()) {
+                $path = $request->import_excel->getRealPath();
+                
+                //passing excel datasheets's values
+                $data = Excel::load($path, function($reader) {
+                })->get();
+
+                if(!empty($data) && $data->count()){
+                        foreach ($data as $key => $value) {
+
+                            //change gender value
+                            if ($value->gender === 'L') {
+                                $gender = '0';
+                            }elseif ($value->gender === 'P') {
+                                $gender = '1';
+                            }
+
+                            //change branch value
+
+                            //change position value
+                            $position_id =Position::where('title' ,$value->position)->where('branch_id', 'CFBAgm20170210063008')->firstOrFail()->id;
+
+                            $insert[] = [
+                            'email' => $value->email, 
+                            'password' => $value->password,
+                            'first_name' => $value->first_name,
+                            'last_name' => $value->last_name,
+                            'address' => $value->address,
+                            'birthdate' => $value->birthdate,
+                            'gender' => $gender,
+                            'phone' => $value->phone,
+                            // 'branch_id' => $value->branch,
+                            'branch_id' => 'CFBAgm20170210063008',
+                            'position_id' => $position_id,
+                            ];
+                        }
+                    if(!empty($insert)){
+                        // dd(array_only($insert[0], ['email']));
+                        for ($i=0; $i <sizeof($insert) ; $i++) {
+                            $user = new User(array_only($insert[$i], ['email']));
+                            $user_id = $user->addUser($user, $insert[$i]['password'], 'staff');
+                            $insert[$i] = array_add($insert[$i], 'id', idWithPrefix(2));
+                            $insert[$i] = array_add($insert[$i], 'user_id', $user_id);
+                            $insert[$i] = array_add($insert[$i], 'created_by', Auth::user()->id);
+                            Staff::create(array_except($insert[$i], ['email', 'password']));    
+                        }
+                        return redirect('staff');
+                    }else{
+                        return 'Terjadi kesalahan dalam input data ke database';
+                    }
+                }else{
+                    return 'Data dalam excel tidak boleh kosong';
+                }
+            }else{
+                return 'terjadi kesalahan dalam upload';
+            }
+        }else{
+            return 'file kosong';
+        }
+        return 'sukses';
+    }
+
+     /**
+     * Get Location Name by ID Location and Length of ID that determine location type.
+     *
+     * @param $branch
+     * @param Indonesia $indonesia
+     */
+    private function get_location($branch, Indonesia $indonesia)
+    {
+        $locationLength = strlen($branch->location_id);
+        switch ($locationLength) {
+            case 2:
+                $branch->location = $indonesia->findProvince($branch->location_id);
+                break;
+            case 4:
+                $branch->location = $indonesia->findCity($branch->location_id, ['province']);
+                break;
+            case 7:
+                $branch->location = $indonesia->findDistrict($branch->location_id, ['city', 'province']);
+                break;
+        }
     }
 }
