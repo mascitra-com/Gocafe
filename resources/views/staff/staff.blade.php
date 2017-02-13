@@ -142,7 +142,7 @@
 						<input type="file" name="import_excel">
 					</div>
 					<button class="btn btn-primary" type="submit">Upload</button>
-					<a href="#" class="btn btn-default"><i class="fa fa-download"></i> download format file</a>
+					<a href="{{ url('staff/download') }}" class="btn btn-default"><i class="fa fa-download"></i> download format file</a>
 				</form>
 			</div>
 		</div>

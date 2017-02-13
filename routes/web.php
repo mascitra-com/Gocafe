@@ -48,6 +48,7 @@ Route::group(['middleware' => ['web']], function () {
 	//--END PROFILE
 
 	//STAFF
+	Route::get('staff/download', 'StaffController@downloadExcel');
 	Route::resource('staff', 'StaffController');
 	Route::post('staff/import', 'StaffController@importExcel');
 	//--END STAFF

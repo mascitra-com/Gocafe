@@ -11,6 +11,8 @@ use App\Cafe;
 use App\CafeBranch;
 use App\Position;
 
+use Illuminate\Support\Facades\Storage;
+
 use Laravolt\Indonesia\Indonesia;
 use Excel;
 
@@ -204,6 +206,17 @@ class StaffController extends Controller
             return 'file kosong';
         }
         return 'sukses';
+    }
+
+    /**
+     * Download excel which contain the template for inputing staff datas.
+     *
+     */
+    public function downloadExcel()
+    {
+        $path= Storage::disk('public')->url('public/staff_template.xlsx');
+        // return $path;
+        return response()->download($path);
     }
 
      /**
