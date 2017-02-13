@@ -20,8 +20,14 @@ class CategoryMenu extends Model
     protected $hidden = ['id', 'cafe_id', 'created_by', 'updated_by', 'deleted_by'];
 
     //RELATIONS
+    public function menus()
+    {
+    	return $this->hasMany(Menu::class);
+    }
+    
     public function cafe()
     {
     	return $this->belongsTo(Cafe::class);
     }
+
 }

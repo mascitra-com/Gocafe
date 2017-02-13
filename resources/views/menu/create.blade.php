@@ -15,7 +15,8 @@
 				<h3 class="panel-title">Tambah Menu</h3>
 			</div>
 			<div class="panel-body">
-				<form action="#">
+				<form action="{{ url('menus') }}" method="POST" enctype="multipart/form-data">
+				{{ csrf_field() }}
 					<div class="form-group">
 						<label for="name">Nama Menu</label>
 						<input type="text" class="form-control" name="name" placeholder="nama menu">
@@ -29,7 +30,7 @@
 							<div class="form-group">
 								<label for="category_id">Kategori Menu</label>
 								<div class="input-group">
-									<input type="text" class="form-control" name="category_name" placeholder="pilih kategori">
+									<input type="text" class="form-control" name="category_name" placeholder="pilih kategori" readonly>
 									<input type="hidden" class="form-control" name="category_id">
 									<div class="span input-group-btn">
 										<button class="btn btn-default" data-toggle="modal" data-target="#kategori" role="dialog" type="button">pilih</button>
@@ -51,19 +52,19 @@
 						<label for="images">Unggah foto</label>
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-3">
-								<input type="file" name="images_name1">
+								<input type="file" name="image1">
 								<img src="{{URL::asset('images/blank-avatar.png')}}" alt="thumbnail" class="image-preview">
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-3">
-								<input type="file" name="images_name2">
+								<input type="file" name="image2">
 								<img src="{{URL::asset('images/blank-avatar.png')}}" alt="thumbnail" class="image-preview">
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-3">
-								<input type="file" name="images_name3">
+								<input type="file" name="image3">
 								<img src="{{URL::asset('images/blank-avatar.png')}}" alt="thumbnail" class="image-preview">
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-3">
-								<input type="file" name="images_name4">
+								<input type="file" name="image4">
 								<img src="{{URL::asset('images/blank-avatar.png')}}" alt="thumbnail" class="image-preview">
 							</div>
 						</div>

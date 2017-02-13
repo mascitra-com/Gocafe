@@ -37,6 +37,11 @@ class Cafe extends Model
         return $this->hasMany(CafeBranch::class);
     }
 
+    public function menus()
+    {
+        return $this->hasMany(Menu::class);
+    }
+
     public function menuCategories()
     {
         return $this->hasMany(CategoryMenu::class);
@@ -76,6 +81,19 @@ class Cafe extends Model
         $category->id = idWithPrefix(6);
         $category->created_by = Auth::user()->id;
         self::find($cafeId)->menuCategories()->save($category);
+    }
+
+    /**
+     * Add New Menu's by Cafe ID given.
+     *
+     * @param Menu $category
+     * @param $cafeId
+     */
+    public function addMenu(Menu $menu, $cafeId)
+    {
+        $menu->id = idWithPrefix(7);
+        $menu->created_by = Auth::user()->id;
+        self::find($cafeId)->menus()->save($menu);
     }
 
 }
