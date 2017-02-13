@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Cafe;
+use App\CategoryMenu;
+
 class MenusController extends Controller
 {
     /**
@@ -13,7 +16,6 @@ class MenusController extends Controller
      */
     public function index()
     {
-        
         return view('menu.menu');
     }
 
@@ -22,9 +24,11 @@ class MenusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Cafe $cafe)
     {
-        return view('menu.create');
+        $categories = $cafe->findOrFail($cafe->getCafeIdByOwnerIdNowLoggedIn())->menuCategories;        
+
+        return view('menu.create', compact('categories'));
     }
 
     /**

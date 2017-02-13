@@ -1,12 +1,6 @@
 @extends('_layout/dashboard/index')
 @section('page_title', 'Tambah Menu')
 
-@section('styles')
-<meta name="csrf-token" content="{{ csrf_token() }}">
-<script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
-<script type="text/javascript">var target_url = '{{ Route::root().'/' }}'</script>
-@stop
-
 @section('content')
 <div class="row">
 	<div class="col-xs-12">

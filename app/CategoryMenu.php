@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryMenu extends Model
 {
+	protected $table = 'categories_menus';
+
     use SoftDeletes;
 
     public $incrementing = false;

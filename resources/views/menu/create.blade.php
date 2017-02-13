@@ -1,11 +1,11 @@
 @extends('_layout/dashboard/index')
 @section('page_title', 'Tambah Menu')
 
-@section('styles')
+@section('header')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
 <script type="text/javascript">var target_url = '{{ Request::root().'/' }}'</script>
-@stop
+@endsection
 
 @section('content')
 <div class="row">
@@ -29,7 +29,8 @@
 							<div class="form-group">
 								<label for="category_id">Kategori Menu</label>
 								<div class="input-group">
-									<input type="text" class="form-control" name="category_id" placeholder="pilih kategori" readonly>
+									<input type="text" class="form-control" name="category_name" placeholder="pilih kategori">
+									<input type="hidden" class="form-control" name="category_id">
 									<div class="span input-group-btn">
 										<button class="btn btn-default" data-toggle="modal" data-target="#kategori" role="dialog" type="button">pilih</button>
 									</div>
@@ -110,27 +111,15 @@
 				<div class="table-responsive break-20">
 					<table class="table table-stripped table-hover" id="tabel-kategori">
 						<tbody>
+						@foreach($categories as $category)
 							<tr>
-								<td><i class="fa fa-circle" style="color:#4AC5AE"></i></td>
-								<td>Makanan</td>
+								<td><i class="fa fa-circle" style="color:{{ $category->colour  }}"></i></td>
+								<td>{{ $category->name }}</td>
 								<td class="text-right">
-									<button class="btn btn-primary btn-xs" data-kategori="makanan" data-dismiss="modal" aria-label="Close">pilih kategori</button>
+									<button class="btn btn-primary btn-xs" data-kategori="{{ $category->name }}" data-kategoris="{{ $category->id }}" data-dismiss="modal" aria-label="Close">pilih kategori</button>
 								</td>
 							</tr>
-							<tr>
-								<td><i class="fa fa-circle" style="color:#337AB7"></i></td>
-								<td>Minuman</td>
-								<td class="text-right">
-									<button class="btn btn-primary btn-xs" data-kategori="minuman" data-dismiss="modal" aria-label="Close">pilih kategori</button>
-								</td>
-							</tr>
-							<tr>
-								<td><i class="fa fa-circle" style="color:#FF7373"></i></td>
-								<td>Desert</td>
-								<td class="text-right">
-									<button class="btn btn-primary btn-xs" data-kategori="desert" data-dismiss="modal" aria-label="Close">pilih kategori</button>
-								</td>
-							</tr>
+						@endforeach
 						</tbody>
 					</table>
 				</div>
@@ -197,7 +186,9 @@
 
 	$("#tabel-kategori > tbody > tr > td > button").click(function(){
 		var data = $(this).data('kategori');
-		$("input[name='category_id']").val(data);
+		var id = $(this).data('kategoris');
+		$("input[name='category_name']").val(data);
+		$("input[name='category_id']").val(id);
 	});
 </script>
 

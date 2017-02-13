@@ -38,11 +38,9 @@ class CategoryMenusController extends Controller
     public function store(Request $request, Cafe $cafe)
     {
         $category = new CategoryMenu($request->all());
-        if($cafe->addMenuCategory($category, Cafe::getCafeIdByOwnerIdNowLoggedIn())){
-            return response()->json(['response' => 'inserted','category_name' => $request->name,'category_colour' => $colour ,'status' => TRUE]);
-        }else{
-            return response()->json(['response' => 'failure', 'status' => FALSE]);
-        }
+        $cafe->addMenuCategory($category, Cafe::getCafeIdByOwnerIdNowLoggedIn());
+        
+        return response()->json(['response' => 'inserted','category_name' => $request->name,'category_colour' => $request->colour ,'status' => TRUE]);
     }
 
     /**
