@@ -12,7 +12,7 @@ class CafeBranchesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('cafes')->insert([
+        DB::table('cafe_branches')->insert([
             'id' => 'CFBksJ20170213062317',
             'cafe_id' => 'CFE1s620170213061958',
             'location_id' => '3509030',
