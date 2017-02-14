@@ -14,7 +14,7 @@ class AddLocationIdColumnAndDropCityColumnAtCafeBranchesTable extends Migration
     public function up()
     {
         Schema::table('cafe_branches', function (Blueprint $table) {
-            $table->integer('location_id')->unsigned()->index();
+            $table->integer('location_id')->unsigned()->index()->after('cafe_id');
             $table->dropColumn('city');
         });
     }
