@@ -11,8 +11,52 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['middleware' => ['web']], function () {
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+
+    Auth::routes();
+
+    Route::get('/home', 'HomeController@index');
+    // CAFE
+    Route::resource('/profile/cafe', 'CafeController');
+    Route::patch('/profile/cafe/updateContact/{contact}', 'CafeController@updateContact');
+    //--END CAFE
+
+    // BRANCH
+    Route::resource('/branch', 'BranchController');
+    Route::post('/branch/getCitiesByProvince', 'BranchController@getCitiesByProvince');
+    Route::post('/branch/getDistrictByCity', 'BranchController@getDistrictByCity');
+    //--END BRANCH
+
+    //DASHBOARD
+    Route::get('dashboard', 'DashboardController@index');
+    //--END DASHBOARD
+
+	//PROFILE
+	Route::get('profile', 'ProfileController@edit');
+	Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');
+	Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
+	Route::get('profile/avatar', [
+		'as' => 'getAvatar', 'uses' => 'ProfileController@showAvatar']); //get avatar's response
+	Route::post('profile/avatar/replace/{id}', 'ProfileController@updateAvatar');
+	Route::put('profile/avatar/change/{id}', 'ProfileController@updateAvatarName');
+	//--END PROFILE
+
+	//STAFF
+	Route::resource('staff', 'StaffController');
+	Route::post('staff/import', 'StaffController@importExcel');
+	//--END STAFF
+
+	//FOO
+	Route::get('foo/upload', 'Foo\FooController@index');
+	Route::get('avatar', [
+		'as' => 'get', 'uses' => 'Foo\FooController@get']);
+	Route::post('foo/upload/store', 'Foo\FooController@store');
 });
 
 // DUMMIES VIEW

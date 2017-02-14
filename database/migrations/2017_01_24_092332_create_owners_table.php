@@ -21,11 +21,14 @@ class CreateOwnersTable extends Migration
             $table->text('address');
             $table->enum('gender', ['0', '1']);
             $table->date('birthdate');
-            $table->string('phone', 20);
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('phone', 20)->nullable();
             $table->timestamps();
             $table->integer('created_by')->unsigned()->index();
-            $table->integer('updated_by')->unsigned()->index();
-            $table->integer('deleted_by')->unsigned()->index();
+            $table->integer('updated_by')->unsigned()->index()->nullable();
+            $table->integer('deleted_by')->unsigned()->index()->nullable();
             $table->softDeletes();
         });
     }
