@@ -65,6 +65,6 @@ if (! function_exists('idWithPrefix')) {
                 $pre = 'IMG';
                 break;
         }
-        return $pre.str_random(3).date('Ymdhis');
+        return $pre.strtoupper(str_random(3)).date('Ymdhis');
     }
 }
