@@ -25,6 +25,9 @@ class BranchController extends Controller
      */
     public function index(Indonesia $indonesia)
     {
+        if(!Cafe::getCafeIdByOwnerIdNowLoggedIn()){
+            return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Filled!');
+        }
         // Get All Provinces and All Cafe Branch by Cafe ID and Owner ID
         $provinces = $indonesia->allProvinces();
         $branches = CafeBranch::all()->where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn());
