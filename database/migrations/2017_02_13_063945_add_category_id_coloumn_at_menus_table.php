@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEmailToStaffsTable extends Migration
+class AddCategoryIdColoumnAtMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddEmailToStaffsTable extends Migration
      */
     public function up()
     {
-        Schema::table('staffs', function (Blueprint $table) {
-             $table->string('email')->unique()->nullable()->after('birthdate');
+        Schema::table('menus', function (Blueprint $table) {
+            $table->string('category_id', 20)->after('cafe_id')->index();
         });
     }
 
@@ -25,7 +25,8 @@ class AddEmailToStaffsTable extends Migration
      */
     public function down()
     {
-        Schema::table('staffs', function (Blueprint $table) {
+        Schema::table('menus', function (Blueprint $table) {
+            $table->dropColumn('category_id');
         });
     }
 }

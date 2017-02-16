@@ -147,6 +147,14 @@
 							<td><a class="btn btn-default btn-xs" href="{{URL('ui/menu/add')}}">ui/menu/add</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
+						<tr>
+							<td>17</td>
+							<td>Kategori</td>
+							<td>Halaman untuk memanajemen kategori menu</td>
+							<td>menu</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/kategori')}}">ui/kategori</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

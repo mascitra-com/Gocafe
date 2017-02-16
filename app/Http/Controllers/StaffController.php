@@ -42,7 +42,7 @@ class StaffController extends Controller
         $cafe_id = $owner->getCafeByOwnerId($owner_id)->id;
 
         $staffs = Cafe::findOrFail($cafe_id)->staffs->load('branches', 'position');
-
+    
         return view('staff/staff', compact('staffs'));
     }
 

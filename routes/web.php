@@ -53,6 +53,14 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('staff/import', 'StaffController@importExcel');
 	//--END STAFF
 
+	//CAFE'S MENU
+	Route::resource('menus', 'MenusController');
+	//--END CAFE'S MENU
+
+	//MENU'S CATEGORY
+	Route::resource('categories', 'CategoryMenusController');
+	//--END MENU'S CATEGORY
+
 	//FOO
 	Route::get('foo/upload', 'Foo\FooController@index');
 	Route::get('avatar', [
@@ -75,3 +83,4 @@ Route::get('ui/position', 'Ui@Position');
 Route::get('ui/account', 'Ui@Account');
 Route::get('ui/menu', 'Ui@Menu');
 Route::get('ui/menu/add', 'Ui@Menu_create');
+Route::get('ui/kategori', 'Ui@Kategori');

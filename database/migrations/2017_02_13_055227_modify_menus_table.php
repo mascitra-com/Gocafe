@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropCloseHoursColumnAtCafesTable extends Migration
+class ModifyMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class DropCloseHoursColumnAtCafesTable extends Migration
      */
     public function up()
     {
-        Schema::table('cafes', function (Blueprint $table) {
-            $table->dropColumn('close_hours');
+        Schema::table('menus', function (Blueprint $table) {
+            $table->string('id', 20)->primary()->before('cafe_id')->change();
         });
     }
 
@@ -25,8 +25,8 @@ class DropCloseHoursColumnAtCafesTable extends Migration
      */
     public function down()
     {
-        Schema::table('cafes', function (Blueprint $table) {
-            $table->string('close_hours', 10);
+        Schema::table('menus', function (Blueprint $table) {
+            //
         });
     }
 }

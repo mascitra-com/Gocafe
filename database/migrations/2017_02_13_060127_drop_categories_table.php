@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEmailToStaffsTable extends Migration
+class DropCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class AddEmailToStaffsTable extends Migration
      */
     public function up()
     {
-        Schema::table('staffs', function (Blueprint $table) {
-             $table->string('email')->unique()->nullable()->after('birthdate');
-        });
+        Schema::dropIfExists('categories');
     }
 
     /**
@@ -25,7 +23,6 @@ class AddEmailToStaffsTable extends Migration
      */
     public function down()
     {
-        Schema::table('staffs', function (Blueprint $table) {
-        });
+        
     }
 }

@@ -32,10 +32,10 @@ if (! function_exists('idWithPrefix')) {
      * Id Generator
      *
      * @param int $prefix
-     * 1 - OWN | 2 - STF | 3 - AVT | 4 - CFE | 5 - CFB | Default - IMG
+     * 1 - OWN | 2 - STF | 3 - AVT | 4 - CFE | 5 - CFB | 6 - CTM | 7 - MCF | Default - IMG
      *
      * @return string
-     * @internal param string $day , $month, $year
+     * @internal param string $prefix
      */
     function idWithPrefix($prefix)
     {
@@ -54,6 +54,12 @@ if (! function_exists('idWithPrefix')) {
                 break;                
             case 5: //id CAFE'S BRANCH
                 $pre = 'CFB';
+                break;              
+            case 6: //id MENU'S CATEGORY
+                $pre = 'CTM';
+                break;            
+            case 7: //id MENU'S CAFE
+                $pre = 'MCF';
                 break;
             default:
                 $pre = 'IMG';
