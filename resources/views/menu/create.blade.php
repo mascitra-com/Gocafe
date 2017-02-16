@@ -1,6 +1,12 @@
 @extends('_layout/dashboard/index')
 @section('page_title', 'Tambah Menu')
 
+@section('header')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
+<script type="text/javascript">var target_url = '{{ Request::root().'/' }}'</script>
+@endsection
+
 @section('content')
 <div class="row">
 	<div class="col-xs-12">
@@ -9,7 +15,8 @@
 				<h3 class="panel-title">Tambah Menu</h3>
 			</div>
 			<div class="panel-body">
-				<form action="#">
+				<form action="{{ url('menus') }}" method="POST" enctype="multipart/form-data">
+				{{ csrf_field() }}
 					<div class="form-group">
 						<label for="name">Nama Menu</label>
 						<input type="text" class="form-control" name="name" placeholder="nama menu">
@@ -23,7 +30,8 @@
 							<div class="form-group">
 								<label for="category_id">Kategori Menu</label>
 								<div class="input-group">
-									<input type="text" class="form-control" name="category_id" placeholder="pilih kategori" readonly>
+									<input type="text" class="form-control" name="category_name" placeholder="pilih kategori" readonly>
+									<input type="hidden" class="form-control" name="category_id">
 									<div class="span input-group-btn">
 										<button class="btn btn-default" data-toggle="modal" data-target="#kategori" role="dialog" type="button">pilih</button>
 									</div>
@@ -44,26 +52,26 @@
 						<label for="images">Unggah foto</label>
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-3">
-								<input type="file" name="images_name1">
+								<input type="file" name="image1">
 								<img src="{{URL::asset('images/blank-avatar.png')}}" alt="thumbnail" class="image-preview">
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-3">
-								<input type="file" name="images_name2">
+								<input type="file" name="image2">
 								<img src="{{URL::asset('images/blank-avatar.png')}}" alt="thumbnail" class="image-preview">
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-3">
-								<input type="file" name="images_name3">
+								<input type="file" name="image3">
 								<img src="{{URL::asset('images/blank-avatar.png')}}" alt="thumbnail" class="image-preview">
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-3">
-								<input type="file" name="images_name4">
+								<input type="file" name="image4">
 								<img src="{{URL::asset('images/blank-avatar.png')}}" alt="thumbnail" class="image-preview">
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> simpan</button>
-						<button class="btn btn-default"><i class="fa fa-refresh"></i> bersihkan</button>
+						<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> simpan</button>
+						<button type="reset" class="btn btn-default"><i class="fa fa-refresh"></i> bersihkan</button>
 					</div>
 				</form>
 			</div>
@@ -82,7 +90,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<input type="text" class="form-control" name="name" placeholder="nama kategori" id="category_colour">
+					<input type="text" class="form-control" name="name" placeholder="nama kategori" id="category_name">
 				</div>
 				<div class="form-group">
 					<select name="colour" class="form-control" id="category_colour">
@@ -104,27 +112,15 @@
 				<div class="table-responsive break-20">
 					<table class="table table-stripped table-hover" id="tabel-kategori">
 						<tbody>
+						@foreach($categories as $category)
 							<tr>
-								<td><i class="fa fa-circle" style="color:#4AC5AE"></i></td>
-								<td>Makanan</td>
+								<td><i class="fa fa-circle" style="color:{{ $category->colour  }}"></i></td>
+								<td>{{ $category->name }}</td>
 								<td class="text-right">
-									<button class="btn btn-primary btn-xs" data-kategori="makanan" data-dismiss="modal" aria-label="Close">pilih kategori</button>
+									<button class="btn btn-primary btn-xs" data-kategori="{{ $category->name }}" data-kategoris="{{ $category->id }}" data-dismiss="modal" aria-label="Close">pilih kategori</button>
 								</td>
 							</tr>
-							<tr>
-								<td><i class="fa fa-circle" style="color:#337AB7"></i></td>
-								<td>Minuman</td>
-								<td class="text-right">
-									<button class="btn btn-primary btn-xs" data-kategori="minuman" data-dismiss="modal" aria-label="Close">pilih kategori</button>
-								</td>
-							</tr>
-							<tr>
-								<td><i class="fa fa-circle" style="color:#FF7373"></i></td>
-								<td>Desert</td>
-								<td class="text-right">
-									<button class="btn btn-primary btn-xs" data-kategori="desert" data-dismiss="modal" aria-label="Close">pilih kategori</button>
-								</td>
-							</tr>
+						@endforeach
 						</tbody>
 					</table>
 				</div>
@@ -181,7 +177,7 @@
 
 @section('javascripts')
 <script>
-	$("select[name='color']").change(function(){
+	$("select[name='colour']").change(function(){
 		if ($(this).val() != ""){
 			$(this).css('background-color', $(this).val()).css('color', '#FFF');
 		}else{
@@ -191,8 +187,11 @@
 
 	$("#tabel-kategori > tbody > tr > td > button").click(function(){
 		var data = $(this).data('kategori');
-		$("input[name='category_id']").val(data);
+		var id = $(this).data('kategoris');
+		$("input[name='category_name']").val(data);
+		$("input[name='category_id']").val(id);
 	});
 </script>
+
 <script type="text/javascript" src="{{URL::asset('js/Category_Menu/category_menu.js')}}"></script>
 @endsection

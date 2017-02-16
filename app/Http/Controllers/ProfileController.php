@@ -66,7 +66,6 @@ class ProfileController extends Controller
 		if ($request->hasFile('avatar')) {
     		//verify the file is uploading
 			if ($request->file('avatar')->isValid()) {
-				$avatar_ori_name = $request->avatar->getClientOriginalName();
 				$avatar_name = idWithPrefix(3);
 				$avatar_mime = $request->avatar->getClientMimeType();
     			//store to storage/app/owner

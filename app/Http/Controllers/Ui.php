@@ -80,4 +80,9 @@ class Ui extends Controller
     {
         return view('_ui/menu/create');
     }
+
+    public function kategori()
+    {
+        return view('_ui/menu/kategori');
+    }
 }
