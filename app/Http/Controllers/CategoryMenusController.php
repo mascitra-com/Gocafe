@@ -29,10 +29,14 @@ class CategoryMenusController extends Controller
      */
     public function store(Request $request, Cafe $cafe)
     {
+        // Validate the required data
+        $this->validate($request, [
+            'name' => 'min:3|max:255|required',
+            'colour' => 'required',
+        ]);
         $category = new CategoryMenu($request->all());
         $cafe->addMenuCategory($category, Cafe::getCafeIdByOwnerIdNowLoggedIn());
-        
-        return response()->json(['response' => 'inserted','category_name' => $request->name,'category_colour' => $request->colour ,'status' => TRUE]);
+        return redirect('categories')->with('status', 'Category Added!');
     }
 
     /**
@@ -66,7 +70,13 @@ class CategoryMenusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validate the required data
+        $this->validate($request, [
+            'name' => 'min:3|max:255|required',
+            'colour' => 'required',
+        ]);
+        CategoryMenu::findOrFail($id)->update($request->all());
+        return redirect('categories')->with('status', 'Category updated!');
     }
 
     /**
@@ -77,6 +87,7 @@ class CategoryMenusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        CategoryMenu::destroy($id);
+        redirect('categories')->with('status', 'Category Deleted');
     }
 }
