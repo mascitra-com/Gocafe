@@ -32,6 +32,12 @@ class StaffController extends Controller
      */
     public function index(User $user, Owner $owner)
     {
+        if(!Cafe::getCafeIdByOwnerIdNowLoggedIn()){
+            return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Filled!');
+        }
+        if(!CafeBranch::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->count()){
+            return redirect('branch')->with('status', 'You Must At Least Have One Cafe Branch');
+        }
         $owner_id = $user->getAccountByUserId(Auth::user()->id)->id;
         $cafe_id = $owner->getCafeByOwnerId($owner_id)->id;
 
