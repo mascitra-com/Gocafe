@@ -16,17 +16,9 @@ class CategoryMenusController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
+        $categoryID = idWithPrefix(6);
+        $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn());
+        return view('menu.kategori', compact('categoryID', 'categories'));
     }
 
     /**

@@ -177,7 +177,7 @@
 
 @section('javascripts')
 <script>
-	$("select[name='color']").change(function(){
+	$("select[name='colour']").change(function(){
 		if ($(this).val() != ""){
 			$(this).css('background-color', $(this).val()).css('color', '#FFF');
 		}else{
