@@ -30,9 +30,9 @@ class CategoryMenusController extends Controller
     public function store(Request $request, Cafe $cafe)
     {
         $category = new CategoryMenu($request->all());
-        $cafe->addMenuCategory($category, Cafe::getCafeIdByOwnerIdNowLoggedIn());
+        $category_id = $cafe->addMenuCategory($category, Cafe::getCafeIdByOwnerIdNowLoggedIn());
         
-        return response()->json(['response' => 'inserted','category_name' => $request->name,'category_colour' => $request->colour ,'status' => TRUE]);
+        return response()->json(['response' => 'inserted','category_id' => $category_id,'category_name' => $request->name,'category_colour' => $request->colour ,'status' => TRUE]);
     }
 
     /**
@@ -78,5 +78,18 @@ class CategoryMenusController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+     /**
+     * Get all category according to cafe's id.
+     *
+     * @return \Illuminate\Http\Response json
+     */
+    public function getAllCategory()
+    {
+        $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn());
+
+        return response()->json($categories);
+
     }
 }

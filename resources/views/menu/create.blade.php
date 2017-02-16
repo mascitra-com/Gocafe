@@ -111,7 +111,7 @@
 				</div>
 				<div class="table-responsive break-20">
 					<table class="table table-stripped table-hover" id="tabel-kategori">
-						<tbody>
+						<tbody id="category-list">
 						@foreach($categories as $category)
 							<tr>
 								<td><i class="fa fa-circle" style="color:{{ $category->colour  }}"></i></td>
@@ -176,6 +176,7 @@
 @endsection
 
 @section('javascripts')
+<script type="text/javascript" src="{{URL::asset('js/Category_Menu/category_menu.js')}}"></script>
 <script>
 	$("select[name='colour']").change(function(){
 		if ($(this).val() != ""){
@@ -193,5 +194,4 @@
 	});
 </script>
 
-<script type="text/javascript" src="{{URL::asset('js/Category_Menu/category_menu.js')}}"></script>
 @endsection

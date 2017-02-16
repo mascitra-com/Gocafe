@@ -17,7 +17,7 @@ class CategoryMenu extends Model
 
     protected $fillable = ['id', 'cafe_id', 'name', 'colour','created_by', 'updated_by', 'deleted_by'];    
 
-    protected $hidden = ['id', 'cafe_id', 'created_by', 'updated_by', 'deleted_by'];
+    protected $hidden = ['cafe_id', 'created_by', 'updated_by', 'deleted_by'];
 
     //RELATIONS
     public function menus()
