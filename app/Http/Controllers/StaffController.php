@@ -11,6 +11,8 @@ use App\Cafe;
 use App\CafeBranch;
 use App\Position;
 
+use Illuminate\Http\Response;
+
 use Illuminate\Support\Facades\Storage;
 
 use Laravolt\Indonesia\Indonesia;
@@ -214,9 +216,9 @@ class StaffController extends Controller
      */
     public function downloadExcel()
     {
-        $path= Storage::disk('public')->url('public/staff_template.xlsx');
-        // return $path;
-        return response()->download($path);
+        $file= Storage::disk('public')->get('staff_template.xlsx');
+        return (new Response($file, 200))
+        ->header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     }
 
      /**

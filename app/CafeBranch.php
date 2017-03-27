@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravolt\Indonesia\Indonesia;
 use App\models\City;
 use App\models\Province;
 use Illuminate\Database\Eloquent\Model;
