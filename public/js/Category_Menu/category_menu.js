@@ -51,7 +51,7 @@ function addCategory() {
 	});
 }
 
-function delete_staff(id) {
+function delete_category(id) {
 	confirm('Apakah anda yakin?');
 	ajax_config();
 
@@ -64,7 +64,7 @@ function delete_staff(id) {
 		if (status) {
 			location.reload(true);
 		}else{
-			alert('artikel gagal dihapus');
+			alert('Kategori Gagal Dihapus');
 		}
 	});
 }

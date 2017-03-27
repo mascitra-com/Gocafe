@@ -25,6 +25,9 @@ class BranchController extends Controller
      */
     public function index(Indonesia $indonesia)
     {
+        if(!Cafe::getCafeIdByOwnerIdNowLoggedIn()){
+            return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Filled!');
+        }
         // Get All Provinces and All Cafe Branch by Cafe ID and Owner ID
         $provinces = $indonesia->allProvinces();
         $branches = CafeBranch::all()->where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn());
@@ -32,7 +35,7 @@ class BranchController extends Controller
         // Get Location Name for each branch
         if (isset($branches)) {
             foreach ($branches as $branch) {
-                CafeBranch::get_location($branch, $indonesia);
+                $this->get_location($branch, $indonesia);
             }
         }
         return view('branch.index', compact('provinces', 'branches'));
@@ -67,7 +70,7 @@ class BranchController extends Controller
         }
 
         // Set Location ID and add Location ID as request attribute
-        $location_id = CafeBranch::set_location_id($request);
+        $location_id = $this->set_location_id($request);
         $request->request->add(array('location_id' => $location_id));
 
         // Save request except 3 parameters which won't be store to the database
@@ -86,7 +89,7 @@ class BranchController extends Controller
     public function edit($id, Indonesia $indonesia)
     {
         $branch = CafeBranch::findOrFail($id);
-        CafeBranch::get_location($branch, $indonesia);
+        $this->get_location($branch, $indonesia);
         $provinces = $indonesia->allProvinces();
         return view('branch.detail', compact('branch', 'provinces'));
     }
@@ -101,7 +104,7 @@ class BranchController extends Controller
     public function update(Request $request, $id)
     {
         // Set Location ID and add Location ID as request attribute
-        $location_id = CafeBranch::set_location_id($request);
+        $location_id = $this->set_location_id($request);
         $request->request->add(array('location_id' => $location_id));
 
         // Save request except 3 parameters which not include in database
@@ -147,5 +150,46 @@ class BranchController extends Controller
             $data[] = "<option value='$list->id'>$list->name</option>";
         }
         return json_encode($data);
+    }
+
+    /**
+     * Get Location Name by ID Location and Length of ID that determine location type.
+     *
+     * @param $branch
+     * @param Indonesia $indonesia
+     */
+    public static function get_location($branch, Indonesia $indonesia)
+    {
+        $locationLength = strlen($branch->location_id);
+        switch ($locationLength) {
+            case 2:
+                $branch->location = $indonesia->findProvince($branch->location_id);
+                break;
+            case 4:
+                $branch->location = $indonesia->findCity($branch->location_id, ['province']);
+                break;
+            case 7:
+                $branch->location = $indonesia->findDistrict($branch->location_id, ['city', 'province']);
+                break;
+        }
+    }
+
+    /**
+     * Set Location ID by the last location selected. Left to Right Priority province_id|city_id|district_id.
+     *
+     * @param Request $request
+     * @return Location ID
+     */
+    public static function set_location_id(Request $request)
+    {
+        $location_id = $request->province_id;
+        if ($request->city_id) {
+            $location_id = $request->city_id;
+        }
+        if ($request->district_id) {
+            $location_id = $request->district_id;
+            return $location_id;
+        }
+        return $location_id;
     }
 }

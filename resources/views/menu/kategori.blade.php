@@ -3,6 +3,11 @@
 
 @section('content')
 <div class="row">
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
 	<div class="col-xs-12 col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -25,8 +30,8 @@
 								<td>{{ $category->name }}</td>
 								<td class="text-center"><span class="label" style="background-color: {{ $category->colour }}">{{ $category->colour }}</span></td>
 								<td class="text-center">
-									<button class="btn btn-default btn-xs" data-id="" data-name="" data-colour=""><i class="fa fa-pencil"></i></button>
-									<a href="#" class="btn btn-default btn-xs" onclick="return confirm('Apakah anda yakin menghapus data ini?')"><i class="fa fa-trash"></i></a>
+									<button class="btn btn-default btn-xs" onclick="edit('{{ $category->id }}')"><i class="fa fa-pencil"></i></button>
+									<button href="#" class="btn btn-default btn-xs" onclick="delete_category('{{ $category->id }}')"><i class="fa fa-trash"></i></button>
 								</td>
 							</tr>
 						@endforeach
@@ -48,16 +53,16 @@
 					{{ csrf_field() }}
 					<div class="form-group">
 						<label for="">ID Kategori</label>
-						<input type="text" class="form-control" name="id" placeholder="id kategori" value="{{ $categoryID }}" readonly>
+						<input type="text" class="form-control" name="id" placeholder="ID Kategori" value="{{ $categoryID }}" readonly>
 					</div>
 					<div class="form-group">
 						<label for="">Nama Kategori</label>
-						<input type="text" class="form-control" name="name" placeholder="nama kategori">
+						<input type="text" class="form-control" name="name" placeholder="Nama Kategori">
 					</div>
 					<div class="form-group">
 						<label for="">Warna Label</label>
 						<select name="colour" class="form-control">
-							<option value="" class="option-blank" selected>Pilih warna...</option>
+							<option value="" class="option-blank" selected>Pilih Warna...</option>
 							<option value="#C52B15" class="option-red">Merah</option>
 							<option value="#337AB7" class="option-blue">Biru</option>
 							<option value="#4AC5AE" class="option-green">Hijau</option>
@@ -80,29 +85,73 @@
 </div>
 @endsection
 
-@section('styles')
-<style>
-	select option{
-		padding: 5px;
-		font-weight: bold;
-		color: #FFF;
-	}
+@section('modal')
+	<div class="modal fade" tabindex="-1" role="dialog" id="kategori">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Pilih kategori</h4>
+				</div>
+                <form action="{{ url('categories') }}" method="POST" id="updateForm">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <input type="hidden" name="_method" value="PATCH">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="name" placeholder="Nama Kategori" id="category_name">
+                        </div>
+                        <div class="form-group">
+                            <select name="colour" class="form-control" id="category_colour">
+                                <option value="" class="option-blank">Pilih warna...</option>
+                                <option value="#C52B15" class="option-red">Merah</option>
+                                <option value="#337AB7" class="option-blue">Biru</option>
+                                <option value="#4AC5AE" class="option-green">Hijau</option>
+                                <option value="#F7C96B" class="option-yellow">Kuning</option>
+                                <option value="#BF73FF" class="option-purple">Ungu</option>
+                                <option value="#EF6C40" class="option-orange">Jingga</option>
+                                <option value="#FF7373" class="option-pink">Merah Muda</option>
+                                <option value="#CCC" class="option-grey">Abu-Abu</option>
+                                <option value="#333" class="option-black">Hitam</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary center-block">Update Kategori</button>
+					</div>
+                </form>
+				</div>
+			</div>
+		</div>
+	</div>
+@endsection
 
-	.option-blank{background-color: #FFF;color: #333}
-	.option-red{background-color: #C52B15;}
-	.option-blue{background-color: #337AB7;}
-	.option-green{background-color: #4AC5AE;}
-	.option-yellow{background-color: #F7C96B;}
-	.option-purple{background-color: #BF73FF;}
-	.option-orange{background-color: #EF6C40;}
-	.option-pink{background-color: #FF7373;}
-	.option-grey{background-color: #CCC;}
-	.option-black{background-color: #333;}
-</style>
+@section('styles')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <style>
+        select option{
+            padding: 5px;
+            font-weight: bold;
+            color: #FFF;
+        }
+
+        .option-blank{background-color: #FFF;color: #333}
+        .option-red{background-color: #C52B15;}
+        .option-blue{background-color: #337AB7;}
+        .option-green{background-color: #4AC5AE;}
+        .option-yellow{background-color: #F7C96B;}
+        .option-purple{background-color: #BF73FF;}
+        .option-orange{background-color: #EF6C40;}
+        .option-pink{background-color: #FF7373;}
+        .option-grey{background-color: #CCC;}
+        .option-black{background-color: #333;}
+    </style>
 @endsection
 
 @section('javascripts')
-<script>
+    <script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
+    <script type="text/javascript" src="{{URL::asset('js/Category_Menu/category_menu.js')}}"></script>
+    <script>
 	$("select[name='colour']").change(function(){
 		if ($(this).val() != ""){
 			$(this).css('background-color', $(this).val()).css('color', '#FFF');
@@ -110,5 +159,10 @@
 			$(this).css('background-color', '#FFF').css('color', '#333');
 		}
 	});
-</script>
+
+    function edit(id) {
+        $("#updateForm").attr("action", "/categories/" + id);
+        $('#kategori').modal('show');
+    }
+    </script>
 @endsection
