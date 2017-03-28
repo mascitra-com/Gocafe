@@ -8,7 +8,7 @@ function ajax_config() {
 	});	
 }
 
-function setCategoryField(name, $id) {
+function setCategoryField(name, id) {
 	var data = name;
 	var id = id;
 	$("input[name='category_name']").val(data);
