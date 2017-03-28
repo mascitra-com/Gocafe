@@ -88,15 +88,15 @@
 					<div class="form-group">
 						<select name="color" class="form-control">
 							<option value="" class="option-blank" selected>Pilih warna...</option>
-							<option value="#C52B15" class="option-red">Merah</option>
-							<option value="#337AB7" class="option-blue">Biru</option>
-							<option value="#4AC5AE" class="option-green">Hijau</option>
-							<option value="#F7C96B" class="option-yellow">Kuning</option>
-							<option value="#BF73FF" class="option-purple">Ungu</option>
-							<option value="#EF6C40" class="option-orange">Jingga</option>
-							<option value="#FF7373" class="option-pink">Merah Muda</option>
-							<option value="#CCC" class="option-grey">Abu-Abu</option>
-							<option value="#333" class="option-black">Hitam</option>
+							<option value="#C52B15" class="option-merah">Merah</option>
+							<option value="#337AB7" class="option-biru">Biru</option>
+							<option value="#4AC5AE" class="option-hijau">Hijau</option>
+							<option value="#F7C96B" class="option-kuning">Kuning</option>
+							<option value="#BF73FF" class="option-ungu">Ungu</option>
+							<option value="#EF6C40" class="option-jingga">Jingga</option>
+							<option value="#FF7373" class="option-merahmuda">Merah Muda</option>
+							<option value="#CCC" class="option-abu">Abu-Abu</option>
+							<option value="#333" class="option-hitam">Hitam</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -168,15 +168,15 @@
 	}
 
 	.option-blank{background-color: #FFF;color: #333}
-	.option-red{background-color: #C52B15;}
-	.option-blue{background-color: #337AB7;}
-	.option-green{background-color: #4AC5AE;}
-	.option-yellow{background-color: #F7C96B;}
-	.option-purple{background-color: #BF73FF;}
-	.option-orange{background-color: #EF6C40;}
-	.option-pink{background-color: #FF7373;}
-	.option-grey{background-color: #CCC;}
-	.option-black{background-color: #333;}
+	.option-merah{background-color: #C52B15;}
+	.option-biru{background-color: #337AB7;}
+	.option-hijau{background-color: #4AC5AE;}
+	.option-kuning{background-color: #F7C96B;}
+	.option-ungu{background-color: #BF73FF;}
+	.option-jingga{background-color: #EF6C40;}
+	.option-merahmuda{background-color: #FF7373;}
+	.option-abu{background-color: #CCC;}
+	.option-hitam{background-color: #333;}
 
 </style>
 @endsection
