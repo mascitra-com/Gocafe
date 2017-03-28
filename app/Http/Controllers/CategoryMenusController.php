@@ -40,6 +40,29 @@ class CategoryMenusController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function add(Request $request, Cafe $cafe)
+    {
+        // Validate the required data
+        $this->validate($request, [
+            'name' => 'min:3|max:255|required',
+            'colour' => 'required',
+            ]);
+        $category = new CategoryMenu($request->all());
+        $newIdCategory = $cafe->addMenuCategory($category, Cafe::getCafeIdByOwnerIdNowLoggedIn());
+        $newCategory = CategoryMenu::find($newIdCategory);
+        return response()->json([
+            'category_name' => $newCategory->name,
+            'category_colour' => $newCategory->colour,
+            'category_id' => $newIdCategory,
+        ]);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
