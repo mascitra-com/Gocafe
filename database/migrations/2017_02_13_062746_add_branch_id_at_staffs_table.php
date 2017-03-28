@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddLocationIdColumnAndDropCityColumnAtCafeBranchesTable extends Migration
+class AddBranchIdAtStaffsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddLocationIdColumnAndDropCityColumnAtCafeBranchesTable extends Migration
      */
     public function up()
     {
-        Schema::table('cafe_branches', function (Blueprint $table) {
-            $table->integer('location_id')->unsigned()->index()->after('cafe_id');
-            $table->dropColumn('city');
+        Schema::table('staffs', function (Blueprint $table) {
+            $table->string('branch_id', 20)->index()->after('position_id');
         });
     }
 

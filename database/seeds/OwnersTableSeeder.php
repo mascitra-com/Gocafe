@@ -13,7 +13,7 @@ class OwnersTableSeeder extends Seeder
     public function run()
     {
         DB::table('owners')->insert([
-            'id' => 'OWN'.random_int(100, 999).date('Ymdhis'),
+            'id' => 'OWN12920170213060758',
             'user_id' => 1,
             'first_name' => 'Owner',
             'last_name' => 'Cafe',
