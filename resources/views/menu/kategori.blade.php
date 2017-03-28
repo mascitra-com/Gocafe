@@ -62,16 +62,16 @@
 					<div class="form-group">
 						<label for="">Warna Label</label>
 						<select name="colour" class="form-control">
-							<option value="" class="option-blank" selected>Pilih Warna...</option>
-							<option value="#C52B15" class="option-red">Merah</option>
-							<option value="#337AB7" class="option-blue">Biru</option>
-							<option value="#4AC5AE" class="option-green">Hijau</option>
-							<option value="#F7C96B" class="option-yellow">Kuning</option>
-							<option value="#BF73FF" class="option-purple">Ungu</option>
-							<option value="#EF6C40" class="option-orange">Jingga</option>
-							<option value="#FF7373" class="option-pink">Merah Muda</option>
-							<option value="#CCC" class="option-grey">Abu-Abu</option>
-							<option value="#333" class="option-black">Hitam</option>
+							<option value="" class="option-blank" selected>Pilih warna...</option>
+							<option value="#C52B15" class="option-merah">Merah</option>
+							<option value="#337AB7" class="option-biru">Biru</option>
+							<option value="#4AC5AE" class="option-hijau">Hijau</option>
+							<option value="#F7C96B" class="option-kuning">Kuning</option>
+							<option value="#BF73FF" class="option-ungu">Ungu</option>
+							<option value="#EF6C40" class="option-jingga">Jingga</option>
+							<option value="#FF7373" class="option-merahmuda">Merah Muda</option>
+							<option value="#CCC" class="option-abu">Abu-Abu</option>
+							<option value="#333" class="option-hitam">Hitam</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -163,6 +163,7 @@
 	$(".btn-edit").click(function(){
 		$("#updateForm").attr("action", "/categories/" + $(this).data('id'));
 		$("#kategori .form input[name='name']").val($(this).data('name'));
+		$("#category_colour").css("background-color",$(this).data('colour')).css("color", "#FFF");
 		$("#kategori .form option[value='"+ $(this).data('colour') +"']").prop('selected', true);
 		$('#kategori').modal('show');
 	});
