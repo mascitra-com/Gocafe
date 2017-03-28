@@ -96,5 +96,4 @@ class Cafe extends Model
         $menu->created_by = Auth::user()->id;
         self::find($cafeId)->menus()->save($menu);
     }
-
 }

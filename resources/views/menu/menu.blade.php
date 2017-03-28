@@ -3,6 +3,11 @@
 
 @section('content')
 <div class="row">
+	@if (session('status'))
+	<div class="alert alert-success">
+		{{ session('status') }}
+	</div>
+	@endif
 	<div class="col-xs-12">
 		<div class="panel panel-theme">
 			<div class="panel-heading">
@@ -36,7 +41,7 @@
 							<td class="text-nowrap"><b>Rp {{ $menu->price }}</b></td>
 							<td class="text-center text-nowrap">
 								<a class="btn btn-xs btn-default" href="#">...</a>
-								<a class="btn btn-xs btn-default" href="#"><i class="fa fa-trash"></i></a>
+								<button class="btn btn-xs btn-default" onclick="delete_menu('{{ $menu->id }}')"><i class="fa fa-trash"></i></button>
 							</td>
 						</tr>
 						@endforeach
@@ -78,6 +83,8 @@
 @endsection
 
 @section('styles')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
 <style>
 	.table > tbody > tr > td{
 		vertical-align: middle;
@@ -103,4 +110,36 @@
 		margin: 0;
 	}
 </style>
+@endsection
+
+@section('javascripts')
+<script type="text/javascript">
+	var token = $('meta[name="csrf-token"]').attr('content');
+
+	function ajax_config() {
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': token
+			}
+		});	
+	}
+
+	function delete_menu(id) {
+		confirm('Apakah anda yakin?');
+		ajax_config();
+
+		$.post(base_url+'/'+id,
+		{
+			_method: 'delete',
+			_token: token
+		},
+		function(data, status){
+			if (status) {
+				location.reload(true);
+			}else{
+				alert('artikel gagal dihapus');
+			}
+		});
+	}
+</script>
 @endsection
