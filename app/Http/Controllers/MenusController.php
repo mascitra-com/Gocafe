@@ -23,7 +23,6 @@ class MenusController extends Controller
     public function index(Cafe $cafe, CategoryMenu $categories)
     {
         $menus = $cafe->findOrFail($cafe->getCafeIdByOwnerIdNowLoggedIn())->menus->load('category');
-        // return dd($menus);
         return view('menu.menu', compact('menus'));
     }
 
@@ -47,6 +46,13 @@ class MenusController extends Controller
      */
     public function store(Request $request, Cafe $cafe)
     {
+        // Validate the required data
+        $this->validate($request, [
+            'category_id' => 'required',
+            'name' => 'min:3|max:255|required',
+            'description' => 'required',
+            'price' => 'required',
+        ]);
         $images_name= "";
         $mime= "";
         for ($i=1; $i <=4 ; $i++) { 
