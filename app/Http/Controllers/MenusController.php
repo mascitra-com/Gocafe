@@ -74,13 +74,13 @@ class MenusController extends Controller
         $request->request->add(array(
             'images_name' => $images_name,
             'mime' => $mime
-        ));
+            ));
 
         //insert to menus table
         $menu = new Menu($request->except('category_name', 'image1', 'image2', 'image3', 'image4'));
         $cafe->addMenu($menu, Cafe::getCafeIdByOwnerIdNowLoggedIn());
 
-        return redirect('menus');
+        return redirect('menus')->with('status', 'Menu Added!');
     }
 
     /**
@@ -125,6 +125,7 @@ class MenusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Menu::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->find($id)->delete();
+        redirect('categories')->with('status', 'Menu Deleted');
     }
 }
