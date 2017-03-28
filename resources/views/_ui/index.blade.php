@@ -155,6 +155,22 @@
 							<td><a class="btn btn-default btn-xs" href="{{URL('ui/kategori')}}">ui/kategori</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
+						<tr>
+							<td>18</td>
+							<td>Diskon</td>
+							<td>Halaman untuk memanajemen diskon menu</td>
+							<td>Discount</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/discount')}}">Go</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
+						</tr>
+						<tr>
+							<td>19</td>
+							<td>Tambah Diskon</td>
+							<td>Halaman untuk menambah diskon menu</td>
+							<td>Discount</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/discount/add')}}">Go</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
