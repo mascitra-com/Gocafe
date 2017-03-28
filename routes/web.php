@@ -60,6 +60,7 @@ Route::group(['middleware' => ['web']], function () {
 	//MENU'S CATEGORY
 	Route::resource('categories', 'CategoryMenusController');
 	Route::get('categories/refresh', 'CategoryMenusController@getAllCategory');
+	Route::post('categories/add', 'CategoryMenusController@add');
 	//--END MENU'S CATEGORY
 
 	//FOO

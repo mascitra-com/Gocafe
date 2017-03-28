@@ -30,7 +30,7 @@ function refreshCategory() {
 
 function addCategory() {
 	ajax_config();
-	$.post(target_url+'categories',
+	$.post(target_url+'categories/add',
 	{
 		_method: 'POST',
 		_token: token,
@@ -38,15 +38,10 @@ function addCategory() {
 		colour: $('#category_colour').val()
 	},
 	function(data, status){
-		if (data.status) {
-			if (data.response == 'inserted') {
-				alert('kategori berhasil masuk ke db' + 'Nama kategori: '+ data.category_name + 'Warna kategori:' + data.category_colour);
-				$('#tabel-kategori').find("#category-list").append("<tr><td><i class='fa fa-circle' style='color:"+data.category_colour+"'></i></td><td>"+data.category_name+"</td><td class='text-right'><button class='btn btn-primary btn-xs' data-kategori='"+data.category_name+"' data-kategoris='"+data.category_id+"' data-dismiss='modal' aria-label='Close' onclick='setCategoryField("+(data.category_name).toString()+","+String(data.category_id)+")'>pilih kategori</button></td></tr>").fadeIn('slow');
-			}
+		if (status == 'success') {
+            $('#tabel-kategori').find("#category-list").append("<tr><td><i class='fa fa-circle' style='color:"+data.category_colour+"'></i></td><td>"+data.category_name+"</td><td class='text-right'><button class='btn btn-primary btn-xs' data-kategori='"+data.category_name+"' data-kategoris='"+data.category_id+"' data-dismiss='modal' aria-label='Close' onclick='setCategoryField("+(data.category_name).toString()+","+String(data.category_id)+")'>pilih kategori</button></td></tr>").fadeIn('slow');
 		}else{
-			if (data.response == 'failure') {
-				alert('kategori tidak berhasil masuk ke db');
-			}
+            alert('Kategori Tidak Berhasil Masuk ke DB');
 		}
 	});
 }
