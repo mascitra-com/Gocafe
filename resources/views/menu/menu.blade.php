@@ -23,23 +23,23 @@
 						<th>aksi</th>
 					</thead>
 					<tbody>
-						@for($i=0;$i < 5; $i++)
+						@foreach($menus as $menu)
 						<tr>
 							<td valign="middle"><button class="btn btn-xs btn-success">aktif</button></td>
 							<td width="50px"><img src="{{URL::asset('images/blank-avatar.png')}}" class="thumb" alt=""></td>
 							<td width="25%">
-								<span class="text-size-16">Mie Ayam Gephok Pedas</span>
+								<span class="text-size-16">{{ $menu->name }}</span>
 								<br>
-								<span class="text-size-12" style="color:green">Makanan</span>
+								<span class="text-size-12" style="color:green">{{ $menu->category->name }}</span>
 							</td>
-							<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit fugit, amet, laudantium commodi laboriosam voluptas.</td>
-							<td class="text-nowrap"><b>Rp 30.000</b></td>
+							<td>{{ $menu->description }}</td>
+							<td class="text-nowrap"><b>Rp {{ $menu->price }}</b></td>
 							<td class="text-center text-nowrap">
 								<a class="btn btn-xs btn-default" href="#">...</a>
 								<a class="btn btn-xs btn-default" href="#"><i class="fa fa-trash"></i></a>
 							</td>
 						</tr>
-						@endfor
+						@endforeach
 					</tbody>
 				</table>
 			</div>

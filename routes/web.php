@@ -59,6 +59,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	//MENU'S CATEGORY
 	Route::resource('categories', 'CategoryMenusController');
+	Route::get('categories/refresh', 'CategoryMenusController@getAllCategory');
 	//--END MENU'S CATEGORY
 
 	//FOO

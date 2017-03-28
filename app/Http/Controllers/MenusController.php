@@ -20,9 +20,11 @@ class MenusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Cafe $cafe, CategoryMenu $categories)
     {
-        return view('menu.menu');
+        $menus = $cafe->findOrFail($cafe->getCafeIdByOwnerIdNowLoggedIn())->menus->load('category');
+        // return dd($menus);
+        return view('menu.menu', compact('menus'));
     }
 
     /**
@@ -78,7 +80,7 @@ class MenusController extends Controller
         $menu = new Menu($request->except('category_name', 'image1', 'image2', 'image3', 'image4'));
         $cafe->addMenu($menu, Cafe::getCafeIdByOwnerIdNowLoggedIn());
 
-        return $menu;
+        return redirect('menus');
     }
 
     /**

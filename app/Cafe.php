@@ -81,6 +81,7 @@ class Cafe extends Model
         $category->id = idWithPrefix(6);
         $category->created_by = Auth::user()->id;
         self::find($cafeId)->menuCategories()->save($category);
+        return $category->id;
     }
 
     /**

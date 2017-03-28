@@ -33,7 +33,7 @@ class CategoryMenusController extends Controller
         $this->validate($request, [
             'name' => 'min:3|max:255|required',
             'colour' => 'required',
-        ]);
+            ]);
         $category = new CategoryMenu($request->all());
         $cafe->addMenuCategory($category, Cafe::getCafeIdByOwnerIdNowLoggedIn());
         return redirect('categories')->with('status', 'Category Added!');
@@ -74,7 +74,7 @@ class CategoryMenusController extends Controller
         $this->validate($request, [
             'name' => 'min:3|max:255|required',
             'colour' => 'required',
-        ]);
+            ]);
         CategoryMenu::findOrFail($id)->update($request->all());
         return redirect('categories')->with('status', 'Category updated!');
     }
@@ -89,5 +89,18 @@ class CategoryMenusController extends Controller
     {
         CategoryMenu::destroy($id);
         redirect('categories')->with('status', 'Category Deleted');
+    }
+
+     /**
+     * Get all category according to cafe's id.
+     *
+     * @return \Illuminate\Http\Response json
+     */
+     public function getAllCategory()
+     {
+        $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn());
+
+        return response()->json($categories);
+
     }
 }
