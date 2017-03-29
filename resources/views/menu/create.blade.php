@@ -12,26 +12,27 @@
 	<div class="col-xs-12">
 		<div class="panel panel-theme">
 			<div class="panel-heading">
-				<h3 class="panel-title">Tambah Menu</h3>
+				<h3 class="panel-title">{{ (isset($menu)) ? 'Sunting' : 'Tambah' }} Menu</h3>
 			</div>
 			<div class="panel-body">
-				<form action="{{ url('menus') }}" method="POST" enctype="multipart/form-data">
+				<form action="@if(isset($menu)) {{ url('menus/'.$menu->id) }} @else {{ url('menus') }} @endif" method="POST" enctype="multipart/form-data">
+				@if(isset($menu)) {{ method_field('PATCH') }} @endif
 				{{ csrf_field() }}
 					<div class="form-group">
 						<label for="name">Nama Menu</label>
-						<input type="text" class="form-control" name="name" placeholder="nama menu">
+						<input type="text" class="form-control" name="name" placeholder="nama menu" value="{{ (isset($menu)) ? $menu->name : '' }}">
 					</div>
 					<div class="form-group">
 						<label for="description">Deskripsi Menu</label>
-						<textarea name="description" class="form-control" placeholder="deskripsi menu"></textarea>
+						<textarea name="description" class="form-control" placeholder="deskripsi menu">{{ (isset($menu)) ? $menu->description : '' }}</textarea>
 					</div>
 					<div class="row">
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
 								<label for="category_id">Kategori Menu</label>
 								<div class="input-group">
-									<input type="text" class="form-control" name="category_name" placeholder="pilih kategori" readonly>
-									<input type="hidden" class="form-control" name="category_id">
+									<input type="text" class="form-control" name="category_name" placeholder="pilih kategori" value="{{ (isset($menu)) ? $menu->category->name : '' }}" readonly>
+									<input type="hidden" class="form-control" name="category_id" value="{{ (isset($menu)) ? $menu->category->id : '' }}">
 									<div class="span input-group-btn">
 										<button class="btn btn-default" data-toggle="modal" data-target="#kategori" role="dialog" type="button">pilih</button>
 									</div>
@@ -43,7 +44,7 @@
 								<label for="price">Harga Menu</label>
 								<div class="input-group">
 									<span class="input-group-addon">Rp</span>
-									<input type="text" class="form-control" name="price" placeholder="harga menu">
+									<input type="text" class="form-control" name="price" placeholder="harga menu" value="{{ (isset($menu)) ? $menu->price : '' }}">
 								</div>
 							</div>
 						</div>

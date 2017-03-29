@@ -62,12 +62,6 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('categories/refresh', 'CategoryMenusController@getAllCategory');
 	Route::post('categories/add', 'CategoryMenusController@add');
 	//--END MENU'S CATEGORY
-
-	//FOO
-	Route::get('foo/upload', 'Foo\FooController@index');
-	Route::get('avatar', [
-		'as' => 'get', 'uses' => 'Foo\FooController@get']);
-	Route::post('foo/upload/store', 'Foo\FooController@store');
 });
 
 // DUMMIES VIEW
