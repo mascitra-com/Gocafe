@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Discount;
 use App\Cafe;
+use Auth;
 
 class DiscountController extends Controller
 {
@@ -36,13 +37,33 @@ class DiscountController extends Controller
      * @param Discount $discount
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Discount $discount)
+    public function store(Request $request)
     {
         // Validate the required data
         $this->validate($request, [
             'name' => 'min:3|max:255|required',
-            'colour' => 'required',
+            'value' => 'required',
         ]);
-        return redirect('categories')->with('status', 'Category Added!');
+
+        if (empty($request->start_date)) {
+            $request['start_date'] = time();
+        }else{
+            $request['start_date'] = date('Y-m-d', strtotime($request->start_date));
+        }
+
+        if (!empty($request->expired_date)) {
+            $request['expired_date'] = date('Y-m-d', strtotime($request->expired_date));
+        }
+
+        $request['value'] = $request->value / 100;
+
+        $request->merge(array(
+            'id' => idWithPrefix(8),
+            'created_by' => Auth::user()->id
+        ));
+
+        Discount::create($request->all());
+
+        return redirect('discount')->with('status', 'Discount Added!');
     }
 }
