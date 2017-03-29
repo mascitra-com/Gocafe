@@ -86,3 +86,5 @@ Route::get('ui/account', 'Ui@Account');
 Route::get('ui/menu', 'Ui@Menu');
 Route::get('ui/menu/add', 'Ui@Menu_create');
 Route::get('ui/kategori', 'Ui@Kategori');
+Route::get('ui/discount', 'Ui@Discount');
+Route::get('ui/discount/add', 'Ui@Discount_create');
