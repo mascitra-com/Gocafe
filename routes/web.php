@@ -63,6 +63,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('categories/add', 'CategoryMenusController@add');
 	//--END MENU'S CATEGORY
 
+	//DISCOUNT
+	Route::resource('discount', 'DiscountController');
+	//--END DISCOUNT
+
 	//FOO
 	Route::get('foo/upload', 'Foo\FooController@index');
 	Route::get('avatar', [
