@@ -20,7 +20,7 @@ class MenusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Cafe $cafe, CategoryMenu $categories)
+    public function index(Cafe $cafe)
     {
         $menus = $cafe->findOrFail($cafe->getCafeIdByOwnerIdNowLoggedIn())->menus->load('category');
         return view('menu.menu', compact('menus'));
@@ -106,9 +106,12 @@ class MenusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Menu $menu)
     {
-        //
+        $menu = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menus->find($menu->id)->load('category');
+        $categories = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menuCategories;   
+        
+        return view('menu.create', compact('menu', 'categories'));
     }
 
     /**
@@ -118,9 +121,10 @@ class MenusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Menu $menu)
     {
-        //
+        Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menus->find($menu->id)->update(($request->except(['category_name', 'image1', 'image2', 'image3', 'image4'])));
+        return redirect('menus')->with('status', 'Menu Updated!');
     }
 
     /**

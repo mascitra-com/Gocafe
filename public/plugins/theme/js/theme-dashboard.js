@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	show_menu();
+	$("input[type='date']").attr('type', 'text').datepicker();
 });
 
 function show_menu()

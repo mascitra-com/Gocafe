@@ -40,7 +40,7 @@
 							<td>{{ $menu->description }}</td>
 							<td class="text-nowrap"><b>Rp {{ $menu->price }}</b></td>
 							<td class="text-center text-nowrap">
-								<a class="btn btn-xs btn-default" href="#">...</a>
+								<a class="btn btn-xs btn-default" href="{{ url('menus/'.$menu->id.'/edit') }}">...</a>
 								<button class="btn btn-xs btn-default" onclick="delete_menu('{{ $menu->id }}')"><i class="fa fa-trash"></i></button>
 							</td>
 						</tr>

@@ -85,4 +85,14 @@ class Ui extends Controller
     {
         return view('_ui/menu/kategori');
     }
+
+    public function discount()
+    {
+        return view('_ui/discount/discount');
+    }
+
+    public function discount_create()
+    {
+        return view('_ui/discount/create');
+    }
 }

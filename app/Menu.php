@@ -17,6 +17,15 @@ class Menu extends Model
 
     protected $hidden = ['id', 'cafe_id', 'category_id', 'created_by', 'updated_by', 'deleted_by'];
 
+    public function getImages($id, $disk, $path)
+    {
+        $entry = $this->findOrFail($id);
+
+        $images = Storage::disk($disk)->get($path.'/'.$entry->images_name);
+ 
+        return array($entry, $images);
+    }
+
     //RELATIONS
     public function cafe()
     {

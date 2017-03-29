@@ -266,16 +266,20 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 	color:#AAA;
 }
 
-.panel-theme .panel-heading{
+.panel-theme > .panel-heading{
 	background-color: #EF6C40;
 	border-color: #ec4913;
 }
 
-.panel-theme .panel-heading .panel-title{
+.panel-theme > .panel-heading .panel-title{
 	color: #FFF;
 }
 
 .form-group > label{
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;!important
+}
+
+td, th{
+	vertical-align: middle!important;
 }
