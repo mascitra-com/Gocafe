@@ -76,7 +76,10 @@ if (! function_exists('idWithPrefix')) {
                 break;            
             case 7: //id MENU'S CAFE
                 $pre = 'MCF';
-                break;            
+                break;    
+            case 8: //id DISCOUNT'S CAFE
+                $pre = 'DSC';
+                break;        
             case 9: //id PACKAGE'S CAFE
                 $pre = 'PKG';
                 break;

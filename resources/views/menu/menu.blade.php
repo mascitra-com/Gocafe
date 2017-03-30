@@ -137,7 +137,7 @@
 			if (status) {
 				location.reload(true);
 			}else{
-				alert('artikel gagal dihapus');
+				alert('menu gagal dihapus');
 			}
 		});
 	}
