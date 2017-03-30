@@ -6,16 +6,17 @@
         <div class="col-xs-12">
             <div class="panel panel-theme">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Add Discount</h4>
+                    <h4 class="panel-title">Edit Discount</h4>
                 </div>
-                <form action="{{ url('discount') }}" method="POST">
+                <form action="{{ url('discount/'.$discount->id) }}" method="POST">
                     {{ csrf_field() }}
+                    {{ method_field('PATCH') }}
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="name">Discount Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Discount Name"
+                                    <input type="text" class="form-control" name="name" value="{{ $discount->name }}" placeholder="Discount Name"
                                            required/>
                                 </div>
                             </div>
@@ -23,7 +24,7 @@
                                 <div class="form-group">
                                     <label for="value">Amount</label>
                                     <div class="input-group">
-                                        <input type="number" name="value" min="1" max="100" class="form-control"
+                                        <input type="number" name="value" min="1" max="100" class="form-control" value="{{ $discount->value * 100 }}"
                                                required/>
                                         <span class="input-group-addon">%</span>
                                     </div>
@@ -34,7 +35,7 @@
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="start_date">Start Date</label>
-                                    <input type="date" name="start_date" class="form-control"
+                                    <input type="date" name="start_date" class="form-control" value="{{ date('Y-m-d', strtotime($discount->start_date)) }}"
                                            placeholder="Start Date"/>
                                     <p class="help-block">* Leave it blank if start from today</p>
                                 </div>
@@ -42,7 +43,7 @@
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="expired_date">Expiration Date</label>
-                                    <input type="date" name="expired_date" class="form-control"
+                                    <input type="date" name="expired_date" class="form-control" value="{{ date('Y-m-d', strtotime($discount->expired_date)) }}"
                                            placeholder="Expiration Date"/>
                                     <p class="help-block">* Leave it blank if no expiration date</p>
                                 </div>
@@ -51,7 +52,7 @@
                         <div class="form-group">
                             <label for="description">Description</label>
                             <textarea class="form-control" name="description"
-                                      placeholder="Discount Description"></textarea>
+                                      placeholder="Discount Description">{{ $discount->description }}</textarea>
                         </div>
                         <div class="panel-footer">
                             <button type="submit" class="btn btn-primary">Save</button>

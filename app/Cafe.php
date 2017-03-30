@@ -42,6 +42,11 @@ class Cafe extends Model
         return $this->hasMany(Menu::class);
     }
 
+    public function discounts()
+    {
+        return $this->hasMany(Discount::class);
+    }
+
     public function menuCategories()
     {
         return $this->hasMany(CategoryMenu::class);

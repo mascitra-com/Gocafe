@@ -38,25 +38,36 @@
 						</tr>
 					</thead>
 					<tbody>
-						@for($i=1; $i < 5; $i++)
-						<tr>
-							<td class="text-center">0{{$i}}</td>
-							<td>New Year's Special</td>
-							<td>Discount for package A,B,C</td>
-							<td class="text-center">
-								<span class="label label-success text-size-14">{{str_pad($i * 5,2,'0',STR_PAD_LEFT)}}%</span>
-							</td>
-							<td class="text-center">12/12/2017</td>
-							<td class="text-center">
-								<span class="label label-primary">active</span>
-							</td>
-							<td class="text-center">
-								<a href="{{URL('ui/diskon/detail')}}" class="btn btn-xs btn-default" title="detail"><i class="fa fa-ellipsis-h"></i></a>
-								<a href="#" class="btn btn-xs btn-default"><i class="fa fa-power-off text-red" title="deactivated"></i></a>
-								<a href="" class="btn btn-xs btn-default" onclick="return confirm('Are you sure?\nThis action cannot be undone')" title="delete"><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						@endfor
+						@if($discounts)
+                            @php $no = 1 @endphp
+							@foreach($discounts as $discount)
+                                <tr>
+                                    <td class="text-center">{{$no++}}</td>
+                                    <td>{{ $discount->name }}</td>
+                                    <td>{{ $discount->description }}</td>
+                                    <td class="text-center">
+                                        <span class="label label-success text-size-14">{{ $discount->value * 100 }}%</span>
+                                    </td>
+                                    <td class="text-center">{{ empty($discount->expired_date) ? '-' : date('d/m/Y', strtotime($discount->expired_date)) }}</td>
+                                    <td class="text-center">
+                                        @php
+                                        if($discount->expired_date){
+                                            $status = date('m/d/Y', strtotime($discount->expired_date)) < date('m/d/Y', time()) ? 'expired' : 'active';
+                                        } else{
+                                            $status = 'active';
+                                        }
+                                        @endphp
+                                        @php $status_color = $status === 'active' ? 'primary' : 'danger' @endphp
+                                        <span class="label label-{{ $status_color }}">{{ $status }}</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{URL("discount/$discount->id/edit")}}" class="btn btn-xs btn-default" title="detail"><i class="fa fa-ellipsis-h"></i></a>
+                                        <a href="#" class="btn btn-xs btn-default"><i class="fa fa-power-off text-red" title="deactivated"></i></a>
+                                        <a href="" class="btn btn-xs btn-default" onclick="delete_discount('{{ $discount->id }}')" title="delete"><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+						@endif
 					</tbody>
 				</table>
 			</div>
@@ -95,6 +106,7 @@
 @endsection
 
 @section('styles')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
 	.pagination{
 		margin: 0;
@@ -104,4 +116,38 @@
 		font-weight: 300;
 	}
 </style>
+@endsection
+
+
+@section('javascripts')
+    <script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
+    <script type="text/javascript">
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        function ajax_config() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': token
+                }
+            });
+        }
+
+        function delete_discount(id) {
+            confirm('Apakah anda yakin?');
+            ajax_config();
+
+            $.post(base_url+'/'+id,
+                {
+                    _method: 'delete',
+                    _token: token
+                },
+                function(data, status){
+                    if (status) {
+                        location.reload(true);
+                    }else{
+                        alert('diskon gagal dihapus');
+                    }
+                });
+        }
+    </script>
 @endsection
