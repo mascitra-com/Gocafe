@@ -62,6 +62,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('categories/refresh', 'CategoryMenusController@getAllCategory');
 	Route::post('categories/add', 'CategoryMenusController@add');
 	//--END MENU'S CATEGORY
+
+	//CAFE'S PACKAGE
+	Route::resource('packages', 'PackagesController');
+	Route::get('packages/package_image/{id}', 'PackagesController@showImage'); //get avatar's response
+	//--END CAFE'S PACKAGE
 });
 
 // DUMMIES VIEW
