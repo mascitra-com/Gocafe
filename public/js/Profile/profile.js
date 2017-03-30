@@ -38,9 +38,6 @@ function change_avatar(id) {
 }
 
 function change_avatar_name(id, avatar_name, avatar_mime) {
-	console.log('current user id:' + id);
-	console.log('current avatar name:' + avatar_name);
-
 	ajax_config();
 
 	$.post(base_url+'/avatar/change/'+id,

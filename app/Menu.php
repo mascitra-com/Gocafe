@@ -13,7 +13,7 @@ class Menu extends Model
 
 	protected $dates = ['deleted_at'];
 
-    protected $fillable = ['id', 'cafe_id', 'category_id', 'name', 'description', 'price','images_name','mime','status','created_by', 'updated_by', 'deleted_by'];    
+    protected $fillable = ['id', 'cafe_id', 'category_id', 'name', 'description', 'price','images_name','mime','status','created_by', 'updated_by', 'deleted_by', 'discount'];    
 
     protected $hidden = ['id', 'cafe_id', 'category_id', 'created_by', 'updated_by', 'deleted_by'];
 
@@ -35,5 +35,10 @@ class Menu extends Model
     public function category()
     {
     	return $this->belongsTo(CategoryMenu::class);
+    }
+
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class)->withTimestamps();;
     }
 }

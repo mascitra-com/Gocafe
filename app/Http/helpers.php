@@ -26,6 +26,22 @@ if (! function_exists('frmtPartDate')) {
     }
 }
 
+if (!function_exists('trim_text')) {
+    /**
+     * Trim long text according the length you need. If the text longer than the length, it'll be replaced by "..."
+     *
+     * @param string $text,  int $length
+     *
+     * @return string $text
+     */
+    function trim_text($text, $length=160){
+        if (strlen($text)>$length) {
+            $text =substr($text, 0, $length).'...';
+        }
+        return $text;
+    }
+}
+
 
 if (! function_exists('idWithPrefix')) {
     /**
@@ -60,9 +76,12 @@ if (! function_exists('idWithPrefix')) {
                 break;            
             case 7: //id MENU'S CAFE
                 $pre = 'MCF';
-                break;            
-            case 8: //id MENU'S CAFE
+                break;    
+            case 8: //id DISCOUNT'S CAFE
                 $pre = 'DSC';
+                break;        
+            case 9: //id PACKAGE'S CAFE
+                $pre = 'PKG';
                 break;
             default:
                 $pre = 'IMG';

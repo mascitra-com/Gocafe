@@ -14,27 +14,27 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+	Route::get('/', function () {
+		return view('welcome');
+	});
 
 
-    Auth::routes();
+	Auth::routes();
 
-    Route::get('/home', 'HomeController@index');
+	Route::get('/home', 'HomeController@index');
     // CAFE
-    Route::resource('/profile/cafe', 'CafeController');
-    Route::patch('/profile/cafe/updateContact/{contact}', 'CafeController@updateContact');
+	Route::resource('/profile/cafe', 'CafeController');
+	Route::patch('/profile/cafe/updateContact/{contact}', 'CafeController@updateContact');
     //--END CAFE
 
     // BRANCH
-    Route::resource('/branch', 'BranchController');
-    Route::post('/branch/getCitiesByProvince', 'BranchController@getCitiesByProvince');
-    Route::post('/branch/getDistrictByCity', 'BranchController@getDistrictByCity');
+	Route::resource('/branch', 'BranchController');
+	Route::post('/branch/getCitiesByProvince', 'BranchController@getCitiesByProvince');
+	Route::post('/branch/getDistrictByCity', 'BranchController@getDistrictByCity');
     //--END BRANCH
 
     //DASHBOARD
-    Route::get('dashboard', 'DashboardController@index');
+	Route::get('dashboard', 'DashboardController@index');
     //--END DASHBOARD
 
 	//PROFILE
@@ -63,6 +63,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('categories/add', 'CategoryMenusController@add');
 	//--END MENU'S CATEGORY
 
+	//CAFE'S PACKAGE
+	Route::resource('packages', 'PackagesController');
+	Route::get('packages/package_image/{id}', 'PackagesController@showImage'); //get avatar's response
+	//--END CAFE'S PACKAGE
+
 	//DISCOUNT
 	Route::resource('discount', 'DiscountController');
 	//--END DISCOUNT
@@ -86,3 +91,5 @@ Route::get('ui/menu/add', 'Ui@Menu_create');
 Route::get('ui/kategori', 'Ui@Kategori');
 Route::get('ui/discount', 'Ui@Discount');
 Route::get('ui/discount/add', 'Ui@Discount_create');
+Route::get('ui/package', 'Ui@Package');
+Route::get('ui/package/add', 'Ui@Package_create');
