@@ -60,6 +60,9 @@ if (! function_exists('idWithPrefix')) {
                 break;            
             case 7: //id MENU'S CAFE
                 $pre = 'MCF';
+                break;            
+            case 8: //id MENU'S CAFE
+                $pre = 'DSC';
                 break;
             default:
                 $pre = 'IMG';

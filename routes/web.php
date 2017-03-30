@@ -62,6 +62,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('categories/refresh', 'CategoryMenusController@getAllCategory');
 	Route::post('categories/add', 'CategoryMenusController@add');
 	//--END MENU'S CATEGORY
+
+	//DISCOUNT
+	Route::resource('discount', 'DiscountController');
+	//--END DISCOUNT
 });
 
 // DUMMIES VIEW
