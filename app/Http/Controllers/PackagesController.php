@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Package;
 use App\Menu;
 use App\Cafe;
+use Auth;
 
 use Illuminate\Http\Response;
 
@@ -55,7 +56,19 @@ class PackagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Add package
+        $package_id = idWithPrefix(9);
+        $request['id'] = $package_id;
+        $request['cafe_id'] = Cafe::getCafeIdByOwnerIdNowLoggedIn();
+        $request['created_by'] = Auth::user()->id;
+        
+        // dd($request->all());
+
+        Package::create($request->except(['menus_id']));
+
+        //Input current menus with inserted package's id
+        $package = Package::find($package_id);
+        $package->menus()->attach($request['menus_id'], ['created_by' => $request['created_by']]);
     }
 
     /**

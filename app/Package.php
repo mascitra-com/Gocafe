@@ -14,7 +14,7 @@ class Package extends Model
 
 	protected $dates = ['deleted_at'];
 
-	protected $fillable = ['id', 'name', 'description', 'price','images_name','mime', 'created_by', 'updated_by', 'deleted_by', 'discount'];    
+	protected $fillable = ['id', 'cafe_id' ,'name', 'description', 'price','images_name','mime', 'created_by', 'updated_by', 'deleted_by', 'discount'];    
 
 	protected $hidden = ['id', 'created_by', 'updated_by', 'deleted_by'];
 
