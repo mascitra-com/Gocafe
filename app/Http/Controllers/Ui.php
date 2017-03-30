@@ -95,4 +95,14 @@ class Ui extends Controller
     {
         return view('_ui/discount/create');
     }
+
+    public function package()
+    {
+        return view('_ui/package/package');
+    }
+
+    public function package_create()
+    {
+        return view('_ui/package/create');
+    }
 }

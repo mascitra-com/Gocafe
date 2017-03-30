@@ -171,6 +171,14 @@
 							<td><a class="btn btn-default btn-xs" href="{{URL('ui/discount/add')}}">Go</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
+						<tr>
+							<td>20</td>
+							<td>Paket</td>
+							<td>Halaman untuk manajemen paket menu</td>
+							<td>Package</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/package')}}">Go</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
