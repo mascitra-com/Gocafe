@@ -69,8 +69,9 @@ Route::group(['middleware' => ['web']], function () {
 	//--END CAFE'S PACKAGE
 
 	//DISCOUNT
-	Route::resource('discount', 'DiscountController');
-	//--END DISCOUNT
+    Route::resource('discount', 'DiscountController');
+    Route::get('discount/deactivate/{id}', 'DiscountController@deactivate');
+    //--END DISCOUNT
 });
 
 // DUMMIES VIEW

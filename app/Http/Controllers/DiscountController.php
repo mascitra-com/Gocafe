@@ -34,8 +34,8 @@ class DiscountController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param Discount $discount
      * @return \Illuminate\Http\Response
+     * @internal param Discount $discount
      */
     public function store(Request $request)
     {
@@ -118,5 +118,17 @@ class DiscountController extends Controller
         $request['value'] = $request->value / 100;
         $request['cafe_id'] = Cafe::getCafeIdByOwnerIdNowLoggedIn();
         return $request;
+    }
+
+    /**
+     * Deactivate specific discount immediately
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deactivate($id)
+    {
+        $yesterday = date('Y-m-d', strtotime('-1 days'));;
+        Discount::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->find($id)->update(array('expired_date' => $yesterday));
+        return redirect('discount')->with('status', 'Discount Deactivated');
     }
 }

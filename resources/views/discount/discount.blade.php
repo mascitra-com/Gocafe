@@ -62,7 +62,7 @@
                                     </td>
                                     <td class="text-center">
                                         <a href="{{URL("discount/$discount->id/edit")}}" class="btn btn-xs btn-default" title="detail"><i class="fa fa-ellipsis-h"></i></a>
-                                        <a href="#" class="btn btn-xs btn-default"><i class="fa fa-power-off text-red" title="deactivated"></i></a>
+                                        <a href="{{URL("discount/deactivate/".$discount->id)}}" class="btn btn-xs btn-default" onclick="return confirm('Apakah anda yakin akan menonaktifkan diskon ini?')"  title="deactivated"><i class="fa fa-power-off text-red"></i></a>
                                         <a href="" class="btn btn-xs btn-default" onclick="delete_discount('{{ $discount->id }}')" title="delete"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
@@ -133,7 +133,7 @@
         }
 
         function delete_discount(id) {
-            confirm('Apakah anda yakin?');
+            confirm('Apakah anda yakin akan menghapus diskon ini?');
             ajax_config();
 
             $.post(base_url+'/'+id,
@@ -143,6 +143,7 @@
                 },
                 function(data, status){
                     if (status) {
+                        alert('diskon berhasil dihapus');
                         location.reload(true);
                     }else{
                         alert('diskon gagal dihapus');
