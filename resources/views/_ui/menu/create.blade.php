@@ -41,10 +41,13 @@
 						</div>
 						<div class="col-xs-12 col-sm-4">
 							<div class="form-group">
-								<label for="">Discount</label>
-								<select name="discount" class="form-control">
-									<option value="">Select Discont</option>
-								</select>
+								<div class="form-group">
+									<label for="">Discount</label>
+									<div class="input-group">
+										<input type="number" name="discount" class="form-control" placeholder="add discount" />
+										<span class="input-group-addon">%</span>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

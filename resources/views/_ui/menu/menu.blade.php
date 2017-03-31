@@ -10,7 +10,19 @@
 				<div class="btn-group btn-group-sm pull-right" role="group">
 					<a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh"></i></a>
 					<button class="btn btn-default" data-toggle="modal" data-target="#add-branches"><i class="fa fa-fw fa-plus"></i></button>
+					<a href="#" class="btn btn-default" title="batch manage discount"><i class="fa fa-fw fa-percent"></i></span></a>
 				</div>
+				<!-- QUICK SEARCH -->
+				<form action="#" class="pull-right hidden-xs">
+					<div class="form-group">
+						<div class="input-group input-group-sm">
+							<input type="text" class="form-control" placeholder="search">
+							<span class="input-group-btn">
+								<button class="btn btn-default"><i class="fa fa-search"></i></button>
+							</span>
+						</div>
+					</div>
+				</form>
 				<div class="clearfix"></div>
 			</div>
 			<div class="panel-body table-responsive table-full">
@@ -35,7 +47,7 @@
 							</td>
 							<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit fugit, amet, laudantium commodi laboriosam voluptas.</td>
 							<td class="text-nowrap"><b>Rp 30.000</b></td>
-							<td><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#modal-discount">discount A</button></td>
+							<td><button class="btn btn-xs btn-success" data-id="01" data-discount="10">10%</button></td>
 							<td class="text-center text-nowrap">
 								<a class="btn btn-xs btn-default" href="#">...</a>
 								<a class="btn btn-xs btn-default" href="#"><i class="fa fa-trash"></i></a>
@@ -85,34 +97,23 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Detail Discount</h4>
+				<h4 class="modal-title">Edit Discount</h4>
 			</div>
 			<div class="modal-body">
-				<table class="table table-striped">
-					<tr>
-						<td>Name</td>
-						<td>: </td>
-						<td>Discount A</td>
-					</tr>
-					<tr>
-						<td>Description</td>
-						<td>:</td>
-						<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, ab.</td>
-					</tr>
-					<tr>
-						<td>Amount</td>
-						<td>:</td>
-						<td>10%</td>
-					</tr>
-					<tr>
-						<td>Expired Date</td>
-						<td>:</td>
-						<td>12/12/2017</td>
-					</tr>
-				</table>
-			</div>
-			<div class="modal-footer">
-				<button class="btn btn-warning" data-dismiss="modal">Close</button>
+				<form action="#" method="POST">
+					<div class="form-group">
+						<label for="">Discount Amount</label>
+						<input type="hidden" name="id" value="">
+						<div class="input-group">
+							<input type="number" name="discount" min="0" class="form-control" placeholder="Discount Amount" />
+							<span class="input-group-addon">%</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-primary">Save</button>
+						<button class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -156,4 +157,16 @@
 		font-size: 10pt;
 	}
 </style>
+@endsection
+
+@section('javascripts')
+<script>
+	$(document).ready(function(){
+		$("[data-discount]").click(function(){
+			$("#modal-discount input[name='id']").val($(this).data('id'));
+			$("#modal-discount input[name='discount']").val($(this).data('discount'));
+			$("#modal-discount").modal('show');
+		});
+	});
+</script>
 @endsection

@@ -86,14 +86,14 @@ class Ui extends Controller
         return view('_ui/menu/kategori');
     }
 
-    public function discount()
+    public function promo()
     {
-        return view('_ui/discount/discount');
+        return view('_ui/promo/promo');
     }
 
-    public function discount_create()
+    public function promo_create()
     {
-        return view('_ui/discount/create');
+        return view('_ui/promo/create');
     }
 
     public function package()
@@ -104,5 +104,10 @@ class Ui extends Controller
     public function package_create()
     {
         return view('_ui/package/create');
+    }
+
+    public function discount()
+    {
+        return view('_ui/misc/batch_discount');
     }
 }

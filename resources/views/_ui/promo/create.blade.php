@@ -7,14 +7,14 @@
 		<div class="col-xs-12 col-md-6">
 			<div class="panel panel-theme">
 				<div class="panel-heading">
-					<h4 class="panel-title">Add Discount</h4>
+					<h4 class="panel-title">Add Promo</h4>
 				</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-xs-12 col-md-6">
 							<div class="form-group">
-								<label for="">Discount Name</label>
-								<input type="text" class="form-control" name="name" placeholder="discount name" required/>
+								<label for="">Promo Name</label>
+								<input type="text" class="form-control" name="name" placeholder="promo name" required/>
 							</div>
 						</div>
 						<div class="col-xs-12 col-md-6">
@@ -28,9 +28,9 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="">Discount Type</label>
+						<label for="">Promo Type</label>
 						<select name="type" class="form-control">
-							<option value="">Choose discount type</option>
+							<option value="">Choose promo type</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -40,7 +40,7 @@
 					</div>
 					<div class="form-group">
 						<label for="">Description</label>
-						<textarea class="form-control" name="description" placeholder="Discount description"></textarea>
+						<textarea class="form-control" name="description" placeholder="Promo description"></textarea>
 					</div>
 				</div>
 				<div class="panel-footer">

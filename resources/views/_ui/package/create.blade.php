@@ -24,9 +24,10 @@
 					</div>
 					<div class="form-group">
 						<label for="">Discount</label>
-						<select name="discount" class="form-control">
-							<option value="">Select Discont</option>
-						</select>
+						<div class="input-group">
+							<input type="number" name="discount" class="form-control" placeholder="add discount" />
+							<span class="input-group-addon">%</span>
+						</div>
 					</div>
 				</div>
 				<div class="panel-footer">
