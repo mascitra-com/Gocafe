@@ -34,8 +34,8 @@ class DiscountController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param Discount $discount
      * @return \Illuminate\Http\Response
+     * @internal param Discount $discount
      */
     public function store(Request $request)
     {

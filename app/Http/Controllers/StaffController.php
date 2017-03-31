@@ -89,17 +89,6 @@ class StaffController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -131,17 +120,6 @@ class StaffController extends Controller
         Staff::findOrFail($staff->id)->update(($request->except(['email', 'password', 'confirm_password', 'birthdate_day', 'birthdate_year', 'birthdate_month', 'phone_input'])));
 
         return redirect('staff');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Staff $staff)
-    {
-        $staff->delete();
     }
 
     /**
