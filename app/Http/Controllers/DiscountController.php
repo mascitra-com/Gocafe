@@ -119,4 +119,16 @@ class DiscountController extends Controller
         $request['cafe_id'] = Cafe::getCafeIdByOwnerIdNowLoggedIn();
         return $request;
     }
+
+    /**
+     * Deactivate specific discount immediately
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deactivate($id)
+    {
+        $yesterday = date('Y-m-d', strtotime('-1 days'));;
+        Discount::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->find($id)->update(array('expired_date' => $yesterday));
+        return redirect('discount')->with('status', 'Discount Deactivated');
+    }
 }
