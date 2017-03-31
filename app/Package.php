@@ -3,13 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Storage;
 
 class Package extends Model
 {
-	use SoftDeletes;
-
 	public $incrementing = false;
 
 	protected $dates = ['deleted_at'];
@@ -19,13 +16,13 @@ class Package extends Model
 	protected $hidden = ['id', 'created_by', 'updated_by', 'deleted_by'];
 
 	public function getImage($id, $disk, $path)
-    {
-        $entry = $this->findOrFail($id)->firstOrFail();
+	{
+		$entry = $this->findOrFail($id);
 
-        $avatar = Storage::disk($disk)->get($path.'/'.$entry->images_name);
- 
-        return array($entry, $avatar);
-    }
+		$avatar = Storage::disk($disk)->get($path.'/'.$entry->images_name);
+
+		return array($entry, $avatar);
+	}
 
     //RELATIONS
 	public function menus()

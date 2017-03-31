@@ -45,7 +45,7 @@
 							<td>
 								<a href="#" class="btn btn-default btn-xs"><i class="fa fa-ellipsis-h"></i></a>
 								<a href="#" class="btn btn-default btn-xs"><i class="fa fa-image"></i></a>
-								<a href="#" class="btn btn-default btn-xs" onclick="return confirm('are you sure?\nThis action cannot be undone.')"><i class="fa fa-times text-red"></i></a>
+								<a href="#" class="btn btn-default btn-xs" onclick="delete_package('{{ $package->id }}')"><i class="fa fa-times text-red"></i></a>
 							</td>
 						</tr>
 						@endforeach
@@ -87,6 +87,8 @@
 @endsection
 
 @section('styles')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
 <style>
 	.package-thumbnail{
 		width: 100px;
@@ -106,4 +108,36 @@
 		margin: 0;
 	}
 </style>
+@endsection
+
+@section('javascripts')
+<script type="text/javascript">
+	var token = $('meta[name="csrf-token"]').attr('content');
+
+	function ajax_config() {
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': token
+			}
+		});	
+	}
+
+	function delete_package(id) {
+		confirm('Are you sure?');
+		ajax_config();
+
+		$.post(base_url+'/'+id,
+		{
+			_method: 'delete',
+			_token: token
+		},
+		function(data, status){
+			if (status) {
+				location.reload(true);
+			}else{
+				alert('menu gagal dihapus');
+			}
+		});
+	}
+</script>
 @endsection

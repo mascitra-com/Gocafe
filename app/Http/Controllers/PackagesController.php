@@ -62,8 +62,6 @@ class PackagesController extends Controller
         $request['cafe_id'] = Cafe::getCafeIdByOwnerIdNowLoggedIn();
         $request['created_by'] = Auth::user()->id;
         
-        // dd($request->all());
-
         Package::create($request->except(['menus_id']));
 
         //Input current menus with inserted package's id
@@ -111,8 +109,9 @@ class PackagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Package $package)
     {
-        //
+        $package->menus()->detach();
+        $package->delete();
     }
 }
