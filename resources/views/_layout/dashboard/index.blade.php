@@ -34,6 +34,7 @@
 					<li class="nav-title">Menu</li>
                     <li><a href="{{ url('menus') }}"><i class="fa fa-fw fa-bars"></i><span class="hidden-sm">Menu Management</span></a></li>
                     <li><a href="{{ url('categories') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Category Management</span></a></li>
+                    <li><a href="{{ url('discount') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Promotion Management</span></a></li>
 					<!-- <li>
 						<a href="#menu-dropdown" data-toggle="collapse" aria-controls="collapse-post"><i class="fa fa-fw fa-bars"></i><span class="hidden-sm">Dropdown</span></a>
 						<ul class="collapse collapseable" id="menu-dropdown">
