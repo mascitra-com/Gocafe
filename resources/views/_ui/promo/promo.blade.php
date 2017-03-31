@@ -1,15 +1,15 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Diskon')
+@section('page_title', 'Promotion')
 
 @section('content')
 <div class="row">
 	<div class="col-xs-12">
 		<div class="panel panel-theme">
 			<div class="panel-heading">
-				<h3 class="panel-title pull-left"><i class="fa fa-fw fa-percent"></i> Discount</h3>
+				<h3 class="panel-title pull-left"><i class="fa fa-fw fa-percent"></i> Promotion</h3>
 				<div class="btn-group btn-group-sm pull-right" role="group">
 					<a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh" title="refresh page"></i> <span class="hidden-sm">refresh</span></a>
-					<a href="{{URL('ui/discount/add')}}" class="btn btn-default" href="#" title="add new"><i class="fa fa-fw fa-plus"></i> <span class="hidden-sm">new</span></a>
+					<a href="{{URL('ui/promo/add')}}" class="btn btn-default" href="#" title="add new"><i class="fa fa-fw fa-plus"></i> <span class="hidden-sm">new</span></a>
 				</div>
 				<!-- QUICK SEARCH -->
 				<form action="#" class="pull-right hidden-xs">
@@ -29,7 +29,7 @@
 					<thead>
 						<tr>
 							<th class="text-center">#</th>
-							<th>Discount Name</th>
+							<th>Promo Name</th>
 							<th>Description</th>
 							<th class="text-center">Amount(%)</th>
 							<th class="text-center">Expired Date</th>
@@ -42,7 +42,7 @@
 						<tr>
 							<td class="text-center">0{{$i}}</td>
 							<td>New Year's Special</td>
-							<td>Discount for package A,B,C</td>
+							<td>Promo for package A,B,C</td>
 							<td class="text-center">
 								<span class="label label-success text-size-14">{{str_pad($i * 5,2,'0',STR_PAD_LEFT)}}%</span>
 							</td>
