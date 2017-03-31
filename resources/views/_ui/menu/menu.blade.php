@@ -16,11 +16,12 @@
 			<div class="panel-body table-responsive table-full">
 				<table class="table table-stripped table-hover">
 					<thead>
-						<th>status</th>
-						<th colspan="2">menu</th>
-						<th>deskripsi</th>
-						<th>harga</th>
-						<th>aksi</th>
+						<th>Status</th>
+						<th colspan="2">Menu</th>
+						<th>Description</th>
+						<th>Price</th>
+						<th>Discount</th>
+						<th></th>
 					</thead>
 					<tbody>
 						@for($i=0;$i < 5; $i++)
@@ -34,6 +35,7 @@
 							</td>
 							<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit fugit, amet, laudantium commodi laboriosam voluptas.</td>
 							<td class="text-nowrap"><b>Rp 30.000</b></td>
+							<td><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#modal-discount">discount A</button></td>
 							<td class="text-center text-nowrap">
 								<a class="btn btn-xs btn-default" href="#">...</a>
 								<a class="btn btn-xs btn-default" href="#"><i class="fa fa-trash"></i></a>
@@ -77,6 +79,46 @@
 </div>
 @endsection
 
+@section('modal')
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-discount">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Detail Discount</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-striped">
+					<tr>
+						<td>Name</td>
+						<td>: </td>
+						<td>Discount A</td>
+					</tr>
+					<tr>
+						<td>Description</td>
+						<td>:</td>
+						<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, ab.</td>
+					</tr>
+					<tr>
+						<td>Amount</td>
+						<td>:</td>
+						<td>10%</td>
+					</tr>
+					<tr>
+						<td>Expired Date</td>
+						<td>:</td>
+						<td>12/12/2017</td>
+					</tr>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-warning" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+@endsection
+
 @section('styles')
 <style>
 	.table > tbody > tr > td{
@@ -92,6 +134,10 @@
 		padding: 3px 5px;
 	}
 
+	#modal-discount table tr td{
+		text-align: left!important;
+	}
+
 	.thumb{
 		width: 50px;
 		height: 50px;
@@ -101,6 +147,13 @@
 
 	ul.pagination{
 		margin: 0;
+	}
+
+	.label{
+		display: block;
+		width: 100%;
+		font-weight: 300;
+		font-size: 10pt;
 	}
 </style>
 @endsection

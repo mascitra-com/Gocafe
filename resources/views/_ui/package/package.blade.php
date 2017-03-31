@@ -30,6 +30,7 @@
 						<tr>
 							<td colspan="2">Package Info</td>
 							<td class="text-center">Price</td>
+							<td class="text-center">Discount</td>
 							<td></td>
 						</tr>
 					</thead>
@@ -42,7 +43,8 @@
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati eveniet incidunt maxime iste et voluptas.</p>
 							</td>
 							<td class="text-center"><span class="label label-success">Rp 10.000</span></td>
-							<td>
+							<td><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#modal-discount">discount A</button></td>
+							<td class="text-nowrap">
 								<a href="#" class="btn btn-default btn-xs"><i class="fa fa-ellipsis-h"></i></a>
 								<a href="#" class="btn btn-default btn-xs"><i class="fa fa-image"></i></a>
 								<a href="#" class="btn btn-default btn-xs" onclick="return confirm('are you sure?\nThis action cannot be undone.')"><i class="fa fa-times text-red"></i></a>
@@ -80,6 +82,46 @@
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+</div>
+@endsection
+
+@section('modal')
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-discount">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Detail Discount</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-striped">
+					<tr>
+						<td>Name</td>
+						<td>: </td>
+						<td>Discount A</td>
+					</tr>
+					<tr>
+						<td>Description</td>
+						<td>:</td>
+						<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, ab.</td>
+					</tr>
+					<tr>
+						<td>Amount</td>
+						<td>:</td>
+						<td>10%</td>
+					</tr>
+					<tr>
+						<td>Expired Date</td>
+						<td>:</td>
+						<td>12/12/2017</td>
+					</tr>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-warning" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
