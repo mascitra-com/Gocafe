@@ -9,7 +9,7 @@ class Discount extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'discounts';
+    protected $table = 'promos';
 
     public $incrementing = false;
 
