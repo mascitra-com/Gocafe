@@ -68,10 +68,15 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('packages/package_image/{id}', 'PackagesController@showImage'); //get avatar's response
 	//--END CAFE'S PACKAGE
 
-	//DISCOUNT
+	//PROMO
     Route::resource('discount', 'DiscountController');
     Route::get('discount/deactivate/{id}', 'DiscountController@deactivate');
-    //--END DISCOUNT
+    //--END PROMO
+
+    //DISCOUNTS
+    Route::get('batch_discount', 'BatchDiscountsController@index');
+    Route::post('batch_discount', 'BatchDiscountsController@batch');
+    //--END DISCOUNTS
 });
 
 // DUMMIES VIEW
