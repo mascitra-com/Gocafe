@@ -22,6 +22,13 @@
 						<label for="">Price</label>
 						<input type="number" name="harga" min="0" class="form-control" placeholder="price" required/>
 					</div>
+					<div class="form-group">
+						<label for="">Discount</label>
+						<div class="input-group">
+							<input type="number" name="discount" class="form-control" placeholder="add discount" />
+							<span class="input-group-addon">%</span>
+						</div>
+					</div>
 				</div>
 				<div class="panel-footer">
 					<button class="btn btn-primary">Save</button>
