@@ -6,22 +6,22 @@
 	<div class="col-xs-12">
 		<div class="panel panel-theme">
 			<div class="panel-heading">
-				<h3 class="panel-title">Tambah Menu</h3>
+				<h3 class="panel-title">Add Menu</h3>
 			</div>
 			<div class="panel-body">
 				<form action="#">
 					<div class="form-group">
-						<label for="name">Nama Menu</label>
+						<label for="">Menu Name</label>
 						<input type="text" class="form-control" name="name" placeholder="nama menu">
 					</div>
 					<div class="form-group">
-						<label for="description">Deskripsi Menu</label>
+						<label for="">Description</label>
 						<textarea name="description" class="form-control" placeholder="deskripsi menu"></textarea>
 					</div>
 					<div class="row">
-						<div class="col-xs-12 col-sm-6">
+						<div class="col-xs-12 col-sm-4">
 							<div class="form-group">
-								<label for="category_id">Kategori Menu</label>
+								<label for="">Menu Category</label>
 								<div class="input-group">
 									<input type="text" class="form-control" name="category_id" placeholder="pilih kategori" readonly>
 									<div class="span input-group-btn">
@@ -30,18 +30,29 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xs-12 col-sm-6">
+						<div class="col-xs-12 col-sm-4">
 							<div class="form-group">
-								<label for="price">Harga Menu</label>
+								<label for="">Price</label>
 								<div class="input-group">
 									<span class="input-group-addon">Rp</span>
 									<input type="text" class="form-control" name="price" placeholder="harga menu">
 								</div>
 							</div>
 						</div>
+						<div class="col-xs-12 col-sm-4">
+							<div class="form-group">
+								<div class="form-group">
+									<label for="">Discount</label>
+									<div class="input-group">
+										<input type="number" name="discount" class="form-control" placeholder="add discount" />
+										<span class="input-group-addon">%</span>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="form-group break-20">
-						<label for="images">Unggah foto</label>
+						<label for="">Upload Picture</label>
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-3">
 								<input type="file" name="images_name1">
@@ -62,8 +73,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> simpan</button>
-						<button class="btn btn-default"><i class="fa fa-refresh"></i> bersihkan</button>
+						<button class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+						<button class="btn btn-default"><i class="fa fa-refresh"></i> Clear</button>
 					</div>
 				</form>
 			</div>
@@ -78,7 +89,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Pilih kategori</h4>
+				<h4 class="modal-title">Choose Category</h4>
 			</div>
 			<div class="modal-body">
 				<form action="#">
@@ -87,20 +98,20 @@
 					</div>
 					<div class="form-group">
 						<select name="color" class="form-control">
-							<option value="" class="option-blank" selected>Pilih warna...</option>
-							<option value="#C52B15" class="option-merah">Merah</option>
-							<option value="#337AB7" class="option-biru">Biru</option>
-							<option value="#4AC5AE" class="option-hijau">Hijau</option>
-							<option value="#F7C96B" class="option-kuning">Kuning</option>
-							<option value="#BF73FF" class="option-ungu">Ungu</option>
-							<option value="#EF6C40" class="option-jingga">Jingga</option>
-							<option value="#FF7373" class="option-merahmuda">Merah Muda</option>
-							<option value="#CCC" class="option-abu">Abu-Abu</option>
-							<option value="#333" class="option-hitam">Hitam</option>
+							<option value="" class="option-blank" selected>Choose color...</option>
+							<option value="#C52B15" class="option-merah">red</option>
+							<option value="#337AB7" class="option-biru">Blue</option>
+							<option value="#4AC5AE" class="option-hijau">Green</option>
+							<option value="#F7C96B" class="option-kuning">Yellow</option>
+							<option value="#BF73FF" class="option-ungu">Purple</option>
+							<option value="#EF6C40" class="option-jingga">Orange</option>
+							<option value="#FF7373" class="option-merahmuda">Pink</option>
+							<option value="#CCC" class="option-abu">Grey</option>
+							<option value="#333" class="option-hitam">Black</option>
 						</select>
 					</div>
 					<div class="form-group">
-						<button class="btn btn-primary btn-block">Tambah Kategori</button>
+						<button class="btn btn-primary btn-block">Add Category</button>
 					</div>
 				</form>
 				<div class="table-responsive break-20">

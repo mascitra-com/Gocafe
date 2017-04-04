@@ -132,7 +132,7 @@
 			},
 			function(data, status){
 				if (data.status) {
-					window.location({{ url('packages') }});
+					window.location("{{ url('packages') }}");
 				}else{
 					alert('Input paket gagal');
 				}

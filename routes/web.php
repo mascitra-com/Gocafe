@@ -68,10 +68,15 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('packages/package_image/{id}', 'PackagesController@showImage'); //get avatar's response
 	//--END CAFE'S PACKAGE
 
-	//DISCOUNT
+	//PROMO
     Route::resource('discount', 'DiscountController');
     Route::get('discount/deactivate/{id}', 'DiscountController@deactivate');
-    //--END DISCOUNT
+    //--END PROMO
+
+    //DISCOUNTS
+    Route::get('batch_discount', 'BatchDiscountsController@index');
+    Route::post('batch_discount', 'BatchDiscountsController@batch');
+    //--END DISCOUNTS
 });
 
 // DUMMIES VIEW
@@ -90,7 +95,8 @@ Route::get('ui/account', 'Ui@Account');
 Route::get('ui/menu', 'Ui@Menu');
 Route::get('ui/menu/add', 'Ui@Menu_create');
 Route::get('ui/kategori', 'Ui@Kategori');
-Route::get('ui/discount', 'Ui@Discount');
-Route::get('ui/discount/add', 'Ui@Discount_create');
+Route::get('ui/promo', 'Ui@Promo');
+Route::get('ui/promo/add', 'Ui@Promo_create');
 Route::get('ui/package', 'Ui@Package');
 Route::get('ui/package/add', 'Ui@Package_create');
+Route::get('ui/discount', 'Ui@Discount');

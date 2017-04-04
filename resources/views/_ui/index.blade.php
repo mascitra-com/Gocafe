@@ -157,18 +157,18 @@
 						</tr>
 						<tr>
 							<td>18</td>
-							<td>Diskon</td>
-							<td>Halaman untuk memanajemen diskon menu</td>
+							<td>promo</td>
+							<td>Halaman untuk memanajemen promo menu</td>
 							<td>Discount</td>
-							<td><a class="btn btn-default btn-xs" href="{{URL('ui/discount')}}">Go</a></td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/promo')}}">Go</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
 							<td>19</td>
-							<td>Tambah Diskon</td>
-							<td>Halaman untuk menambah diskon menu</td>
+							<td>Tambah promo</td>
+							<td>Halaman untuk menambah promo menu</td>
 							<td>Discount</td>
-							<td><a class="btn btn-default btn-xs" href="{{URL('ui/discount/add')}}">Go</a></td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/promo/add')}}">Go</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 						<tr>
@@ -177,6 +177,14 @@
 							<td>Halaman untuk manajemen paket menu</td>
 							<td>Package</td>
 							<td><a class="btn btn-default btn-xs" href="{{URL('ui/package')}}">Go</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
+						</tr>
+						<tr>
+							<td>20</td>
+							<td>Diskon</td>
+							<td>Halaman untuk manajemen diskon &amp paket secara banyak</td>
+							<td>Misc</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/discount')}}">Go</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
 					</tbody>
