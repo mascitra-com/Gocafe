@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Cafe;
 use App\CategoryMenu;
 
+/**
+ * Class CategoryMenusController untuk Fitur Category Management
+ * @package App\Http\Controllers
+ */
 class CategoryMenusController extends Controller
 {
     /**
@@ -24,7 +28,8 @@ class CategoryMenusController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     * @param Cafe $cafe
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Cafe $cafe)
@@ -33,7 +38,7 @@ class CategoryMenusController extends Controller
         $this->validate($request, [
             'name' => 'min:3|max:255|required',
             'colour' => 'required',
-            ]);
+        ]);
         $category = new CategoryMenu($request->all());
         $cafe->addMenuCategory($category, Cafe::getCafeIdByOwnerIdNowLoggedIn());
         return redirect('categories')->with('status', 'Category Added!');
@@ -42,7 +47,8 @@ class CategoryMenusController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     * @param Cafe $cafe
      * @return \Illuminate\Http\Response
      */
     public function add(Request $request, Cafe $cafe)
@@ -51,7 +57,7 @@ class CategoryMenusController extends Controller
         $this->validate($request, [
             'name' => 'min:3|max:255|required',
             'colour' => 'required',
-            ]);
+        ]);
         $category = new CategoryMenu($request->all());
         $newIdCategory = $cafe->addMenuCategory($category, Cafe::getCafeIdByOwnerIdNowLoggedIn());
         $newCategory = CategoryMenu::find($newIdCategory);
@@ -65,8 +71,8 @@ class CategoryMenusController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -75,7 +81,7 @@ class CategoryMenusController extends Controller
         $this->validate($request, [
             'name' => 'min:3|max:255|required',
             'colour' => 'required',
-            ]);
+        ]);
         CategoryMenu::findOrFail($id)->update($request->all());
         return redirect('categories')->with('status', 'Category updated!');
     }
@@ -83,25 +89,23 @@ class CategoryMenusController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         CategoryMenu::destroy($id);
-        redirect('categories')->with('status', 'Category Deleted');
+        return redirect('categories')->with('status', 'Category Deleted');
     }
 
-     /**
+    /**
      * Get all category according to cafe's id.
      *
      * @return \Illuminate\Http\Response json
      */
-     public function getAllCategory()
-     {
+    public function getAllCategory()
+    {
         $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn());
-
         return response()->json($categories);
-
     }
 }

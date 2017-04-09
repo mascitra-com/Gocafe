@@ -7,6 +7,10 @@ use App\Owner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class CafeController untuk Fitur Profile (Cafe)
+ * @package App\Http\Controllers
+ */
 class CafeController extends Controller
 {
     /**
@@ -34,6 +38,7 @@ class CafeController extends Controller
      * Store a newly Cafe Profile.
      *
      * @param  \Illuminate\Http\Request $request
+     * @param Owner $owner
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Owner $owner)
@@ -47,7 +52,6 @@ class CafeController extends Controller
             'twitter' => 'max:255',
             'instagram' => 'max:255',
         ]);
-
         // Add Profile Cafe with Owner ID currently logged in
         $cafe = new Cafe($request->all());
         $owner->addProfileCafe($cafe, Owner::getOwnerIdNowLoggedIn());

@@ -10,6 +10,10 @@ use Auth;
 
 use Illuminate\Http\Response;
 
+/**
+ * Class PackagesController untuk Fitur Packages Management
+ * @package App\Http\Controllers
+ */
 class PackagesController extends Controller
 {
     /**
@@ -26,14 +30,14 @@ class PackagesController extends Controller
     /**
      * Display a package's image.
      *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @param Package $package
+     * @return Response
      */
     public function showImage($id, Package $package)
     {
         $avatar_instance = $package->getImage($id, 'packages', 'packages');
-
-        return (new Response($avatar_instance[1], 200))
-        ->header('Content-Type', $avatar_instance[0]->mime);
+        return (new Response($avatar_instance[1], 200))->header('Content-Type', $avatar_instance[0]->mime);
     }
 
     /**
@@ -44,15 +48,13 @@ class PackagesController extends Controller
     public function create()
     {
         $menus = Menu::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->get();
-
         return view('package.create', compact('menus'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
      */
     public function store(Request $request)
     {
@@ -61,57 +63,21 @@ class PackagesController extends Controller
         $request['id'] = $package_id;
         $request['cafe_id'] = Cafe::getCafeIdByOwnerIdNowLoggedIn();
         $request['created_by'] = Auth::user()->id;
-        
         Package::create($request->except(['menus_id']));
-
         //Input current menus with inserted package's id
         $package = Package::find($package_id);
-        $package->menus()->attach($request['menus_id'], ['created_by' => $request['created_by']]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return $package->menus()->attach($request['menus_id'], ['created_by' => $request['created_by']]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Package $package
+     * @internal param int $id
      */
     public function destroy(Package $package)
     {
         $package->menus()->detach();
-        $package->delete();
+        return $package->delete();
     }
 }
