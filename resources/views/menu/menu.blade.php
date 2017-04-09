@@ -115,7 +115,12 @@
 @section('javascripts')
 <script type="text/javascript">
 	var token = $('meta[name="csrf-token"]').attr('content');
-
+    $(document).ready(function()
+    {
+        $(".thumb").on("error", function(){
+            $(this).attr('src', '{{ URL::asset('images/blank-menu.png') }}');
+        });
+    });
 	function ajax_config() {
 		$.ajaxSetup({
 			headers: {

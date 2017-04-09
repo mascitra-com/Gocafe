@@ -54,19 +54,19 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-3">
 								<input type="file" name="image1">
-								<img src="{{ isset($menu) && $images[0] !== 'default' ? url('menus/showImage/'.$images[0]) : URL::asset('images/blank-avatar.png')}}" alt="thumbnail" class="image-preview">
+								<img src="{{ isset($menu) && $images[0] !== 'default' ? url('menus/showImage/'.$images[0]) : URL::asset('images/blank-menu.png')}}" alt="thumbnail" class="image-preview">
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-3">
 								<input type="file" name="image2">
-								<img src="{{ isset($menu) && $images[1] !== 'default' ? url('menus/showImage/'.$images[1]) : URL::asset('images/blank-avatar.png')}}" alt="thumbnail" class="image-preview">
+								<img src="{{ isset($menu) && $images[1] !== 'default' ? url('menus/showImage/'.$images[1]) : URL::asset('images/blank-menu.png')}}" alt="thumbnail" class="image-preview">
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-3">
 								<input type="file" name="image3">
-								<img src="{{ isset($menu) && $images[2] !== 'default' ? url('menus/showImage/'.$images[2]) : URL::asset('images/blank-avatar.png')}}" alt="thumbnail" class="image-preview">
+								<img src="{{ isset($menu) && $images[2] !== 'default' ? url('menus/showImage/'.$images[2]) : URL::asset('images/blank-menu.png')}}" alt="thumbnail" class="image-preview">
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-3">
 								<input type="file" name="image4">
-								<img src="{{ isset($menu) && $images[3] !== 'default' ? url('menus/showImage/'.$images[3]) : URL::asset('images/blank-avatar.png')}}" alt="thumbnail" class="image-preview">
+								<img src="{{ isset($menu) && $images[3] !== 'default' ? url('menus/showImage/'.$images[3]) : URL::asset('images/blank-menu.png')}}" alt="thumbnail" class="image-preview">
 							</div>
 						</div>
 					</div>
