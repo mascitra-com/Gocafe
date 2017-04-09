@@ -1,12 +1,12 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Diskon')
+@section('page_title', 'Promotion')
 
 @section('content')
     <div class="row">
         <div class="col-xs-12">
             <div class="panel panel-theme">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Add Discount</h4>
+                    <h4 class="panel-title">Add Promotion</h4>
                 </div>
                 <form action="{{ url('discount') }}" method="POST">
                     {{ csrf_field() }}
@@ -14,14 +14,14 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="name">Discount Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Discount Name"
+                                    <label for="name">Promotion Name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Promotion Name"
                                            required/>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="value">Amount</label>
+                                    <label for="value">Discount (%)</label>
                                     <div class="input-group">
                                         <input type="number" name="value" min="1" max="100" class="form-control"
                                                required/>

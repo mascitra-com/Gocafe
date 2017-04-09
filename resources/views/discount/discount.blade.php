@@ -1,12 +1,12 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Diskon')
+@section('page_title', 'Promotion')
 
 @section('content')
 <div class="row">
 	<div class="col-xs-12">
 		<div class="panel panel-theme">
 			<div class="panel-heading">
-				<h3 class="panel-title pull-left"><i class="fa fa-fw fa-percent"></i> Discount</h3>
+				<h3 class="panel-title pull-left"><i class="fa fa-fw fa-percent"></i> Promotion</h3>
 				<div class="btn-group btn-group-sm pull-right" role="group">
 					<a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh" title="refresh page"></i> <span class="hidden-sm">refresh</span></a>
 					<a href="{{URL('discount/create')}}" class="btn btn-default" href="#" title="add new"><i class="fa fa-fw fa-plus"></i> <span class="hidden-sm">new</span></a>
@@ -29,9 +29,9 @@
 					<thead>
 						<tr>
 							<th class="text-center">#</th>
-							<th>Discount Name</th>
+							<th>Promotion Name</th>
 							<th>Description</th>
-							<th class="text-center">Amount(%)</th>
+							<th class="text-center">Discount (%)</th>
 							<th class="text-center">Expired Date</th>
 							<th class="text-center">Status</th>
 							<th class="text-center"></th>
