@@ -131,8 +131,9 @@
 				menus_id: menu_id
 			},
 			function(data, status){
-				if (data.status) {
-					window.location("{{ url('packages') }}");
+				if (status) {
+                    alert('Input paket Berhasil');
+                    window.location.href = "{{ url('packages') }}";
 				}else{
 					alert('Input paket gagal');
 				}

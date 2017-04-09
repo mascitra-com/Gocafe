@@ -117,10 +117,11 @@
 					menus_id: menu_id
 				},
 				function(data, status){
-					if (data.status) {
-						window.location("{{ url('batch_discount') }}");
-					}else{
-						alert('Input paket gagal');
+                    if (status) {
+                        alert('Input Diskon Berhasil');
+                        window.location.href = "{{ url('batch_discount') }}";
+                    }else{
+						alert('Input paket Gagal');
 					}
 				});
 			});
