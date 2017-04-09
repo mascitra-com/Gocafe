@@ -8,6 +8,10 @@ use App\Cafe;
 use App\CategoryMenu;
 use App\Menu;
 
+/**
+ * Class MenusController untuk Fitur Menu Management
+ * @package App\Http\Controllers
+ */
 class MenusController extends Controller
 {
     public function __construct()
@@ -18,6 +22,7 @@ class MenusController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Cafe $cafe
      * @return \Illuminate\Http\Response
      */
     public function index(Cafe $cafe)
@@ -29,19 +34,19 @@ class MenusController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param Cafe $cafe
      * @return \Illuminate\Http\Response
      */
     public function create(Cafe $cafe)
     {
-        $categories = $cafe->findOrFail($cafe->getCafeIdByOwnerIdNowLoggedIn())->menuCategories;        
-
+        $categories = $cafe->findOrFail($cafe->getCafeIdByOwnerIdNowLoggedIn())->menuCategories;
         return view('menu.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Cafe $cafe)
@@ -53,53 +58,48 @@ class MenusController extends Controller
             'description' => 'required',
             'price' => 'required',
         ]);
-        $images_name= "";
-        $mime= "";
-        for ($i=1; $i <=4 ; $i++) { 
-            if ($request->hasFile('image'.$i)) {
-                if ($request->file('image'.$i)->isValid()) {
+        $images_name = "";
+        $mime = "";
+        for ($i = 1; $i <= 4; $i++) {
+            if ($request->hasFile('image' . $i)) {
+                if ($request->file('image' . $i)->isValid()) {
                     $image_name = idWithPrefix(0);
-                    $image_mime = $request->file('image'.$i)->getClientMimeType();
-
+                    $image_mime = $request->file('image' . $i)->getClientMimeType();
                     //store to storage/app/menus
-                    $request->file('image'.$i)->storeAs('menus', $image_name, 'menus');
-                    
+                    $request->file('image' . $i)->storeAs('menus', $image_name, 'menus');
                     //add current image_name to images_name array
-                    $images_name.=$image_name.":";
-                    $mime.=$image_mime.":";
-                }else{
-                    echo "file image".$i." tidak valid <br>";
+                    $images_name .= $image_name . ":";
+                    $mime .= $image_mime . ":";
+                } else {
+                    echo "file image" . $i . " tidak valid <br>";
                 }
-            }else{
-                $images_name.='default:';
-                $mime.='image/jpeg:';
+            } else {
+                $images_name .= 'default:';
+                $mime .= 'image/jpeg:';
             }
         }
-
         //manage requests
         $request->request->add(array(
             'images_name' => $images_name,
             'mime' => $mime
-            ));
-
+        ));
         //insert to menus table
         $menu = new Menu($request->except('category_name', 'image1', 'image2', 'image3', 'image4'));
         $cafe->addMenu($menu, Cafe::getCafeIdByOwnerIdNowLoggedIn());
-
         return redirect('menus')->with('status', 'Menu Added!');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Menu $menu
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function edit(Menu $menu)
     {
         $menu = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menus->find($menu->id)->load('category');
-        $categories = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menuCategories;   
-        
+        $categories = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menuCategories;
         return view('menu.create', compact('menu', 'categories'));
     }
 
@@ -120,12 +120,12 @@ class MenusController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         Menu::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->find($id)->delete();
-        redirect('categories')->with('status', 'Menu Deleted');
+        return redirect('categories')->with('status', 'Menu Deleted');
     }
 }

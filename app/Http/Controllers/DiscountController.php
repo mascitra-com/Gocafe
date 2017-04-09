@@ -7,6 +7,10 @@ use App\Discount;
 use App\Cafe;
 use Auth;
 
+/**
+ * Class DiscountController untuk Fitur Promotion Management
+ * @package App\Http\Controllers
+ */
 class DiscountController extends Controller
 {
     /**
@@ -44,23 +48,40 @@ class DiscountController extends Controller
             'name' => 'min:3|max:255|required',
             'value' => 'required',
         ]);
-
         $request = $this->customize_request_data($request);
-
         $request->merge(array(
             'id' => idWithPrefix(8),
             'created_by' => Auth::user()->id
         ));
-
         Discount::create($request->all());
-
         return redirect('discount')->with('status', 'Discount Added!');
+    }
+
+    /**
+     * @param Request $request
+     * @return Request
+     */
+    private function customize_request_data(Request $request)
+    {
+        if (empty($request->start_date)) {
+            $request['start_date'] = date('Y-m-d');
+        } else {
+            $request['start_date'] = date('Y-m-d', strtotime($request->start_date));
+        }
+        if (!empty($request->expired_date)) {
+            $request['expired_date'] = date('Y-m-d', strtotime($request->expired_date));
+        } else {
+            $request['expired_date'] = NULL;
+        }
+        $request['value'] = $request->value / 100;
+        $request['cafe_id'] = Cafe::getCafeIdByOwnerIdNowLoggedIn();
+        return $request;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,7 +101,6 @@ class DiscountController extends Controller
     public function update(Request $request, Discount $discount)
     {
         $request = $this->customize_request_data($request);
-
         Discount::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->find($discount->id)->update(($request->all()));
         return redirect('discount')->with('status', 'Discount Updated!');
     }
@@ -88,36 +108,13 @@ class DiscountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         Discount::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->find($id)->delete();
-        redirect('discount')->with('status', 'Discount Deleted');
-    }
-
-    /**
-     * @param Request $request
-     * @return Request
-     */
-    private function customize_request_data(Request $request)
-    {
-        if (empty($request->start_date)) {
-            $request['start_date'] = date('Y-m-d');
-        } else {
-            $request['start_date'] = date('Y-m-d', strtotime($request->start_date));
-        }
-
-        if (!empty($request->expired_date)) {
-            $request['expired_date'] = date('Y-m-d', strtotime($request->expired_date));
-        } else {
-            $request['expired_date'] = NULL;
-        }
-
-        $request['value'] = $request->value / 100;
-        $request['cafe_id'] = Cafe::getCafeIdByOwnerIdNowLoggedIn();
-        return $request;
+        return redirect('discount')->with('status', 'Discount Deleted');
     }
 
     /**
