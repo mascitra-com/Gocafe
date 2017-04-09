@@ -31,7 +31,7 @@
 						@foreach($menus as $menu)
 						<tr>
 							<td valign="middle"><button class="btn btn-xs btn-success">aktif</button></td>
-							<td width="50px"><img src="{{URL::asset('images/blank-avatar.png')}}" class="thumb" alt=""></td>
+							<td width="50px"><img src="{{url("menus/showThumbnail/$menu->id")}}" class="thumb" alt=""></td>
 							<td width="25%">
 								<span class="text-size-16">{{ $menu->name }}</span>
 								<br>

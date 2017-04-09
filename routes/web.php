@@ -55,6 +55,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	//CAFE'S MENU
 	Route::resource('menus', 'MenusController');
+    Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail'); //get avatar's response
 	//--END CAFE'S MENU
 
 	//MENU'S CATEGORY
