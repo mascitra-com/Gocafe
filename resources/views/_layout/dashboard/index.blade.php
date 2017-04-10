@@ -18,7 +18,7 @@
     <div id="nav-side">
         <div id="nav-side-wrapper">
             <div id="nav-side-thumbnail" class="hidden-sm">
-                <h3><span class="text-black">GO</span>CAFE!</h3>
+                <h3><span class="text-quintuple">GO</span>CAFE!</h3>
             </div>
             <ul class="nav">
                 <li class="nav-close"><a href="#"><i class="fa fa-fw fa-close"></i></a></li>
@@ -67,18 +67,18 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><i class="fa fa-fw fa-cog"></i></a></li>
+                        <li><a href="#"><i class="fa fa-fw fa-cog text-secondary"></i></a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-user"></i><span
-                                        class="caret"></span></a>
+                               aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-user text-secondary"></i><span
+                                        class="caret text-secondary"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Action</a></li>
                                 <li><a href="#">Another action</a></li>
                             </ul>
                         </li>
                         <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();
-								document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off"></i></a>
+								document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off text-secondary"></i></a>
                         </li>
                         {{-- TODO Make this with AJAX --}}
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

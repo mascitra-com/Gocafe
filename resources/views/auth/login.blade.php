@@ -11,19 +11,19 @@
 <body>
 	<div class="container-fluid">
 		<div class="row form-big" id="form-container">
-			<div class="col-xs-12 col-sm-6 col-md-8 background-img image-fade" id="form-left" data-image="{{URL::asset('images/bg4.png')}}">
+			<div class="col-xs-12 col-sm-6 col-md-8 background-img image-fade" id="form-left" data-image="{{URL::asset('images/bg2.jpg')}}">
 				<h2>DIGITAL CAFE<br>MARKETPLACE</h2>
 				<p class="text-size-20">Your perfect place to manage and promote<br>your favorite Cafe</p>
 				<div class="break-50"></div>
-				<button class="btn btn-default btn-round">daftar sekarang!</button>
+				<button class="btn btn-default btn-round">Daftar Sekarang!</button>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-4" id="form-right">
-				<h3 class="form-title">MEMBER LOGIN</h3>
+				<h3 class="form-title text-quintuple">MEMBER LOGIN</h3>
 				<form action="#" method="post" role="form" action="{{ url('/login') }}">
 					{{ csrf_field() }}
 					<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-						<label for="email">email</label>
-						<input name="email" type="text" class="form-control" placeholder="email" value="{{ old('email') }}" required autofocus>
+						<label for="email" class="text-quadruple">Email</label>
+						<input name="email" type="text" class="form-control" placeholder="Email" value="{{ old('email') }}" required autofocus>
 
 						@if ($errors->has('email'))
 						<span class="help-block">
@@ -33,8 +33,8 @@
 
 					</div>
 					<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-						<label for="password">password</label>
-						<input name="password" type="password" class="form-control" placeholder="password" required>
+						<label for="password" class="text-quadruple">Password</label>
+						<input name="password" type="password" class="form-control" placeholder="Password" required>
 
 						@if ($errors->has('password'))
 						<span class="help-block">
@@ -46,10 +46,10 @@
 					<div class="form-group">
 						<div class="btn-group btn-group-justified">
 							<div class="btn-group" role="group">
-								<button class="btn btn-primary btn-round" type="submit">login</button>
+								<button class="btn btn-primary btn-round" type="submit">Login</button>
 							</div>
 							<div class="btn-group" role="group">
-								<button class="btn btn-warning btn-round">reset</button>
+								<button class="btn btn-default btn-round">Reset</button>
 							</div>
 						</div>
 					</div>

@@ -38,7 +38,7 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 
 #nav-side{
 	position: fixed;
-	width:230px;
+	width:270px;
 	top:0;
 	left: 0;
 	bottom: 0;
@@ -62,7 +62,7 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 	margin:0 auto;
 	margin-bottom: 20px;
 	padding: calc(var(--nav-top-padding) - 13px) var(--navside-left-padding);
-	background-color: #EF6C40;
+	background-color: #F18803;
 	color: #FFF;
 	/*display: none;*/
 }
@@ -161,7 +161,7 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 
 #main-panel{
 	position: relative;
-	width: calc(100% - 230px);
+	width: calc(100% - 270px);
 	min-height: 100%;
 	float: right;
 }
@@ -169,13 +169,21 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 #nav-top{
 	margin: 0;
 	padding:calc(var(--nav-top-padding) - 25.75px) 0px;
-	background-color: #DDD;
+	background-color: #723834;
+}
+
+.navbar-default .navbar-brand {
+	color: #F2EBDF;
+}
+
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+	color: #F2EBDF;
 }
 
 #content{
 	position: absolute;
 	width: 100%;
-	min-height: calc(100% - 50px - 10px);
+	min-height: calc(100% - 100px);
 	max-height: none;
 	padding: 15px 20px;
 	padding-top: 20px;
@@ -267,8 +275,8 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 }
 
 .panel-theme > .panel-heading{
-	background-color: #EF6C40;
-	border-color: #ec4913;
+	background-color: #8C4728;
+	border-color: #723834;
 }
 
 .panel-theme > .panel-heading .panel-title{

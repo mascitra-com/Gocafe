@@ -14,11 +14,10 @@
 				<h4 class="panel-title">Profile Picture</h4>
 				<img src="{{route('getAvatar')}}" class="image-fit img-circle" width="80%" alt="foto">
 				<div class="break-10"></div>
-				<h4>{{ $profile->first_name.' '.$profile->last_name }}</h4>
+				<h4 class="text-quadruple">{{ $profile->first_name.' '.$profile->last_name }}</h4>
 				<div class="break-10"></div>
-				<button class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-target="#upload">Change Profile Picture</button>
-				<div class="break-5"></div>
-				<button class="btn btn-default btn-xs btn-round">Delete</button>
+				<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#upload">Change Profile Picture</button>
+				<button class="btn btn-default btn-xs">Delete</button>
 			</div>
 		</div>
 	</div>
@@ -32,23 +31,23 @@
 					<div class="row">
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
-								<label for="first_name">First Name</label>
-								<input type="text" name="first_name" class="form-control" placeholder="first name" value="{{ $profile->first_name }}">
+								<label for="first_name" class="text-quadruple">First Name</label>
+								<input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ $profile->first_name }}">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
-								<label for="last_name">Last Name</label>
-								<input type="text" name="last_name" class="form-control" placeholder="Last name" value={{ $profile->last_name }}>
+								<label for="last_name" class="text-quadruple">Last Name</label>
+								<input type="text" name="last_name" class="form-control" placeholder="Last Name" value={{ $profile->last_name }}>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="address">Address</label>
-						<textarea name="address" class="form-control" placeholder="address">{{ $profile->address }}</textarea>
+						<label for="address" class="text-quadruple">Address</label>
+						<textarea name="address" class="form-control" placeholder="Address">{{ $profile->address }}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="birthdate">Birth Date</label>
+						<label for="birthdate" class="text-quadruple">Birth Date</label>
 						<div class="row">
 							<div class="col-xs-3">
 								<select name="birthdate_day" class="form-control">
@@ -74,7 +73,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="gender">Gender</label><br>
+						<label for="gender" class="text-quadruple">Gender</label><br>
 						<label class="radio-inline">
 							<input type="radio" name="gender" value="0" @if ($profile->gender === '0') {{ 'checked' }}@endif> Male
 						</label>
@@ -99,24 +98,24 @@
 					{{ method_field('PATCH') }}
 					{{ csrf_field() }}
 					<div class="form-group">
-						<label for="email">Public Email</label>
-						<input type="text" class="form-control" name="email" placeholder="email address" value={{ $profile->email }}>
+						<label for="email" class="text-quadruple">Public Email</label>
+						<input type="text" class="form-control" name="email" placeholder="Email Address" value={{ $profile->email }}>
 					</div>
 					<div class="form-group">
-						<label for="phone">Phone Number</label>
-						<input type="text" class="form-control" name="phone" placeholder="phone number" value= {{ $profile->phone }}>
+						<label for="phone" class="text-quadruple">Phone Number</label>
+						<input type="text" class="form-control" name="phone" placeholder="Phone Number" value= {{ $profile->phone }}>
 					</div>
 					<div class="form-group">
-						<label for="facebook">Facebook</label>
-						<input type="text" class="form-control" name="facebook" placeholder="facebook (optional)" value= {{ $profile->facebook }}>
+						<label for="facebook" class="text-quadruple">Facebook</label>
+						<input type="text" class="form-control" name="facebook" placeholder="Facebook (optional)" value= {{ $profile->facebook }}>
 					</div>
 					<div class="form-group">
-						<label for="twitter">Twitter</label>
-						<input type="text" class="form-control" name="twitter" placeholder="twitter (optional)" value= {{ $profile->twitter }}>
+						<label for="twitter" class="text-quadruple">Twitter</label>
+						<input type="text" class="form-control" name="twitter" placeholder="Twitter (optional)" value= {{ $profile->twitter }}>
 					</div>
 					<div class="form-group">
-						<label for="instagram">Instagram</label>
-						<input type="text" class="form-control" name="instagram" placeholder="instagram (optional)" value= {{ $profile->instagram }}>
+						<label for="instagram" class="text-quadruple">Instagram</label>
+						<input type="text" class="form-control" name="instagram" placeholder="Instagram (optional)" value= {{ $profile->instagram }}>
 					</div>
 					<div class="break-20"></div>
 					<div class="form-group">
@@ -141,7 +140,7 @@
 			<div class="modal-body">
 				<form id="updateAvatar">
 					<div class="form-group">
-						<label for="avatar"> Pilih file</label>
+						<label for="avatar" class="text-quadruple"> Pilih file</label>
 						<input type="file" name="avatar" id="avatar">
 					</div>
 					<button type="button" class="btn btn-primary" onclick="change_avatar('{{ encrypt(Auth::user()->id) }}')" id="btn-avt">Upload</button>
