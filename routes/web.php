@@ -55,6 +55,8 @@ Route::group(['middleware' => ['web']], function () {
 
 	//CAFE'S MENU
 	Route::resource('menus', 'MenusController');
+    Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail'); //get avatar's response
+    Route::get('menus/showImage/{image_file}', 'MenusController@showImage'); //get avatar's response
 	//--END CAFE'S MENU
 
 	//MENU'S CATEGORY
@@ -78,7 +80,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('batch_discount', 'BatchDiscountsController@batch');
     //--END DISCOUNTS
 });
-
 // DUMMIES VIEW
 Route::get('ui/', 'Ui@Index');
 Route::get('ui/dashboard', 'Ui@Dashboard');

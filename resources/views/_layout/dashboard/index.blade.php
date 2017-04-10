@@ -45,6 +45,9 @@
                 </li>
                 <li><a href="{{ url('batch_discount') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Discount Management</span></a>
                 </li>
+                </li>
+                <li><a href="{{ url('packages') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Packages Management</span></a>
+                </li>
             </ul>
         </div>
     </div>

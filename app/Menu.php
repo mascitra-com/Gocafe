@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Menu extends Model
 {
@@ -17,13 +18,30 @@ class Menu extends Model
 
     protected $hidden = ['id', 'cafe_id', 'category_id', 'created_by', 'updated_by', 'deleted_by'];
 
-    public function getImages($id, $disk, $path)
+    /**
+     * Get One Image from Menu
+     *
+     * @param $id
+     * @param $disk
+     * @param $path
+     * @return array
+     */
+    public function getThumbnail($id, $disk, $path)
     {
-        $entry = $this->findOrFail($id);
-
-        $images = Storage::disk($disk)->get($path.'/'.$entry->images_name);
- 
-        return array($entry, $images);
+        $menu = $this->findOrFail($id)->attributes;
+        $images = explode(':', $menu['images_name']);
+        $mimes = explode(':', $menu['mime']);
+        $thumb = 'default';
+        $mime = 'jpeg:image';
+        foreach ($images as $key => $image){
+            if($image !== 'default'){
+                $thumb = $image;
+                $mime = $mimes[$key];
+                break;
+            }
+        }
+        $thumbnail = Storage::disk($disk)->get($path.'/'.$thumb);
+        return array($thumbnail, $mime);
     }
 
     //RELATIONS

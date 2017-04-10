@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 use App\Cafe;
-use App\CategoryMenu;
 use App\Menu;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class MenusController untuk Fitur Menu Management
@@ -99,8 +100,9 @@ class MenusController extends Controller
     public function edit(Menu $menu)
     {
         $menu = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menus->find($menu->id)->load('category');
+        $images = explode(':', $menu->getattributes()['images_name']);
         $categories = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menuCategories;
-        return view('menu.create', compact('menu', 'categories'));
+        return view('menu.create', compact('menu', 'categories', 'images'));
     }
 
     /**
@@ -127,5 +129,30 @@ class MenusController extends Controller
     {
         Menu::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->find($id)->delete();
         return redirect('categories')->with('status', 'Menu Deleted');
+    }
+
+    /**
+     * Show Thumbnail of Menu
+     *
+     * @param $id
+     * @param Menu $menu
+     * @return $this
+     */
+    public function showThumbnail($id, Menu $menu)
+    {
+        $thumbnail = $menu->getThumbnail($id, 'menus', 'menus');
+        return Response($thumbnail[0], 200)->header('Content-Type', $thumbnail[1]);
+    }
+
+    /**
+     * Show Thumbnail of Menu
+     *
+     * @param $image_file
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function showImage($image_file)
+    {
+        $image = Storage::disk('menus')->get('menus/'.$image_file);
+        return Response($image, 200);
     }
 }
