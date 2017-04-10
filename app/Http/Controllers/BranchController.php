@@ -133,8 +133,15 @@ class BranchController extends Controller
     {
         $branch = CafeBranch::findOrFail($id);
         $this->get_location($branch, $indonesia);
+        $currentLocation = $indonesia->findDistrict($branch->location_id, ['city.province']);
+        $current = new \stdClass();
+        $current->district = $currentLocation;
+        $current->city = $currentLocation->city;
+        $current->province = $currentLocation->city->province;
         $provinces = $indonesia->allProvinces();
-        return view('branch.detail', compact('branch', 'provinces'));
+        $cities = $indonesia->findProvince($current->province->id, ['cities'])->cities;
+        $districts = $indonesia->findCity($current->city->id, ['districts'])->districts;
+        return view('branch.detail', compact('branch', 'current', 'provinces', 'cities', 'districts'));
     }
 
     /**

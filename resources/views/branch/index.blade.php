@@ -137,58 +137,5 @@
 @endsection
 
 @section('javascripts')
-    <script>
-        var token = $('meta[name="csrf-token"]').attr('content');
-        $("#provinces").on('change', function () {
-            $("#cities").html("<option>Pilih Kabupaten / Kota</option>");
-            $("#cities").prop('disabled', true);
-            var id;
-            var x = document.getElementById("provinces");
-            for (var i = 0; i < x.options.length; i++) {
-                if (x.options[i].selected) {
-                    id = x.options[i].value;
-                }
-            }
-            $.ajaxSetup({
-                headers: { 'X-CSRF-TOKEN': token }
-            });
-            $.ajax({
-                type: 'POST',
-                data: { 'idProvince' : id },
-                dataType: "json",
-                url: "branch/getCitiesByProvince",
-                success: function (data) {
-                    $("#cities").html(data);
-                    $("#cities").prop('disabled', false);
-                }
-            });
-        });
-    </script>
-    <script>
-        var token = $('meta[name="csrf-token"]').attr('content');
-        $("#cities").on('change', function () {
-            $("#districts").html("<option>Pilih Kabupaten / Kota</option>");
-            $("#districts").prop('disabled', true);
-            var id;
-            var x = document.getElementById("cities");
-            for (var i = 0; i < x.options.length; i++) {
-                if (x.options[i].selected) {
-                    id = x.options[i].value;
-                }
-            }
-            $.ajaxSetup({
-                headers: { 'X-CSRF-TOKEN': token }
-            });
-            $.ajax({
-                type: 'POST',
-                data: { 'idCity' : id },
-                dataType: "json",
-                url: "branch/getDistrictByCity",
-                success: function (data) {
-                    $("#districts").html(data);
-                    $("#districts").prop('disabled', false);
-                }
-            });
-        });
-    </script>
+    <script type="text/javascript" src="{{URL::asset('js/branches.js')}}"></script>
 @endsection
