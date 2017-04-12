@@ -1,0 +1,157 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	transition: background-color 0.5s ease;
+}
+
+div{
+	box-sizing: border-box;
+}
+
+body, html{
+	width: 100%;
+	height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6,
+h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+	margin: 0;
+}
+
+.form-control{
+	border-radius: 0;
+	border-color: #EEE;
+	box-shadow: none;
+}
+
+.form-control[readonly]{
+	background-color: #F2F2F2;
+}
+
+label{
+	color:#AAA;
+	letter-spacing: 1px;
+}
+
+.btn{
+	border-radius: 0;
+}
+
+.btn-black{
+	background-color: #333;
+	color: #FFF;
+}
+
+.btn-black:hover{
+	background-color: #555;
+	color: #FFF;
+}
+
+.btn-lg{
+	font-size: 18pt;
+	font-family: 'Montserrat', serif;
+	font-weight: 700;
+}
+
+#wrapper{
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	max-width: 100%;
+	max-height: 100%;
+	background-color: #f4f1f4;
+}
+
+#order-menu > .container-fluid,
+#order-detail > .container-fluid{
+	position: absolute;
+	width: 100%;
+	margin: 0;
+	padding: 30px;
+}
+
+#order-menu{
+	position: relative;
+	float: left;
+	width: calc(100% - 350px);
+	height: 100%;
+	max-height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+/*ORDER DETAIL*/
+#order-detail{
+	position: relative;
+	float: right;
+	width: 350px;
+	height: 100%;
+	max-height: 100%;
+	overflow: hidden;
+	background-color: #FFF;
+}
+
+#order-detail > .footer{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+#order-list{
+	max-height: 300px;
+	overflow-y: auto;
+	border: 1px #EEE solid;
+	border-radius: 5px;
+	border-left: none;
+	border-right: none;
+}
+
+#order-list > li{
+	max-width: 100%;
+	overflow-x: hidden;
+	cursor: pointer;
+}
+
+.order-count, .order-name, .order-price{
+	display:inline-block;
+	vertical-align: top;
+}
+
+.order-count{
+	width: 15%;
+	color: #AAA;
+	text-align: center;
+}
+
+.order-name{
+	width: 55%;
+}
+
+.order-price{
+	width: 25%;
+	text-align: right;
+	color: #42f47a;
+	font-weight: bolder;
+}
+
+.btn-remove-cart{
+	position: absolute;
+	right: 0px;
+	top: 0;
+	padding: 0px 5px;
+	width: 80px;
+	height: 100%;
+	border: none;
+	border-radius: 0;
+	transform: translate3d(80px,0,0);
+	transition: transform 0.5s ease;
+}
+
+.btn-remove-cart.show{
+	transform: translate3d(0,0,0);
+	transition: transform 0.5s ease;
+}

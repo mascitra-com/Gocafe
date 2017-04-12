@@ -110,4 +110,14 @@ class Ui extends Controller
     {
         return view('_ui/misc/batch_discount');
     }
+
+    public function cashier()
+    {
+        return view('_ui/cashier/cashier');
+    }
+
+    public function order()
+    {
+        return view('_ui/cashier/order');
+    }
 }

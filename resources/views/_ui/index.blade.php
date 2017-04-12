@@ -187,6 +187,14 @@
 							<td><a class="btn btn-default btn-xs" href="{{URL('ui/discount')}}">Go</a></td>
 							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
 						</tr>
+						<tr>
+							<td>21</td>
+							<td>Kasir</td>
+							<td>Halaman kasir</td>
+							<td>Cashier</td>
+							<td><a class="btn btn-default btn-xs" href="{{URL('ui/cashier')}}">Go</a></td>
+							<td class="text-center"><i class="fa fa-circle text-green"></i></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

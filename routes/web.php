@@ -80,3 +80,5 @@ Route::get('ui/promo/add', 'Ui@Promo_create');
 Route::get('ui/package', 'Ui@Package');
 Route::get('ui/package/add', 'Ui@Package_create');
 Route::get('ui/discount', 'Ui@Discount');
+Route::get('ui/cashier', 'Ui@Cashier');
+Route::get('ui/order', 'Ui@Order');
