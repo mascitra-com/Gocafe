@@ -131,6 +131,18 @@ class MenusController extends Controller
         return redirect('categories')->with('status', 'Menu Deleted');
     }
 
+    public function getMenus($idCategory)
+    {
+        $menus = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menus->where('category_id', $idCategory);
+        return response()->json(['success' => true, 'menus' => $menus]);
+    }
+
+    public function getMenu($idMenu)
+    {
+        $menu = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menus->where('id', $idMenu);
+        return response()->json(['success' => true, 'menu' => $menu]);
+    }
+
     /**
      * Show Thumbnail of Menu
      *

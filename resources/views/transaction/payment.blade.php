@@ -34,38 +34,61 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title pull-left">{{ $categories[0]['name'] }}</h3>
-                    <div class="clearfix"></div>
+        <div class="col-xs-10">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title pull-left">{{ $categories[0]['name'] }}</h3>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body table-responsive table-full">
+                            <table class="table table-hover" id="menus">
+                                @foreach($menus as $menu)
+                                    <tr onclick="addToCheck('{{ $menu->id }}')" id="tr-menu"
+                                        class="tr-selection text-quintuple">
+                                        <td width="150px"><img src="{{url("menus/showThumbnail/$menu->id")}}"
+                                                               class="img img-responsive" style="width: 150px;" alt="">
+                                        </td>
+                                        <td>
+                                            {{ strtoupper($menu->name) }}
+                                        </td>
+                                        <td class="price">
+                                            Rp. {{ number_format($menu->price, 0, ',', '.') }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-body table-responsive table-full">
-                    <table class="table table-hover" id="menus">
-                        @foreach($menus as $menu)
-                            <tr onclick="addToCheck()" id="tr-menu" class="tr-selection text-quintuple">
-                                <td width="150px"><img src="{{url("menus/showThumbnail/$menu->id")}}"
-                                                       class="img img-responsive" style="width: 150px;" alt="">
-                                </td>
-                                <td>
-                                    {{ strtoupper($menu->name) }}
-                                </td>
-                                <td class="price">
-                                    Rp. {{ $menu->price }}
-                                </td>
+                <div class="col-xs-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title pull-left">Pembayaran</h3>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body table-responsive table-full">
+                            <table class="table text-quintuple" id="bill">
+                                <thead>
+                                <tr>
+                                    <th width="5%"></th>
+                                    <th width="37.5%">Nama</th>
+                                    <th width="27.5%">Jumlah</th>
+                                    <th width="25%">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <table class="table text-quintuple" id="bill">
+                            <tr>
+                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
+                                <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
                             </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title pull-left">Pembayaran</h3>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="panel-body table-responsive table-full">
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,36 +98,28 @@
 @section('styles')
     <style>
         .price {
-            font-weight:bold;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .input-xs {
+            height: 26px;
+            padding: 2px 5px;
+            font-size: 14px;
+            line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
+            border-radius: 3px;
+        }
+
+        button.deleteMenu {
+            background: Transparent no-repeat;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
         }
     </style>
 @endsection
 
 @section('javascripts')
-    <script>
-        function showMenus(idCategory) {
-            $.ajax({
-                url: '/payment/getMenus/' + idCategory,
-                dataType: 'json',
-                success: function(response) {
-                    var menus = $('#menus').find('tbody').empty();
-                    $.each(response.menus, function (i, menu) {
-                        var id = menu.id;
-                        var name = menu.name;
-                        var price = menu.price;
-                        var markup = "<tr onclick='addToCheck()' id='tr-menu' class='tr-selection text-quintuple'><td width='150px'><img src='"+getThumbnail(id)+"' class='img img-responsive' style='width: 150px;'></td><td>" + name + "</td><td class='price'>Rp. " + price + "</td></tr>";
-                        console.log(markup);
-                        $("#menus").find('tbody').append(markup);
-                    });
-                }
-            });
-        }
-
-        function getThumbnail(idMenu) {
-            return "http://gocafe.dev/menus/showThumbnail/" + idMenu;
-        }
-        function addToCheck() {
-            alert('Added to Check')
-        }
-    </script>
+    <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
+    <script src="{{ url('js/payment.js') }}"></script>
 @endsection

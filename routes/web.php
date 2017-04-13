@@ -57,7 +57,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('menus', 'MenusController');
     Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail'); //get avatar's response
     Route::get('menus/showImage/{image_file}', 'MenusController@showImage'); //get avatar's response
-	//--END CAFE'S MENU
+    Route::get('menus/getMenus/{idCategory}', 'MenusController@getMenus');
+    Route::get('menus/getMenu/{idMenu}', 'MenusController@getMenu');
+    //--END CAFE'S MENU
 
 	//MENU'S CATEGORY
 	Route::resource('categories', 'CategoryMenusController');
@@ -82,7 +84,6 @@ Route::group(['middleware' => ['web']], function () {
 
     //TRANSACTION
     Route::get('payment', 'TransactionController@index');
-    Route::get('payment/getMenus/{idCategory}', 'TransactionController@getMenus');
     //--END TRANSACTION
 });
 // DUMMIES VIEW

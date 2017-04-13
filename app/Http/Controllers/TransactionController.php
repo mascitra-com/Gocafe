@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Menu;
 use App\Transaction;
 use App\CategoryMenu;
 use App\Cafe;
@@ -20,12 +19,6 @@ class TransactionController extends Controller
         $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->sortBy('name');
         $menus = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
         return view('transaction.payment', compact('categories', 'menus'));
-    }
-
-    public function getMenus($idCategory)
-    {
-        $menus = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menus->where('category_id', $idCategory);
-        return response()->json(['success' => true, 'menus' => $menus]);
     }
 
     /**
