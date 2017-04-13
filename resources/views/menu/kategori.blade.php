@@ -61,17 +61,17 @@
 					</div>
 					<div class="form-group">
 						<label for="">Warna Label</label>
-						<select name="colour" class="form-control">
-							<option value="" class="option-blank" selected>Pilih warna...</option>
-							<option value="#C52B15" class="option-merah">Merah</option>
-							<option value="#337AB7" class="option-biru">Biru</option>
-							<option value="#4AC5AE" class="option-hijau">Hijau</option>
-							<option value="#F7C96B" class="option-kuning">Kuning</option>
-							<option value="#BF73FF" class="option-ungu">Ungu</option>
-							<option value="#EF6C40" class="option-jingga">Jingga</option>
-							<option value="#FF7373" class="option-merahmuda">Merah Muda</option>
-							<option value="#CCC" class="option-abu">Abu-Abu</option>
-							<option value="#333" class="option-hitam">Hitam</option>
+						<select name="colour" class="form-control" id="category_colour">
+							<option value="" class="option-blank">Pilih warna...</option>
+							<option value="#b71c1c" class="option-red">Merah</option>
+							<option value="#1976d2" class="option-blue">Biru</option>
+							<option value="#2e7d32" class="option-green">Hijau</option>
+							<option value="#f9a825" class="option-yellow">Kuning</option>
+							<option value="#7b1fa2" class="option-purple">Ungu</option>
+							<option value="#ef6c00" class="option-orange">Jingga</option>
+							<option value="#c2185b" class="option-pink">Merah Muda</option>
+							<option value="#9e9e9e" class="option-grey">Abu-Abu</option>
+							<option value="#212121" class="option-black">Hitam</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -103,15 +103,15 @@
 					<div class="form-group">
 						<select name="colour" class="form-control" id="category_colour">
 							<option value="" class="option-blank">Pilih warna...</option>
-							<option value="#C52B15" class="option-red">Merah</option>
-							<option value="#337AB7" class="option-blue">Biru</option>
-							<option value="#4AC5AE" class="option-green">Hijau</option>
-							<option value="#F7C96B" class="option-yellow">Kuning</option>
-							<option value="#BF73FF" class="option-purple">Ungu</option>
-							<option value="#EF6C40" class="option-orange">Jingga</option>
-							<option value="#FF7373" class="option-pink">Merah Muda</option>
-							<option value="#CCC" class="option-grey">Abu-Abu</option>
-							<option value="#333" class="option-black">Hitam</option>
+							<option value="#b71c1c" class="option-red">Merah</option>
+							<option value="#1976d2" class="option-blue">Biru</option>
+							<option value="#2e7d32" class="option-green">Hijau</option>
+							<option value="#f9a825" class="option-yellow">Kuning</option>
+							<option value="#7b1fa2" class="option-purple">Ungu</option>
+							<option value="#ef6c00" class="option-orange">Jingga</option>
+							<option value="#c2185b" class="option-pink">Merah Muda</option>
+							<option value="#9e9e9e" class="option-grey">Abu-Abu</option>
+							<option value="#212121" class="option-black">Hitam</option>
 						</select>
 					</div>
 				</div>
@@ -135,16 +135,16 @@
 		color: #FFF;
 	}
 
-	.option-blank{background-color: #FFF;color: #333}
-	.option-red{background-color: #C52B15;}
-	.option-blue{background-color: #337AB7;}
-	.option-green{background-color: #4AC5AE;}
-	.option-yellow{background-color: #F7C96B;}
-	.option-purple{background-color: #BF73FF;}
-	.option-orange{background-color: #EF6C40;}
-	.option-pink{background-color: #FF7373;}
-	.option-grey{background-color: #CCC;}
-	.option-black{background-color: #333;}
+	.option-blank{background-color: #fafafa;color: #333}
+	.option-red{background-color: #b71c1c;}
+	.option-blue{background-color: #1976d2;}
+	.option-green{background-color: #2e7d32;}
+	.option-yellow{background-color: #f9a825;}
+	.option-purple{background-color: #7b1fa2;}
+	.option-orange{background-color: #ef6c00;}
+	.option-pink{background-color: #c2185b;}
+	.option-grey{background-color: #9e9e9e;}
+	.option-black{background-color: #212121;}
 </style>
 @endsection
 

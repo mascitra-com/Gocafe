@@ -15,7 +15,7 @@
 Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/', function () {
-		return view('welcome');
+		return redirect('dashboard');
 	});
 
 
@@ -79,6 +79,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('batch_discount', 'BatchDiscountsController@index');
     Route::post('batch_discount', 'BatchDiscountsController@batch');
     //--END DISCOUNTS
+
+    //TRANSACTION
+    Route::get('payment', 'TransactionController@index');
+    Route::get('payment/getMenus/{idCategory}', 'TransactionController@getMenus');
+    //--END TRANSACTION
 });
 // DUMMIES VIEW
 Route::get('ui/', 'Ui@Index');

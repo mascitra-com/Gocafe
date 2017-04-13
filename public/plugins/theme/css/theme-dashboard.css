@@ -271,7 +271,8 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 .panel-title{
 	font-weight: 300;
 	text-transform: uppercase;
-	color:#AAA;
+	color: #ef6c00;
+    font-weight: bold;
 }
 
 .panel-theme > .panel-heading{
