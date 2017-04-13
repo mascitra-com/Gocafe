@@ -53,7 +53,7 @@
                                         <td>
                                             {{ strtoupper($menu->name) }}
                                         </td>
-                                        <td class="price">
+                                        <td class="price text-right">
                                             Rp. {{ number_format($menu->price, 0, ',', '.') }}
                                         </td>
                                     </tr>
@@ -69,24 +69,39 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="panel-body table-responsive table-full">
-                            <table class="table text-quintuple" id="bill">
-                                <thead>
+                            <form action="{{ url('payment') }}" method="POST">
+                                {{ csrf_field() }}
+                                <table class="table text-quintuple" id="bill">
+                                    <thead>
+                                    <tr>
+                                        <th width="5%"></th>
+                                        <th width="37.5%">Nama</th>
+                                        <th width="27.5%">Jumlah</th>
+                                        <th width="25%">Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                                <table class="table text-quintuple">
                                 <tr>
-                                    <th width="5%"></th>
-                                    <th width="37.5%">Nama</th>
-                                    <th width="27.5%">Jumlah</th>
-                                    <th width="25%">Total</th>
+                                    <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
+                                    <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            <table class="table text-quintuple" id="bill">
-                            <tr>
-                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
-                                <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
-                            </tr>
-                            </table>
+                                <tr>
+                                    <td style="font-weight: bold; font-size: 16px" colspan="2">Total Diskon</td>
+                                    <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">- Rp. 0</label></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
+                                    <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 16px">Rp. 0</label></td>
+                                </tr>
+                                <tr>
+                                    <td><button class="btn btn-primary btn-block" type="sumit"><b style="font-size: 16px">Bayar</b></button></td>
+                                    <td><button class="btn btn-secondary btn-block" type="bbutton" id="reset"><b style="font-size: 16px">Batal</b></button></td>
+                                </tr>
+                                </table>
+                            </form>
                         </div>
                     </div>
                 </div>

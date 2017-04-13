@@ -16,6 +16,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        // Get List of Category and All Menus from first Category
         $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->sortBy('name');
         $menus = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
         return view('transaction.payment', compact('categories', 'menus'));
@@ -28,7 +29,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -39,7 +40,11 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Make Transaction ID
+        // Get Table Number
+        // Get currently ID Branch & Staff TODO modified the table
+        // Get Items and calculate the total price, total discount and total payment
+        return $request->all();
     }
 
     /**
