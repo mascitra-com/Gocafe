@@ -8,53 +8,13 @@
     <link rel="stylesheet" href="{{URL::asset('plugins/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('plugins/fontawesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('plugins/jqueryui/css/jquery-ui.min.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-dashboard.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-order.css')}}">
     <link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-helper.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400" rel="stylesheet">
     @yield('styles')
 </head>
 <body>
 <div class="container-fluid" id="wrapper">
-    <div id="nav-side">
-        <div id="nav-side-wrapper">
-            <div id="nav-side-thumbnail" class="hidden-sm">
-                <h3><span class="text-quintuple">GO</span>CAFE!</h3>
-            </div>
-            <ul class="nav">
-                <li class="nav-close"><a href="#"><i class="fa fa-fw fa-close"></i></a></li>
-                <li class="nav-active"><a href="#"><i class="fa fa-fw fa-home"></i><span
-                                class="hidden-sm">Dashboard</span></a></li>
-                <li class="nav-title">Information</li>
-                <li><a href="{{ url('profile') }}"><i class="fa fa-fw fa-user"></i><span
-                                class="hidden-sm">Owner Profile</span></a></li>
-                <li class="nav-title">Cafe</li>
-                <li><a href="{{ url('profile/cafe') }}"><i class="fa fa-fw fa-user"></i><span
-                                class="hidden-sm">Profile</span></a></li>
-                <li class="nav-title">Cafe Branches</li>
-                <li><a href="{{ url('branch') }}"><i class="fa fa-fw fa-users"></i><span
-                                class="hidden-sm">Branches</span></a></li>
-                <li class="nav-title">Staff</li>
-                <li><a href="{{ url('staff') }}"><i class="fa fa-fw fa-users"></i><span class="hidden-sm">Staff Management</span></a>
-                </li>
-                <li class="nav-title">Menu</li>
-                <li><a href="{{ url('menus') }}"><i class="fa fa-fw fa-cutlery"></i><span
-                                class="hidden-sm">Menu Management</span></a></li>
-                <li><a href="{{ url('categories') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Category Management</span></a>
-                </li>
-                <li><a href="{{ url('discount') }}"><i class="fa fa-fw fa-bookmark"></i><span class="hidden-sm">Promotion Management</span></a>
-                </li>
-                <li><a href="{{ url('batch_discount') }}"><i class="fa fa-fw fa-money"></i><span class="hidden-sm">Discount Management</span></a>
-                </li>
-                </li>
-                <li><a href="{{ url('packages') }}"><i class="fa fa-fw fa-cubes"></i><span class="hidden-sm">Packages Management</span></a>
-                </li>
-                <li class="nav-title">Transaction</li>
-                <li><a href="{{ url('payment') }}"><i class="fa fa-fw fa-money"></i><span class="hidden-sm">Payment</span></a>
-                <li><a href="{{ url('order') }}"><i class="fa fa-fw fa-shopping-cart"></i><span class="hidden-sm">Payment</span></a>
-                </li>
-            </ul>
-        </div>
-    </div>
     <div id="main-panel">
         <nav class="navbar navbar-default" id="nav-top">
             <div class="container-fluid">
@@ -92,7 +52,7 @@
                 </div>
             </div>
         </nav>
-        <div id="content">
+        <div id="content" style="overflow: hidden;">
             <div class="container-fluid">
                 @yield('content')
             </div>
