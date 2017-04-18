@@ -51,10 +51,13 @@
                                                                class="img img-responsive" style="width: 150px;" alt="">
                                         </td>
                                         <td>
-                                            {{ strtoupper($menu->name) }}
+                                            {{ $menu->name }}
                                         </td>
                                         <td class="price text-right">
-                                            Rp. {{ number_format($menu->price, 0, ',', '.') }}
+                                            Rp. {{ number_format($menu->price, 0, ',', '.') }} <br>
+                                            @if($menu->discount)
+                                                (- Rp. {{ number_format($menu->discount * $menu->price, 0, ',', '.') }})
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -97,8 +100,33 @@
                                     <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 16px">Rp. 0</label></td>
                                 </tr>
                                 <tr>
+                                    <td style="font-weight: bold; font-size: 16px" colspan="2" rowspan="2">Jenis Pembayaran</td>
+                                    <td><input type="radio" name="type" id="cash" value="cash" checked></td>
+                                    <td><label for="type">Tunai</label></td>
+                                </tr>
+                                <tr>
+                                    <td style=" padding-left: 8px;"><input type="radio" name="type" id="credit" value="credit"></td>
+                                    <td><label for="type">Kartu Kredit</label></td>
+                                </tr>
+                                <tr class="credit_card">
+                                    <td colspan="2"><label for="credit_name">Nama pada Kartu Kredit</label></td>
+                                    <td colspan="2"><input type="text" id="credit_name" name="credit_card_name"></td>
+                                </tr>
+                                <tr class="credit_card">
+                                    <td colspan="2"><label for="credit_number">Nomor Kartu Kredit</label></td>
+                                    <td colspan="2"><input type="text" id="credit_number" name="credit_card_number"></td>
+                                </tr>
+                                <tr class="cash">
+                                    <td colspan="2"><label for="cash_received">Pembayaran Yang Diterima</label></td>
+                                    <td colspan="2"><input type="text" id="cash_received" name="cash_received"></td>
+                                </tr>
+                                <tr class="cash">
+                                    <td colspan="2"><label for="refund">Jumlah Uang Kembali</label></td>
+                                    <td colspan="2"><input type="text" id="refund" name="refund" readonly></td>
+                                </tr>
+                                <tr>
                                     <td><button class="btn btn-primary btn-block" type="sumit"><b style="font-size: 16px">Bayar</b></button></td>
-                                    <td><button class="btn btn-secondary btn-block" type="bbutton" id="reset"><b style="font-size: 16px">Batal</b></button></td>
+                                    <td><button class="btn btn-secondary btn-block" type="button" id="reset"><b style="font-size: 16px">Batal</b></button></td>
                                 </tr>
                                 </table>
                             </form>

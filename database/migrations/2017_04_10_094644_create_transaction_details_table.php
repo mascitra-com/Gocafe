@@ -15,11 +15,11 @@ class CreateTransactionDetailsTable extends Migration
     {
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_transaction')->index();
-            $table->integer('id_item')->index();
+            $table->string('id_transaction')->index();
+            $table->string('id_item')->index();
             $table->integer('amount', FALSE, TRUE);
             $table->double('price', 15, 2);
-            $table->double('discount', 15, 2);
+            $table->double('discount', 4, 2)->nullable();
         });
     }
 

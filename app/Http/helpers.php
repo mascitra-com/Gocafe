@@ -45,10 +45,12 @@ if (!function_exists('trim_text')) {
 
 if (! function_exists('idWithPrefix')) {
     /**
-     * Id Generator
+     * ID Generator
      *
      * @param int $prefix
-     * 1 - OWN | 2 - STF | 3 - AVT | 4 - CFE | 5 - CFB | 6 - CTM | 7 - MCF | Default - IMG
+     * 1 - OWN | 2 - STF | 3 - AVT | 4 - CFE | 5 - CFB |
+     * 6 - CTM | 7 - MCF | 8 - DSC | 9 - PKG | 10 - TRA |
+     * 11 - TRD | Default - IMG
      *
      * @return string
      * @internal param string $prefix
@@ -82,6 +84,12 @@ if (! function_exists('idWithPrefix')) {
                 break;        
             case 9: //id PACKAGE'S CAFE
                 $pre = 'PKG';
+                break;
+            case 10: //id TRANSACTION'S CAFE
+                $pre = 'TRA';
+                break;
+            case 11: //id TRANSACTION DETAIL'S CAFE
+                $pre = 'TRD';
                 break;
             default:
                 $pre = 'IMG';

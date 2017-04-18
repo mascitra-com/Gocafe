@@ -74,7 +74,7 @@ class DiscountController extends Controller
             $request['expired_date'] = NULL;
         }
         $request['value'] = $request->value / 100;
-        $request['cafe_id'] = Cafe::getCafeIdByOwnerIdNowLoggedIn();
+        $request['cafe_id'] = Cafe::getCafeIdByUserIdNowLoggedIn();
         return $request;
     }
 
@@ -101,7 +101,7 @@ class DiscountController extends Controller
     public function update(Request $request, Discount $discount)
     {
         $request = $this->customize_request_data($request);
-        Discount::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->find($discount->id)->update(($request->all()));
+        Discount::where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn())->find($discount->id)->update(($request->all()));
         return redirect('discount')->with('status', 'Discount Updated!');
     }
 
@@ -113,7 +113,7 @@ class DiscountController extends Controller
      */
     public function destroy($id)
     {
-        Discount::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->find($id)->delete();
+        Discount::where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn())->find($id)->delete();
         return redirect('discount')->with('status', 'Discount Deleted');
     }
 
@@ -125,7 +125,7 @@ class DiscountController extends Controller
     public function deactivate($id)
     {
         $yesterday = date('Y-m-d', strtotime('-1 days'));;
-        Discount::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->find($id)->update(array('expired_date' => $yesterday));
+        Discount::where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn())->find($id)->update(array('expired_date' => $yesterday));
         return redirect('discount')->with('status', 'Discount Deactivated');
     }
 }

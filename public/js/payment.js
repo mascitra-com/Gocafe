@@ -1,3 +1,15 @@
+$("tr.credit_card").hide();
+$('input#cash_received').number(true, 0, ',', '.');
+$('input#refund').number(true, 0, ',', '.');
+
+function update_refund() {
+    var cash_received = $('input#cash_received').val()
+    var total_payment = $("label.final").html();
+    total_payment = parseInt(total_payment.replace('Rp. ', '').replace('\.', '').replace('\.', ''));
+    var refund = cash_received - total_payment;
+    $('input#refund').val(refund);
+}
+
 $(document).on('click', 'button#reset', function () { // <-- changes
     $('#bill').find('tbody').empty();
     $("label.total").html('Rp. 0');
@@ -19,6 +31,7 @@ $(document).on('click', 'button#reset', function () { // <-- changes
     set_new_discount(discount * amount, false);
     // Set New Final Payment
     set_new_final_payment();
+    update_refund();
     $(this).closest('tr').remove();
 })
     .on('click', 'button.increase', function () { // <-- changes
@@ -43,6 +56,7 @@ $(document).on('click', 'button#reset', function () { // <-- changes
         set_new_discount(discount, true);
         // Set New Final Payment
         set_new_final_payment();
+        update_refund();
     })
     .on('click', 'button.decrease', function () { // <-- changes
         var amount = parseInt($(this).closest("tr").find("input.input-xs").val());
@@ -66,9 +80,19 @@ $(document).on('click', 'button#reset', function () { // <-- changes
             set_new_discount(discount, false);
             // Set New Final Payment
             set_new_final_payment();
+            update_refund();
         }
         return false;
+    }).on('click', 'input#cash', function () { // <-- changes
+        $("tr.cash").show();
+        $("tr.credit_card").hide();
+    }).on('click', 'input#credit', function () { // <-- changes
+        $("tr.credit_card").show();
+        $("tr.cash").hide();
+    }).on('keyup', 'input#cash_received', function () { // <-- changes
+        update_refund();
     });
+
 function showMenus(idCategory) {
     $.ajax({
         url: '/menus/getMenus/' + idCategory,
@@ -79,7 +103,8 @@ function showMenus(idCategory) {
                 var id = menu.id;
                 var name = menu.name;
                 var price = $.number(menu.price, 0, '', '.');
-                var markup = "<tr onclick=\"addToCheck('" + id + "')\" id='tr-menu' class='tr-selection text-quintuple'><td width='150px'><img src='" + getThumbnail(id) + "' class='img img-responsive' style='width: 150px;'></td><td>" + name + "</td><td class='price text-right'>Rp. " + price + "</td></tr>";
+                var discount = "(- Rp. " + $.number(menu.price * menu.discount, 0, '', '.') + ")";
+                var markup = "<tr onclick=\"addToCheck('" + id + "')\" id='tr-menu' class='tr-selection text-quintuple'><td width='150px'><img src='" + getThumbnail(id) + "' class='img img-responsive' style='width: 150px;'></td><td>" + name + "</td><td class='price text-right'>Rp. " + price + " <br>"+ (discount != '(- Rp. 0)' ? discount  : '') +"</td></tr>";
                 $("#menus").find('tbody').append(markup);
             });
         }
@@ -104,12 +129,12 @@ function addToCheck(idMenu) {
             $.each(response.menu, function (i, menu) {
                 var id = menu.id;
                 var name = menu.name;
-                var discount = menu.discount;
+                var discount = menu.price * menu.discount;
                 if (!discount) {
                     discount = 0;
                 }
                 var price = 'Rp. ' + $.number(menu.price, 0, '', '.');
-                var markup = "<tr><input type='hidden' name='id[]' value='" + id + "'><input type='hidden' class='discount' value='" + discount + "'><td><button class='deleteMenu'><i class='fa fa-times'></i></button></td><td>" + name + "</td><td class='input-group'><span class='input-group-btn'><button class='btn btn-default btn-xs decrease' type='button'><i class='fa fa-arrow-down'></i></button></span><input class='form-control input-xs' maxlength='' type='text'name='total[]' value='1' min='1' max='999' title='amount'/><span class='input-group-btn'><button class='btn btn-default btn-xs increase' type='button'><i class='fa fa-arrow-up'></i></button></span></td><td><label class='price' for='price'>" + price + "</label></td></tr>";
+                var markup = "<tr><input type='hidden' name='ids_menu[]' value='" + id + "'><input type='hidden' class='discount' value='" + discount + "'><td><button class='deleteMenu'><i class='fa fa-times'></i></button></td><td>" + name + "</td><td class='input-group'><span class='input-group-btn'><button class='btn btn-default btn-xs decrease' type='button'><i class='fa fa-arrow-down'></i></button></span><input class='form-control input-xs' maxlength='' type='text' name='amount[]' value='1' min='1' max='999' title='amount' readonly/><span class='input-group-btn'><button class='btn btn-default btn-xs increase' type='button'><i class='fa fa-arrow-up'></i></button></span></td><td><label class='price' for='price'>" + price + "</label></td></tr>";
                 $("#bill").find('tbody').append(markup);
                 // Set Total Payment
                 var total = $("label.total").html();
@@ -119,6 +144,7 @@ function addToCheck(idMenu) {
                 $("label.total").html(new_total);
                 set_new_discount(discount, true);
                 set_new_final_payment();
+                update_refund();
             });
         }
     });
