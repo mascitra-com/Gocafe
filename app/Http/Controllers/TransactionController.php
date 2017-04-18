@@ -19,7 +19,7 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function payment()
     {
         // Get List of Category and All Menus from first Category
         $categories = CategoryMenu::all()->where('cafe_id', Staff::getCafeIdByStaffIdNowLoggedIn())->sortBy('name');
@@ -32,9 +32,9 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function order()
     {
-
+        return view('transaction.order');
     }
 
     /**
@@ -71,11 +71,11 @@ class TransactionController extends Controller
         // Add Data to Store to Transaction Table
         $data['id'] = $transactionId;
         $data['created_by'] = 2;
-        $data['table_number'] = '23';
+        $data['table_number'] = '23'; // TODO Make This Dynamic
         $data['total_price'] = $total_price;
         $data['total_discount'] = $total_discount;
         $data['total_payment'] = $total_payment;
-        $data['status'] = $request->type === 'cash' ? '0' : '1';
+        $data['status'] = $request->type === 'cash' ? '0' : '1'; // TODO Make This as Status Payment
 
         $request->request->add($data);
         $transaction = new Transaction($request->except(array('ids_menu', 'amount', 'cash_received', 'refund', 'type')));
