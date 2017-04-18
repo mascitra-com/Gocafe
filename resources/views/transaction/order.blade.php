@@ -102,7 +102,7 @@
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin-right: 1em;
+            margin-right: 0.75em;
         }
 
         .side-nav {
