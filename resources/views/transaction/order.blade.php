@@ -3,87 +3,96 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title pull-left">Pembayaran</h3>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="panel-body table-responsive table-full">
-                    <form action="{{ url('payment') }}" method="POST">
-                        {{ csrf_field() }}
-                        <table class="table text-quintuple" id="bill">
-                            <thead>
-                            <tr>
-                                <th width="5%"></th>
-                                <th width="37.5%">Nama</th>
-                                <th width="27.5%">Jumlah</th>
-                                <th width="25%">Total</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <table class="table text-quintuple">
-                            <tr>
-                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
-                                <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Diskon</td>
-                                <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">- Rp. 0</label></td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
-                                <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 16px">Rp. 0</label></td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold; font-size: 16px" colspan="2" rowspan="2">Jenis Pembayaran</td>
-                                <td><input type="radio" name="type" id="cash" value="cash" checked></td>
-                                <td><label for="type">Tunai</label></td>
-                            </tr>
-                            <tr>
-                                <td style=" padding-left: 8px;"><input type="radio" name="type" id="credit" value="credit"></td>
-                                <td><label for="type">Kartu Kredit</label></td>
-                            </tr>
-                            <tr class="credit_card">
-                                <td colspan="2"><label for="credit_name">Nama pada Kartu Kredit</label></td>
-                                <td colspan="2"><input type="text" id="credit_name" name="credit_card_name"></td>
-                            </tr>
-                            <tr class="credit_card">
-                                <td colspan="2"><label for="credit_number">Nomor Kartu Kredit</label></td>
-                                <td colspan="2"><input type="text" id="credit_number" name="credit_card_number"></td>
-                            </tr>
-                            <tr class="cash">
-                                <td colspan="2"><label for="cash_received">Pembayaran Yang Diterima</label></td>
-                                <td colspan="2"><input type="text" id="cash_received" name="cash_received"></td>
-                            </tr>
-                            <tr class="cash">
-                                <td colspan="2"><label for="refund">Jumlah Uang Kembali</label></td>
-                                <td colspan="2"><input type="text" id="refund" name="refund" readonly></td>
-                            </tr>
-                            <tr>
-                                <td><button class="btn btn-primary btn-block" type="sumit"><b style="font-size: 16px">Bayar</b></button></td>
-                                <td><button class="btn btn-secondary btn-block" type="button" id="reset"><b style="font-size: 16px">Batal</b></button></td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6" id="menus">
+        <div class="col-md-6" id="productList">
             <div class="side-nav">
                 <ul class="nav">
                     <li style="margin-right: 1em"><a href="#" disabled="true">KATEGORI</a></li>
                     <li style="margin-right: 15em"><a href="#" disabled="true">PRODUK</a></li>
                 </ul>
             </div>
-            <div id="list">
-                <button class="kategori"><b>Makanan</b></button>
-                <button class="kategori"><b>Minuman</b></button>
-                <button class="kategori"><b>Snack</b></button>
-                <button class="kategori"><b>Kopi</b></button>
-                <button class="kategori"><b>Roti Bakar</b></button>
+            <div class="row grid">
+                <div class="list">
+                    @foreach($categories as $category)
+                        <button class="rectangle" onclick="showMenus('{{ $category->id }}')">{{ $category->name }}</button>
+                    @endforeach
+                </div>
+            </div>
+            <div class="row grid2">
+                <div class="list" id="product">
+                    @foreach($menus as $menu)<button class="rectangle product"><img src="{{ url("menus/showThumbnail/$menu->id")}}" alt="Thumbnail">{{ $menu->name }}</button>@endforeach
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="overflow:auto; position:absolute; top:0; left:50%; right:0px; bottom:50px;" id="productDetail">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title pull-left">Detail Produk</h3>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                    <h3 class="head-menu">{{ $firstMenu->name }}</h3>
+                    <div>
+                        <i class="fa fa-star text-primary"></i>
+                        <i class="fa fa-star text-primary"></i>
+                        <i class="fa fa-star text-primary"></i>
+                        <i class="fa fa-star text-primary"></i>
+                        <i class="fa fa-star-half-o text-primary"></i>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="thumbnail">
+                                <img src="{{ url("menus/showThumbnail/$firstMenu->id")}}" alt="Thumbnail">
+                            </div>
+                        </div>
+                        <div class="col-md-6 table-responsive detail-menu">
+                            <h4>Detail :</h4><br>
+                            <table class="table">
+                                <tr>
+                                    <td class="text-primary">Harga</td>
+                                    <td>Rp. {{ number_format($firstMenu->price, 0, ',', '.') }},-</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-primary">Diskon</td>
+                                    <td>@if($firstMenu->discount)
+                                        - Rp. {{ number_format($firstMenu->price * $firstMenu->discount, 0, ',', '.') }},-
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @for($i = 0; $i < 4; $i++)
+                            <div class="col-xs-6 col-md-3">
+                                <a href="#" class="thumbnail">
+                                    <img src="{{ url("menus/showThumbnail/MCFDK120170419082141")}}" alt="Thumbnail">
+                                </a>
+                            </div>
+                        @endfor
+                    </div>
+                    <div class="row col-md-12">
+                        <h4>Deskripsi :</h4><br>
+                        <p class="text-primary">{{ $firstMenu->description }}</p><br>
+                    </div>
+                    <div class="row col-md-12">
+                        <h4>Ulasan :</h4><br>
+                        <table class="table table-responsive">
+                            @for($i = 0; $i < 4; $i++)
+                            <tr>
+                                <td width="15%">
+                                    <img src="{{ asset('images/blank-avatar.png') }}" alt="" class="img-circle img-responsive">
+                                </td>
+                                <td class="{{ $i % 2 === 0 ?: 'text-primary' }}">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, culpa cumque, debitis dolor exercitationem hic impedit incidunt ipsum iure laboriosam laborum molestias non, porro praesentium quasi repudiandae sequi tempora velit?
+                                </td>
+                            </tr>
+                            @endfor
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -91,7 +100,37 @@
 
 @section('styles')
     <style>
-        button.kategori {
+        .detail-menu {
+            font-size: 12pt;
+        }
+
+        .head-menu {
+            margin-bottom: .5em;
+        }
+
+        .product img {
+            max-height: 80px;
+            width: auto;
+            margin: 0 0;
+            vertical-align: top;
+        }
+
+        div.grid {
+            margin-left: auto;
+        }
+
+        div.grid2 {
+            margin-left: auto;
+            margin-top: 2em;
+        }
+
+        button.product {
+            background-image: linear-gradient(0deg, rgba(140, 71, 40, 0.75) 50%, rgba(255, 255, 255, 1) 100%, rgba(255, 255, 255, 1) 75%) !important;
+            font-size: 12px !important;
+            margin-top: 0.75em;
+        }
+
+        button.rectangle {
             background-image: linear-gradient(0deg, rgba(140, 71, 40, 0.75) 25%, rgba(140, 71, 40, 1) 25%, rgba(140, 71, 40, 0.8) 90%);
             height: 100px;
             width: 90px;
@@ -102,7 +141,8 @@
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin-right: 0.75em;
+            margin-right: 0.6em;
+            font-weight: bold;
         }
 
         .side-nav {
@@ -127,7 +167,7 @@
             cursor: default;
         }
 
-        #list {
+        .list {
             margin-left: 3em;
             margin-top: 1em;
         }
@@ -145,9 +185,7 @@
             border-radius: 3px;
         }
 
-        button.deleteMenu {
-            background: Transparent no-repeat;
-            border: none;
+        button.rectangle {
             cursor: pointer;
             overflow: hidden;
         }
@@ -156,5 +194,5 @@
 
 @section('javascripts')
     <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
-    <script src="{{ url('js/payment.js') }}"></script>
+    <script src="{{ url('js/order.js') }}"></script>
 @endsection

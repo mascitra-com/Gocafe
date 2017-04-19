@@ -34,7 +34,11 @@ class TransactionController extends Controller
      */
     public function order()
     {
-        return view('transaction.order');
+        // Get List of Category and All Menus from first Category
+        $categories = CategoryMenu::all()->where('cafe_id', Staff::getCafeIdByStaffIdNowLoggedIn())->sortBy('name');
+        $menus = Cafe::findOrFail(Staff::getCafeIdByStaffIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
+        $firstMenu = $menus[0];
+        return view('transaction.order', compact('categories', 'menus', 'firstMenu'));
     }
 
     /**
