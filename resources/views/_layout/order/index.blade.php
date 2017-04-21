@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{URL::asset('plugins/jqueryui/css/jquery-ui.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-order.css')}}">
     <link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-helper.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('plugins/star-rating/css/star-rating.css')}}">
     {{--<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400" rel="stylesheet">--}}
     @yield('styles')
     <style>
@@ -105,5 +106,6 @@
 <script src="{{URL::asset('plugins/jqueryui/js/jquery-ui.min.js')}}"></script>
 <script src="{{URL::asset('plugins/theme/js/theme-dashboard.js')}}"></script>
 <script src="{{URL::asset('plugins/theme/js/theme-helper.js')}}"></script>
+<script src="{{URL::asset('plugins/star-rating/js/star-rating.js')}}"></script>
 @yield('javascripts')
 </html>

@@ -87,6 +87,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('payment', 'TransactionController@store');
     Route::get('order', 'TransactionController@order');
     //--END TRANSACTION
+
+    //REVIEW
+    Route::post('review', 'ReviewController@store');
+    //--END REVIEW
 });
 // DUMMIES VIEW
 Route::get('ui/', 'Ui@Index');

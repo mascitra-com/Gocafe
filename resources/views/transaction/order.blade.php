@@ -31,13 +31,9 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="panel-body">
-                    <h3 id="head-menu">{{ $firstMenu->name }}</h3>
+                    <h2 id="head-menu">{{ $firstMenu->name }}</h2>
                     <div>
-                        <i class="fa fa-star text-primary"></i>
-                        <i class="fa fa-star text-primary"></i>
-                        <i class="fa fa-star text-primary"></i>
-                        <i class="fa fa-star text-primary"></i>
-                        <i class="fa fa-star-half-o text-primary"></i>
+                        <input id="rating-avg" value="{{ $firstMenu->rating }}" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" readonly>
                     </div>
                     <br>
                     <div class="row">
@@ -81,20 +77,14 @@
                     <div class="row col-md-12">
                         <h4>Ulasan :</h4><br>
                         {{-- TODO Use Ajax Instead --}}
-                        <form action="{{ url('review') }}" method="post">
+                        <form id="form-review" action="">
                             {{ csrf_field() }}
                             <input type="hidden" name="item_id" value="{{ $firstMenu->id }}" id="item_id">
                             <table class="table table-responsive">
                                 <tr>
                                     <td>Penilaian Anda</td>
                                     <td>
-                                        <div>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star-half-o text-primary"></i>
-                                        </div>
+                                        <input name="rating" id="input-id" type="text" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" data-step="1">
                                     </td>
                                 </tr>
                                 <tr>
@@ -110,18 +100,20 @@
                         </form>
                     </div>
                     <div class="row col-md-12">
-                        <table class="table table-responsive">
-                            @for($i = 0; $i < 4; $i++)
+                        <table class="table table-responsive" id="table-review">
+                            @foreach($reviews as $review)
                             <tr>
                                 <td width="15%">
                                     <img src="{{ asset('images/blank-avatar.png') }}" alt="" class="img-circle img-responsive">
                                 </td>
                                 <td>
-                                    <p style="font-size: 14pt" class="text-primary">Lorem Ipsum</p>
-                                    Animi, culpa cumque, debitis dolor exercitationem hic impedit incidunt ipsum iure laboriosam laborum molestias non, porro praesentium quasi repudiandae sequi tempora velit? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    <p>
+                                        <input id="rating-avg" value="{{ $review->rating }}" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" readonly>
+                                    </p>
+                                    {{ $review->review }}
                                 </td>
                             </tr>
-                            @endfor
+                            @endforeach
                         </table>
                     </div>
                 </div>
@@ -131,6 +123,7 @@
 @endsection
 
 @section('styles')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
         .detail-menu {
             font-size: 12pt;
@@ -234,4 +227,31 @@
     <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
     <script src="{{ url('js/payment.js') }}"></script>
     <script src="{{ url('js/order.js') }}"></script>
+    <script>
+        $(document).on('ready', function(){
+            $('#rating-avg').rating({displayOnly: true, step: 0.5});
+        });
+        $(function(){
+            $('#form-review').on('submit',function(e){
+                $.ajaxSetup({
+                    header:$('meta[name="_token"]').attr('content')
+                });
+                e.preventDefault(e);
+                $.ajax({
+                    type:"POST",
+                    url:'/review',
+                    data:$(this).serialize(),
+                    dataType: 'json',
+                    success: function(data){
+                        // TODO Make This Happen
+                        {{--var markup = "<tr><td width='15%'><img src='{{ asset('images/blank-avatar.png') }}' alt='' class='img-circle img-responsive'></td><td><p><input id='rating-avg' value='"+data.review.rating+"' class='rating' data-size='xs' data-show-clear='false' data-show-caption='false' readonly></p>"+data.review.review+"</td></tr>";--}}
+                        alert('Ulasan Anda Sudah di Simpan. Silahkan Lanjutkan Pesanan Anda');
+                        $("#table-review").find('tbody').append(markup);
+                    },
+                    error: function(data){
+                    }
+                })
+            });
+        });
+    </script>
 @endsection

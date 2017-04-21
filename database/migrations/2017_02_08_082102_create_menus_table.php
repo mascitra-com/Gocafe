@@ -19,6 +19,7 @@ class CreateMenusTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->double('price');
+            $table->double('rating');
             $table->string('images_name');
             $table->string('mime')->default('image/jpeg');
             $table->integer('created_by')->unsigned()->index();
