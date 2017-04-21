@@ -53,7 +53,7 @@
 						<div class="col-xs-12 col-md-6">
 							<div class="form-group">
 								<label for="">Jam Buka</label>
-								<input type="text" class="form-control" name="open_hours" placeholder="Jam Nuka" value="{{ $branch->open_hours }}">
+								<input type="text" class="form-control" name="open_hours" placeholder="Jam Buka" value="{{ $branch->open_hours }}">
 							</div>
 						</div>
 						<div class="col-xs-12 col-md-6">
@@ -62,6 +62,10 @@
 								<input type="text" class="form-control" name="close_hours" placeholder="Jam Tutup" value="{{ $branch->close_hours }}">
 							</div>
 						</div>
+					</div>
+					<div class="form-group">
+						<label for="">Jumlah Meja</label>
+						<input type="number" class="form-control" name="number_of_tables" placeholder="Jumlah Meja" value="{{ $branch->number_of_tables }}">
 					</div>
 					<div class="form-group">
 						<button class="btn btn-primary" type="submit"><i class="fa fa-save fa-fw"></i> Perbaharui</button>
