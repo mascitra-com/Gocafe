@@ -97,7 +97,7 @@
                                 </tr>
                                 <tr>
                                     <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
-                                    <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 16px">Rp. 0</label></td>
+                                    <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 30px">Rp. 0</label></td>
                                 </tr>
                                 <tr>
                                     <td style="font-weight: bold; font-size: 16px" colspan="2" rowspan="2">Jenis Pembayaran</td>
@@ -118,14 +118,14 @@
                                 </tr>
                                 <tr class="cash">
                                     <td colspan="2"><label for="cash_received">Pembayaran Yang Diterima</label></td>
-                                    <td colspan="2"><input type="text" id="cash_received" name="cash_received"></td>
+                                    <td colspan="2"><input type="text" id="cash_received" name="cash_received" style="text-align: right;"></td>
                                 </tr>
                                 <tr class="cash">
                                     <td colspan="2"><label for="refund">Jumlah Uang Kembali</label></td>
-                                    <td colspan="2"><input type="text" id="refund" name="refund" readonly></td>
+                                    <td colspan="2"><input type="text" id="refund" name="refund" readonly style="text-align: right;"></td>
                                 </tr>
                                 <tr>
-                                    <td><button class="btn btn-primary btn-block" type="sumit"><b style="font-size: 16px">Bayar</b></button></td>
+                                    <td><button class="btn btn-primary btn-block" type="submit"><b style="font-size: 16px">Bayar</b></button></td>
                                     <td><button class="btn btn-secondary btn-block" type="button" id="reset"><b style="font-size: 16px">Batal</b></button></td>
                                 </tr>
                                 </table>
