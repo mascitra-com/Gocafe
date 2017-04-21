@@ -21,7 +21,7 @@ class CategoryMenusController extends Controller
     public function index()
     {
         $categoryID = idWithPrefix(6);
-        $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn());
+        $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn());
         return view('menu.kategori', compact('categoryID', 'categories'));
     }
 
@@ -40,7 +40,7 @@ class CategoryMenusController extends Controller
             'colour' => 'required',
         ]);
         $category = new CategoryMenu($request->all());
-        $cafe->addMenuCategory($category, Cafe::getCafeIdByOwnerIdNowLoggedIn());
+        $cafe->addMenuCategory($category, Cafe::getCafeIdByUserIdNowLoggedIn());
         return redirect('categories')->with('status', 'Category Added!');
     }
 
@@ -59,7 +59,7 @@ class CategoryMenusController extends Controller
             'colour' => 'required',
         ]);
         $category = new CategoryMenu($request->all());
-        $newIdCategory = $cafe->addMenuCategory($category, Cafe::getCafeIdByOwnerIdNowLoggedIn());
+        $newIdCategory = $cafe->addMenuCategory($category, Cafe::getCafeIdByUserIdNowLoggedIn());
         $newCategory = CategoryMenu::find($newIdCategory);
         return response()->json([
             'category_name' => $newCategory->name,
@@ -105,7 +105,7 @@ class CategoryMenusController extends Controller
      */
     public function getAllCategory()
     {
-        $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn());
+        $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn());
         return response()->json($categories);
     }
 }

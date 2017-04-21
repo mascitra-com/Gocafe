@@ -37,16 +37,20 @@
                 <li><a href="{{ url('staff') }}"><i class="fa fa-fw fa-users"></i><span class="hidden-sm">Staff Management</span></a>
                 </li>
                 <li class="nav-title">Menu</li>
-                <li><a href="{{ url('menus') }}"><i class="fa fa-fw fa-bars"></i><span
+                <li><a href="{{ url('menus') }}"><i class="fa fa-fw fa-cutlery"></i><span
                                 class="hidden-sm">Menu Management</span></a></li>
                 <li><a href="{{ url('categories') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Category Management</span></a>
                 </li>
-                <li><a href="{{ url('discount') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Promotion Management</span></a>
+                <li><a href="{{ url('discount') }}"><i class="fa fa-fw fa-bookmark"></i><span class="hidden-sm">Promotion Management</span></a>
                 </li>
-                <li><a href="{{ url('batch_discount') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Discount Management</span></a>
+                <li><a href="{{ url('batch_discount') }}"><i class="fa fa-fw fa-money"></i><span class="hidden-sm">Discount Management</span></a>
                 </li>
                 </li>
-                <li><a href="{{ url('packages') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Packages Management</span></a>
+                <li><a href="{{ url('packages') }}"><i class="fa fa-fw fa-cubes"></i><span class="hidden-sm">Packages Management</span></a>
+                </li>
+                <li class="nav-title">Transaction</li>
+                <li><a href="{{ url('payment') }}"><i class="fa fa-fw fa-money"></i><span class="hidden-sm">Payment</span></a>
+                <li><a href="{{ url('order') }}"><i class="fa fa-fw fa-shopping-cart"></i><span class="hidden-sm">Payment</span></a>
                 </li>
             </ul>
         </div>

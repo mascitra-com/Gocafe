@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cafe;
 use App\CafeBranch;
+use App\Owner;
 use Illuminate\Http\Request;
 use Laravolt\Indonesia\Indonesia;
 use Validator;
@@ -30,12 +31,12 @@ class BranchController extends Controller
      */
     public function index(Indonesia $indonesia)
     {
-        if (!Cafe::getCafeIdByOwnerIdNowLoggedIn()) {
+        if (!Cafe::getCafeIdByUserIdNowLoggedIn()) {
             return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Filled!');
         }
         // Get All Provinces and All Cafe Branch by Cafe ID and Owner ID
         $provinces = $indonesia->allProvinces();
-        $branches = CafeBranch::all()->where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn());
+        $branches = CafeBranch::all()->where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn());
         // Get Location Name for each branch
         if (isset($branches)) {
             foreach ($branches as $branch) {
@@ -99,7 +100,7 @@ class BranchController extends Controller
         $request->request->add(array('location_id' => $location_id));
         // Save request except 3 parameters which won't be store to the database
         $cafeBranch = new CafeBranch($request->except('province_id', 'city_id', 'district_id'));
-        $cafe->addBranch($cafeBranch, Cafe::getCafeIdByOwnerIdNowLoggedIn());
+        $cafe->addBranch($cafeBranch, Cafe::getCafeIdByUserIdNowLoggedIn());
         return redirect('branch')->with('status', 'Branch added!');
     }
 

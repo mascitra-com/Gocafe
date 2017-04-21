@@ -16,7 +16,7 @@ class Menu extends Model
 
     protected $fillable = ['id', 'cafe_id', 'category_id', 'name', 'description', 'price','images_name','mime','status','created_by', 'updated_by', 'deleted_by', 'discount'];    
 
-    protected $hidden = ['id', 'cafe_id', 'category_id', 'created_by', 'updated_by', 'deleted_by'];
+    protected $hidden = ['cafe_id', 'category_id', 'created_by', 'updated_by', 'deleted_by'];
 
     /**
      * Get One Image from Menu

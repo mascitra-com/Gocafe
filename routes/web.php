@@ -15,7 +15,7 @@
 Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/', function () {
-		return view('welcome');
+		return redirect('dashboard');
 	});
 
 
@@ -57,7 +57,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('menus', 'MenusController');
     Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail'); //get avatar's response
     Route::get('menus/showImage/{image_file}', 'MenusController@showImage'); //get avatar's response
-	//--END CAFE'S MENU
+    Route::get('menus/getMenus/{idCategory}', 'MenusController@getMenus');
+    Route::get('menus/getMenu/{idMenu}', 'MenusController@getMenu');
+    //--END CAFE'S MENU
 
 	//MENU'S CATEGORY
 	Route::resource('categories', 'CategoryMenusController');
@@ -79,6 +81,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('batch_discount', 'BatchDiscountsController@index');
     Route::post('batch_discount', 'BatchDiscountsController@batch');
     //--END DISCOUNTS
+
+    //TRANSACTION
+    Route::get('payment', 'TransactionController@payment');
+    Route::post('payment', 'TransactionController@store');
+    Route::get('order', 'TransactionController@order');
+    //--END TRANSACTION
 });
 // DUMMIES VIEW
 Route::get('ui/', 'Ui@Index');

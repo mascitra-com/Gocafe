@@ -39,7 +39,7 @@ class User extends Authenticatable
 
     public function get_role($id)
     {
-        return $this->findOrFail($id)->first()->role;
+        return $this->findOrFail($id)->role;
     }
 
     public function getAvatar($id, $disk, $path)

@@ -36,17 +36,6 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 	height: 100%;
 }
 
-#nav-side{
-	position: fixed;
-	width:270px;
-	top:0;
-	left: 0;
-	bottom: 0;
-	z-index: 1;
-	overflow-y: auto;
-	box-shadow: 3px 0 4px rgba(0,0,0,.5);
-}
-
 #nav-side-wrapper{
 	position: relative;
 	width: 100%;
@@ -65,12 +54,6 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 	background-color: #F18803;
 	color: #FFF;
 	/*display: none;*/
-}
-
-#nav-side > #nav-side-wrapper > ul{
-	padding: 0;
-	margin: 0;
-	margin-bottom: 30px;
 }
 
 #nav-side .nav > .nav-title{
@@ -161,7 +144,7 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 
 #main-panel{
 	position: relative;
-	width: calc(100% - 270px);
+	width: calc(100%);
 	min-height: 100%;
 	float: right;
 }
@@ -184,9 +167,7 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 	position: absolute;
 	width: 100%;
 	min-height: calc(100% - 100px);
-	max-height: none;
-	padding: 15px 20px;
-	padding-top: 20px;
+	max-height: 100%;
 	background-color: #F1F4F7;
 }
 
@@ -291,4 +272,12 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 
 td, th{
 	vertical-align: middle!important;
+}
+
+#productList {
+    padding: 0px 5px;
+	top: 0;
+	width: 50%;
+	height: 100vh;
+	background-color: #8C4728;
 }

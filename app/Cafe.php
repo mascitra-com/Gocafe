@@ -17,13 +17,13 @@ class Cafe extends Model
      *
      * @return Cafe ID|null
      */
-    public static function getCafeIdByOwnerIdNowLoggedIn()
+    public static function getCafeIdByUserIdNowLoggedIn()
     {
-        $cafe = DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first();
-        if ($cafe) {
-            return $cafe->id;
+        $user = new User();
+        if($user->get_role(Auth::user()->id) == 'owner'){
+            return DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first()->id;
         } else {
-            return NULL;
+            return DB::table('cafe_branches')->where('id', Staff::getCafeBranchIdNowLoggedIn())->first()->cafe_id;
         }
     }
 

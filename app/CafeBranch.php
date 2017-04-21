@@ -2,9 +2,6 @@
 
 namespace App;
 
-use Laravolt\Indonesia\Indonesia;
-use App\models\City;
-use App\models\Province;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -18,6 +15,11 @@ class CafeBranch extends Model
     protected $dates = ['deleted_at'];
 
     protected $guarded = ['id'];
+
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 
     public function cafe()
     {

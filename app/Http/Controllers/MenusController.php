@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -28,7 +29,7 @@ class MenusController extends Controller
      */
     public function index(Cafe $cafe)
     {
-        $menus = $cafe->findOrFail($cafe->getCafeIdByOwnerIdNowLoggedIn())->menus->load('category');
+        $menus = $cafe->findOrFail($cafe->getCafeIdByUserIdNowLoggedIn())->menus->load('category');
         return view('menu.menu', compact('menus'));
     }
 
@@ -40,7 +41,7 @@ class MenusController extends Controller
      */
     public function create(Cafe $cafe)
     {
-        $categories = $cafe->findOrFail($cafe->getCafeIdByOwnerIdNowLoggedIn())->menuCategories;
+        $categories = $cafe->findOrFail($cafe->getCafeIdByUserIdNowLoggedIn())->menuCategories;
         return view('menu.create', compact('categories'));
     }
 
@@ -86,7 +87,7 @@ class MenusController extends Controller
         ));
         //insert to menus table
         $menu = new Menu($request->except('category_name', 'image1', 'image2', 'image3', 'image4'));
-        $cafe->addMenu($menu, Cafe::getCafeIdByOwnerIdNowLoggedIn());
+        $cafe->addMenu($menu, Cafe::getCafeIdByUserIdNowLoggedIn());
         return redirect('menus')->with('status', 'Menu Added!');
     }
 
@@ -99,9 +100,9 @@ class MenusController extends Controller
      */
     public function edit(Menu $menu)
     {
-        $menu = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menus->find($menu->id)->load('category');
+        $menu = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->find($menu->id)->load('category');
         $images = explode(':', $menu->getattributes()['images_name']);
-        $categories = Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menuCategories;
+        $categories = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menuCategories;
         return view('menu.create', compact('menu', 'categories', 'images'));
     }
 
@@ -115,7 +116,7 @@ class MenusController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        Cafe::findOrFail(Cafe::getCafeIdByOwnerIdNowLoggedIn())->menus->find($menu->id)->update(($request->except(['category_name', 'image1', 'image2', 'image3', 'image4'])));
+        Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->find($menu->id)->update(($request->except(['category_name', 'image1', 'image2', 'image3', 'image4'])));
         return redirect('menus')->with('status', 'Menu Updated!');
     }
 
@@ -127,8 +128,20 @@ class MenusController extends Controller
      */
     public function destroy($id)
     {
-        Menu::where('cafe_id', Cafe::getCafeIdByOwnerIdNowLoggedIn())->find($id)->delete();
+        Menu::where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn())->find($id)->delete();
         return redirect('categories')->with('status', 'Menu Deleted');
+    }
+
+    public function getMenus($idCategory)
+    {
+        $menus = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->where('category_id', $idCategory);
+        return response()->json(['success' => true, 'menus' => $menus]);
+    }
+
+    public function getMenu($idMenu)
+    {
+        $menu = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->where('id', $idMenu);
+        return response()->json(['success' => true, 'menu' => $menu]);
     }
 
     /**
