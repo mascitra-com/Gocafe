@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CafeBranch;
 use App\Menu;
 use App\Staff;
 use App\Transaction;
@@ -24,7 +25,8 @@ class TransactionController extends Controller
         // Get List of Category and All Menus from first Category
         $categories = CategoryMenu::all()->where('cafe_id', Staff::getCafeIdByStaffIdNowLoggedIn())->sortBy('name');
         $menus = Cafe::findOrFail(Staff::getCafeIdByStaffIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
-        return view('transaction.payment', compact('categories', 'menus'));
+        $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
+        return view('transaction.payment', compact('categories', 'menus', 'numberOfTables'));
     }
 
     /**
@@ -38,7 +40,8 @@ class TransactionController extends Controller
         $categories = CategoryMenu::all()->where('cafe_id', Staff::getCafeIdByStaffIdNowLoggedIn())->sortBy('name');
         $menus = Cafe::findOrFail(Staff::getCafeIdByStaffIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
         $firstMenu = $menus[0];
-        return view('transaction.order', compact('categories', 'menus', 'firstMenu'));
+        $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
+        return view('transaction.order', compact('categories', 'menus', 'firstMenu', 'numberOfTables'));
     }
 
     /**
@@ -75,7 +78,6 @@ class TransactionController extends Controller
         // Add Data to Store to Transaction Table
         $data['id'] = $transactionId;
         $data['created_by'] = 2;
-        $data['table_number'] = '23'; // TODO Make This Dynamic
         $data['total_price'] = $total_price;
         $data['total_discount'] = $total_discount;
         $data['total_payment'] = $total_payment;

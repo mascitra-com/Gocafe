@@ -76,6 +76,17 @@
                                 </form>
                             </div>
                         </li>
+                        <li>
+                            <div class="pull-right row" style="width: 225px; margin-top: .6em">
+                                <span for="table_number" class="col-md-6" style="margin-top: .5em; color:#fff;">Nomor Meja</span>
+                                <select name="table_number" id="table_number" class="form-control col-md-6" style="width: 75px">
+                                    <option value="">Pilih</option>
+                                    @for($i = 1; $i <= $numberOfTables; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class CafeBranch extends Model
 {
@@ -15,6 +16,12 @@ class CafeBranch extends Model
     protected $dates = ['deleted_at'];
 
     protected $guarded = ['id'];
+
+    public static function getNumberOfTablesByStaffNowLoggedIn()
+    {
+        $cafeBranchId = Staff::getCafeBranchIdNowLoggedIn();
+        return DB::table('cafe_branches')->where('id', $cafeBranchId)->first()->number_of_tables;
+    }
 
     public function transaction()
     {
