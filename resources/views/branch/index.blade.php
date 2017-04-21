@@ -31,6 +31,14 @@
                 </div>
                 <div class="panel-body table-responsive table-full">
                     <table class="table table-stripped">
+                        <thead>
+                            <th>Nama Cabang</th>
+                            <th>Lokasi</th>
+                            <th>Alamat</th>
+                            <th>Jam Buka</th>
+                            <th>Jam Tutup</th>
+                            <th>Jumlah Meja</th>
+                        </thead>
                         <tbody>
                         @foreach($branches as $branch)
                             <tr>
@@ -42,6 +50,7 @@
                                 <td>{{ $branch->address }}</td>
                                 <td>{{ $branch->open_hours }}</td>
                                 <td>{{ $branch->close_hours }}</td>
+                                <td>{{ $branch->number_of_tables }} Meja</td>
                                 <td class="text-right"><a href="{{ url('branch/'.$branch->id.'/edit') }}" class="btn btn-xs btn-default"><i class="fa fa-info-circle fa-fw"></i> detail</a></td>
                             </tr>
                         @endforeach
@@ -80,7 +89,7 @@
                     <form action="{{ url("branch") }}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="">Location</label>
+                            <label for="location">Location</label>
                             <div class="row">
                                 <div class="col-xs-12 col-md-4">
                                     <select name="province_id" class="form-control" id="provinces">
@@ -108,22 +117,25 @@
                         </div>
                         <div class="form-group">
                             <label for="">Phone Number</label>
-                            <input type="text" class="form-control" name="phone" placeholder="phone number">
+                            <input type="text" class="form-control" name="phone" placeholder="Phone Number">
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="">Open Hours</label>
-                                    <input type="text" class="form-control" name="open_hours" placeholder="open hours">
+                                    <input type="text" class="form-control" name="open_hours" placeholder="Open Hours">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="">Close Hours</label>
-                                    <input type="text" class="form-control" name="close_hours"
-                                           placeholder="close hours">
+                                    <input type="text" class="form-control" name="close_hours" placeholder="Close Hours">
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Number of Tables</label>
+                            <input type="number" class="form-control" name="number_of_tables" placeholder="Number of Tables">
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary"><i class="fa fa-save fa-fw"></i> save</button>

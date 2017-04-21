@@ -67,70 +67,79 @@
                 </div>
                 <div class="col-xs-6">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title pull-left">Pembayaran</h3>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="panel-body table-responsive table-full">
-                            <form action="{{ url('payment') }}" method="POST">
-                                {{ csrf_field() }}
-                                <table class="table text-quintuple" id="bill">
-                                    <thead>
+                        <form action="{{ url('payment') }}" method="POST">
+                            <div class="panel-heading">
+                                <h3 class="panel-title pull-left">Pembayaran</h3>
+                                <div class="pull-right row" style="width: 225px">
+                                    <label for="table_number" class="col-md-6" style="margin-top: .5em">Nomor Meja</label>
+                                    <select name="table_number" id="table_number" class="form-control col-md-6" style="width: 75px">
+                                        <option value="">Pilih</option>
+                                        @for($i = 1; $i <= $numberOfTables; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-body table-responsive table-full">
+                                    {{ csrf_field() }}
+                                    <table class="table text-quintuple" id="bill">
+                                        <thead>
+                                        <tr>
+                                            <th width="5%"></th>
+                                            <th width="37.5%">Nama</th>
+                                            <th width="27.5%">Jumlah</th>
+                                            <th width="25%">Total</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <table class="table text-quintuple">
                                     <tr>
-                                        <th width="5%"></th>
-                                        <th width="37.5%">Nama</th>
-                                        <th width="27.5%">Jumlah</th>
-                                        <th width="25%">Total</th>
+                                        <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
+                                        <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                                <table class="table text-quintuple">
-                                <tr>
-                                    <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
-                                    <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight: bold; font-size: 16px" colspan="2">Total Diskon</td>
-                                    <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">- Rp. 0</label></td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
-                                    <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 30px">Rp. 0</label></td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight: bold; font-size: 16px" colspan="2" rowspan="2">Jenis Pembayaran</td>
-                                    <td><input type="radio" name="type" id="cash" value="cash" checked></td>
-                                    <td><label for="type">Tunai</label></td>
-                                </tr>
-                                <tr>
-                                    <td style=" padding-left: 8px;"><input type="radio" name="type" id="credit" value="credit"></td>
-                                    <td><label for="type">Kartu Kredit</label></td>
-                                </tr>
-                                <tr class="credit_card">
-                                    <td colspan="2"><label for="credit_name">Nama pada Kartu Kredit</label></td>
-                                    <td colspan="2"><input type="text" id="credit_name" name="credit_card_name"></td>
-                                </tr>
-                                <tr class="credit_card">
-                                    <td colspan="2"><label for="credit_number">Nomor Kartu Kredit</label></td>
-                                    <td colspan="2"><input type="text" id="credit_number" name="credit_card_number"></td>
-                                </tr>
-                                <tr class="cash">
-                                    <td colspan="2"><label for="cash_received">Pembayaran Yang Diterima</label></td>
-                                    <td colspan="2"><input type="text" id="cash_received" name="cash_received" style="text-align: right;"></td>
-                                </tr>
-                                <tr class="cash">
-                                    <td colspan="2"><label for="refund">Jumlah Uang Kembali</label></td>
-                                    <td colspan="2"><input type="text" id="refund" name="refund" readonly style="text-align: right;"></td>
-                                </tr>
-                                <tr>
-                                    <td><button class="btn btn-primary btn-block" type="submit"><b style="font-size: 16px">Bayar</b></button></td>
-                                    <td><button class="btn btn-secondary btn-block" type="button" id="reset"><b style="font-size: 16px">Batal</b></button></td>
-                                </tr>
-                                </table>
-                            </form>
-                        </div>
+                                    <tr>
+                                        <td style="font-weight: bold; font-size: 16px" colspan="2">Total Diskon</td>
+                                        <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">- Rp. 0</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
+                                        <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 30px">Rp. 0</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; font-size: 16px" colspan="2" rowspan="2">Jenis Pembayaran</td>
+                                        <td><input type="radio" name="type" id="cash" value="cash" checked></td>
+                                        <td><label for="type">Tunai</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td style=" padding-left: 8px;"><input type="radio" name="type" id="credit" value="credit"></td>
+                                        <td><label for="type">Kartu Kredit</label></td>
+                                    </tr>
+                                    <tr class="credit_card">
+                                        <td colspan="2"><label for="credit_name">Nama pada Kartu Kredit</label></td>
+                                        <td colspan="2"><input type="text" id="credit_name" name="credit_card_name"></td>
+                                    </tr>
+                                    <tr class="credit_card">
+                                        <td colspan="2"><label for="credit_number">Nomor Kartu Kredit</label></td>
+                                        <td colspan="2"><input type="text" id="credit_number" name="credit_card_number"></td>
+                                    </tr>
+                                    <tr class="cash">
+                                        <td colspan="2"><label for="cash_received">Pembayaran Yang Diterima</label></td>
+                                        <td colspan="2"><input type="text" id="cash_received" name="cash_received" style="text-align: right;"></td>
+                                    </tr>
+                                    <tr class="cash">
+                                        <td colspan="2"><label for="refund">Jumlah Uang Kembali</label></td>
+                                        <td colspan="2"><input type="text" id="refund" name="refund" readonly style="text-align: right;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button class="btn btn-primary btn-block" type="submit"><b style="font-size: 16px">Bayar</b></button></td>
+                                        <td><button class="btn btn-secondary btn-block" type="button" id="reset"><b style="font-size: 16px">Batal</b></button></td>
+                                    </tr>
+                                    </table>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
