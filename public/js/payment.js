@@ -111,10 +111,6 @@ function showMenus(idCategory) {
     });
 }
 
-function getThumbnail(idMenu) {
-    return "http://gocafe.dev/menus/showThumbnail/" + idMenu;
-}
-
 function set_new_final_payment() {
     var final = parseInt($("label.total").html().replace('Rp. ', '').replace('\.', '').replace('\.', '')) - parseInt($("label.discount").html().replace('- Rp. ', '').replace('\.', '').replace('\.', ''));
     final = 'Rp. ' + $.number(final, 0, '', '.');
@@ -137,11 +133,7 @@ function addToCheck(idMenu) {
                 var markup = "<tr><input type='hidden' name='ids_menu[]' value='" + id + "'><input type='hidden' class='discount' value='" + discount + "'><td><button class='deleteMenu'><i class='fa fa-times'></i></button></td><td>" + name + "</td><td class='input-group'><span class='input-group-btn'><button class='btn btn-default btn-xs decrease' type='button'><i class='fa fa-arrow-down'></i></button></span><input class='form-control input-xs' maxlength='' type='text' name='amount[]' value='1' min='1' max='999' title='amount' readonly/><span class='input-group-btn'><button class='btn btn-default btn-xs increase' type='button'><i class='fa fa-arrow-up'></i></button></span></td><td><label class='price' for='price'>" + price + "</label></td></tr>";
                 $("#bill").find('tbody').append(markup);
                 // Set Total Payment
-                var total = $("label.total").html();
-                total = parseInt(total.replace('Rp. ', '').replace('\.', '').replace('\.', ''));
-                var new_total = parseInt(total) + parseInt(price.replace('Rp. ', '').replace('\.', '').replace('\.', ''));
-                new_total = 'Rp. ' + $.number(new_total, 0, '', '.');
-                $("label.total").html(new_total);
+                set_total_payment();
                 set_new_discount(discount, true);
                 set_new_final_payment();
                 update_refund();
@@ -149,6 +141,18 @@ function addToCheck(idMenu) {
         }
     });
 }
+
+function set_total_payment() {
+    var total = $("label.total").html();
+    total = parseInt(total.replace('Rp. ', '').replace('\.', '').replace('\.', ''));
+    var new_total = parseInt(total) + parseInt(price.replace('Rp. ', '').replace('\.', '').replace('\.', ''));
+    new_total = 'Rp. ' + $.number(new_total, 0, '', '.');
+    $("label.total").html(new_total);
+}
+
+$('#table_number').on('change', function() {
+    alert( this.value );
+});
 
 function set_new_discount(discount, increment) {
     var old_discount = $("label.discount").html();
@@ -161,4 +165,8 @@ function set_new_discount(discount, increment) {
     }
     new_discount = '- Rp. ' + $.number(new_discount, 0, '', '.');
     $("label.discount").html(new_discount);
+}
+
+function getThumbnail(idMenu) {
+    return "http://gocafe.dev/menus/showThumbnail/" + idMenu;
 }

@@ -148,27 +148,7 @@
 @endsection
 
 @section('styles')
-    <style>
-        .price {
-            font-weight: bold;
-            font-size: 13px;
-        }
-
-        .input-xs {
-            height: 26px;
-            padding: 2px 5px;
-            font-size: 14px;
-            line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
-            border-radius: 3px;
-        }
-
-        button.deleteMenu {
-            background: Transparent no-repeat;
-            border: none;
-            cursor: pointer;
-            overflow: hidden;
-        }
-    </style>
+    <link rel="stylesheet" href="{{URL::asset('css/payment.css')}}">
 @endsection
 
 @section('javascripts')

@@ -19,7 +19,11 @@
             </div>
             <div class="row grid2">
                 <div class="list" id="product">
-                    @foreach($menus as $menu)<button class="rectangle product" onclick="getProductDetail('{{ $menu->id }}')"><img src="{{ url("menus/showThumbnail/$menu->id")}}" alt="Thumbnail">{{ $menu->name }}</button>@endforeach
+                    @foreach($menus as $menu)
+                        <button class="rectangle product" onclick="getProductDetail('{{ $menu->id }}')">
+                            <img src="{{ url("menus/showThumbnail/$menu->id")}}" alt="Thumbnail">{{ $menu->name }}
+                        </button>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -51,10 +55,11 @@
                                 </tr>
                                 <tr>
                                     <td class="text-primary">Diskon</td>
-                                    <td id="discount">@if($firstMenu->discount)
+                                    <td id="discount">
+                                        @if($firstMenu->discount)
                                         - Rp. {{ number_format($firstMenu->price * $firstMenu->discount, 0, ',', '.') }},-
                                         @else
-                                            -
+                                        -
                                         @endif
                                     </td>
                                 </tr>
@@ -123,104 +128,9 @@
 @endsection
 
 @section('styles')
+    <link rel="stylesheet" href="{{URL::asset('css/order.css')}}">
+
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <style>
-        .detail-menu {
-            font-size: 12pt;
-        }
-
-        #head-menu {
-            margin-bottom: .5em;
-        }
-
-        .product img {
-            max-height: 80px;
-            width: auto;
-            margin: 0 0;
-            vertical-align: top;
-        }
-
-        div.grid {
-            margin-left: auto;
-        }
-
-        div.grid2 {
-            margin-left: auto;
-            margin-top: 2em;
-        }
-
-        button.product {
-            background-image: linear-gradient(0deg, rgba(140, 71, 40, 0.75) 50%, rgba(255, 255, 255, 1) 100%, rgba(255, 255, 255, 1) 75%) !important;
-            font-size: 12px !important;
-            margin-top: 0.75em;
-        }
-
-        button.rectangle {
-            background-image: linear-gradient(0deg, rgba(140, 71, 40, 0.75) 25%, rgba(140, 71, 40, 1) 25%, rgba(140, 71, 40, 0.8) 90%);
-            height: 100px;
-            width: 90px;
-            border: 1px solid #7c4621;
-            border-radius: 5px;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-right: 0.6em;
-            font-weight: bold;
-        }
-
-        .side-nav {
-            width:100vh;
-            height:25px;
-            position:absolute;
-            background:#8C4728;
-            -webkit-transform-origin: left top;
-            -webkit-transform:rotate(-90deg) translateX(-100%);
-        }
-
-        ul.nav li {
-            margin-right:20px;
-            float:right;
-            height:100%;
-            line-height:20px;
-        }
-
-        #productList ul.nav li a {
-            color: whitesmoke;
-            cursor: default;
-        }
-
-        .list {
-            margin-left: 3em;
-            margin-top: 1em;
-        }
-
-        .price {
-            font-weight: bold;
-            font-size: 13px;
-        }
-
-        .input-xs {
-            height: 26px;
-            padding: 2px 5px;
-            font-size: 14px;
-            line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
-            border-radius: 3px;
-        }
-
-        button.rectangle {
-            cursor: pointer;
-            overflow: hidden;
-        }
-
-        button.deleteMenu {
-            background: Transparent no-repeat;
-            border: none;
-            cursor: pointer;
-            overflow: hidden;
-        }
-    </style>
 @endsection
 
 @section('javascripts')
@@ -244,9 +154,9 @@
                     dataType: 'json',
                     success: function(data){
                         // TODO Make This Happen
-                        {{--var markup = "<tr><td width='15%'><img src='{{ asset('images/blank-avatar.png') }}' alt='' class='img-circle img-responsive'></td><td><p><input id='rating-avg' value='"+data.review.rating+"' class='rating' data-size='xs' data-show-clear='false' data-show-caption='false' readonly></p>"+data.review.review+"</td></tr>";--}}
+                        // var markup = "<tr><td width='15%'><img src='{{ asset('images/blank-avatar.png') }}' alt='' class='img-circle img-responsive'></td><td><p><input id='rating-avg' value='"+data.review.rating+"' class='rating' data-size='xs' data-show-clear='false' data-show-caption='false' readonly></p>"+data.review.review+"</td></tr>";
+                        // $("#table-review").find('tbody').append(markup);
                         alert('Ulasan Anda Sudah di Simpan. Silahkan Lanjutkan Pesanan Anda');
-                        $("#table-review").find('tbody').append(markup);
                     },
                     error: function(data){
                     }

@@ -1,0 +1,95 @@
+.detail-menu {
+    font-size: 12pt;
+}
+
+#head-menu {
+    margin-bottom: .5em;
+}
+
+.product img {
+    max-height: 80px;
+    width: auto;
+    margin: 0 0;
+    vertical-align: top;
+}
+
+div.grid {
+    margin-left: auto;
+}
+
+div.grid2 {
+    margin-left: auto;
+    margin-top: 2em;
+}
+
+button.product {
+    background-image: linear-gradient(0deg, rgba(140, 71, 40, 0.75) 50%, rgba(255, 255, 255, 1) 100%, rgba(255, 255, 255, 1) 75%) !important;
+    font-size: 12px !important;
+    margin-top: 0.75em;
+}
+
+button.rectangle {
+    background-image: linear-gradient(0deg, rgba(140, 71, 40, 0.75) 25%, rgba(140, 71, 40, 1) 25%, rgba(140, 71, 40, 0.8) 90%);
+    height: 100px;
+    width: 90px;
+    border: 1px solid #7c4621;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 0.6em;
+    font-weight: bold;
+}
+
+.side-nav {
+    width:100vh;
+    height:25px;
+    position:absolute;
+    background:#8C4728;
+    -webkit-transform-origin: left top;
+    -webkit-transform:rotate(-90deg) translateX(-100%);
+}
+
+ul.nav li {
+    margin-right:20px;
+    float:right;
+    height:100%;
+    line-height:20px;
+}
+
+#productList ul.nav li a {
+    color: whitesmoke;
+    cursor: default;
+}
+
+.list {
+    margin-left: 3em;
+    margin-top: 1em;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.input-xs {
+    height: 26px;
+    padding: 2px 5px;
+    font-size: 14px;
+    line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
+    border-radius: 3px;
+}
+
+button.rectangle {
+    cursor: pointer;
+    overflow: hidden;
+}
+
+button.deleteMenu {
+    background: Transparent no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}
