@@ -1,5 +1,64 @@
-@extends('_layout/order/index')
+@extends('_layout/transaction/index')
 @section('page_title', 'Pemesanan')
+
+@section('navbar-right')
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                   aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-shopping-cart text-secondary"></i> <span class="text-secondary">Pesanan</span><span
+                            class="caret text-secondary" id="cart"></span></a>
+                <div class="dropdown-menu" style="width: 500px; margin: .5em .5em">
+                    <form action="{{ url('order') }}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="table_number" value="">
+                        <input type="hidden" name="status" value="0">
+                        <table class="table text-quintuple" id="bill">
+                            <thead>
+                            <tr>
+                                <th width="5%"></th>
+                                <th width="37.5%">Nama</th>
+                                <th width="27.5%">Jumlah</th>
+                                <th width="25%">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <table class="table text-quintuple">
+                            <tr>
+                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
+                                <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Diskon</td>
+                                <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">- Rp. 0</label></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
+                                <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 16px">Rp. 0</label></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><button class="btn btn-primary btn-block" type="submit"><b style="font-size: 16px">Pesan</b></button></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div class="pull-right row" style="width: 225px; margin-top: .6em">
+                    <span for="table_number" class="col-md-6" style="margin-top: .5em; color:#fff;">Nomor Meja</span>
+                    <select id="table_number" class="form-control col-md-6" style="width: 75px">
+                        <option value="">Pilih</option>
+                        @for($i = 1; $i <= $numberOfTables; $i++)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+            </li>
+        </ul>
+    </div>
+@endsection
 
 @section('content')
     <div class="row">
@@ -162,6 +221,21 @@
                     }
                 })
             });
+        });
+        var url = "{{ url('') }}";
+        $('#table_number').on('change', function() {
+            $.ajax({
+                url: '/transaction/getMenusByTableNumber/' + this.value,
+                dataType: 'json',
+                success: function () {
+                    var conf = confirm('Meja Ini Masih Terdapat Transaksi yg Belum Dibayarkan / Sudah Di Pesan! Anda');
+                    if(!conf){
+                        $('#table_number').val('');
+                        $('input[name ="table_number"]').val('');
+                    }
+                }
+            });
+            $('input[name ="table_number"]').val($('#table_number').val());
         });
     </script>
 @endsection

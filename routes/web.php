@@ -85,7 +85,10 @@ Route::group(['middleware' => ['web']], function () {
     //TRANSACTION
     Route::get('payment', 'TransactionController@payment');
     Route::post('payment', 'TransactionController@store');
+    Route::patch('payment/{paymentId}', 'TransactionController@update');
     Route::get('order', 'TransactionController@order');
+    Route::post('order', 'TransactionController@store');
+    Route::get('transaction/getMenusByTableNumber/{transactionId}', 'TransactionController@getMenusByTableNumber');
     //--END TRANSACTION
 
     //REVIEW

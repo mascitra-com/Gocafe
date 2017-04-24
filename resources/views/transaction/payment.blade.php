@@ -1,20 +1,8 @@
-@extends('_layout/dashboard/index')
+@extends('_layout/transaction/index')
 @section('page_title', 'Pembayaran')
 
 @section('content')
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title pull-left">Pembayaran</h3>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="panel-body table-responsive table-full">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
+    <div class="row" style="margin-top: 1em">
         <div class="col-xs-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -67,7 +55,8 @@
                 </div>
                 <div class="col-xs-6">
                     <div class="panel panel-default">
-                        <form action="{{ url('payment') }}" method="POST">
+                        <form action="{{ url('payment') }}" method="POST" id="form-payment">
+                            {{ csrf_field() }}
                             <div class="panel-heading">
                                 <h3 class="panel-title pull-left">Pembayaran</h3>
                                 <div class="pull-right row" style="width: 225px">
@@ -82,7 +71,6 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="panel-body table-responsive table-full">
-                                    {{ csrf_field() }}
                                     <table class="table text-quintuple" id="bill">
                                         <thead>
                                         <tr>
@@ -96,47 +84,47 @@
                                         </tbody>
                                     </table>
                                     <table class="table text-quintuple">
-                                    <tr>
-                                        <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
-                                        <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-weight: bold; font-size: 16px" colspan="2">Total Diskon</td>
-                                        <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">- Rp. 0</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
-                                        <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 30px">Rp. 0</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-weight: bold; font-size: 16px" colspan="2" rowspan="2">Jenis Pembayaran</td>
-                                        <td><input type="radio" name="type" id="cash" value="cash" checked></td>
-                                        <td><label for="type">Tunai</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td style=" padding-left: 8px;"><input type="radio" name="type" id="credit" value="credit"></td>
-                                        <td><label for="type">Kartu Kredit</label></td>
-                                    </tr>
-                                    <tr class="credit_card">
-                                        <td colspan="2"><label for="credit_name">Nama pada Kartu Kredit</label></td>
-                                        <td colspan="2"><input type="text" id="credit_name" name="credit_card_name"></td>
-                                    </tr>
-                                    <tr class="credit_card">
-                                        <td colspan="2"><label for="credit_number">Nomor Kartu Kredit</label></td>
-                                        <td colspan="2"><input type="text" id="credit_number" name="credit_card_number"></td>
-                                    </tr>
-                                    <tr class="cash">
-                                        <td colspan="2"><label for="cash_received">Pembayaran Yang Diterima</label></td>
-                                        <td colspan="2"><input type="text" id="cash_received" name="cash_received" style="text-align: right;"></td>
-                                    </tr>
-                                    <tr class="cash">
-                                        <td colspan="2"><label for="refund">Jumlah Uang Kembali</label></td>
-                                        <td colspan="2"><input type="text" id="refund" name="refund" readonly style="text-align: right;"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><button class="btn btn-primary btn-block" type="submit"><b style="font-size: 16px">Bayar</b></button></td>
-                                        <td><button class="btn btn-secondary btn-block" type="button" id="reset"><b style="font-size: 16px">Batal</b></button></td>
-                                    </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; font-size: 13pt" colspan="2">Total Keseluruhan</td>
+                                            <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16pt">Rp. 0</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; font-size: 13pt" colspan="2">Total Diskon</td>
+                                            <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16pt">- Rp. 0</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; font-size: 13pt" colspan="2">Total Pembayaran</td>
+                                            <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 20pt">Rp. 0</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; font-size: 16px" colspan="2" rowspan="2">Jenis Pembayaran</td>
+                                            <td><input type="radio" name="type" id="cash" value="cash" checked></td>
+                                            <td><label for="type">Tunai</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 8px;"><input type="radio" name="type" id="credit" value="credit"></td>
+                                            <td><label for="type">Kartu Kredit</label></td>
+                                        </tr>
+                                        <tr class="credit_card">
+                                            <td colspan="2"><label for="credit_name">Nama pada Kartu Kredit</label></td>
+                                            <td colspan="2"><input type="text" id="credit_name" name="credit_card_name"></td>
+                                        </tr>
+                                        <tr class="credit_card">
+                                            <td colspan="2"><label for="credit_number">Nomor Kartu Kredit</label></td>
+                                            <td colspan="2"><input type="text" id="credit_number" name="credit_card_number"></td>
+                                        </tr>
+                                        <tr class="cash">
+                                            <td colspan="2"><label for="cash_received">Pembayaran Yang Diterima</label></td>
+                                            <td colspan="2" class="text-right"><input type="text" id="cash_received" name="cash_received"></td>
+                                        </tr>
+                                        <tr class="cash">
+                                            <td colspan="2"><label for="refund">Jumlah Uang Kembali</label></td>
+                                            <td colspan="2" class="text-right"><input type="text" id="refund" name="refund" readonly></td>
+                                        </tr>
+                                        <tr>
+                                            <td><button class="btn btn-primary btn-block" type="submit"><b style="font-size: 16pt">Bayar</b></button></td>
+                                            <td><button class="btn btn-secondary btn-block" type="button" id="reset"><b style="font-size: 16pt">Batal</b></button></td>
+                                        </tr>
                                     </table>
                             </div>
                         </form>
@@ -154,4 +142,26 @@
 @section('javascripts')
     <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
     <script src="{{ url('js/payment.js') }}"></script>
+    <script>
+        var url = "{{ url('') }}";
+        $('#table_number').on('change', function() {
+            $("#bill").find("tbody").empty();
+            $("label.total").html('Rp. 0');
+            $("label.discount").html('Rp. 0');
+            $("label.final").html('Rp. 0');
+            $('input[name="_method"]').remove();
+            $('#form-payment').attr('action', url + '/payment');
+            $.ajax({
+                url: '/transaction/getMenusByTableNumber/' + this.value,
+                dataType: 'json',
+                success: function (response) {
+                    $.each(response.menus, function (i, menu) {
+                        addToCheck(menu.item_id);
+                    });
+                    $('#form-payment').attr('action', url + '/payment/' + response.transactionId)
+                    .append('{{ method_field('PATCH') }}');
+                }
+            })
+        });
+    </script>
 @endsection

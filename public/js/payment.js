@@ -94,17 +94,17 @@ $(document).on('click', 'button#reset', function () { // <-- changes
     });
 
 function showMenus(idCategory) {
+    var menus = $('#menus').find('tbody').empty();
     $.ajax({
         url: '/menus/getMenus/' + idCategory,
         dataType: 'json',
         success: function (response) {
-            var menus = $('#menus').find('tbody').empty();
             $.each(response.menus, function (i, menu) {
                 var id = menu.id;
                 var name = menu.name;
                 var price = $.number(menu.price, 0, '', '.');
                 var discount = "(- Rp. " + $.number(menu.price * menu.discount, 0, '', '.') + ")";
-                var markup = "<tr onclick=\"addToCheck('" + id + "')\" id='tr-menu' class='tr-selection text-quintuple'><td width='150px'><img src='" + getThumbnail(id) + "' class='img img-responsive' style='width: 150px;'></td><td>" + name + "</td><td class='price text-right'>Rp. " + price + " <br>"+ (discount != '(- Rp. 0)' ? discount  : '') +"</td></tr>";
+                var markup = "<tr onclick=\"addToCheck('" + id + "')\" id='tr-menu' class='tr-selection text-quintuple'><td width='150px'><img src='" + getThumbnail(id) + "' class='img img-responsive' style='width: 150pt;'></td><td>" + name + "</td><td class='price text-right'>Rp. " + price + " <br>"+ (discount != '(- Rp. 0)' ? discount  : '') +"</td></tr>";
                 $("#menus").find('tbody').append(markup);
             });
         }
@@ -133,7 +133,7 @@ function addToCheck(idMenu) {
                 var markup = "<tr><input type='hidden' name='ids_menu[]' value='" + id + "'><input type='hidden' class='discount' value='" + discount + "'><td><button class='deleteMenu'><i class='fa fa-times'></i></button></td><td>" + name + "</td><td class='input-group'><span class='input-group-btn'><button class='btn btn-default btn-xs decrease' type='button'><i class='fa fa-arrow-down'></i></button></span><input class='form-control input-xs' maxlength='' type='text' name='amount[]' value='1' min='1' max='999' title='amount' readonly/><span class='input-group-btn'><button class='btn btn-default btn-xs increase' type='button'><i class='fa fa-arrow-up'></i></button></span></td><td><label class='price' for='price'>" + price + "</label></td></tr>";
                 $("#bill").find('tbody').append(markup);
                 // Set Total Payment
-                set_total_payment();
+                set_total_payment(price);
                 set_new_discount(discount, true);
                 set_new_final_payment();
                 update_refund();
@@ -142,17 +142,13 @@ function addToCheck(idMenu) {
     });
 }
 
-function set_total_payment() {
+function set_total_payment(price) {
     var total = $("label.total").html();
     total = parseInt(total.replace('Rp. ', '').replace('\.', '').replace('\.', ''));
     var new_total = parseInt(total) + parseInt(price.replace('Rp. ', '').replace('\.', '').replace('\.', ''));
     new_total = 'Rp. ' + $.number(new_total, 0, '', '.');
     $("label.total").html(new_total);
 }
-
-$('#table_number').on('change', function() {
-    alert( this.value );
-});
 
 function set_new_discount(discount, increment) {
     var old_discount = $("label.discount").html();

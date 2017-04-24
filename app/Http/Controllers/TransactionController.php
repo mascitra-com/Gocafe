@@ -83,7 +83,9 @@ class TransactionController extends Controller
         $data['total_price'] = $total_price;
         $data['total_discount'] = $total_discount;
         $data['total_payment'] = $total_payment;
-        $data['status'] = $request->type === 'cash' ? '0' : '1'; // TODO Make This as Status Payment
+        if($request->type){
+            $data['status'] = $request->type === 'cash' ? '1' : '-1'; // TODO Make This as Status Payment
+        }
 
         $request->request->add($data);
         $transaction = new Transaction($request->except(array('ids_menu', 'amount', 'cash_received', 'refund', 'type')));
@@ -92,18 +94,20 @@ class TransactionController extends Controller
             $transactionDetail = new TransactionDetail($detail);
             $staff->saveTransactionDetail($transactionDetail, $transactionId);
         }
-        return redirect('payment')->with('status', 'Transaction Inserted!');
+        return back()->with('status', 'Transaction Inserted!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Transaction $transaction
+     * @param $tableNumber
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function getMenusByTableNumber($tableNumber)
     {
-        //
+        $transactionId = Transaction::where(array('table_number' => $tableNumber, 'status' => 0))->orderBy('created_at', 'desc')->first()->id;
+        $menus = TransactionDetail::where('transaction_id', $transactionId)->get();
+        return response()->json(['transactionId' => $transactionId, 'menus' => $menus]);
     }
 
     /**
@@ -120,13 +124,20 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Transaction $transaction
+     * @param Request $request
+     * @param $transactionId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, $transactionId)
     {
-        //
+        $transaction = Transaction::find($transactionId);
+        $transaction->status = $request->type === 'cash' ? '1' : '-1'; // TODO Make This as Status Payment
+        if($transaction->status == -1) {
+            $transaction->credit_card_name = $request->credit_card_name;
+            $transaction->credit_card_number = $request->credit_card_number;
+        }
+        $transaction->save();
+        return redirect('payment')->with('status', 'Transaction Updated!');
     }
 
     /**
