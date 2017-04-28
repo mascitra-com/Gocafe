@@ -89,7 +89,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('order', 'TransactionController@order');
     Route::post('order', 'TransactionController@store');
     Route::get('transaction/getMenusByTableNumber/{transactionId}', 'TransactionController@getMenusByTableNumber');
-    Route::get('transaction/chart', 'TransactionController@chart');
+    Route::get('chart', 'TransactionController@chart');
+    Route::get('report', 'TransactionController@report');
     //--END TRANSACTION
 
     //REVIEW

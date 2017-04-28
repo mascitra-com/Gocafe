@@ -86,7 +86,7 @@ class TransactionController extends Controller
         $data['total_discount'] = $total_discount;
         $data['total_payment'] = $total_payment;
         if($request->type){
-            $data['status'] = $request->type === 'cash' ? '1' : '-1'; // TODO Make This as Status Payment
+            $data['status'] =  $request->type === 'cash' ? '1' : '-1';// TODO Make This as Status Payment
         }
 
         $request->request->add($data);
@@ -165,7 +165,7 @@ class TransactionController extends Controller
             }
         }
         // Customers per 30 day
-        $customers30day = Charts::database(Transaction::all(), 'bar', 'chartjs')
+        $customers30day = Charts::database(Transaction::all(), 'area', 'chartjs')
             ->title("30 Hari")
             ->dimensions(275, 300)
             ->elementLabel('Jumlah Pengunjung')
@@ -175,7 +175,7 @@ class TransactionController extends Controller
             ->groupByDay()
             ->lastByDay(30, false);
         // Menus per 30 Day
-        $menus30day = Charts::database(TransactionDetail::all(), 'bar', 'chartjs')
+        $menus30day = Charts::database(TransactionDetail::all(), 'line', 'chartjs')
             ->title("30 Hari")
             ->dimensions(275, 300)
             ->elementLabel('Jumlah Menu di Pesan')
@@ -185,7 +185,7 @@ class TransactionController extends Controller
             ->groupByDay()
             ->lastByDay(30, false);
         // Revenue per 3 Month
-        $revenue = Charts::database(Transaction::all(), 'bar', 'chartjs')
+        $revenue = Charts::database(Transaction::all(), 'area', 'chartjs')
             ->title("3 Bulan")
             ->dimensions(275, 300)
             ->elementLabel('Pendapatan')
@@ -196,5 +196,11 @@ class TransactionController extends Controller
         // TODO 5 Favorite Food
         // TODO 5 Favorite Drink
         return view('transaction.chart', compact('favMenus', 'customers30day', 'menus30day', 'revenue'));
+    }
+
+    public function report()
+    {
+        $transactions = Transaction::all();
+        return view('transaction.report', compact('transactions'));
     }
 }
