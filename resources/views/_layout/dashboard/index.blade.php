@@ -51,6 +51,8 @@
                 <li class="nav-title">Transaction</li>
                 <li><a href="{{ url('payment') }}"><i class="fa fa-fw fa-money"></i><span class="hidden-sm">Payment</span></a>
                 <li><a href="{{ url('order') }}"><i class="fa fa-fw fa-shopping-cart"></i><span class="hidden-sm">Order</span></a>
+                <li class="nav-title">Chart</li>
+                <li><a href="{{ url('transaction/chart') }}"><i class="fa fa-fw fa-bar-chart"></i><span class="hidden-sm">Transaction Chart</span></a>
                 </li>
             </ul>
         </div>

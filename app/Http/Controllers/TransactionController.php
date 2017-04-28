@@ -13,6 +13,8 @@ use App\TransactionDetail;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Charts;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -149,5 +151,50 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+    }
+
+    public function chart()
+    {
+        // TODO Favorite Menus
+        $favMenus = TransactionDetail::getFavouriteMenu(1);
+        foreach ($favMenus as $key => $value){
+            $code_item = substr($value->item_id, 0,3);
+            if($code_item === "MCF"){
+                $menu = Menu::find($value->item_id);
+                $favMenus[$key]->name = $menu->name;
+            }
+        }
+        // Customers per 30 day
+        $customers30day = Charts::database(Transaction::all(), 'bar', 'chartjs')
+            ->title("30 Hari")
+            ->dimensions(275, 300)
+            ->elementLabel('Jumlah Pengunjung')
+            ->colors(['#F18803', '#F18803', '#8C4728'])
+            ->template("material")
+            ->dateColumn('created_at')
+            ->groupByDay()
+            ->lastByDay(30, false);
+        // Menus per 30 Day
+        $menus30day = Charts::database(TransactionDetail::all(), 'bar', 'chartjs')
+            ->title("30 Hari")
+            ->dimensions(275, 300)
+            ->elementLabel('Jumlah Menu di Pesan')
+            ->colors(['#F18803', '#F18803', '#8C4728'])
+            ->template("material")
+            ->dateColumn('created_at')
+            ->groupByDay()
+            ->lastByDay(30, false);
+        // Revenue per 3 Month
+        $revenue = Charts::database(Transaction::all(), 'bar', 'chartjs')
+            ->title("3 Bulan")
+            ->dimensions(275, 300)
+            ->elementLabel('Pendapatan')
+            ->colors(['#F18803', '#F18803', '#8C4728'])
+            ->template("material")
+            ->aggregateColumn('total_payment', 'sum')
+            ->lastByMonth(3, false);
+        // TODO 5 Favorite Food
+        // TODO 5 Favorite Drink
+        return view('transaction.chart', compact('favMenus', 'customers30day', 'menus30day', 'revenue'));
     }
 }
