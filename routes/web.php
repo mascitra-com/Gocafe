@@ -91,6 +91,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('transaction/getMenusByTableNumber/{transactionId}', 'TransactionController@getMenusByTableNumber');
     Route::get('chart', 'TransactionController@chart');
     Route::get('report', 'TransactionController@report');
+    Route::get('revenue', 'TransactionController@revenue');
     //--END TRANSACTION
 
     //REVIEW

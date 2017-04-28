@@ -203,4 +203,9 @@ class TransactionController extends Controller
         $transactions = Transaction::all();
         return view('transaction.report', compact('transactions'));
     }
+    public function revenue()
+    {
+        $transactions = Transaction::all();
+        return view('transaction.revenue', compact('transactions'));
+    }
 }

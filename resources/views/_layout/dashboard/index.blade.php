@@ -52,8 +52,9 @@
                 <li><a href="{{ url('payment') }}"><i class="fa fa-fw fa-money"></i><span class="hidden-sm">Payment</span></a>
                 <li><a href="{{ url('order') }}"><i class="fa fa-fw fa-shopping-cart"></i><span class="hidden-sm">Order</span></a>
                 <li class="nav-title">Statistics</li>
-                <li><a href="{{ url('chart') }}"><i class="fa fa-fw fa-bar-chart"></i><span class="hidden-sm">Transaction Chart</span></a>
-                <li><a href="{{ url('report') }}"><i class="fa fa-fw fa-list-alt"></i><span class="hidden-sm">Transaction Report</span></a>
+                <li><a href="{{ url('chart') }}"><i class="fa fa-fw fa-bar-chart"></i><span class="hidden-sm">Chart</span></a>
+                <li><a href="{{ url('report') }}"><i class="fa fa-fw fa-list-alt"></i><span class="hidden-sm">Report</span></a>
+                <li><a href="{{ url('revenue') }}"><i class="fa fa-fw fa-pie-chart"></i><span class="hidden-sm">Revenue</span></a>
                 </li>
             </ul>
         </div>
