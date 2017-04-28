@@ -168,6 +168,7 @@ return [
          */
         Laravolt\Indonesia\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -226,8 +227,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Indonesia' => Laravolt\Indonesia\Facade::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
     ],
 
 ];
