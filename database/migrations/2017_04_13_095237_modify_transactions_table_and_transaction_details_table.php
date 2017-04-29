@@ -17,7 +17,7 @@ class ModifyTransactionsTableAndTransactionDetailsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->integer('table_number')->after('id_staff')->unsigned()->index();
-            $table->integer('status')->after('total_payment')->unsigned()->index();
+            $table->tinyInteger('status')->after('total_payment')->index();
             $table->integer('created_by')->unsigned()->index();
             $table->integer('updated_by')->unsigned()->index()->nullable();
             $table->integer('deleted_by')->unsigned()->index()->nullable();

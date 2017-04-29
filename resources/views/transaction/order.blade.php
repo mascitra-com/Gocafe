@@ -1,5 +1,64 @@
-@extends('_layout/order/index')
+@extends('_layout/transaction/index')
 @section('page_title', 'Pemesanan')
+
+@section('navbar-right')
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                   aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-shopping-cart text-secondary"></i> <span class="text-secondary">Pesanan</span><span
+                            class="caret text-secondary" id="cart"></span></a>
+                <div class="dropdown-menu" style="width: 500px; margin: .5em .5em">
+                    <form action="{{ url('order') }}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="table_number" value="">
+                        <input type="hidden" name="status" value="0">
+                        <table class="table text-quintuple" id="bill">
+                            <thead>
+                            <tr>
+                                <th width="5%"></th>
+                                <th width="37.5%">Nama</th>
+                                <th width="27.5%">Jumlah</th>
+                                <th width="25%">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <table class="table text-quintuple">
+                            <tr>
+                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
+                                <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Diskon</td>
+                                <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">- Rp. 0</label></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
+                                <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 16px">Rp. 0</label></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><button class="btn btn-primary btn-block" type="submit"><b style="font-size: 16px">Pesan</b></button></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <div class="pull-right row" style="width: 225px; margin-top: .6em">
+                    <span for="table_number" class="col-md-6" style="margin-top: .5em; color:#fff;">Nomor Meja</span>
+                    <select id="table_number" class="form-control col-md-6" style="width: 75px">
+                        <option value="">Pilih</option>
+                        @for($i = 1; $i <= $numberOfTables; $i++)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+            </li>
+        </ul>
+    </div>
+@endsection
 
 @section('content')
     <div class="row">
@@ -19,7 +78,11 @@
             </div>
             <div class="row grid2">
                 <div class="list" id="product">
-                    @foreach($menus as $menu)<button class="rectangle product" onclick="getProductDetail('{{ $menu->id }}')"><img src="{{ url("menus/showThumbnail/$menu->id")}}" alt="Thumbnail">{{ $menu->name }}</button>@endforeach
+                    @foreach($menus as $menu)
+                        <button class="rectangle product" onclick="getProductDetail('{{ $menu->id }}')">
+                            <img src="{{ url("menus/showThumbnail/$menu->id")}}" alt="Thumbnail">{{ $menu->name }}
+                        </button>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -31,13 +94,9 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="panel-body">
-                    <h3 id="head-menu">{{ $firstMenu->name }}</h3>
+                    <h2 id="head-menu">{{ $firstMenu->name }}</h2>
                     <div>
-                        <i class="fa fa-star text-primary"></i>
-                        <i class="fa fa-star text-primary"></i>
-                        <i class="fa fa-star text-primary"></i>
-                        <i class="fa fa-star text-primary"></i>
-                        <i class="fa fa-star-half-o text-primary"></i>
+                        <input id="rating-avg" value="{{ $firstMenu->rating }}" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" readonly>
                     </div>
                     <br>
                     <div class="row">
@@ -55,10 +114,11 @@
                                 </tr>
                                 <tr>
                                     <td class="text-primary">Diskon</td>
-                                    <td id="discount">@if($firstMenu->discount)
+                                    <td id="discount">
+                                        @if($firstMenu->discount)
                                         - Rp. {{ number_format($firstMenu->price * $firstMenu->discount, 0, ',', '.') }},-
                                         @else
-                                            -
+                                        -
                                         @endif
                                     </td>
                                 </tr>
@@ -81,20 +141,14 @@
                     <div class="row col-md-12">
                         <h4>Ulasan :</h4><br>
                         {{-- TODO Use Ajax Instead --}}
-                        <form action="{{ url('review') }}" method="post">
+                        <form id="form-review" action="">
                             {{ csrf_field() }}
                             <input type="hidden" name="item_id" value="{{ $firstMenu->id }}" id="item_id">
                             <table class="table table-responsive">
                                 <tr>
                                     <td>Penilaian Anda</td>
                                     <td>
-                                        <div>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star-half-o text-primary"></i>
-                                        </div>
+                                        <input name="rating" id="input-id" type="text" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" data-step="1">
                                     </td>
                                 </tr>
                                 <tr>
@@ -110,18 +164,20 @@
                         </form>
                     </div>
                     <div class="row col-md-12">
-                        <table class="table table-responsive">
-                            @for($i = 0; $i < 4; $i++)
+                        <table class="table table-responsive" id="table-review">
+                            @foreach($reviews as $review)
                             <tr>
                                 <td width="15%">
                                     <img src="{{ asset('images/blank-avatar.png') }}" alt="" class="img-circle img-responsive">
                                 </td>
                                 <td>
-                                    <p style="font-size: 14pt" class="text-primary">Lorem Ipsum</p>
-                                    Animi, culpa cumque, debitis dolor exercitationem hic impedit incidunt ipsum iure laboriosam laborum molestias non, porro praesentium quasi repudiandae sequi tempora velit? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    <p>
+                                        <input id="rating-avg" value="{{ $review->rating }}" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" readonly>
+                                    </p>
+                                    {{ $review->review }}
                                 </td>
                             </tr>
-                            @endfor
+                            @endforeach
                         </table>
                     </div>
                 </div>
@@ -131,107 +187,55 @@
 @endsection
 
 @section('styles')
-    <style>
-        .detail-menu {
-            font-size: 12pt;
-        }
+    <link rel="stylesheet" href="{{URL::asset('css/order.css')}}">
 
-        #head-menu {
-            margin-bottom: .5em;
-        }
-
-        .product img {
-            max-height: 80px;
-            width: auto;
-            margin: 0 0;
-            vertical-align: top;
-        }
-
-        div.grid {
-            margin-left: auto;
-        }
-
-        div.grid2 {
-            margin-left: auto;
-            margin-top: 2em;
-        }
-
-        button.product {
-            background-image: linear-gradient(0deg, rgba(140, 71, 40, 0.75) 50%, rgba(255, 255, 255, 1) 100%, rgba(255, 255, 255, 1) 75%) !important;
-            font-size: 12px !important;
-            margin-top: 0.75em;
-        }
-
-        button.rectangle {
-            background-image: linear-gradient(0deg, rgba(140, 71, 40, 0.75) 25%, rgba(140, 71, 40, 1) 25%, rgba(140, 71, 40, 0.8) 90%);
-            height: 100px;
-            width: 90px;
-            border: 1px solid #7c4621;
-            border-radius: 5px;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-right: 0.6em;
-            font-weight: bold;
-        }
-
-        .side-nav {
-            width:100vh;
-            height:25px;
-            position:absolute;
-            background:#8C4728;
-            -webkit-transform-origin: left top;
-            -webkit-transform:rotate(-90deg) translateX(-100%);
-        }
-
-        ul.nav li {
-            margin-right:20px;
-            float:right;
-            height:100%;
-            line-height:20px;
-        }
-
-        #productList ul.nav li a {
-            color: whitesmoke;
-            cursor: default;
-        }
-
-        .list {
-            margin-left: 3em;
-            margin-top: 1em;
-        }
-
-        .price {
-            font-weight: bold;
-            font-size: 13px;
-        }
-
-        .input-xs {
-            height: 26px;
-            padding: 2px 5px;
-            font-size: 14px;
-            line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
-            border-radius: 3px;
-        }
-
-        button.rectangle {
-            cursor: pointer;
-            overflow: hidden;
-        }
-
-        button.deleteMenu {
-            background: Transparent no-repeat;
-            border: none;
-            cursor: pointer;
-            overflow: hidden;
-        }
-    </style>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 @endsection
 
 @section('javascripts')
     <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
     <script src="{{ url('js/payment.js') }}"></script>
     <script src="{{ url('js/order.js') }}"></script>
+    <script>
+        $(document).on('ready', function(){
+            $('#rating-avg').rating({displayOnly: true, step: 0.5});
+        });
+        $(function(){
+            $('#form-review').on('submit',function(e){
+                $.ajaxSetup({
+                    header:$('meta[name="_token"]').attr('content')
+                });
+                e.preventDefault(e);
+                $.ajax({
+                    type:"POST",
+                    url:'/review',
+                    data:$(this).serialize(),
+                    dataType: 'json',
+                    success: function(data){
+                        // TODO Make This Happen
+                        // var markup = "<tr><td width='15%'><img src='{{ asset('images/blank-avatar.png') }}' alt='' class='img-circle img-responsive'></td><td><p><input id='rating-avg' value='"+data.review.rating+"' class='rating' data-size='xs' data-show-clear='false' data-show-caption='false' readonly></p>"+data.review.review+"</td></tr>";
+                        // $("#table-review").find('tbody').append(markup);
+                        alert('Ulasan Anda Sudah di Simpan. Silahkan Lanjutkan Pesanan Anda');
+                    },
+                    error: function(data){
+                    }
+                })
+            });
+        });
+        var url = "{{ url('') }}";
+        $('#table_number').on('change', function() {
+            $.ajax({
+                url: '/transaction/getMenusByTableNumber/' + this.value,
+                dataType: 'json',
+                success: function () {
+                    var conf = confirm('Meja Ini Masih Terdapat Transaksi yg Belum Dibayarkan / Sudah Di Pesan! Anda');
+                    if(!conf){
+                        $('#table_number').val('');
+                        $('input[name ="table_number"]').val('');
+                    }
+                }
+            });
+            $('input[name ="table_number"]').val($('#table_number').val());
+        });
+    </script>
 @endsection

@@ -85,8 +85,18 @@ Route::group(['middleware' => ['web']], function () {
     //TRANSACTION
     Route::get('payment', 'TransactionController@payment');
     Route::post('payment', 'TransactionController@store');
+    Route::patch('payment/{paymentId}', 'TransactionController@update');
     Route::get('order', 'TransactionController@order');
+    Route::post('order', 'TransactionController@store');
+    Route::get('transaction/getMenusByTableNumber/{transactionId}', 'TransactionController@getMenusByTableNumber');
+    Route::get('chart', 'TransactionController@chart');
+    Route::get('report', 'TransactionController@report');
+    Route::get('revenue', 'TransactionController@revenue');
     //--END TRANSACTION
+
+    //REVIEW
+    Route::post('review', 'ReviewController@store');
+    //--END REVIEW
 });
 // DUMMIES VIEW
 Route::get('ui/', 'Ui@Index');
