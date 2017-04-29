@@ -44,6 +44,13 @@ class ReportController extends Controller
         return response()->json(['transactions' => $transactions]);
     }
 
+    public function detail($transactionId)
+    {
+        $transaction = Transaction::find($transactionId);
+        $details = TransactionDetail::where('transaction_id', $transactionId)->get();
+        return view('report.detail', compact('transaction', 'details'));
+    }
+
     /**
      * Revenue Report for Manager
      *
