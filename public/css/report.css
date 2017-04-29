@@ -1,5 +1,5 @@
-div.table-responsive>div.dataTables_wrapper>div.row {
-    margin: 1em;
+div#report_wrapper {
+    margin: 1em 1em !important;
 }
 .applyBtn {
     color: #fff;
