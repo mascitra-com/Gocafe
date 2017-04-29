@@ -13,7 +13,6 @@ use App\TransactionDetail;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Charts;
 use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller

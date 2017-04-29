@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Transaction;
+use App\TransactionDetail;
+use App\Menu;
+use Charts;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
