@@ -18,6 +18,7 @@ class ReportController extends Controller
     public function index()
     {
         $transactions = Transaction::with('branch')
+            ->where('status', '!=', 0)
             ->latest()
             ->whereMonth('created_at', DB::raw('MONTH(NOW())'))
             ->get();
@@ -35,6 +36,7 @@ class ReportController extends Controller
             ->when($paymentType, function ($query) use ($paymentType) {
                 return $query->where('status', $paymentType);
             })
+            ->where('status', '!=', 0)
             ->get();
         return response()->json(['transactions' => $transactions]);
     }

@@ -30,7 +30,6 @@
                             <option value="1">Tunai</option>
                             <option value="-1">Kartu Kredit</option>
                             <option value="-2">Kartu Debit</option>
-                            <option value="0">Belum Di Bayar</option>
                         </select>
                     </div>
                 </div>
@@ -39,7 +38,7 @@
 						<tr>
 							<th class="text-center">Tanggal Transaksi</th>
 							<th>Kode Transaksi</th>
-							<th class="text-center" width="15%">Jumlah <br>Pemasukan</th>
+							<th class="text-center" width="15%">Total <br>Transaksi</th>
 							<th class="text-center">Jenis <br>Pembayaran</th>
 							<th>Aksi</th>
 						</tr>
@@ -83,6 +82,7 @@
         $(document).ready( function () {
             $('input[name="daterange"]').daterangepicker(
             {
+                "startDate": moment().startOf('month'),
                 locale: {
                     format: 'YYYY-MM-DD'
                 }
@@ -111,9 +111,7 @@
                     $('#report').find('tbody').empty();
                     $.each(response.transactions, function (i, transaction) {
                         var status;
-                        if (transaction.status === 0) {
-                            status = 'Belum Di Bayar';
-                        } else if (transaction.status === 1) {
+                        if (transaction.status === 1) {
                             status = 'Tunai';
                         } else if (transaction.status === -1) {
                             status = 'Kartu Kredit';
