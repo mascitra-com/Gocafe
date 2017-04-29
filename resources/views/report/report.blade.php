@@ -80,14 +80,14 @@
     <!-- Include Date Range Picker -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
     <!-- Include Data Table-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-3.1.3/pdfmake-0.1.27/dt-1.10.15/b-1.3.1/b-flash-1.3.1/b-html5-1.3.1/b-print-1.3.1/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-3.1.3/pdfmake-0.1.27/dt-1.10.15/b-1.3.1/b-colvis-1.3.1/b-flash-1.3.1/b-html5-1.3.1/b-print-1.3.1/cr-1.3.3/datatables.min.css"/>
     <link rel="stylesheet" href="{{URL::asset('css/report.css')}}">
 @endsection
 
 @section('javascripts')
     <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
     <!-- Include Data Table-->
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-3.1.3/pdfmake-0.1.27/dt-1.10.15/b-1.3.1/b-flash-1.3.1/b-html5-1.3.1/b-print-1.3.1/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-3.1.3/pdfmake-0.1.27/dt-1.10.15/b-1.3.1/b-colvis-1.3.1/b-flash-1.3.1/b-html5-1.3.1/b-print-1.3.1/cr-1.3.3/datatables.min.js"></script>
     <!-- Include Date Range Picker -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
@@ -98,7 +98,7 @@
                 "searching": false,
                 "dom": 'Bfrtip',
                 "buttons": [
-                    'copy', 'excel', 'pdf'
+                    'copy', 'csv', 'excel', 'pdf', 'colvis'
                 ],
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.15/i18n/Indonesian.json"
