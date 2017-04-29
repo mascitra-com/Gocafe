@@ -132,12 +132,20 @@ class MenusController extends Controller
         return redirect('categories')->with('status', 'Menu Deleted');
     }
 
+    /**
+     * @param $idCategory
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getMenus($idCategory)
     {
         $menus = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->where('category_id', $idCategory);
         return response()->json(['success' => true, 'menus' => $menus]);
     }
 
+    /**
+     * @param $idMenu
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getMenu($idMenu)
     {
         $menu = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->where('id', $idMenu);
