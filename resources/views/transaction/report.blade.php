@@ -44,6 +44,7 @@
 						</tr>
 					</thead>
 					<tbody>
+                        <?php $total_transactions = 0 ?>
 						@if($transactions) @foreach($transactions as $transaction)
                         <tr>
                             <td class="text-center">{{ date('d-M-Y H:i:s', strtotime($transaction->created_at)) }}</td>
@@ -54,8 +55,17 @@
                                 <a href="#" class="btn btn-info"><i class="fa fa-info"></i> Detail</a>
                             </td>
                        </tr>
+                        <?php $total_transactions = $transaction->total_payment ?>
                         @endforeach @endif
 					</tbody>
+                    <tfoot>
+                        <tr>
+                            <th class="text-center" colspan="2">Total Transaksi</th>
+                            <th class="text-center" >Rp. <span id="total"><?=!empty($total_transactions) ? number_format($total_transactions, 0, ',', '.') : ''?></span>,-</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
 				</table>
 			</div>
 			<div class="panel-footer">
@@ -109,6 +119,7 @@
                 dataType: 'json',
                 success: function (response) {
                     $('#report').find('tbody').empty();
+                    var total = 0;
                     $.each(response.transactions, function (i, transaction) {
                         var status;
                         if (transaction.status === 1) {
@@ -117,8 +128,10 @@
                             status = 'Kartu Kredit';
                         }
                         var markup = "<tr><td class='text-center'>" + $.format.date(transaction.created_at, 'dd-MMM-yyyy hh:mm:ss') + "</td><td>" + transaction.id + "</td><td class='text-right' style='padding-right: 2em'>Rp. " + $.number(transaction.total_payment, 0, ',', '.') + ",-</td><td class='text-center'>" + status + "</td><td><a href='#' class='btn btn-info'><i class='fa fa-info'></i> Detail</a></td></tr>";
+                        total += transaction.total_payment;
                         $("#report").find('tbody').append(markup);
                     });
+                    $('span#total').html($.number(total, 0, ',', '.'));
                 }
             })
         }
