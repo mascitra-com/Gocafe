@@ -22,7 +22,7 @@ class ReportController extends Controller
             ->latest()
             ->whereMonth('created_at', DB::raw('MONTH(NOW())'))
             ->get();
-        return view('transaction.report', compact('transactions'));
+        return view('report.report', compact('transactions'));
     }
 
     public function report_filter($startDate, $endDate, $paymentType)
@@ -49,6 +49,56 @@ class ReportController extends Controller
     public function revenue()
     {
         $transactions = Transaction::all();
-        return view('transaction.revenue', compact('transactions'));
+        return view('report.revenue', compact('transactions'));
+    }
+
+    /**
+     * Show Chart
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function chart()
+    {
+        // TODO Favorite Menus
+        $favMenus = TransactionDetail::getFavouriteMenu(1);
+        foreach ($favMenus as $key => $value){
+            $code_item = substr($value->item_id, 0,3);
+            if($code_item === "MCF"){
+                $menu = Menu::find($value->item_id);
+                $favMenus[$key]->name = $menu->name;
+            }
+        }
+        // Customers per 30 day
+        $customers30day = Charts::database(Transaction::all(), 'area', 'chartjs')
+            ->title("30 Hari")
+            ->dimensions(275, 300)
+            ->elementLabel('Jumlah Pengunjung')
+            ->colors(['#F18803', '#F18803', '#8C4728'])
+            ->template("material")
+            ->dateColumn('created_at')
+            ->groupByDay()
+            ->lastByDay(30, false);
+        // Menus per 30 Day
+        $menus30day = Charts::database(TransactionDetail::all(), 'line', 'chartjs')
+            ->title("30 Hari")
+            ->dimensions(275, 300)
+            ->elementLabel('Jumlah Menu di Pesan')
+            ->colors(['#F18803', '#F18803', '#8C4728'])
+            ->template("material")
+            ->dateColumn('created_at')
+            ->groupByDay()
+            ->lastByDay(30, false);
+        // Revenue per 3 Month
+        $revenue = Charts::database(Transaction::all(), 'area', 'chartjs')
+            ->title("3 Bulan")
+            ->dimensions(275, 300)
+            ->elementLabel('Pendapatan')
+            ->colors(['#F18803', '#F18803', '#8C4728'])
+            ->template("material")
+            ->aggregateColumn('total_payment', 'sum')
+            ->lastByMonth(3, false);
+        // TODO 5 Favorite Food
+        // TODO 5 Favorite Drink
+        return view('report.chart', compact('favMenus', 'customers30day', 'menus30day', 'revenue'));
     }
 }

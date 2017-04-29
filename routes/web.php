@@ -89,7 +89,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('order', 'TransactionController@order');
     Route::post('order', 'TransactionController@store');
     Route::get('transaction/getMenusByTableNumber/{transactionId}', 'TransactionController@getMenusByTableNumber');
-    Route::get('chart', 'TransactionController@chart');
+    Route::get('chart', 'ReportController@chart');
     Route::get('report', 'ReportController@index');
     Route::get('revenue', 'ReportController@revenue');
     Route::get('filter_report/{startDate}/{endDate}/{paymentType}', 'ReportController@report_filter');
