@@ -1,5 +1,5 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Kategori Menu')
+@section('page_title', 'Laporan Pendapatan')
 
 @section('content')
 <div class="row">

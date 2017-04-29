@@ -1,5 +1,5 @@
 @extends('_layout/dashboard/index')
-@section('page_title','Dashboard')
+@section('page_title','Diagram')
 
 @section('content')
 <div class="row">

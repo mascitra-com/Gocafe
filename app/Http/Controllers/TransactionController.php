@@ -153,6 +153,11 @@ class TransactionController extends Controller
         //
     }
 
+    /**
+     * Show Chart
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function chart()
     {
         // TODO Favorite Menus
@@ -198,14 +203,4 @@ class TransactionController extends Controller
         return view('transaction.chart', compact('favMenus', 'customers30day', 'menus30day', 'revenue'));
     }
 
-    public function report()
-    {
-        $transactions = Transaction::all();
-        return view('transaction.report', compact('transactions'));
-    }
-    public function revenue()
-    {
-        $transactions = Transaction::all();
-        return view('transaction.revenue', compact('transactions'));
-    }
 }
