@@ -86,7 +86,7 @@ class TransactionController extends Controller
         $data['total_discount'] = $total_discount;
         $data['total_payment'] = $total_payment;
         if($request->type){
-            $data['status'] =  $request->type === 'cash' ? '1' : '-1';// TODO Make This as Status Payment
+            $data['status'] =  $request->type;
         }
 
         $request->request->add($data);

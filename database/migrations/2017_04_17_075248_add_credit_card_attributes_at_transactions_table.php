@@ -14,8 +14,8 @@ class AddCreditCardAttributesAtTransactionsTable extends Migration
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->string('credit_card_name', 255)->nullable();
-            $table->string('credit_card_number', 20)->nullable();
+            $table->string('card_name', 255)->nullable();
+            $table->string('card_number', 20)->nullable();
         });
     }
 
