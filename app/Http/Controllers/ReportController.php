@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\CafeBranch;
 use App\Transaction;
 use App\TransactionDetail;
 use App\Menu;
 use Charts;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
@@ -21,6 +21,7 @@ class ReportController extends Controller
     public function index()
     {
         $transactions = Transaction::with('branch')
+            ->whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn())
             ->where('status', '!=', 0)
             ->latest()
             ->whereMonth('created_at', DB::raw('MONTH(NOW())'))
@@ -40,13 +41,15 @@ class ReportController extends Controller
                 return $query->where('status', $paymentType);
             })
             ->where('status', '!=', 0)
+            ->whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn())
             ->get();
         return response()->json(['transactions' => $transactions]);
     }
 
     public function detail($transactionId)
     {
-        $transaction = Transaction::find($transactionId);
+        $transaction = Transaction::find($transactionId)
+            ->whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn());
         $details = TransactionDetail::where('transaction_id', $transactionId)->get();
         return view('report.detail', compact('transaction', 'details'));
     }
@@ -58,7 +61,7 @@ class ReportController extends Controller
      */
     public function revenue()
     {
-        $transactions = Transaction::all();
+        $transactions = Transaction::whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn())->get();
         return view('report.revenue', compact('transactions'));
     }
 
@@ -69,7 +72,7 @@ class ReportController extends Controller
      */
     public function chart()
     {
-        // TODO Favorite Menus
+        // Favorite Menus
         $favMenus = TransactionDetail::getFavouriteMenu(1);
         foreach ($favMenus as $key => $value){
             $code_item = substr($value->item_id, 0,3);
@@ -79,7 +82,7 @@ class ReportController extends Controller
             }
         }
         // Customers per 30 day
-        $customers30day = Charts::database(Transaction::all(), 'area', 'chartjs')
+        $customers30day = Charts::database(Transaction::whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn())->get(), 'area', 'chartjs')
             ->title("30 Hari")
             ->dimensions(275, 300)
             ->elementLabel('Jumlah Pengunjung')
@@ -89,7 +92,7 @@ class ReportController extends Controller
             ->groupByDay()
             ->lastByDay(30, false);
         // Menus per 30 Day
-        $menus30day = Charts::database(TransactionDetail::all(), 'line', 'chartjs')
+        $menus30day = Charts::database(TransactionDetail::getMenusOrderedPer30Days(), 'line', 'chartjs')
             ->title("30 Hari")
             ->dimensions(275, 300)
             ->elementLabel('Jumlah Menu di Pesan')
@@ -99,7 +102,7 @@ class ReportController extends Controller
             ->groupByDay()
             ->lastByDay(30, false);
         // Revenue per 3 Month
-        $revenue = Charts::database(Transaction::all(), 'area', 'chartjs')
+        $revenue = Charts::database(Transaction::whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn())->get(), 'area', 'chartjs')
             ->title("3 Bulan")
             ->dimensions(275, 300)
             ->elementLabel('Pendapatan')

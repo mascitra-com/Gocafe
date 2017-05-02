@@ -106,6 +106,7 @@ class TransactionController extends Controller
      */
     public function getMenusByTableNumber($tableNumber)
     {
+        // TODO Get BRANCH ID from Cafe BY STAFF ID Now Logged In
         $transactionId = Transaction::where(array('table_number' => $tableNumber, 'status' => 0))->orderBy('created_at', 'desc')->first()->id;
         $menus = TransactionDetail::where('transaction_id', $transactionId)->get();
         return response()->json(['transactionId' => $transactionId, 'menus' => $menus]);

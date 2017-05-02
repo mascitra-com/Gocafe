@@ -38,7 +38,8 @@
 						<tr>
 							<th class="text-center">Tanggal Transaksi</th>
 							<th>Kode Transaksi</th>
-							<th class="text-center" width="15%">Total <br>Transaksi</th>
+                            <th>Alamat Cabang</th>
+                            <th class="text-center" width="15%">Total <br>Transaksi</th>
 							<th class="text-center">Jenis <br>Pembayaran</th>
 							<th>Aksi</th>
 						</tr>
@@ -48,8 +49,9 @@
 						@if($transactions) @foreach($transactions as $transaction)
                         <tr>
                             <td class="text-center">{{ date('d-M-Y H:i:s', strtotime($transaction->created_at)) }}</td>
-							<td>{{ $transaction->id }}</td>
-							<td class="text-right" style="padding-right: 2em">Rp. {{ number_format($transaction->total_payment, 0, ',', '.') }},-</td>
+                            <td>{{ $transaction->id }}</td>
+                            <td>{{ $transaction->branch->address }}</td>
+                            <td class="text-right" style="padding-right: 2em">Rp. {{ number_format($transaction->total_payment, 0, ',', '.') }},-</td>
                             <td class="text-center">{{ $transaction->status === 0 ? 'Belum di Bayar' : ($transaction->status === 1 ? 'Tunai' : 'Kartu Kredit') }}</td>
                             <td>
                                 <a href="{{ url('report/detail/'.$transaction->id) }}" class="btn btn-info"><i class="fa fa-info"></i> Detail</a>
@@ -62,6 +64,7 @@
                         <tr>
                             <th class="text-center" colspan="2">Total Transaksi</th>
                             <th class="text-center" >Rp. <span id="total"><?=!empty($total_transactions) ? number_format($total_transactions, 0, ',', '.') : ''?></span>,-</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>
