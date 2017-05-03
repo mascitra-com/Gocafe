@@ -130,7 +130,7 @@
                 "url": "https://cdn.datatables.net/plug-ins/1.10.15/i18n/Indonesian.json"
             }
         });
-        $('td.price').number( true, 2 );
+        $('td.price').number(true, 0, ',', '.');
         $(".thumb").on("error", function(){
             $(this).attr('src', '{{ URL::asset('images/blank-menu.png') }}');
         });

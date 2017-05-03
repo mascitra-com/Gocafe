@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
 {
-    protected $fillable = ['id', 'branch_id', 'staff_id', 'table_number', 'total_price', 'total_discount', 'total_payment', 'status', 'card_name', 'card_number'];
+    protected $fillable = ['id', 'branch_id', 'staff_id', 'table_number', 'production_cost', 'total_price', 'total_discount', 'total_payment', 'status', 'card_name', 'card_number'];
 
     use SoftDeletes;
 

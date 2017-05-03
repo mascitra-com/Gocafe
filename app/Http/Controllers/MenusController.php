@@ -60,6 +60,9 @@ class MenusController extends Controller
             'description' => 'required',
             'price' => 'required',
         ]);
+        $requestData['cost'] = str_replace('.', '', $request->cost);
+        $requestData['price'] = str_replace('.', '', $request->price);
+        $request->merge($requestData);
         $images_name = "";
         $mime = "";
         for ($i = 1; $i <= 4; $i++) {
@@ -116,6 +119,9 @@ class MenusController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
+        $requestData['cost'] = str_replace('.', '', $request->cost);
+        $requestData['price'] = str_replace('.', '', $request->price);
+        $request->merge($requestData);
         Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->find($menu->id)->update(($request->except(['category_name', 'image1', 'image2', 'image3', 'image4'])));
         return redirect('menus')->with('status', 'Menu Updated!');
     }

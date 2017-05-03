@@ -26,25 +26,32 @@
 						<label for="description">Deskripsi Menu</label>
 						<textarea name="description" class="form-control" placeholder="deskripsi menu">{{ (isset($menu)) ? $menu->description : '' }}</textarea>
 					</div>
+					<div class="form-group">
+                        <label for="category_id">Kategori Menu</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="category_name" placeholder="pilih kategori" value="{{ (isset($menu)) ? $menu->category->name : '' }}" readonly>
+                            <input type="hidden" class="form-control" name="category_id" value="{{ (isset($menu)) ? $menu->category->id : '' }}">
+                            <div class="span input-group-btn">
+                                <button class="btn btn-default" data-toggle="modal" data-target="#kategori" role="dialog" type="button">pilih</button>
+                            </div>
+                        </div>
+                    </div>
 					<div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="price">Biaya Produksi</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Rp</span>
+                                    <input type="text" class="form-control currency" name="cost" placeholder="harga menu" value="{{ (isset($menu)) ? $menu->cost : '' }}">
+                                </div>
+                            </div>
+                        </div>
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
-								<label for="category_id">Kategori Menu</label>
-								<div class="input-group">
-									<input type="text" class="form-control" name="category_name" placeholder="pilih kategori" value="{{ (isset($menu)) ? $menu->category->name : '' }}" readonly>
-									<input type="hidden" class="form-control" name="category_id" value="{{ (isset($menu)) ? $menu->category->id : '' }}">
-									<div class="span input-group-btn">
-										<button class="btn btn-default" data-toggle="modal" data-target="#kategori" role="dialog" type="button">pilih</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-12 col-sm-6">
-							<div class="form-group">
-								<label for="price">Harga Menu</label>
+								<label for="price">Harga Jual</label>
 								<div class="input-group">
 									<span class="input-group-addon">Rp</span>
-									<input type="text" class="form-control" name="price" placeholder="harga menu" value="{{ (isset($menu)) ? $menu->price : '' }}">
+									<input type="text" class="form-control currency" name="price" placeholder="harga menu" value="{{ (isset($menu)) ? $menu->price : '' }}">
 								</div>
 							</div>
 						</div>
@@ -177,9 +184,12 @@
 @endsection
 
 @section('javascripts')
-<script type="text/javascript" src="{{URL::asset('js/Category_Menu/category_menu.js')}}"></script>
+    <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
+    <script type="text/javascript" src="{{URL::asset('js/Category_Menu/category_menu.js')}}"></script>
 <script>
-	$("select[name='colour']").change(function(){
+    $('input.currency').number(true, 0, ',', '.');
+
+    $("select[name='colour']").change(function(){
 		if ($(this).val() != ""){
 			$(this).css('background-color', $(this).val()).css('color', '#FFF');
 		}else{

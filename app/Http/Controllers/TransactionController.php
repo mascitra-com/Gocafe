@@ -58,6 +58,7 @@ class TransactionController extends Controller
         // Get Items and calculate the total price
         $total_price = 0;
         $total_discount = 0;
+        $production_cost = 0;
         $total_payment = 0;
         $allId = $request->ids_menu;
         $allAmount = $request->amount;
@@ -73,6 +74,7 @@ class TransactionController extends Controller
                 $details[$key]['price'] = $menu->price;
                 $details[$key]['discount'] = $menu->discount;
                 // Calculate All Total to store in Transaction Table
+                $production_cost += $menu->cost * $allAmount[$key];
                 $total_price += $price = $menu->price * $allAmount[$key];
                 $total_discount += $discount = $menu->discount * $menu->price * $allAmount[$key];
                 $total_payment += ($price - $discount);
@@ -83,6 +85,7 @@ class TransactionController extends Controller
         $data['created_by'] = 2;
         $data['total_price'] = $total_price;
         $data['total_discount'] = $total_discount;
+        $data['production_cost'] = $production_cost;
         $data['total_payment'] = $total_payment;
         if($request->type){
             $data['status'] =  $request->type;

@@ -19,7 +19,7 @@
 						<tr>
 							<th class="text-center" width="20%">Tanggal Transaksi</th>
 							<th class="text-center">ID Transaksi</th>
-							<th class="text-center">Jumlah <br>Pemasukan</th>
+							<th class="text-center">Pendapatan</th>
 							<th class="text-center">Jenis <br>Pembayaran</th>
 							<th>Aksi</th>
 						</tr>
@@ -29,7 +29,7 @@
                         <tr>
 							<td class="text-center">{{ date('d-M-Y H:i:s', strtotime($transaction->created_at)) }}</td>
 							<td class="text-center">{{ $transaction->id }}</td>
-							<td class="text-center" style="padding-right: 2em">Rp. {{ number_format($transaction->total_payment, 0, ',', '.') }},-</td>
+							<td class="text-center" style="padding-right: 2em">Rp. {{ number_format($transaction->total_payment - $transaction->production_cost, 0, ',', '.') }},-</td>
                             <td class="text-center">{{ $transaction->status === 1 ? 'Tunai' : 'Kartu Kredit' }}</td>
                             <td>
                                 <a href="#" class="btn btn-info"><i class="fa fa-info"></i> Detail</a>
