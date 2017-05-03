@@ -51,7 +51,7 @@
 							<td class="text-center" style="padding-right: 2em">Rp. {{ number_format($transaction->total_payment - $transaction->production_cost, 0, ',', '.') }},-</td>
                             <td class="text-center">{{ $transaction->status === 1 ? 'Tunai' : 'Kartu Kredit' }}</td>
                             <td>
-                                <a href="#" class="btn btn-info"><i class="fa fa-info"></i> Detail</a>
+                                <a href="{{ url('revenue/detail/'.$transaction->id) }}" class="btn btn-info"><i class="fa fa-info"></i> Detail</a>
                             </td>
                        </tr>
                         @endforeach @endif
@@ -131,7 +131,8 @@
                         } else if (transaction.status === -1) {
                             status = 'Kartu Kredit';
                         }
-                        var markup = "<tr><td class='text-center'>" + $.format.date(transaction.created_at, 'dd-MMM-yyyy hh:mm:ss') + "</td><td>" + transaction.id + "</td><td class='text-right' style='padding-right: 2em'>Rp. " + $.number(transaction.total_payment - transaction.production_cost, 0, ',', '.') + ",-</td><td class='text-center'>" + status + "</td><td><a href='#' class='btn btn-info'><i class='fa fa-info'></i> Detail</a></td></tr>";
+                        var link = '{{ url('revenue/detail/') }}' + '/' + transaction.id;
+                        var markup = "<tr><td class='text-center'>" + $.format.date(transaction.created_at, 'dd-MMM-yyyy hh:mm:ss') + "</td><td>" + transaction.id + "</td><td class='text-right' style='padding-right: 2em'>Rp. " + $.number(transaction.total_payment - transaction.production_cost, 0, ',', '.') + ",-</td><td class='text-center'>" + status + "</td><td><a href='"+link+"' class='btn btn-info'><i class='fa fa-info'></i> Detail</a></td></tr>";
                         total += transaction.total_payment - transaction.production_cost;
                         $("#revenue").find('tbody').append(markup);
                     });

@@ -21,6 +21,7 @@
 							<th>Kode Item</th>
 							<th>Jumlah</th>
 							<th class="text-center" width="15%">Harga</th>
+							<th class="text-center" width="15%">Total Harga</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -30,13 +31,22 @@
 							<td>{{ $detail->item_id }}</td>
 							<td>{{ $detail->amount }} Item</td>
 							<td class="text-right" style="padding-right: 2em">Rp. {{ number_format($detail->price, 0, ',', '.') }},-</td>
+							<td class="text-right" style="padding-right: 2em">Rp. {{ number_format($detail->price * $detail->amount, 0, ',', '.') }},-</td>
                        </tr>
                         @endforeach @endif
 					</tbody>
                     <tfoot>
                     <tr>
-                        <th class="text-center" colspan="3">Total Transaksi</th>
-                        <th class="text-center" >Rp. <span id="total"><?=!empty($transaction) ? number_format($transaction->total_payment, 0, ',', '.') : ''?></span>,-</th>
+                        <th class="text-center" colspan="4">Total Transaksi</th>
+                        <th class="text-center" >Rp. <span id="total"><?=!empty($transaction) ? number_format($transaction[0]->total_payment, 0, ',', '.') : ''?></span>,-</th>
+                    </tr>
+                    <tr>
+                        <th class="text-center" colspan="4">Biaya Produksi</th>
+                        <th class="text-center" >Rp. <span id="total"><?=!empty($transaction) ? number_format($transaction[0]->production_cost, 0, ',', '.') : ''?></span>,-</th>
+                    </tr>
+                    <tr>
+                        <th class="text-center" colspan="4">Pendapatan</th>
+                        <th class="text-center" >Rp. <span id="total"><?=!empty($transaction) ? number_format($transaction[0]->total_payment - $transaction[0]->production_cost, 0, ',', '.') : ''?></span>,-</th>
                     </tr>
                     </tfoot>
 				</table>

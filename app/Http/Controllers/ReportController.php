@@ -46,12 +46,20 @@ class ReportController extends Controller
         return response()->json(['transactions' => $transactions]);
     }
 
-    public function detail($transactionId)
+    public function reportDetail($transactionId)
     {
         $transaction = Transaction::find($transactionId)
-            ->whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn());
+            ->whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn())->get();
         $details = TransactionDetail::where('transaction_id', $transactionId)->get();
-        return view('report.detail', compact('transaction', 'details'));
+        return view('report.reportDetail', compact('transaction', 'details'));
+    }
+
+    public function revenueDetail($transactionId)
+    {
+        $transaction = Transaction::find($transactionId)
+            ->whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn())->get();
+        $details = TransactionDetail::where('transaction_id', $transactionId)->get();
+        return view('report.revenueDetail', compact('transaction', 'details'));
     }
 
     /**

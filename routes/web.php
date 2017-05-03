@@ -95,8 +95,9 @@ Route::group(['middleware' => ['web']], function () {
     // REPORT
     Route::get('chart', 'ReportController@chart');
     Route::get('report', 'ReportController@index');
-    Route::get('report/detail/{transactionId}', 'ReportController@detail');
+    Route::get('report/detail/{transactionId}', 'ReportController@reportDetail');
     Route::get('revenue', 'ReportController@revenue');
+    Route::get('revenue/detail/{transactionId}', 'ReportController@revenueDetail');
     Route::get('filter_report/{startDate}/{endDate}/{paymentType}', 'ReportController@report_filter');
     Route::get('filter_revenue/{startDate}/{endDate}/{paymentType}', 'ReportController@revenue_filter');
     //--END REPORT
