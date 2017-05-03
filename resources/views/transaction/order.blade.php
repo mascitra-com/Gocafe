@@ -204,11 +204,11 @@
                     data:$(this).serialize(),
                     dataType: 'json',
                     success: function(data){
-                        var markup = "<tr><td width='15%'><img src='{{ asset('images/blank-avatar.png') }}' alt='' class='img-circle img-responsive'></td><td><p><input class='rating-avg' value='"+data.review.rating+"' class='rating' data-size='xs' data-show-clear='false' data-show-caption='false' readonly></p>"+data.review.review+"</td></tr>";
+                        var markup = "<tr><td width='15%'><img src='{{ asset('images/blank-avatar.png') }}' alt='' class='img-circle img-responsive'></td><td><p><input class='rating-avg' value='"+data.review.rating+"' class='rating' data-size='xs' data-show-clear='false' data-show-caption='false' readonly></p><p>" + data.review.review + "</p><p><span class='label label-default'>Baru Saja</span></p></td></tr>";
                         $("#table-review").find('tbody').prepend(markup);
                         $('.rating-avg').rating({displayOnly: true, step: 0.5});
-                        $('input#rating').attr('value', '');
-                        $('input#review').attr('value', '');
+                        $('#total-rating').empty().append("<input value='" + data.newRating + "' class='rating-avg' data-size='xs' data-show-clear='false' data-show-caption='false' readonly>");
+                        $('.rating-avg').rating({displayOnly: true, step: 0.5});
                         $('#form-review').hide();
                     },
                     error: function(data){
