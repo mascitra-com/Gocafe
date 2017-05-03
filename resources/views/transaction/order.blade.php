@@ -47,7 +47,7 @@
             </li>
             <li>
                 <div class="pull-right row" style="width: 225px; margin-top: .6em">
-                    <span for="table_number" class="col-md-6" style="margin-top: .5em; color:#fff;">Nomor Meja</span>
+                    <span for="table_number" class="col-md-6" style="margin-top: .5em; color:#fff;"><b>Nomor Meja</b></span>
                     <select id="table_number" class="form-control col-md-6" style="width: 75px">
                         <option value="">Pilih</option>
                         @for($i = 1; $i <= $numberOfTables; $i++)
@@ -98,8 +98,8 @@
                         <button class="btn btn-primary" onclick="addToCheck('{{ $firstMenu->id }}')"><i class="fa fa-plus"></i></button>
                     </div>
                     <h2 id="head-menu">{{ $firstMenu->name }}</h2>
-                    <div>
-                        <input id="rating-avg" value="{{ $firstMenu->rating }}" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" readonly>
+                    <div id="total-rating">
+                        <input value="" class="rating-avg" data-size="xs" data-show-clear="false" data-show-caption="false" readonly>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -169,21 +169,7 @@
                     </div>
                     <div class="row col-md-12">
                         <table class="table table-responsive" id="table-review">
-                            <tbody>
-                            @foreach($reviews as $review)
-                                <tr>
-                                    <td width="15%">
-                                        <img src="{{ asset('images/blank-avatar.png') }}" alt="" class="img-circle img-responsive">
-                                    </td>
-                                    <td>
-                                        <p>
-                                            <input class="rating-avg" value="{{ $review->rating }}" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" readonly>
-                                        </p>
-                                        {{ $review->review }}
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>

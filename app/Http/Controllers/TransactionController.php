@@ -43,7 +43,6 @@ class TransactionController extends Controller
         $menus = Cafe::findOrFail(Staff::getCafeIdByStaffIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
         $firstMenu = $menus[0];
         $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
-        $reviews = Review::where('item_id', $firstMenu->id)->orderBy('id', 'desc')->get();
         return view('transaction.order', compact('categories', 'menus', 'firstMenu', 'numberOfTables', 'reviews'));
     }
 

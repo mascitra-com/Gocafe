@@ -39,7 +39,8 @@ function getProductDetail(idMenu) {
                 $('#btn-add').html('<button class="btn btn-primary" onclick="addToCheck(\'' + menu.id +'\')"><i class="fa fa-plus"></i></button>');
                 $('#big-thumbnail').attr('src', getThumbnail(menu.id));
                 $('#item_id').val(menu.id);
-                // url('menus/showImage/'.$images[1])
+                $('#total-rating').empty().append("<input value='" + menu.rating + "' class='rating-avg' data-size='xs' data-show-clear='false' data-show-caption='false' readonly>");
+                $('.rating-avg').rating({displayOnly: true, step: 0.5});
                 var images = menu.images_name.split(':').filter(n => n);
                 var thumbnails = '';
                 $('#thumbnails').find('div').remove();
