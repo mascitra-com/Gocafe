@@ -98,6 +98,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('report/detail/{transactionId}', 'ReportController@detail');
     Route::get('revenue', 'ReportController@revenue');
     Route::get('filter_report/{startDate}/{endDate}/{paymentType}', 'ReportController@report_filter');
+    Route::get('filter_revenue/{startDate}/{endDate}/{paymentType}', 'ReportController@revenue_filter');
     //--END REPORT
 
     // REVIEW

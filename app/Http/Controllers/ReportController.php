@@ -65,6 +65,22 @@ class ReportController extends Controller
         return view('report.revenue', compact('transactions'));
     }
 
+    public function revenue_filter($startDate, $endDate, $paymentType)
+    {
+        if($paymentType === '-') {
+            $paymentType = FALSE;
+        }
+        $startDate = Carbon::parse($startDate);
+        $endDate = Carbon::parse($endDate);
+        $transactions = Transaction::whereBetween('created_at', [$startDate->format('Y-m-d')." 00:00:00", $endDate->format('Y-m-d')." 23:59:59"])
+            ->when($paymentType, function ($query) use ($paymentType) {
+                return $query->where('status', $paymentType);
+            })
+            ->where('status', '!=', 0)
+            ->whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn())
+            ->get();
+        return response()->json(['transactions' => $transactions]);
+    }
     /**
      * Show Chart
      *

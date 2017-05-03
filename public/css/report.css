@@ -1,6 +1,9 @@
 div#report_wrapper {
     margin: 1em 1em !important;
 }
+div#revenue_wrapper {
+    margin: 1em 1em !important;
+}
 .applyBtn {
     color: #fff;
     background-color: #8C4728;
