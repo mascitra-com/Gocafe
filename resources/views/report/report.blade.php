@@ -60,9 +60,8 @@
 					</tbody>
                     <tfoot>
                         <tr>
-                            <th class="text-center" colspan="2">Total Transaksi</th>
+                            <th class="text-center" colspan="3">Total Transaksi</th>
                             <th class="text-center" >Rp. <span id="total"><?=!empty($total_transactions) ? number_format($total_transactions, 0, ',', '.') : ''?></span>,-</th>
-                            <th></th>
                             <th></th>
                         </tr>
                     </tfoot>
