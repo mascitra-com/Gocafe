@@ -54,7 +54,21 @@ function getProductDetail(idMenu) {
                     thumbnails += "<div class='col-xs-6 col-md-3'><button class='thumbnail' onclick='changeBigThumbnail(\""+ imageSrc +"\")' data-src='"+ image +"'><img src='"+ imageSrc +"' alt='Thumbnail'></button></div>";
                 });
                 $('#thumbnails').html(thumbnails);
+                $('#form-review').show();
             });
+        }
+    });
+    $.ajax({
+        url: '/transaction/getReviews/' + idMenu,
+        dataType: 'json',
+        success: function (response) {
+            $("#table-review").find('tbody').empty();
+            $.each(response.reviews, function (i, review) {
+                var markup = "<tr><td width='15%'><img src='/images/blank-avatar.png' alt='' class='img-circle img-responsive'></td><td><p><input class='rating-avg' value='" + review.rating + "' class='rating' data-size='xs' data-show-clear='false' data-show-caption='false' readonly></p>" + review.review + "</td></tr>";
+                $("#table-review").find('tbody').append(markup);
+            });
+            $('.rating-avg').rating({displayOnly: true, step: 0.5});
+            $('#product-detail').modal('show');
         }
     });
 }

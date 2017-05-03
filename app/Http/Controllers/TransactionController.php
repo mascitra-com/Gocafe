@@ -116,6 +116,18 @@ class TransactionController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param $itemId
+     * @return \Illuminate\Http\Response
+     */
+    public function getReviewsByItemId($itemId)
+    {
+        $reviews = Review::where('item_id', $itemId)->orderBy('id', 'desc')->get();
+        return response()->json(['reviews' => $reviews]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Transaction $transaction

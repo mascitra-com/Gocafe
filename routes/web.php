@@ -89,14 +89,18 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('order', 'TransactionController@order');
     Route::post('order', 'TransactionController@store');
     Route::get('transaction/getMenusByTableNumber/{transactionId}', 'TransactionController@getMenusByTableNumber');
+    Route::get('transaction/getReviews/{itemId}', 'TransactionController@getReviewsByItemId');
+    //--END TRANSACTION
+
+    // REPORT
     Route::get('chart', 'ReportController@chart');
     Route::get('report', 'ReportController@index');
     Route::get('report/detail/{transactionId}', 'ReportController@detail');
     Route::get('revenue', 'ReportController@revenue');
     Route::get('filter_report/{startDate}/{endDate}/{paymentType}', 'ReportController@report_filter');
-    //--END TRANSACTION
+    //--END REPORT
 
-    //REVIEW
+    // REVIEW
     Route::post('review', 'ReviewController@store');
     //--END REVIEW
 });

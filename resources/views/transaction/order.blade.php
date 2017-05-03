@@ -62,7 +62,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6" id="productList">
+        <div class="col-md-12" id="productList">
             <div class="side-nav">
                 <ul class="nav">
                     <li style="margin-right: 1em"><a href="#" disabled="true">KATEGORI</a></li>
@@ -86,19 +86,23 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6" style="overflow:auto; position:absolute; top:0; left:50%; right:0px; bottom:50px; z-index: 0" id="productDetail">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title pull-left">Detail Produk</h3>
-                    <div class="pull-right" id="btn-add"><button class="btn btn-primary" onclick="addToCheck('{{ $firstMenu->id }}')"><i class="fa fa-plus"></i></button></div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="panel-body">
+    </div>
+@endsection
+
+@section('modal')
+    <div class="modal fade" tabindex="-1" role="dialog" id="product-detail">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="pull-right" id="btn-add">
+                        <button class="btn btn-primary" onclick="addToCheck('{{ $firstMenu->id }}')"><i class="fa fa-plus"></i></button>
+                    </div>
                     <h2 id="head-menu">{{ $firstMenu->name }}</h2>
                     <div>
                         <input id="rating-avg" value="{{ $firstMenu->rating }}" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" readonly>
                     </div>
-                    <br>
+                </div>
+                <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="thumbnail">
@@ -116,9 +120,9 @@
                                     <td class="text-primary">Diskon</td>
                                     <td id="discount">
                                         @if($firstMenu->discount)
-                                        - Rp. {{ number_format($firstMenu->price * $firstMenu->discount, 0, ',', '.') }},-
+                                            - Rp. {{ number_format($firstMenu->price * $firstMenu->discount, 0, ',', '.') }},-
                                         @else
-                                        -
+                                            -
                                         @endif
                                     </td>
                                 </tr>
@@ -148,7 +152,7 @@
                                 <tr>
                                     <td>Penilaian Anda</td>
                                     <td>
-                                        <input name="rating" id="input-id" type="text" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" data-step="1">
+                                        <input name="rating" id="rating" type="text" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" data-step="1">
                                     </td>
                                 </tr>
                                 <tr>
@@ -165,19 +169,21 @@
                     </div>
                     <div class="row col-md-12">
                         <table class="table table-responsive" id="table-review">
+                            <tbody>
                             @foreach($reviews as $review)
-                            <tr>
-                                <td width="15%">
-                                    <img src="{{ asset('images/blank-avatar.png') }}" alt="" class="img-circle img-responsive">
-                                </td>
-                                <td>
-                                    <p>
-                                        <input id="rating-avg" value="{{ $review->rating }}" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" readonly>
-                                    </p>
-                                    {{ $review->review }}
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="15%">
+                                        <img src="{{ asset('images/blank-avatar.png') }}" alt="" class="img-circle img-responsive">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            <input class="rating-avg" value="{{ $review->rating }}" class="rating" data-size="xs" data-show-clear="false" data-show-caption="false" readonly>
+                                        </p>
+                                        {{ $review->review }}
+                                    </td>
+                                </tr>
                             @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -198,7 +204,7 @@
     <script src="{{ url('js/order.js') }}"></script>
     <script>
         $(document).on('ready', function(){
-            $('#rating-avg').rating({displayOnly: true, step: 0.5});
+            $('.rating-avg').rating({displayOnly: true, step: 0.5});
         });
         $(function(){
             $('#form-review').on('submit',function(e){
@@ -212,10 +218,12 @@
                     data:$(this).serialize(),
                     dataType: 'json',
                     success: function(data){
-                        // TODO Make This Happen
-                        // var markup = "<tr><td width='15%'><img src='{{ asset('images/blank-avatar.png') }}' alt='' class='img-circle img-responsive'></td><td><p><input id='rating-avg' value='"+data.review.rating+"' class='rating' data-size='xs' data-show-clear='false' data-show-caption='false' readonly></p>"+data.review.review+"</td></tr>";
-                        // $("#table-review").find('tbody').append(markup);
-                        alert('Ulasan Anda Sudah di Simpan. Silahkan Lanjutkan Pesanan Anda');
+                        var markup = "<tr><td width='15%'><img src='{{ asset('images/blank-avatar.png') }}' alt='' class='img-circle img-responsive'></td><td><p><input class='rating-avg' value='"+data.review.rating+"' class='rating' data-size='xs' data-show-clear='false' data-show-caption='false' readonly></p>"+data.review.review+"</td></tr>";
+                        $("#table-review").find('tbody').prepend(markup);
+                        $('.rating-avg').rating({displayOnly: true, step: 0.5});
+                        $('input#rating').attr('value', '');
+                        $('input#review').attr('value', '');
+                        $('#form-review').hide();
                     },
                     error: function(data){
                     }

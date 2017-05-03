@@ -93,3 +93,10 @@ button.deleteMenu {
     cursor: pointer;
     overflow: hidden;
 }
+
+.modal-body {
+    position: relative;
+    overflow-y: auto;
+    max-height: 100%;
+    padding: 15px;
+}
