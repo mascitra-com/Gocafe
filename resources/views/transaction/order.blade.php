@@ -94,9 +94,8 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="pull-right" id="btn-add">
-                        <button class="btn btn-primary" onclick="addToCheck('{{ $firstMenu->id }}')"><i class="fa fa-plus"></i></button>
-                    </div>
+                    <button type="button" class="btn btn-primary pull-right" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true"><i class="fa fa-close"></i></span></button>
                     <h2 id="head-menu">{{ $firstMenu->name }}</h2>
                     <div id="total-rating">
                         <input value="" class="rating-avg" data-size="xs" data-show-clear="false" data-show-caption="false" readonly>
@@ -124,6 +123,13 @@
                                         @else
                                             -
                                         @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="btn-add">
+                                            <button class="btn btn-primary" onclick="addToCheck('{{ $firstMenu->id }}')"><i class="fa fa-plus"></i> Pesan</button>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
