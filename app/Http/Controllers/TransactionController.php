@@ -28,7 +28,8 @@ class TransactionController extends Controller
         $categories = CategoryMenu::all()->where('cafe_id', Staff::getCafeIdByStaffIdNowLoggedIn())->sortBy('name');
         $menus = Cafe::findOrFail(Staff::getCafeIdByStaffIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
         $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
-        return view('transaction.payment', compact('categories', 'menus', 'numberOfTables'));
+        $table = $this->makeTableLayout($numberOfTables);
+        return view('transaction.payment', compact('categories', 'menus', 'numberOfTables', 'table'));
     }
 
     /**
@@ -165,6 +166,32 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+    }
+
+    /**
+     * Get Table that contains table
+     *
+     * @param $totalCell - Sum of Table
+     * @return string
+     */
+    private function makeTableLayout($totalCell)
+    {
+        $tableNotAvailable = Transaction::getTableNotAvailable(CafeBranch::getBranchIdsByUserNowLoggedIn());
+        $t = 0;
+        $res = '<table width="200" border="1" class="table table-bordered"><tr>';
+        for ($i = 1; $i <= $totalCell; $i++) {
+            if(isset($tableNotAvailable[$t]) && $i === $tableNotAvailable[$t]->table_number){
+                $td = '<td align="center" class="danger">';
+                $t++;
+            } else {
+                $td = '<td align="center" class="success">';
+            }
+            if ($i % 5 == 0) $res .= $td . $i . '</td></tr><tr>';
+            else {
+                $res .= $td . $i . '</td>';
+            }
+        }
+        return $res . '</table>';
     }
 
 }

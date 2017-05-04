@@ -5,6 +5,7 @@ namespace App;
 use App\Http\Controllers\BranchController;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Transaction extends Model
 {
@@ -15,6 +16,16 @@ class Transaction extends Model
     protected $table = 'transactions';
 
     public $incrementing = false;
+
+    public static function getTableNotAvailable($branchId)
+    {
+        $table = DB::table('transactions')
+            ->select('table_number')
+            ->where('branch_id', $branchId)
+            ->where('status', 0)
+            ->get();
+        return $table;
+    }
 
     public function details()
     {

@@ -1,6 +1,12 @@
 @extends('_layout/transaction/index')
 @section('page_title', 'Pembayaran')
 
+@section('navbar-right')
+    <div class="pull-right" style="margin-top: .5em">
+        <button class="btn btn-primary"  data-toggle="modal" data-target="#table-availability">Ketersediaan Meja</button>
+    </div>
+@endsection
+
 @section('content')
     <div class="row" style="margin-top: 1em">
         <div class="col-xs-2">
@@ -139,6 +145,23 @@
     </div>
 @endsection
 
+@section('modal')
+    <div class="modal fade" tabindex="-1" role="dialog" id="table-availability">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn btn-primary pull-right" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true"><i class="fa fa-close"></i></span></button>
+                    <h2>Ketersediaan Meja</h2>
+                </div>
+                <div class="modal-body">
+                    {!! $table !!}
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
 @section('styles')
     <link rel="stylesheet" href="{{URL::asset('css/payment.css')}}">
 @endsection
@@ -147,6 +170,7 @@
     <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
     <script src="{{ url('js/payment.js') }}"></script>
     <script>
+        $('#table-availability').modal('show');
         var url = "{{ url('') }}";
         $('#table_number').on('change', function() {
             $("#bill").find("tbody").empty();
