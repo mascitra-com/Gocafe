@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-xs-6">
                     <div class="panel panel-default">
-                        <form action="{{ url('payment') }}" method="POST" id="form-payment">
+                        <form action="{{ url('payment') }}" method="POST" id="form-payment" onsubmit="return validateForm()">
                             {{ csrf_field() }}
                             <div class="panel-heading">
                                 <h3 class="panel-title pull-left">Pembayaran</h3>
@@ -170,7 +170,6 @@
     <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
     <script src="{{ url('js/payment.js') }}"></script>
     <script>
-        $('#table-availability').modal('show');
         var url = "{{ url('') }}";
         $('#table_number').on('change', function() {
             $("#bill").find("tbody").empty();

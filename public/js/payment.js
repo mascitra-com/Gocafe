@@ -2,6 +2,14 @@ $("tr.credit_card").hide();
 $('input#cash_received').number(true, 0, ',', '.');
 $('input#refund').number(true, 0, ',', '.');
 
+function validateForm() {
+    var table_number = document.getElementById("table_number").value;
+    if(!table_number) {
+        alert('Silahkan Pilih Nomor Meja!')
+    }
+    return !!table_number;
+}
+
 function update_refund() {
     var cash_received = $('input#cash_received').val()
     var total_payment = $("label.final").html();

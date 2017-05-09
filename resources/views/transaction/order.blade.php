@@ -9,7 +9,7 @@
                    aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-shopping-cart text-secondary"></i> <span class="text-secondary">Pesanan</span><span
                             class="caret text-secondary" id="cart"></span></a>
                 <div class="dropdown-menu" style="width: 500px; margin: .5em .5em">
-                    <form action="{{ url('order') }}" method="POST">
+                    <form action="{{ url('order') }}" method="POST" onsubmit="return validateForm()">
                         {{ csrf_field() }}
                         <input type="hidden" name="table_number" value="">
                         <input type="hidden" name="status" value="0">
@@ -128,7 +128,7 @@
                                 <tr>
                                     <td>
                                         <div id="btn-add">
-                                            <button class="btn btn-primary" onclick="addToCheck('{{ $firstMenu->id }}')"><i class="fa fa-plus"></i> Pesan</button>
+                                            <button class="btn btn-primary" onclick="addToCheck('{{ $firstMenu->id }}')" onmouseup="alert('Menu/Paket Sudah di Tambahkan, Silahkan Lanjutkan Pesanan Anda.')"><i class="fa fa-plus"></i> Pesan</button>
                                         </div>
                                     </td>
                                 </tr>
