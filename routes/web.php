@@ -68,8 +68,10 @@ Route::group(['middleware' => ['web']], function () {
 	//--END MENU'S CATEGORY
 
 	//CAFE'S PACKAGE
-	Route::resource('packages', 'PackagesController');
-	Route::get('packages/package_image/{id}', 'PackagesController@showImage'); //get avatar's response
+    Route::get('packages/getPackages', 'PackagesController@getPackages');
+    Route::get('packages/getPackage/{packageId}', 'PackagesController@getPackage');
+    Route::resource('packages', 'PackagesController');
+    Route::get('packages/package_image/{id}', 'PackagesController@showImage'); //get avatar's response
 	//--END CAFE'S PACKAGE
 
 	//PROMO

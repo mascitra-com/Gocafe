@@ -112,7 +112,25 @@ function showMenus(idCategory) {
                 var name = menu.name;
                 var price = $.number(menu.price, 0, '', '.');
                 var discount = "(- Rp. " + $.number(menu.price * menu.discount, 0, '', '.') + ")";
-                var markup = "<tr onclick=\"addToCheck('" + id + "')\" id='tr-menu' class='tr-selection text-quintuple'><td width='150px'><img src='" + getThumbnail(id) + "' class='img img-responsive' style='width: 150pt;'></td><td>" + name + "</td><td class='price text-right'>Rp. " + price + " <br>"+ (discount != '(- Rp. 0)' ? discount  : '') +"</td></tr>";
+                var markup = "<tr onclick=\"addMenuToCheck('" + id + "')\" id='tr-menu' class='tr-selection text-quintuple'><td width='150px'><img src='" + getThumbnail(id) + "' class='img img-responsive' style='width: 150pt;'></td><td>" + name + "</td><td class='price text-right'>Rp. " + price + " <br>"+ (discount != '(- Rp. 0)' ? discount  : '') +"</td></tr>";
+                $("#menus").find('tbody').append(markup);
+            });
+        }
+    });
+}
+
+function showPackages() {
+    var menus = $('#menus').find('tbody').empty();
+    $.ajax({
+        url: '/packages/getPackages/',
+        dataType: 'json',
+        success: function (response) {
+            $.each(response.packages, function (i, package) {
+                var id = package.id;
+                var name = package.name;
+                var thumbnailId = package.menus[0].id;
+                var price = $.number(package.price, 0, '', '.');
+                var markup = "<tr onclick=\"addPackageToCheck('" + id + "')\" id='tr-menu' class='tr-selection text-quintuple'><td width='150px'><img src='" + getThumbnail(thumbnailId) + "' class='img img-responsive' style='width: 150pt;'></td><td>" + name + "</td><td class='price text-right'>Rp. " + price + "</td></tr>";
                 $("#menus").find('tbody').append(markup);
             });
         }
@@ -125,7 +143,7 @@ function set_new_final_payment() {
     $("label.final").html(final);
 }
 
-function addToCheck(idMenu) {
+function addMenuToCheck(idMenu) {
     $.ajax({
         url: '/menus/getMenu/' + idMenu,
         dataType: 'json',
@@ -143,6 +161,26 @@ function addToCheck(idMenu) {
                 // Set Total Payment
                 set_total_payment(price);
                 set_new_discount(discount, true);
+                set_new_final_payment();
+                update_refund();
+            });
+        }
+    });
+}
+
+function addPackageToCheck(idPackage) {
+    $.ajax({
+        url: '/packages/getPackage/' + idPackage,
+        dataType: 'json',
+        success: function (response) {
+            $.each(response.package, function (i, package) {
+                var id = package.id;
+                var name = package.name;
+                var price = 'Rp. ' + $.number(package.price, 0, '', '.');
+                var markup = "<tr><input type='hidden' name='ids_menu[]' value='" + id + "'><td><button class='deleteMenu'><i class='fa fa-times'></i></button></td><td>" + name + "</td><td class='input-group'><span class='input-group-btn'><button class='btn btn-default btn-xs decrease' type='button'><i class='fa fa-arrow-down'></i></button></span><input class='form-control input-xs' maxlength='' type='text' name='amount[]' value='1' min='1' max='999' title='amount' readonly/><span class='input-group-btn'><button class='btn btn-default btn-xs increase' type='button'><i class='fa fa-arrow-up'></i></button></span></td><td><label class='price' for='price'>" + price + "</label></td></tr>";
+                $("#bill").find('tbody').append(markup);
+                // Set Total Payment
+                set_total_payment(price);
                 set_new_final_payment();
                 update_refund();
             });

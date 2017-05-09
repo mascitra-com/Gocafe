@@ -42,16 +42,10 @@ button.rectangle {
     margin-right: 0.6em;
     font-weight: bold;
 }
-
-.side-nav {
-    width:100vh;
-    height:25px;
-    position:absolute;
-    background:#8C4728;
-    -webkit-transform-origin: left top;
-    -webkit-transform:rotate(-90deg) translateX(-100%);
+h3 {
+    margin-left: 2em;
+    color: #FFFFFF;
 }
-
 ul.nav li {
     margin-right:20px;
     float:right;

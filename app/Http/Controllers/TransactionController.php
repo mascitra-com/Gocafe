@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CafeBranch;
 use App\Menu;
+use App\Package;
 use App\Review;
 use App\Staff;
 use App\Transaction;
@@ -44,7 +45,8 @@ class TransactionController extends Controller
         $menus = Cafe::findOrFail(Staff::getCafeIdByStaffIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
         $firstMenu = $menus[0];
         $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
-        return view('transaction.order', compact('categories', 'menus', 'firstMenu', 'numberOfTables', 'reviews'));
+        $packages = Package::with('menus')->get();
+        return view('transaction.order', compact('categories', 'menus', 'firstMenu', 'numberOfTables', 'reviews', 'packages'));
     }
 
     /**
@@ -79,6 +81,18 @@ class TransactionController extends Controller
                 $total_discount += $discount = $menu->discount * $menu->price * $allAmount[$key];
                 $total_payment += ($price - $discount);
             }
+            if($code_item === "PKG"){
+                $package = Package::where('id', $value)->get();
+                $details[$key]['id'] = idWithPrefix(11);
+                $details[$key]['item_id'] = $package[0]->id;
+                $details[$key]['amount'] = $allAmount[$key];
+                $details[$key]['price'] = $package[0]->price;
+                // Calculate All Total to store in Transaction Table
+                $production_cost += $package[0]->cost * $allAmount[$key];
+                $total_price += $price = $package[0]->price * $allAmount[$key];
+                $total_discount += $discount = $package[0]->price * $allAmount[$key];
+                $total_payment += $price;
+            }
         }
         // Add Data to Store to Transaction Table
         $data['id'] = $transactionId;
@@ -90,7 +104,6 @@ class TransactionController extends Controller
         if($request->type){
             $data['status'] =  $request->type;
         }
-
         $request->request->add($data);
         $transaction = new Transaction($request->except(array('ids_menu', 'amount', 'cash_received', 'refund', 'type')));
         $staff->saveTransaction($transaction, Staff::getStaffIdNowLoggedIn());
@@ -110,9 +123,12 @@ class TransactionController extends Controller
     public function getMenusByTableNumber($tableNumber)
     {
         // TODO Get BRANCH ID from Cafe BY STAFF ID Now Logged In
-        $transactionId = Transaction::where(array('table_number' => $tableNumber, 'status' => 0))->orderBy('created_at', 'desc')->first()->id;
-        $menus = TransactionDetail::where('transaction_id', $transactionId)->get();
-        return response()->json(['transactionId' => $transactionId, 'menus' => $menus]);
+        if($transactionId = Transaction::where(array('table_number' => $tableNumber, 'status' => 0))->orderBy('created_at', 'desc')->first()){
+            $items = TransactionDetail::where('transaction_id', $transactionId->id)->get();
+            return response()->json(['transactionId' => $transactionId, 'items' => $items]);
+        } else {
+            return response()->json(['transactionId' => FALSE]);
+        }
     }
 
     /**
@@ -150,8 +166,8 @@ class TransactionController extends Controller
         $transaction = Transaction::find($transactionId);
         $transaction->status = $request->type === 'cash' ? '1' : '-1'; // TODO Make This as Status Payment
         if($transaction->status == -1) {
-            $transaction->credit_card_name = $request->credit_card_name;
-            $transaction->credit_card_number = $request->credit_card_number;
+            $transaction->card_name = $request->card_name;
+            $transaction->card_number = $request->card_number;
         }
         $transaction->save();
         return redirect('payment')->with('status', 'Transaction Updated!');

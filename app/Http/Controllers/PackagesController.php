@@ -28,6 +28,26 @@ class PackagesController extends Controller
     }
 
     /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getPackages()
+    {
+        $packages = Package::with('menus')->get();
+        return response()->json(['success' => true, 'packages' => $packages]);
+    }
+
+    /**
+     * @param $idPackage
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getPackage($idPackage)
+    {
+        $package = Package::where('id', $idPackage)->get();
+        return response()->json(['success' => true, 'package' => $package]);
+    }
+
+
+    /**
      * Display a package's image.
      *
      * @param $id

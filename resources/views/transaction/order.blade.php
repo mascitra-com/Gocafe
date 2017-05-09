@@ -12,7 +12,6 @@
                     <form action="{{ url('order') }}" method="POST" onsubmit="return validateForm()">
                         {{ csrf_field() }}
                         <input type="hidden" name="table_number" value="">
-                        <input type="hidden" name="status" value="0">
                         <table class="table text-quintuple" id="bill">
                             <thead>
                             <tr>
@@ -63,13 +62,8 @@
 @section('content')
     <div class="row">
         <div class="col-md-12" id="productList">
-            <div class="side-nav">
-                <ul class="nav">
-                    <li style="margin-right: 1em"><a href="#" disabled="true">KATEGORI</a></li>
-                    <li style="margin-right: 15em"><a href="#" disabled="true">PRODUK</a></li>
-                </ul>
-            </div>
-            <div class="row grid">
+            <div class="row grid" style="margin-top: 2em;">
+                <h3>KATEGORI</h3>
                 <div class="list">
                     @foreach($categories as $category)
                         <button class="rectangle" onclick="showMenus('{{ $category->id }}')">{{ $category->name }}</button>
@@ -77,10 +71,21 @@
                 </div>
             </div>
             <div class="row grid2">
+                <h3>PRODUK</h3>
                 <div class="list" id="product">
                     @foreach($menus as $menu)
                         <button class="rectangle product" onclick="getProductDetail('{{ $menu->id }}')">
                             <img src="{{ url("menus/showThumbnail/$menu->id")}}" alt="Thumbnail">{{ $menu->name }}
+                        </button>
+                    @endforeach
+                </div>
+            </div>
+            <div class="row grid2">
+                <h3>PAKET</h3>
+                <div class="list" id="product">
+                    @foreach($packages as $package)
+                        <button class="rectangle product" onclick="addPackageToCheck('{{ $package->id }}')" onmouseup="alert('Paket Sudah ditambahkan. Silahkan Lanjutkan Pesanan Anda.')">
+                            <img src="{{ url("menus/showThumbnail/".$package->menus[0]->id)}}" alt="Thumbnail">{{ $menu->name }}
                         </button>
                     @endforeach
                 </div>
@@ -128,7 +133,7 @@
                                 <tr>
                                     <td>
                                         <div id="btn-add">
-                                            <button class="btn btn-primary" onclick="addToCheck('{{ $firstMenu->id }}')" onmouseup="alert('Menu/Paket Sudah di Tambahkan, Silahkan Lanjutkan Pesanan Anda.')"><i class="fa fa-plus"></i> Pesan</button>
+                                            <button class="btn btn-primary" onclick="addMenuToCheck('{{ $firstMenu->id }}')" onmouseup="alert('Menu/Paket Sudah di Tambahkan, Silahkan Lanjutkan Pesanan Anda.')"><i class="fa fa-plus"></i> Pesan</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -227,11 +232,13 @@
             $.ajax({
                 url: '/transaction/getMenusByTableNumber/' + this.value,
                 dataType: 'json',
-                success: function () {
-                    var conf = confirm('Meja Ini Masih Terdapat Transaksi yg Belum Dibayarkan / Sudah Di Pesan! Anda');
-                    if(!conf){
-                        $('#table_number').val('');
-                        $('input[name ="table_number"]').val('');
+                success: function (response) {
+                    if(response.transactionId['id']) {
+                        var conf = confirm('Meja Ini Masih Terdapat Transaksi yg Belum Dibayarkan / Sudah Di Pesan! Anda');
+                        if (!conf) {
+                            $('#table_number').val('');
+                            $('input[name ="table_number"]').val('');
+                        }
                     }
                 }
             });

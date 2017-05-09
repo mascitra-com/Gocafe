@@ -24,6 +24,9 @@
                                 </td>
                             </tr>
                         @endforeach
+                        <tr onclick="showPackages()" id="tr-package" class="tr-selection">
+                            <td class="text-quintuple"><br>PAKET<br><br></td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -39,7 +42,7 @@
                         <div class="panel-body table-responsive table-full">
                             <table class="table table-hover" id="menus">
                                 @foreach($menus as $menu)
-                                    <tr onclick="addToCheck('{{ $menu->id }}')" id="tr-menu"
+                                    <tr onclick="addMenuToCheck('{{ $menu->id }}')" id="tr-menu"
                                         class="tr-selection text-quintuple">
                                         <td width="150px"><img src="{{url("menus/showThumbnail/$menu->id")}}"
                                                                class="img img-responsive" style="width: 150px;" alt="">
@@ -182,11 +185,14 @@
                 url: '/transaction/getMenusByTableNumber/' + this.value,
                 dataType: 'json',
                 success: function (response) {
-                    $.each(response.menus, function (i, menu) {
-                        addToCheck(menu.item_id);
-                    });
-                    $('#form-payment').attr('action', url + '/payment/' + response.transactionId)
-                    .append('{{ method_field('PATCH') }}');
+                    if(response.transactionId['id']) {
+                        $.each(response.items, function (i, item) {
+                            addMenuToCheck(item.item_id);
+                            addPackageToCheck(item.item_id);
+                        });
+                        $('#form-payment').attr('action', url + '/payment/' + response.transactionId['id'])
+                            .append('{{ method_field('PATCH') }}');
+                    }
                 }
             })
         });
