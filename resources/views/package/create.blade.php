@@ -39,7 +39,10 @@
 						<thead>
 							<td colspan="4">
 								<div class="input-group">
-									<input type="text" list="data-list" class="form-control" placeholder="search menu" autocomplete="off">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="reset"><i class="fa fa-close"></i></button>
+                                    </span>
+									<input type="text" list="data-list" class="form-control" placeholder="Search Menu" autocomplete="off">
 									<datalist id="data-list">
 										@foreach($menus as $menu)
 										<option value="{{ $menu->name . '|' . $menu->id }}" />
@@ -82,62 +85,5 @@
 	@endsection
 
 	@section('javascripts')
-	<script type="text/javascript">
-		var data = [];
-		var menu_id = [];
-
-		$('.btn-tambah').click(function(){
-			$input = $("input[list='data-list']").val();
-			if ($input) {
-				var id = $input.split("|");
-				data.push($input);
-				menu_id.push(id[1]);
-				refresh();
-			}else{
-				alert('Pilih menu terlebih dahulu!');
-			}
-		});
-
-		$("tbody").delegate('.btn-remove','click', function(){
-			var ind = data.indexOf($(this).data('index'));
-			if (ind > -1) {
-				data.splice(ind, 1);
-			}
-			refresh();
-		});
-
-		function refresh() {
-			var asset = "{{URL::asset('images/blank-avatar.png')}}";
-			$(".table-menu > tbody").empty();
-			data.forEach(function (item, index) {
-				var html = "<tr><td><img src='"+ "{{URL::asset('images/blank-avatar.png')}}" +"' alt='thumbnail' class='menu-thumbnail'></td>";
-				html+= "<td><h4>"+ item +"</h4><p>"+ "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, deleniti." +"</p></td>";
-				html+= "<td><span class='label label-success'>"+ "Rp 10.000" + "</span></td>"
-				html+= "<td class='text-nowrap btn-remove'><button class='btn btn-default btn-xs' data-index='" + (index) + "' type='button'><i class='fa fa-ellipsis-h'></i></button>";
-				html+= "<button class='btn btn-default btn-xs' type='button'><i class='fa fa-times text-red'></i></button></td></tr>";
-				$(".table-menu > tbody").append(html);
-			});
-		}
-
-		$('form').on('submit', function(e){
-			e.preventDefault();
-			$.post("{{url('packages')}}",
-			{
-				_method: 'POST',
-				_token: $('meta[name="csrf-token"]').attr('content'),
-				name: $("input[name='name']").val(),
-				description: $("textarea[name='description']").val(),
-				price: $("input[name='price']").val(),
-				menus_id: menu_id
-			},
-			function(data, status){
-				if (status) {
-                    alert('Input paket Berhasil');
-                    window.location.href = "{{ url('packages') }}";
-				}else{
-					alert('Input paket gagal');
-				}
-			});
-		});
-	</script>
+        <script src="{{ asset('js/package.js') }}"></script>
 	@stop

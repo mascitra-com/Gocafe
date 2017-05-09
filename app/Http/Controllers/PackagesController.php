@@ -23,7 +23,7 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        $packages = Package::all();
+        $packages = Package::with('menus')->get();
         return view('package.package', compact('packages'));
     }
 
