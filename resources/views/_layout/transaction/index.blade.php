@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     @yield('header')
-    <title>Gocafe | @yield('page_title')</title>
+    <title>Kulinerae | @yield('page_title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{URL::asset('plugins/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('plugins/fontawesome/css/font-awesome.min.css')}}">
@@ -39,7 +39,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="{{ url('') }}" id="btn-menu" data-menu="#nav-side"><i
-                                class="fa fa-bars btn-responsive"></i>GOCAFE</a>
+                                class="fa fa-bars btn-responsive"></i>KULINERAE</a>
                 </div>
                 @yield('navbar-right')
             </div>

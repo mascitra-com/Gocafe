@@ -17,7 +17,7 @@
     <!-- Following Menu -->
     <div class="ui large top fixed hidden menu">
         <div class="ui container">
-            <a class="item"><b>GOCAFE</b></a>
+            <a class="item"><b>KULINERAE</b></a>
             <a class="category item" data-position="bottom right">
                 Kategori
                 <i class="dropdown icon"></i>
