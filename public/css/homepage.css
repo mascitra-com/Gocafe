@@ -1,0 +1,80 @@
+.ui.vertical.segment.container {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+.ui.card.stack.fluid {
+    margin-bottom: 2em;
+}
+.ui.card.stack {
+    flex-direction: row;
+}
+.ui.card.stack > div > img {
+    max-height: 200px;
+    width: auto;
+}
+.ui.card.stack > div {
+    margin-bottom: ;
+}
+.ui.card.stack > .content {
+    padding: 1.5em;
+}
+.ui.input input:focus,
+.ui.input.focus input,
+.ui.selection.dropdown:focus,
+.ui.selection.dropdown:hover {
+    border: 1px solid rgba(34,36,38,.15);
+}
+.ui.action.input:not([class*="left action"]) input:focus {
+    border-right-color: transparent !important;
+}
+.menu > a.item, .ui.fixed.menu .ui.item {
+    position: initial !important;
+}
+.ui.large.top.fixed.hidden.menu {
+    background-color: whitesmoke;
+}
+#promo {
+     margin-bottom: .1em
+ }
+.ui.tab {
+    height: 17vh;
+}
+.ui.pointing.secondary.menu {
+     margin-bottom: 1vh;
+}
+div.pusher {
+    margin-top: 5em;
+}
+select#location {
+    font-size: 10pt;
+}
+.tab {
+    padding: 1em;
+}
+a {
+    color: #F18803;
+}
+.ui.selectable.table tbody tr:hover, .ui.table tbody tr td.selectable:hover {
+    background: transparent !important;
+    color: #8C4728 !important;
+}
+a:hover {
+    color: #8C4728;
+}
+.ui.card>.content>a.header:hover, .ui.cards>.card>.content>a.header:hover {
+    color: #8C4728;
+}
+.ui.secondary.pointing.menu .active.item:hover {
+    border-color: #8C4728;
+    color: #8C4728;
+    font-weight: normal;
+}
+.ui.secondary.pointing.menu .active.item {
+    border-color: #8C4728;
+    color: #8C4728;
+    font-weight: normal;
+}
+.ui.secondary.pointing.menu .dropdown.item:hover, .ui.secondary.pointing.menu .link.item:hover, .ui.secondary.pointing.menu a.item:hover {
+    background-color: transparent;
+    color: #8C4728;
+}
