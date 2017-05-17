@@ -88,7 +88,7 @@
         <h3>Rekomendasi Toko</h3>
         <div class="ui eight doubling cards">
             @foreach($cafes as $cafe)
-            <a class="card" href="#">
+            <a class="card" href="{{ url('shop/'.$cafe->id) }}">
                 <div class="image">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHfIvsQ2CtsjxMC-GVIJFu7ab5I9GTdsMS5pelqZCFfvAYortrg">
                 </div>

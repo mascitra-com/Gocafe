@@ -13,14 +13,6 @@ use Illuminate\Support\Facades\DB;
  */
 class CafeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Display Cafe Profile by owner id now logged in.

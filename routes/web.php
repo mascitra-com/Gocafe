@@ -18,7 +18,6 @@ Route::group(['middleware' => ['web']], function () {
 		return redirect('dashboard');
 	});
 
-
 	Auth::routes();
 
 	Route::get('/home', 'HomeController@index');
@@ -55,8 +54,6 @@ Route::group(['middleware' => ['web']], function () {
 
 	//CAFE'S MENU
 	Route::resource('menus', 'MenusController');
-    Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail'); //get avatar's response
-    Route::get('menus/showImage/{image_file}', 'MenusController@showImage'); //get avatar's response
     Route::get('menus/getMenus/{idCategory}', 'MenusController@getMenus');
     Route::get('menus/getMenu/{idMenu}', 'MenusController@getMenu');
     //--END CAFE'S MENU
@@ -108,10 +105,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('review', 'ReviewController@store');
     //--END REVIEW
 
-    //HOMEPAGE
-    Route::get('shop/{cafeId}', 'HomeController@shop');
-    //--END HOMEPAGE
 });
+//HOMEPAGE
+Route::get('shop/{cafeId}', 'HomeController@shop');
+//--END HOMEPAGE
+Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail'); //get avatar's response
+Route::get('menus/showImage/{image_file}', 'MenusController@showImage'); //get avatar's response
+
 // DUMMIES VIEW
 Route::get('ui/', 'Ui@Index');
 Route::get('ui/dashboard', 'Ui@Dashboard');

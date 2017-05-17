@@ -18,10 +18,6 @@ use Illuminate\Contracts\Encryption\DecryptException;
  */
 class ProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * @param User $user

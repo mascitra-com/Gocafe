@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Homepage</title>
+    <link rel="stylesheet" href="{{URL::asset('plugins/fontawesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/semantic-ui/semantic.min.css') }}">
     @yield('styles')
 </head>
@@ -12,7 +13,7 @@
 
 <!-- Following Menu -->
 <div class="ui large top fixed hidden menu">
-    <a class="item"><b>KULINERAE</b></a>
+    <a class="item" href="{{ url('home') }}"><b>KULINERAE</b></a>
     <a class="category item">
         Kategori
         <i class="dropdown icon"></i>

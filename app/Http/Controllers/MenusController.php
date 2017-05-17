@@ -16,10 +16,6 @@ use Illuminate\Support\Facades\Storage;
  */
 class MenusController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Display a listing of the resource.
@@ -144,7 +140,7 @@ class MenusController extends Controller
      */
     public function getMenus($idCategory)
     {
-        $menus = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->where('category_id', $idCategory);
+        $menus = Menu::where('category_id', $idCategory)->get();
         return response()->json(['success' => true, 'menus' => $menus]);
     }
 

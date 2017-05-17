@@ -10,12 +10,27 @@
         <div class="ui two column divided grid">
             <div class="row">
                 <div class="six column">
-                    <h3>Royal Restaurant</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquam aut culpa, cum dicta dolor, doloremque enim impedit ipsam ipsum laborum neque officia pariatur possimus praesentium quasi quos similique voluptate.</p>
+                    <h3>{{ $cafe->name }}</h3>
+                    <p>{{ $cafe->description }}</p>
                 </div>
                 <div class="six column">
-                    <img class="ui small left floated image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHfIvsQ2CtsjxMC-GVIJFu7ab5I9GTdsMS5pelqZCFfvAYortrg">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic illo molestiae tempore. Laudantium magni maxime necessitatibus quod. Blanditiis cupiditate nisi recusandae reiciendis tempora. Iusto molestiae optio, pariatur repudiandae sed sint.</p>
+                    <div class="ui grid">
+                        <div class="four wide column">
+                            <img class="ui small image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHfIvsQ2CtsjxMC-GVIJFu7ab5I9GTdsMS5pelqZCFfvAYortrg">
+                        </div>
+                        <div class="twelve wide column">
+                            <table class="ui table table-responsive" style="border: none">
+                            <tr>
+                                <td><a href="www.facebook.com/{{ $cafe->facebook }}"><i class="fa fa-facebook-square"></i> {{ $cafe->facebook }}</a></td>
+                                <td><a href="www.twitter.com/{{ $cafe->twitter }}"><i class="fa fa-twitter-square"></i> {{ $cafe->twitter }}</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="www.instagram.com/{{ $cafe->instagram }}"><i class="fa fa-instagram"></i> {{ $cafe->instagram }}</a</td>
+                                <td style="color: #F18803"><i class="fa fa-phone-square"></i> {{ $cafe->phone }}</td>
+                            </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -25,27 +40,12 @@
             <div class="three wide column">
                 <h3>Kategori</h3>
                 <div class="ui secondary vertical menu">
-                    <a class="active brown item">
-                        Makanan
-                        <div class="ui brown left label">21</div>
-                    </a>
-                    <a class="item">
-                        Minuman
-                        <div class="ui label">25</div>
-                    </a>
-                    <a class="item">
-                        Snack
-                        <div class="ui label">12</div>
-                    </a>
-                    <div class="ui dropdown item">
-                        <i class="dropdown icon"></i>
-                        Lainnya
-                        <div class="menu">
-                            <a class="item">Small</a>
-                            <a class="item">Medium</a>
-                            <a class="item">Large</a>
-                        </div>
-                    </div>
+                    @foreach($categories as $category)
+                        <a class="brown item" data-id="{{ $category->id }}">
+                            {{ $category->name }}
+                            {{--<div class="ui brown left label">21</div>--}}
+                        </a>
+                    @endforeach
                 </div>
                 <h3>Informasi</h3>
                 <div class="ui secondary vertical menu">
@@ -65,26 +65,26 @@
             </div>
             <div class="thirteen wide column" style="padding-left: 2em">
                 <h3>Produk</h3>
-                <div class="ui three doubling cards">
-                    @for($i = 1; $i <= 9; $i++)
+                <div class="ui three doubling cards" id="productList">
+                    @foreach($menus as $menu)
                         <div class="card">
                             <div class="image">
-                                <img src="https://semantic-ui.com/images/wireframe/image.png">
+                                <img src="{{url("menus/showThumbnail/$menu->id")}}">
                             </div>
                             <div class="content">
-                                <div class="header">Makanan {{ $i }}</div>
+                                <div class="header">{{ $menu->name }}</div>
                             </div>
                             <div class="extra content">
-                                <span class="right floated">
-                                Di Pesan {{ $i * 32 }}x
-                                </span>
                                 <span>
-                                <i class="heart brown icon"></i>
-                                Disukai {{ $i *13 }}x
+                                <i class="money brown icon"></i>
+                                <b>Rp. {{ number_format($menu->price, 0, ',', '.') }}</b>
+                                </span>
+                                <span class="right floated">
+                                    <div class="ui star rating right floated" data-rating="{{ floor($menu->rating) }}"></div>
                                 </span>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -125,9 +125,43 @@
 @endsection
 
 @section('javascripts')
+    <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
     <script>
+        $(document).ready(function() {
+            $('.ui.star.rating').rating({
+                maxRating: 5
+            }).rating('disable');
+        });
+        $("a.brown").first().addClass("active");
         $('.ui.dropdown').dropdown({
             on: 'hover'
         });
+
+        $("a.brown").click(function(){
+            $("a.brown").removeClass("active").eq($(this).index()).addClass('active');
+            var idCategory = $(this).data("id");
+            var menus = $('#productList').empty();
+            $.ajax({
+                url: '/menus/getMenus/' + idCategory,
+                dataType: 'json',
+                success: function (response) {
+                    $.each(response.menus, function (i, menu) {
+                        var id = menu.id;
+                        var name = menu.name;
+                        var price = $.number(menu.price, 0, '', '.');
+                        var rating = Math.floor(menu.rating);
+                        var markup = "<div class='card'><div class='image'><img src='" + getThumbnail(id) + "'></div><div class='content'><div class='header'>" + name + "</div></div><div class='extra content'><span><i class='money brown icon'></i><b>Rp." + price + "</b></span><span class='right floated'><div class='ui star rating right floated' data-rating='" + rating + "'></div></span></div></div>";
+                        $("#productList").append(markup);
+                    });
+                    $('.ui.star.rating').rating({
+                        maxRating: 5
+                    }).rating('disable');
+                }
+            });
+        });
+
+        function getThumbnail(idMenu) {
+            return "http://gocafe.dev/menus/showThumbnail/" + idMenu;
+        }
     </script>
 @endsection
