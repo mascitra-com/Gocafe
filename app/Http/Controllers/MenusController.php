@@ -150,7 +150,7 @@ class MenusController extends Controller
      */
     public function getMenu($idMenu)
     {
-        $menu = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->where('id', $idMenu);
+        $menu = Menu::where('id', $idMenu)->get();
         return response()->json(['success' => true, 'menu' => $menu]);
     }
 

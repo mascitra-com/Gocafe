@@ -171,7 +171,7 @@
             $('#big-thumbnail').attr('src', getThumbnail(productId));
             $('#thumbnails').find('div').remove();
             $.ajax({
-                url: '/menus/getMenu/' + productId,
+                url: "http://"+ hostname + '/menus/getMenu/' + productId,
                 dataType: 'json',
                 success: function (response) {
                     $.each(response.menu, function (i, menu) {
@@ -186,7 +186,7 @@
                             } else {
                                 imageSrc = imageUrl(image);
                             }
-                            thumbnails += "<div class='card'><div class='image'><img src='" + imageSrc + "'></div></div>";
+                            thumbnails += "<a class='card' onclick='changeBigThumbnail(\""+ imageSrc +"\")' ><div class='image'><img src='" + imageSrc + "'></div></a>";
                             $('#thumbnails').html(thumbnails);
                         });
                     });
@@ -207,7 +207,7 @@
             var idCategory = $(this).data("id");
             var menus = $('#productList').empty();
             $.ajax({
-                url: '/menus/getMenus/' + idCategory,
+                url: "http://"+ hostname + '/menus/getMenus/' + idCategory,
                 dataType: 'json',
                 success: function (response) {
                     $.each(response.menus, function (i, menu) {
@@ -228,6 +228,10 @@
 
         function getThumbnail(idMenu) {
             return "http://" + hostname + "/menus/showThumbnail/" + idMenu;
+        }
+
+        function changeBigThumbnail(src) {
+            $('#big-thumbnail').attr('src', src);
         }
     </script>
 @endsection
