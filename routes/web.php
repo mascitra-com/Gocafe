@@ -107,6 +107,10 @@ Route::group(['middleware' => ['web']], function () {
     // REVIEW
     Route::post('review', 'ReviewController@store');
     //--END REVIEW
+
+    //HOMEPAGE
+    Route::get('shop/{cafeId}', 'HomeController@shop');
+    //--END HOMEPAGE
 });
 // DUMMIES VIEW
 Route::get('ui/', 'Ui@Index');

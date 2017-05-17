@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Cafe;
+
 class HomeController extends Controller
 {
     /**
@@ -11,6 +13,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $cafes = Cafe::all();
+        return view('homepage.index', compact('cafes'));
     }
+
+    public function shop($cafeId)
+    {
+        $cafe = Cafe::where('id', $cafeId)->first();
+        return view('homepage.shop', compact('cafe'));
+    }
+
 }

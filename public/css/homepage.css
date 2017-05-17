@@ -1,5 +1,4 @@
 .ui.vertical.segment.container {
-    padding-top: 2em;
     padding-bottom: 2em;
 }
 .ui.card.stack.fluid {
@@ -9,11 +8,11 @@
     flex-direction: row;
 }
 .ui.card.stack > div > img {
-    max-height: 200px;
+    max-width: 300px;
     width: auto;
 }
 .ui.card.stack > div {
-    margin-bottom: ;
+    margin-bottom: 0;
 }
 .ui.card.stack > .content {
     padding: 1.5em;

@@ -32,7 +32,7 @@ class PackagesController extends Controller
      */
     public function getPackages()
     {
-        $packages = Package::with('menus')->get();
+        $packages = Package::where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn())->with('menus')->get();
         return response()->json(['success' => true, 'packages' => $packages]);
     }
 

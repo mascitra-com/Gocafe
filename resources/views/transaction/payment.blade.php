@@ -36,7 +36,7 @@
                 <div class="col-xs-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title pull-left">{{ $categories[0]['name'] }}</h3>
+                            <h3 class="panel-title pull-left">Produk</h3>
                             <div class="clearfix"></div>
                         </div>
                         <div class="panel-body table-responsive table-full">
