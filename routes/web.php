@@ -108,6 +108,7 @@ Route::group(['middleware' => ['web']], function () {
 });
 //HOMEPAGE
 Route::get('shop/{cafeId}', 'HomeController@shop');
+Route::get('product/{productId}', 'HomeController@product');
 //--END HOMEPAGE
 Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail'); //get avatar's response
 Route::get('menus/showImage/{image_file}', 'MenusController@showImage'); //get avatar's response

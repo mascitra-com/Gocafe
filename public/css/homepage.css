@@ -77,3 +77,8 @@ a:hover {
     background-color: transparent;
     color: #8C4728;
 }
+p.price-last-update {
+    font-size: 8pt;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgba(124, 70, 33, 0.51);
+}
