@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CafeBranch;
+use App\Package;
 use App\Transaction;
 use App\TransactionDetail;
 use App\Menu;
@@ -103,6 +104,12 @@ class ReportController extends Controller
             if($code_item === "MCF"){
                 $menu = Menu::find($value->item_id);
                 $favMenus[$key]->name = $menu->name;
+                $favMenus[$key]->type = 'Menu';
+            }
+            if($code_item === "PKG"){
+                $package = Package::find($value->item_id);
+                $favMenus[$key]->name = $package->name;
+                $favMenus[$key]->type = 'Paket';
             }
         }
         // Customers per 30 day

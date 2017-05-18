@@ -15,6 +15,7 @@
 						<tr>
 							<th>#</th>
 							<th>Nama</th>
+							<th>Jenis</th>
 							<th>Jumlah Pesanan</th>
 						</tr>
 					</thead>
@@ -24,6 +25,7 @@
                         <tr>
 							<td>{{ $no++ }}</td>
 							<td>{{ $favorite->name }}</td>
+							<td>{{ $favorite->type }}</td>
 							<td>{{ $favorite->total_order }} Pesanan</td>
 						</tr>
                     @endforeach @endif
