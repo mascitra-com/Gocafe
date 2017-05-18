@@ -174,28 +174,26 @@
                 url: "http://"+ hostname + '/menus/getMenu/' + productId,
                 dataType: 'json',
                 success: function (response) {
+                    var thumbnails = '';
+                    var images = '';
                     $.each(response.menu, function (i, menu) {
                         $('.modal > .header').html(menu.name);
-                        var images = menu.images_name.split(':').filter(n => n);
-                        var thumbnails = '';
-                        var k = 1;
-                        var imageSrc = '';
-                        $.each(images, function (i, image) {
-                            if(image === 'default') {
-                                imageSrc = imageUrl(images[i - k++]);
-                            } else {
-                                imageSrc = imageUrl(image);
-                            }
-                            thumbnails += "<a class='card' onclick='changeBigThumbnail(\""+ imageSrc +"\")' ><div class='image'><img src='" + imageSrc + "'></div></a>";
-                            $('#thumbnails').html(thumbnails);
-                        });
+                        images = menu.images_name.split(':').filter(n => n);
                     });
-                },
-                complete : function () {
-                    $('.ui.long.modal').modal('show');
+                    var k = 1;
+                    var imageSrc = '';
+                    $.each(images, function (i, image) {
+                        if(image === 'default') {
+                            imageSrc = imageUrl(images[i - k++]);
+                        } else {
+                            imageSrc = imageUrl(image);
+                        }
+                        thumbnails += "<a class='card' onclick='changeBigThumbnail(\""+ imageSrc +"\")' ><div class='image'><img src='" + imageSrc + "'></div></a>";
+                    });
+                    $('#thumbnails').html(thumbnails);
+                    $('.ui.long.modal').modal('toggle')
                 }
             });
-
         }
 
         function imageUrl(image) {
