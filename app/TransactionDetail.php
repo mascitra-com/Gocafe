@@ -20,6 +20,7 @@ class TransactionDetail extends Model
             ->whereIn('transactions.branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn())
             ->groupBy('transaction_details.item_id')
             ->orderBy('total_order', 'desc')
+            ->limit(5, 0)
             ->get();
         return $top5menus;
     }
