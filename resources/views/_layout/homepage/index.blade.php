@@ -13,7 +13,7 @@
 
 <!-- Following Menu -->
 <div class="ui large top fixed hidden menu">
-    <a class="item" href="{{ url('home') }}"><b>KULINERAE</b></a>
+    <a class="item" href="{{ url('/') }}"><b>KULINERAE</b></a>
     <a class="category item">
         Kategori
         <i class="dropdown icon"></i>
