@@ -23,9 +23,29 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        $packages = Package::all();
+        $packages = Package::with('menus')->get();
         return view('package.package', compact('packages'));
     }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getPackages()
+    {
+        $packages = Package::where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn())->with('menus')->get();
+        return response()->json(['success' => true, 'packages' => $packages]);
+    }
+
+    /**
+     * @param $idPackage
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getPackage($idPackage)
+    {
+        $package = Package::where('id', $idPackage)->get();
+        return response()->json(['success' => true, 'package' => $package]);
+    }
+
 
     /**
      * Display a package's image.

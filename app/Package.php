@@ -13,7 +13,7 @@ class Package extends Model
 
 	protected $fillable = ['id', 'cafe_id' ,'name', 'description', 'price','images_name','mime', 'created_by', 'updated_by', 'deleted_by', 'discount'];    
 
-	protected $hidden = ['id', 'created_by', 'updated_by', 'deleted_by'];
+	protected $hidden = ['created_by', 'updated_by', 'deleted_by'];
 
 	public function getImage($id, $disk, $path)
 	{

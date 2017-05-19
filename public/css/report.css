@@ -1,0 +1,40 @@
+div#report_wrapper {
+    margin: 1em 1em !important;
+}
+div#revenue_wrapper {
+    margin: 1em 1em !important;
+}
+.applyBtn {
+    color: #fff;
+    background-color: #8C4728;
+    border-color: #723834;
+}
+.applyBtn:hover {
+    color: #fff;
+    background-color: #F18803;
+    border-color: #8C4728;
+}
+.applyBtn:focus  {
+    color: #fff;
+    background-color: #F18803;
+    border-color: #8C4728;
+}
+.applyBtn:active {
+    color: #fff;
+    background-color: #F18803;
+    border-color: #8C4728;
+}
+.btn-success.active.focus, .btn-success.active:focus, .btn-success.active:hover, .btn-success:active.focus, .btn-success:active:focus, .btn-success:active:hover, .open>.dropdown-toggle.btn-success.focus, .open>.dropdown-toggle.btn-success:focus, .open>.dropdown-toggle.btn-success:hover {
+    color: #fff;
+    background-color: #F18803;
+    border-color: #8C4728;
+}
+.daterangepicker td.active, .daterangepicker td.active:hover {
+    background-color: #8C4728;
+}
+.daterangepicker td.in-range {
+    background-color: #F2EBDF;
+}
+.daterangepicker td.end-date.in-range {
+    background-color: #8C4728;
+}

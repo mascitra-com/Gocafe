@@ -16,10 +16,6 @@ use Illuminate\Support\Facades\Storage;
  */
 class MenusController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Display a listing of the resource.
@@ -60,6 +56,9 @@ class MenusController extends Controller
             'description' => 'required',
             'price' => 'required',
         ]);
+        $requestData['cost'] = str_replace('.', '', $request->cost);
+        $requestData['price'] = str_replace('.', '', $request->price);
+        $request->merge($requestData);
         $images_name = "";
         $mime = "";
         for ($i = 1; $i <= 4; $i++) {
@@ -116,6 +115,9 @@ class MenusController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
+        $requestData['cost'] = str_replace('.', '', $request->cost);
+        $requestData['price'] = str_replace('.', '', $request->price);
+        $request->merge($requestData);
         Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->find($menu->id)->update(($request->except(['category_name', 'image1', 'image2', 'image3', 'image4'])));
         return redirect('menus')->with('status', 'Menu Updated!');
     }
@@ -132,15 +134,23 @@ class MenusController extends Controller
         return redirect('categories')->with('status', 'Menu Deleted');
     }
 
+    /**
+     * @param $idCategory
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getMenus($idCategory)
     {
-        $menus = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->where('category_id', $idCategory);
+        $menus = Menu::where('category_id', $idCategory)->get();
         return response()->json(['success' => true, 'menus' => $menus]);
     }
 
+    /**
+     * @param $idMenu
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getMenu($idMenu)
     {
-        $menu = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->where('id', $idMenu);
+        $menu = Menu::where('id', $idMenu)->get();
         return response()->json(['success' => true, 'menu' => $menu]);
     }
 

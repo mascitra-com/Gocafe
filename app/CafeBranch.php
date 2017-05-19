@@ -23,6 +23,16 @@ class CafeBranch extends Model
         return DB::table('cafe_branches')->where('id', $cafeBranchId)->first()->number_of_tables;
     }
 
+    public static function getBranchIdsByUserNowLoggedIn()
+    {
+        $branches = CafeBranch::all()->where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn());
+        return $branches->map(function ($branch) {
+            return collect($branch->toArray())
+                ->only(['id'])
+                ->all();
+        })->toArray();
+    }
+
     public function transaction()
     {
         return $this->hasMany(Transaction::class);

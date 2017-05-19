@@ -36,7 +36,7 @@
 					<tbody>
 						@foreach($packages as $package)
 						<tr>
-							<td><img src="{{url('packages/package_image/'.$package->id)}}" class="package-thumbnail" alt="thumbnail"></td>
+							<td><img src="{{url("menus/showThumbnail/".$package->menus[0]->id)}}" class="package-thumbnail" alt="thumbnail"></td>
 							<td>
 								<h4>{{ trim_text($package->name ,30) }}</h4>
 								<p>{{ trim_text($package->description) }}</p>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CafeBranch;
 use App\Menu;
+use App\Package;
 use App\Review;
 use App\Staff;
 use App\Transaction;
@@ -13,7 +14,6 @@ use App\TransactionDetail;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Charts;
 use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
@@ -29,7 +29,8 @@ class TransactionController extends Controller
         $categories = CategoryMenu::all()->where('cafe_id', Staff::getCafeIdByStaffIdNowLoggedIn())->sortBy('name');
         $menus = Cafe::findOrFail(Staff::getCafeIdByStaffIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
         $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
-        return view('transaction.payment', compact('categories', 'menus', 'numberOfTables'));
+        $table = $this->makeTableLayout($numberOfTables);
+        return view('transaction.payment', compact('categories', 'menus', 'numberOfTables', 'table'));
     }
 
     /**
@@ -44,8 +45,8 @@ class TransactionController extends Controller
         $menus = Cafe::findOrFail(Staff::getCafeIdByStaffIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
         $firstMenu = $menus[0];
         $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
-        $reviews = Review::where('item_id', $firstMenu->id)->orderBy('id', 'desc')->get();
-        return view('transaction.order', compact('categories', 'menus', 'firstMenu', 'numberOfTables', 'reviews'));
+        $packages = Package::where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn())->with('menus')->get();
+        return view('transaction.order', compact('categories', 'menus', 'firstMenu', 'numberOfTables', 'reviews', 'packages'));
     }
 
     /**
@@ -59,6 +60,7 @@ class TransactionController extends Controller
         // Get Items and calculate the total price
         $total_price = 0;
         $total_discount = 0;
+        $production_cost = 0;
         $total_payment = 0;
         $allId = $request->ids_menu;
         $allAmount = $request->amount;
@@ -74,9 +76,22 @@ class TransactionController extends Controller
                 $details[$key]['price'] = $menu->price;
                 $details[$key]['discount'] = $menu->discount;
                 // Calculate All Total to store in Transaction Table
+                $production_cost += $menu->cost * $allAmount[$key];
                 $total_price += $price = $menu->price * $allAmount[$key];
                 $total_discount += $discount = $menu->discount * $menu->price * $allAmount[$key];
                 $total_payment += ($price - $discount);
+            }
+            if($code_item === "PKG"){
+                $package = Package::where('id', $value)->get();
+                $details[$key]['id'] = idWithPrefix(11);
+                $details[$key]['item_id'] = $package[0]->id;
+                $details[$key]['amount'] = $allAmount[$key];
+                $details[$key]['price'] = $package[0]->price;
+                // Calculate All Total to store in Transaction Table
+                $production_cost += $package[0]->cost * $allAmount[$key];
+                $total_price += $price = $package[0]->price * $allAmount[$key];
+                $total_discount += $discount = $package[0]->price * $allAmount[$key];
+                $total_payment += $price;
             }
         }
         // Add Data to Store to Transaction Table
@@ -84,11 +99,11 @@ class TransactionController extends Controller
         $data['created_by'] = 2;
         $data['total_price'] = $total_price;
         $data['total_discount'] = $total_discount;
+        $data['production_cost'] = $production_cost;
         $data['total_payment'] = $total_payment;
         if($request->type){
-            $data['status'] =  $request->type === 'cash' ? '1' : '-1';// TODO Make This as Status Payment
+            $data['status'] =  $request->type;
         }
-
         $request->request->add($data);
         $transaction = new Transaction($request->except(array('ids_menu', 'amount', 'cash_received', 'refund', 'type')));
         $staff->saveTransaction($transaction, Staff::getStaffIdNowLoggedIn());
@@ -107,9 +122,25 @@ class TransactionController extends Controller
      */
     public function getMenusByTableNumber($tableNumber)
     {
-        $transactionId = Transaction::where(array('table_number' => $tableNumber, 'status' => 0))->orderBy('created_at', 'desc')->first()->id;
-        $menus = TransactionDetail::where('transaction_id', $transactionId)->get();
-        return response()->json(['transactionId' => $transactionId, 'menus' => $menus]);
+        // TODO Get BRANCH ID from Cafe BY STAFF ID Now Logged In
+        if($transactionId = Transaction::where(array('table_number' => $tableNumber, 'status' => 0))->orderBy('created_at', 'desc')->first()){
+            $items = TransactionDetail::where('transaction_id', $transactionId->id)->get();
+            return response()->json(['transactionId' => $transactionId, 'items' => $items]);
+        } else {
+            return response()->json(['transactionId' => FALSE]);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param $itemId
+     * @return \Illuminate\Http\Response
+     */
+    public function getReviewsByItemId($itemId)
+    {
+        $reviews = Review::where('item_id', $itemId)->orderBy('id', 'desc')->get();
+        return response()->json(['reviews' => $reviews]);
     }
 
     /**
@@ -135,8 +166,8 @@ class TransactionController extends Controller
         $transaction = Transaction::find($transactionId);
         $transaction->status = $request->type === 'cash' ? '1' : '-1'; // TODO Make This as Status Payment
         if($transaction->status == -1) {
-            $transaction->credit_card_name = $request->credit_card_name;
-            $transaction->credit_card_number = $request->credit_card_number;
+            $transaction->card_name = $request->card_name;
+            $transaction->card_number = $request->card_number;
         }
         $transaction->save();
         return redirect('payment')->with('status', 'Transaction Updated!');
@@ -153,59 +184,30 @@ class TransactionController extends Controller
         //
     }
 
-    public function chart()
+    /**
+     * Get Table that contains table
+     *
+     * @param $totalCell - Sum of Table
+     * @return string
+     */
+    private function makeTableLayout($totalCell)
     {
-        // TODO Favorite Menus
-        $favMenus = TransactionDetail::getFavouriteMenu(1);
-        foreach ($favMenus as $key => $value){
-            $code_item = substr($value->item_id, 0,3);
-            if($code_item === "MCF"){
-                $menu = Menu::find($value->item_id);
-                $favMenus[$key]->name = $menu->name;
+        $tableNotAvailable = Transaction::getTableNotAvailable(CafeBranch::getBranchIdsByUserNowLoggedIn());
+        $t = 0;
+        $res = '<table width="200" border="1" class="table table-bordered"><tr>';
+        for ($i = 1; $i <= $totalCell; $i++) {
+            if(isset($tableNotAvailable[$t]) && $i === $tableNotAvailable[$t]->table_number){
+                $td = '<td align="center" class="danger">';
+                $t++;
+            } else {
+                $td = '<td align="center" class="success">';
+            }
+            if ($i % 5 == 0) $res .= $td . $i . '</td></tr><tr>';
+            else {
+                $res .= $td . $i . '</td>';
             }
         }
-        // Customers per 30 day
-        $customers30day = Charts::database(Transaction::all(), 'area', 'chartjs')
-            ->title("30 Hari")
-            ->dimensions(275, 300)
-            ->elementLabel('Jumlah Pengunjung')
-            ->colors(['#F18803', '#F18803', '#8C4728'])
-            ->template("material")
-            ->dateColumn('created_at')
-            ->groupByDay()
-            ->lastByDay(30, false);
-        // Menus per 30 Day
-        $menus30day = Charts::database(TransactionDetail::all(), 'line', 'chartjs')
-            ->title("30 Hari")
-            ->dimensions(275, 300)
-            ->elementLabel('Jumlah Menu di Pesan')
-            ->colors(['#F18803', '#F18803', '#8C4728'])
-            ->template("material")
-            ->dateColumn('created_at')
-            ->groupByDay()
-            ->lastByDay(30, false);
-        // Revenue per 3 Month
-        $revenue = Charts::database(Transaction::all(), 'area', 'chartjs')
-            ->title("3 Bulan")
-            ->dimensions(275, 300)
-            ->elementLabel('Pendapatan')
-            ->colors(['#F18803', '#F18803', '#8C4728'])
-            ->template("material")
-            ->aggregateColumn('total_payment', 'sum')
-            ->lastByMonth(3, false);
-        // TODO 5 Favorite Food
-        // TODO 5 Favorite Drink
-        return view('transaction.chart', compact('favMenus', 'customers30day', 'menus30day', 'revenue'));
+        return $res . '</table>';
     }
 
-    public function report()
-    {
-        $transactions = Transaction::all();
-        return view('transaction.report', compact('transactions'));
-    }
-    public function revenue()
-    {
-        $transactions = Transaction::all();
-        return view('transaction.revenue', compact('transactions'));
-    }
 }

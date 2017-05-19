@@ -36,10 +36,11 @@ function getProductDetail(idMenu) {
                 $('#price').html("Rp. " + $.number(menu.price, 0, ',', '.') + ',-');
                 $('#discount').html("- Rp. " + $.number(menu.price * menu.discount, 0, ',', '.') + ',-');
                 $('#menu-desc').html(menu.description);
-                $('#btn-add').html('<button class="btn btn-primary" onclick="addToCheck(\'' + menu.id +'\')"><i class="fa fa-plus"></i></button>');
+                $('#btn-add').html('<button class="btn btn-primary" onclick="addMenuToCheck(\'' + menu.id +'\')" onmouseup=\"alert(\'Menu/Paket Sudah di Tambahkan, Silahkan Lanjutkan Pesanan Anda.\')\"><i class="fa fa-plus"></i> Pesan</button>');
                 $('#big-thumbnail').attr('src', getThumbnail(menu.id));
                 $('#item_id').val(menu.id);
-                // url('menus/showImage/'.$images[1])
+                $('#total-rating').empty().append("<input value='" + menu.rating + "' class='rating-avg' data-size='xs' data-show-clear='false' data-show-caption='false' readonly>");
+                $('.rating-avg').rating({displayOnly: true, step: 0.5});
                 var images = menu.images_name.split(':').filter(n => n);
                 var thumbnails = '';
                 $('#thumbnails').find('div').remove();
@@ -54,7 +55,21 @@ function getProductDetail(idMenu) {
                     thumbnails += "<div class='col-xs-6 col-md-3'><button class='thumbnail' onclick='changeBigThumbnail(\""+ imageSrc +"\")' data-src='"+ image +"'><img src='"+ imageSrc +"' alt='Thumbnail'></button></div>";
                 });
                 $('#thumbnails').html(thumbnails);
+                $('#form-review').show();
             });
+        }
+    });
+    $.ajax({
+        url: '/transaction/getReviews/' + idMenu,
+        dataType: 'json',
+        success: function (response) {
+            $("#table-review").find('tbody').empty();
+            $.each(response.reviews, function (i, review) {
+                var markup = "<tr><td width='15%'><img src='/images/blank-avatar.png' alt='' class='img-circle img-responsive'></td><td><p><input class='rating-avg' value='" + review.rating + "' class='rating' data-size='xs' data-show-clear='false' data-show-caption='false' readonly></p><p>" + review.review + "</p><p><span class='label label-default'>" + review.created_at + "</span></p></td></tr>";
+                $("#table-review").find('tbody').append(markup);
+            });
+            $('.rating-avg').rating({displayOnly: true, step: 0.5});
+            $('#product-detail').modal('show');
         }
     });
 }

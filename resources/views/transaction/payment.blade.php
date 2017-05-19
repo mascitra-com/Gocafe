@@ -1,6 +1,12 @@
 @extends('_layout/transaction/index')
 @section('page_title', 'Pembayaran')
 
+@section('navbar-right')
+    <div class="pull-right" style="margin-top: .5em">
+        <button class="btn btn-primary"  data-toggle="modal" data-target="#table-availability">Ketersediaan Meja</button>
+    </div>
+@endsection
+
 @section('content')
     <div class="row" style="margin-top: 1em">
         <div class="col-xs-2">
@@ -18,6 +24,9 @@
                                 </td>
                             </tr>
                         @endforeach
+                        <tr onclick="showPackages()" id="tr-package" class="tr-selection">
+                            <td class="text-quintuple"><br>PAKET<br><br></td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -27,13 +36,13 @@
                 <div class="col-xs-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title pull-left">{{ $categories[0]['name'] }}</h3>
+                            <h3 class="panel-title pull-left">Produk</h3>
                             <div class="clearfix"></div>
                         </div>
                         <div class="panel-body table-responsive table-full">
                             <table class="table table-hover" id="menus">
                                 @foreach($menus as $menu)
-                                    <tr onclick="addToCheck('{{ $menu->id }}')" id="tr-menu"
+                                    <tr onclick="addMenuToCheck('{{ $menu->id }}')" id="tr-menu"
                                         class="tr-selection text-quintuple">
                                         <td width="150px"><img src="{{url("menus/showThumbnail/$menu->id")}}"
                                                                class="img img-responsive" style="width: 150px;" alt="">
@@ -55,7 +64,7 @@
                 </div>
                 <div class="col-xs-6">
                     <div class="panel panel-default">
-                        <form action="{{ url('payment') }}" method="POST" id="form-payment">
+                        <form action="{{ url('payment') }}" method="POST" id="form-payment" onsubmit="return validateForm()">
                             {{ csrf_field() }}
                             <div class="panel-heading">
                                 <h3 class="panel-title pull-left">Pembayaran</h3>
@@ -97,21 +106,25 @@
                                             <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 20pt">Rp. 0</label></td>
                                         </tr>
                                         <tr>
-                                            <td style="font-weight: bold; font-size: 16px" colspan="2" rowspan="2">Jenis Pembayaran</td>
-                                            <td><input type="radio" name="type" id="cash" value="cash" checked></td>
+                                            <td style="font-weight: bold; font-size: 16px" colspan="2" rowspan="3">Jenis Pembayaran</td>
+                                            <td><input type="radio" name="type" id="cash" value="1" checked></td>
                                             <td><label for="type">Tunai</label></td>
                                         </tr>
                                         <tr>
-                                            <td style="padding-left: 8px;"><input type="radio" name="type" id="credit" value="credit"></td>
+                                            <td style="padding-left: 8px;"><input type="radio" name="type" id="credit" value="-1"></td>
                                             <td><label for="type">Kartu Kredit</label></td>
                                         </tr>
-                                        <tr class="credit_card">
-                                            <td colspan="2"><label for="credit_name">Nama pada Kartu Kredit</label></td>
-                                            <td colspan="2"><input type="text" id="credit_name" name="credit_card_name"></td>
+                                        <tr>
+                                            <td style="padding-left: 8px;"><input type="radio" name="type" id="debit" value="-2"></td>
+                                            <td><label for="type">Kartu Debit</label></td>
                                         </tr>
                                         <tr class="credit_card">
-                                            <td colspan="2"><label for="credit_number">Nomor Kartu Kredit</label></td>
-                                            <td colspan="2"><input type="text" id="credit_number" name="credit_card_number"></td>
+                                            <td colspan="2"><label for="credit_name">Nama pada Kartu</label></td>
+                                            <td colspan="2"><input type="text" id="credit_name" name="card_name"></td>
+                                        </tr>
+                                        <tr class="credit_card">
+                                            <td colspan="2"><label for="credit_number">Nomor Kartu</label></td>
+                                            <td colspan="2"><input type="text" id="credit_number" name="card_number"></td>
                                         </tr>
                                         <tr class="cash">
                                             <td colspan="2"><label for="cash_received">Pembayaran Yang Diterima</label></td>
@@ -129,6 +142,23 @@
                             </div>
                         </form>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('modal')
+    <div class="modal fade" tabindex="-1" role="dialog" id="table-availability">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn btn-primary pull-right" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true"><i class="fa fa-close"></i></span></button>
+                    <h2>Ketersediaan Meja</h2>
+                </div>
+                <div class="modal-body">
+                    {!! $table !!}
                 </div>
             </div>
         </div>
@@ -155,11 +185,14 @@
                 url: '/transaction/getMenusByTableNumber/' + this.value,
                 dataType: 'json',
                 success: function (response) {
-                    $.each(response.menus, function (i, menu) {
-                        addToCheck(menu.item_id);
-                    });
-                    $('#form-payment').attr('action', url + '/payment/' + response.transactionId)
-                    .append('{{ method_field('PATCH') }}');
+                    if(response.transactionId['id']) {
+                        $.each(response.items, function (i, item) {
+                            addMenuToCheck(item.item_id);
+                            addPackageToCheck(item.item_id);
+                        });
+                        $('#form-payment').attr('action', url + '/payment/' + response.transactionId['id'])
+                            .append('{{ method_field('PATCH') }}');
+                    }
                 }
             })
         });

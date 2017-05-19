@@ -19,13 +19,13 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="panel-body table-responsive table-full">
-				<table class="table table-stripped table-hover">
+				<table class="table table-stripped table-hover" id="menus">
 					<thead>
-						<th>status</th>
-						<th colspan="2">menu</th>
-						<th>deskripsi</th>
-						<th>harga</th>
-						<th>aksi</th>
+						<th>Status</th>
+						<th colspan="2">Nama</th>
+						<th>Deskripsi</th>
+						<th width="10%">Harga</th>
+						<th>Aksi</th>
 					</thead>
 					<tbody>
 						@foreach($menus as $menu)
@@ -38,7 +38,7 @@
 								<span class="text-size-12" style="color:green">{{ $menu->category->name }}</span>
 							</td>
 							<td>{{ $menu->description }}</td>
-							<td class="text-nowrap"><b>Rp {{ $menu->price }}</b></td>
+							<td class="text-right price"><b>{{ $menu->price }}</b></td>
 							<td class="text-center text-nowrap">
 								<a class="btn btn-xs btn-default" href="{{ url('menus/'.$menu->id.'/edit') }}">...</a>
 								<button class="btn btn-xs btn-default" onclick="delete_menu('{{ $menu->id }}')"><i class="fa fa-trash"></i></button>
@@ -84,7 +84,12 @@
 
 @section('styles')
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.css"/>
+<style>
+	div.table-responsive>div.dataTables_wrapper>div.row {
+		margin: 1em;
+	}
+</style>
 <style>
 	.table > tbody > tr > td{
 		vertical-align: middle;
@@ -113,10 +118,19 @@
 @endsection
 
 @section('javascripts')
-<script type="text/javascript">
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js"></script>
+    <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
+    <script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
+    <script type="text/javascript">
 	var token = $('meta[name="csrf-token"]').attr('content');
     $(document).ready(function()
     {
+        $('#menus').dataTable( {
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.15/i18n/Indonesian.json"
+            }
+        });
+        $('td.price').number(true, 0, ',', '.');
         $(".thumb").on("error", function(){
             $(this).attr('src', '{{ URL::asset('images/blank-menu.png') }}');
         });

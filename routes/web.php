@@ -12,16 +12,12 @@
 */
 
 
+Route::get('/', 'HomeController@index');
+
 Route::group(['middleware' => ['web']], function () {
-
-	Route::get('/', function () {
-		return redirect('dashboard');
-	});
-
 
 	Auth::routes();
 
-	Route::get('/home', 'HomeController@index');
     // CAFE
 	Route::resource('/profile/cafe', 'CafeController');
 	Route::patch('/profile/cafe/updateContact/{contact}', 'CafeController@updateContact');
@@ -55,8 +51,6 @@ Route::group(['middleware' => ['web']], function () {
 
 	//CAFE'S MENU
 	Route::resource('menus', 'MenusController');
-    Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail'); //get avatar's response
-    Route::get('menus/showImage/{image_file}', 'MenusController@showImage'); //get avatar's response
     Route::get('menus/getMenus/{idCategory}', 'MenusController@getMenus');
     Route::get('menus/getMenu/{idMenu}', 'MenusController@getMenu');
     //--END CAFE'S MENU
@@ -68,8 +62,10 @@ Route::group(['middleware' => ['web']], function () {
 	//--END MENU'S CATEGORY
 
 	//CAFE'S PACKAGE
-	Route::resource('packages', 'PackagesController');
-	Route::get('packages/package_image/{id}', 'PackagesController@showImage'); //get avatar's response
+    Route::get('packages/getPackages', 'PackagesController@getPackages');
+    Route::get('packages/getPackage/{packageId}', 'PackagesController@getPackage');
+    Route::resource('packages', 'PackagesController');
+    Route::get('packages/package_image/{id}', 'PackagesController@showImage'); //get avatar's response
 	//--END CAFE'S PACKAGE
 
 	//PROMO
@@ -89,15 +85,31 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('order', 'TransactionController@order');
     Route::post('order', 'TransactionController@store');
     Route::get('transaction/getMenusByTableNumber/{transactionId}', 'TransactionController@getMenusByTableNumber');
-    Route::get('chart', 'TransactionController@chart');
-    Route::get('report', 'TransactionController@report');
-    Route::get('revenue', 'TransactionController@revenue');
+    Route::get('transaction/getReviews/{itemId}', 'TransactionController@getReviewsByItemId');
     //--END TRANSACTION
 
-    //REVIEW
+    // REPORT
+    Route::get('chart', 'ReportController@chart');
+    Route::get('report', 'ReportController@index');
+    Route::get('report/detail/{transactionId}', 'ReportController@reportDetail');
+    Route::get('revenue', 'ReportController@revenue');
+    Route::get('revenue/detail/{transactionId}', 'ReportController@revenueDetail');
+    Route::get('filter_report/{startDate}/{endDate}/{paymentType}', 'ReportController@report_filter');
+    Route::get('filter_revenue/{startDate}/{endDate}/{paymentType}', 'ReportController@revenue_filter');
+    //--END REPORT
+
+    // REVIEW
     Route::post('review', 'ReviewController@store');
     //--END REVIEW
+
 });
+//HOMEPAGE
+Route::get('shop/{cafeId}', 'HomeController@shop');
+Route::get('product/{productId}', 'HomeController@product');
+//--END HOMEPAGE
+Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail'); //get avatar's response
+Route::get('menus/showImage/{image_file}', 'MenusController@showImage'); //get avatar's response
+
 // DUMMIES VIEW
 Route::get('ui/', 'Ui@Index');
 Route::get('ui/dashboard', 'Ui@Dashboard');
