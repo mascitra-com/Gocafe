@@ -12,15 +12,12 @@
 */
 
 
-Route::group(['middleware' => ['web']], function () {
+Route::get('/', 'HomeController@index');
 
-	Route::get('/', function () {
-		return redirect('dashboard');
-	});
+Route::group(['middleware' => ['web']], function () {
 
 	Auth::routes();
 
-	Route::get('/home', 'HomeController@index');
     // CAFE
 	Route::resource('/profile/cafe', 'CafeController');
 	Route::patch('/profile/cafe/updateContact/{contact}', 'CafeController@updateContact');

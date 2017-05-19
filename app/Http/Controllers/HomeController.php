@@ -7,6 +7,7 @@ use App\CategoryMenu;
 use App\Menu;
 use App\Package;
 use App\Review;
+use App\TransactionDetail;
 
 class HomeController extends Controller
 {
@@ -18,7 +19,21 @@ class HomeController extends Controller
     public function index()
     {
         $cafes = Cafe::all();
-        return view('homepage.index', compact('cafes'));
+        // Favorite Menus
+        $favProducts = TransactionDetail::getTrendingProducts(1);
+        foreach ($favProducts as $key => $value){
+            $code_item = substr($value->item_id, 0,3);
+            if($code_item === "MCF"){
+                $menu = Menu::find($value->item_id);
+                $favProducts[$key]->name = $menu->name;
+                $favProducts[$key]->type = 'Menu';
+            }
+            if($code_item === "PKG"){
+                // TODO Fix this so that Package will have image to view
+                unset($favProducts[$key]);
+            }
+        }
+        return view('homepage.index', compact('cafes', 'favProducts'));
     }
 
     public function shop($cafeId)

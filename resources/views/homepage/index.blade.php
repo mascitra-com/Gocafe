@@ -114,7 +114,6 @@
                                 <a class="image">
                                     <img src="http://media.nationalgeographic.co.id/daily/640/0/201606161542243/b/foto-4-manfaat-kopi-untuk-kecantikan.jpg">
                                 </a>
-                                <div class="extra">Rp. 10.000,-</div>
                             </div>
                         </div>
                         <div class="column">
@@ -122,8 +121,6 @@
                                 <a class="image">
                                     <img src="https://bellnu.files.wordpress.com/2016/03/5-consejos-para-dormir-mas-rapido-segun-los-cientificos-5.jpg">
                                 </a>
-                                <div class="extra">Rp. 10.000,-</div>
-
                             </div>
                         </div>
                         <div class="column">
@@ -131,8 +128,6 @@
                                 <a class="image">
                                     <img src="http://manfaat.co.id/wp-content/uploads/2014/08/kopi.jpg">
                                 </a>
-                                <div class="extra">Rp. 10.000,-</div>
-
                             </div>
                         </div>
                         <div class="column">
@@ -140,8 +135,6 @@
                                 <a class="image">
                                     <img src="http://media.nationalgeographic.co.id/daily/640/0/201401131420290/b/foto-rutin-minum-kopi-turunkan-resiko-kematian-dini.jpg">
                                 </a>
-                                <div class="extra">Rp. 10.000,-</div>
-
                             </div>
                         </div>
                     </div>
@@ -149,7 +142,7 @@
             </div>
             <div class="ui card stack fluid">
                 <div class="image">
-                    <img src="http://bashooka.com/wp-content/uploads/2013/02/coffee-logos-54.png">
+                    <img src="https://image.freepik.com/free-vector/best-coffee-house-logo_23-2147498998.jpg">
                 </div>
                 <div class="content">
                     <div class="ui four column grid">
@@ -158,7 +151,7 @@
                                 <a class="image">
                                     <img src="http://media.nationalgeographic.co.id/daily/640/0/201606161542243/b/foto-4-manfaat-kopi-untuk-kecantikan.jpg">
                                 </a>
-                                <div class="extra">Rp. 10.000,-</div>
+                                
                             </div>
                         </div>
                         <div class="column">
@@ -166,7 +159,7 @@
                                 <a class="image">
                                     <img src="https://bellnu.files.wordpress.com/2016/03/5-consejos-para-dormir-mas-rapido-segun-los-cientificos-5.jpg">
                                 </a>
-                                <div class="extra">Rp. 10.000,-</div>
+                                
                             </div>
                         </div>
                         <div class="column">
@@ -174,7 +167,7 @@
                                 <a class="image">
                                     <img src="http://manfaat.co.id/wp-content/uploads/2014/08/kopi.jpg">
                                 </a>
-                                <div class="extra">Rp. 10.000,-</div>
+                                
                             </div>
                         </div>
                         <div class="column">
@@ -182,7 +175,6 @@
                                 <a class="image">
                                     <img src="http://media.nationalgeographic.co.id/daily/640/0/201401131420290/b/foto-rutin-minum-kopi-turunkan-resiko-kematian-dini.jpg">
                                 </a>
-                                <div class="extra">Rp. 10.000,-</div>
                             </div>
                         </div>
                     </div>
@@ -199,7 +191,6 @@
                                 <a class="image">
                                     <img src="http://media.nationalgeographic.co.id/daily/640/0/201606161542243/b/foto-4-manfaat-kopi-untuk-kecantikan.jpg">
                                 </a>
-                                <div class="extra">Rp. 10.000,-</div>
                             </div>
                         </div>
                         <div class="column">
@@ -207,7 +198,6 @@
                                 <a class="image">
                                     <img src="https://bellnu.files.wordpress.com/2016/03/5-consejos-para-dormir-mas-rapido-segun-los-cientificos-5.jpg">
                                 </a>
-                                <div class="extra">Rp. 10.000,-</div>
                             </div>
                         </div>
                         <div class="column">
@@ -215,7 +205,6 @@
                                 <a class="image">
                                     <img src="http://manfaat.co.id/wp-content/uploads/2014/08/kopi.jpg">
                                 </a>
-                                <div class="extra">Rp. 10.000,-</div>
                             </div>
                         </div>
                         <div class="column">
@@ -223,7 +212,6 @@
                                 <a class="image">
                                     <img src="http://media.nationalgeographic.co.id/daily/640/0/201401131420290/b/foto-rutin-minum-kopi-turunkan-resiko-kematian-dini.jpg">
                                 </a>
-                                <div class="extra">Rp. 10.000,-</div>
                             </div>
                         </div>
                     </div>
@@ -234,55 +222,21 @@
     {{--Hot List--}}
     <div class="ui vertical stripe quote segment container">
         <h3>Trending</h3>
-        <div class="ui four doubling cards">
-            <div class="card">
-                <a class="image" href="#">
-                    <img src="https://i.ytimg.com/vi/EvqLHP51klA/hqdefault.jpg">
-                </a>
-                <div class="content">
-                    <a class="header">Makanan W</a>
-                    <div class="meta">
-                        <i class="heart icon"></i>
-                        294x dipesan
+        <div class="ui five doubling cards">
+            @foreach($favProducts as $product)
+                <div class="card">
+                    <a class="image" href="#">
+                        <img src="{{ url('menus/showThumbnail/'.$product->item_id) }}">
+                    </a>
+                    <div class="content">
+                        <a class="header">{{ $product->name }}</a>
+                        <div class="meta">
+                            <i class="home icon"></i>
+                            {{ rand(153, 323) }}x dipesan
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <a class="image" href="#">
-                    <img src="https://resepterupdate.com/wp-content/uploads/2016/07/resep-ayam-penyet-surabaya.png">
-                </a>
-                <div class="content">
-                    <a class="header">Makanan X</a>
-                    <div class="meta">
-                        <i class="heart icon"></i>
-                        273x dipesan
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <a class="image" href="#">
-                    <img src="http://selerasa.com/images/ikan/resep_kepiting/21.jpg">
-                </a>
-                <div class="content">
-                    <a class="header">Makanan Y</a>
-                    <div class="meta">
-                        <i class="heart icon"></i>
-                        243x dipesan
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <a class="image" href="#">
-                    <img src="https://mysexychef.files.wordpress.com/2012/08/gudeg.jpg">
-                </a>
-                <div class="content">
-                    <a class="header">Makanan Z</a>
-                    <div class="meta">
-                        <i class="heart icon"></i>
-                        224x dipesan
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     {{--Category--}}

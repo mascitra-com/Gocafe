@@ -97,19 +97,19 @@ class ReportController extends Controller
      */
     public function chart()
     {
-        // Favorite Menus
-        $favMenus = TransactionDetail::getFavouriteMenu(1);
-        foreach ($favMenus as $key => $value){
+        // Favorite Products
+        $favProducts = TransactionDetail::getFavouriteProducts(1);
+        foreach ($favProducts as $key => $value){
             $code_item = substr($value->item_id, 0,3);
             if($code_item === "MCF"){
                 $menu = Menu::find($value->item_id);
-                $favMenus[$key]->name = $menu->name;
-                $favMenus[$key]->type = 'Menu';
+                $favProducts[$key]->name = $menu->name;
+                $favProducts[$key]->type = 'Menu';
             }
             if($code_item === "PKG"){
                 $package = Package::find($value->item_id);
-                $favMenus[$key]->name = $package->name;
-                $favMenus[$key]->type = 'Paket';
+                $favProducts[$key]->name = $package->name;
+                $favProducts[$key]->type = 'Paket';
             }
         }
         // Customers per 30 day
@@ -143,6 +143,6 @@ class ReportController extends Controller
             ->lastByMonth(3, false);
         // TODO 5 Favorite Food
         // TODO 5 Favorite Drink
-        return view('report.chart', compact('favMenus', 'customers30day', 'menus30day', 'revenue'));
+        return view('report.chart', compact('favProducts', 'customers30day', 'menus30day', 'revenue'));
     }
 }
