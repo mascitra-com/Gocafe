@@ -29,7 +29,7 @@
 <body>
 <div id="app">
     <div class="container-fluid">
-        <div class="row"  style="margin-top: 5em">
+        <div class="row"  style="margin-top: 2.5em">
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
@@ -147,9 +147,9 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <a href="{{ url('/') }}" class="btn btn-default   ">
+                                    <button onclick="window.history.back();" class="btn btn-default">
                                         Kembali
-                                    </a>
+                                    </button>
                                     <button type="submit" class="btn btn-primary">
                                         Register
                                     </button>
