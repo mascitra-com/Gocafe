@@ -12,9 +12,9 @@
 */
 
 
-Route::get('/', 'HomeController@index');
-
 Route::group(['middleware' => ['web']], function () {
+
+	Route::get('/', 'HomeController@index');
 
 	Auth::routes();
 

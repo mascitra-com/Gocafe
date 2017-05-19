@@ -241,7 +241,7 @@
     </div>
     {{--Category--}}
     <div class="ui vertical stripe quote segment container">
-        <h3>Lokasi</h3>
+        <h3>Kategori</h3>
         <table class="ui celled table">
             <tr>
                 <td class="selectable">
@@ -280,7 +280,7 @@
     </div>
     {{--Lokasi--}}
     <div class="ui vertical stripe quote segment container">
-        <h3>Kategori</h3>
+        <h3>Lokasi</h3>
         <table class="ui celled table">
             <tr>
                 <td class="selectable">
@@ -316,35 +316,6 @@
                 </td>
             </tr>
         </table>
-    </div>
-    {{--Footer--}}
-    <div class="ui vertical footer segment">
-        <div class="ui container">
-            <div class="ui stackable divided equal height stackable grid">
-                <div class="five wide column">
-                    <h4 class="ui header">About</h4>
-                    <div class="ui link list">
-                        <a href="#" class="item">Sitemap</a>
-                        <a href="#" class="item">Contact Us</a>
-                        <a href="#" class="item">Religious Ceremonies</a>
-                        <a href="#" class="item">Gazebo Plans</a>
-                    </div>
-                </div>
-                <div class="six wide column">
-                    <h4 class="ui header">Services</h4>
-                    <div class="ui link list">
-                        <a href="#" class="item">Banana Pre-Order</a>
-                        <a href="#" class="item">DNA FAQ</a>
-                        <a href="#" class="item">How To Access</a>
-                        <a href="#" class="item">Favorite X-Men</a>
-                    </div>
-                </div>
-                <div class="five wide column">
-                    <h4 class="ui header">Footer Header</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab beatae dolorem itaque neque praesentium?</p>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 @section('styles')

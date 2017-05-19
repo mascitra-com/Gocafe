@@ -30,7 +30,6 @@
                             <div class="ui buttons brown">
                                 <a class="ui button active" data-tab="first">Informasi Produk</a>
                                 <a class="ui button" data-tab="second">Ulasan Produk</a>
-                                <a class="ui button" data-tab="third">Diskusi Produk</a>
                             </div>
                             <br>
                             <h4>Deskripsi Produk</h4>
@@ -39,7 +38,7 @@
                     </div>
                     <div class="row">
                         <div class="column">
-                            <h4>&nbsp;&nbsp;<i class="fa fa-list"></i> Ringkasan Ulasan 6 Bulan Terakhir</h4>
+                            <h4>&nbsp;&nbsp;<i class="fa fa-list"></i> Ringkasan Ulasan 3 Bulan Terakhir</h4>
                             <table class="ui table" id="table-review">
                                 <tbody>
                                     @foreach($reviews as $review)
@@ -74,37 +73,7 @@
                 <a target="_blank" href="https://www.instagram.com/{{ $cafe->instagram }}"><i class="fa fa-instagram"></i> {{ $cafe->instagram }}</a><br>
                 <span style="color: #F18803"><i class="fa fa-phone-square"></i> {{ $cafe->phone }}</span><br><br>
                 <button class="ui brown fluid button"><i class="fa fa-plus"></i> &nbsp Favoritkan</button><br>
-
                 <button class="ui fluid button"><i class="fa fa-envelope"></i> &nbsp Kirim Pesan</button>
-            </div>
-        </div>
-    </div><br>
-    {{--Footer--}}
-    <div class="ui vertical footer segment">
-        <div class="ui container">
-            <div class="ui stackable divided equal height stackable grid">
-                <div class="five wide column">
-                    <h4 class="ui header">About</h4>
-                    <div class="ui link list">
-                        <a href="#" class="item">Sitemap</a>
-                        <a href="#" class="item">Contact Us</a>
-                        <a href="#" class="item">Religious Ceremonies</a>
-                        <a href="#" class="item">Gazebo Plans</a>
-                    </div>
-                </div>
-                <div class="six wide column">
-                    <h4 class="ui header">Services</h4>
-                    <div class="ui link list">
-                        <a href="#" class="item">Banana Pre-Order</a>
-                        <a href="#" class="item">DNA FAQ</a>
-                        <a href="#" class="item">How To Access</a>
-                        <a href="#" class="item">Favorite X-Men</a>
-                    </div>
-                </div>
-                <div class="five wide column">
-                    <h4 class="ui header">Footer Header</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab beatae dolorem itaque neque praesentium?</p>
-                </div>
             </div>
         </div>
     </div>

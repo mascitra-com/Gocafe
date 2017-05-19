@@ -38,6 +38,20 @@ class TransactionDetail extends Model
         return $top5menus;
     }
 
+    public static function getHotProducts($intervalMonth)
+    {
+        // Select Menu Group by ID order by Count of Aggrate Menu
+        $top5menus = DB::table('transaction_details')
+            ->join('transactions', 'transactions.id', '=', 'transaction_details.transaction_id')
+            ->select(DB::raw('count(transaction_details.id) as total_order, transaction_details.item_id'))
+            ->whereRaw("transactions.created_at >= (now() - interval $intervalMonth month)")
+            ->groupBy('transaction_details.item_id')
+            ->orderBy('total_order', 'desc')
+            ->limit(5, 0)
+            ->get();
+        return $top5menus;
+    }
+
     public static function getMenusOrderedPer30Days()
     {
         $menusPer30Days = TransactionDetail::join('transactions', 'transactions.id', '=', 'transaction_details.transaction_id')

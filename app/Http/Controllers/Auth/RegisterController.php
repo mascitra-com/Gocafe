@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Owner;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -49,6 +50,9 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
+            'last_name' => 'max:255',
+            'phone' => 'required|max:14',
+            'gender' => 'required|',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -57,15 +61,28 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $user = User::create([
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'role' => 'owner',
+            'avatar_name' => 'default.jpg',
+            'avatar_mime' => 'image/jpeg'
         ]);
+        Owner::create([
+            'id' => idWithPrefix(1),
+            'user_id' => $user->id,
+            'first_name' => $data['name'],
+            'last_name' => $data['last_name'] != NULL ? $data['last_name'] : '',
+            'phone' => $data['phone'],
+            'email' => $data['email'],
+            'gender' => $data['gender'],
+            'created_by' => 0
+        ]);
+        return $user;
     }
 }

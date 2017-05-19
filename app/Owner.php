@@ -15,7 +15,7 @@ class Owner extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $guarded = ['user_id', 'created_by'];
+    protected $guarded = ['created_at'];
 
     protected $hidden = ['id'];
 

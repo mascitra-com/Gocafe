@@ -31,14 +31,59 @@
         <div class="results"></div>
     </div>
     <div class="right menu">
-        <a class="item">Daftar</a>
-        <a class="item">Masuk</a>
+        <a href="{{ url('register') }}" class="item">Daftar</a>
+        <a href="{{ url('login') }}" class="item">Masuk</a>
     </div>
 </div>
 
 <!-- Page Contents -->
 <div class="pusher">
     @yield('content')
+    {{--Footer--}}
+    <div class="ui vertical footer segment">
+        <div class="ui container">
+            <div class="ui stackable divided equal height stackable grid">
+                <div class="five wide column">
+                    <h4 class="ui header">Kulinerae</h4>
+                    <div class="ui link list">
+                        <a href="#" class="item">Tentang Kami</a>
+                        <a href="#" class="item">Media Kit</a>
+                        <a href="#" class="item">Kegiatan Kami</a>
+                        <a href="#" class="item">Kisah Penjual</a>
+                    </div>
+                </div>
+                <div class="six wide column">
+                    <h4 class="ui header">Beli</h4>
+                    <div class="ui link list">
+                        <a href="#" class="item">Kuliner di Kulinerae</a>
+                        <a href="#" class="item">Hot List</a>
+                        <a href="#" class="item">Trending</a>
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <h4 class="ui header">Kontak</h4>
+                    <table width="100%">
+                        <tr>
+                            <td width="25%"><i class="fa fa-facebook-square"></i> Facebook</td>
+                            <td width="50%">: <a href="#">Kulinerae</a></td>
+                        </tr>
+                        <tr>
+                            <td width="25%"><i class="fa fa-twitter-square"></i> Twitter</td>
+                            <td width="50%">: <a href="#">Kulinerae</a></td>
+                        </tr>
+                        <tr>
+                            <td width="25%"><i class="fa fa-instagram"></i> Instagram</td>
+                            <td width="50%">: <a href="#">Kulinerae</a></td>
+                        </tr>
+                        <tr>
+                            <td width="25%"><i class="fa fa-phone-square"></i> Contact</td>
+                            <td width="50%">: (+62) 000 000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @yield('modal')
 <script src="{{ asset('plugins/jquery/jquery-3.1.1.min.js') }}"></script>

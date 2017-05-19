@@ -15,7 +15,7 @@
 				<h2>DIGITAL CAFE<br>MARKETPLACE</h2>
 				<p class="text-size-20">Your perfect place to manage and promote<br>your favorite Cafe</p>
 				<div class="break-50"></div>
-				<button class="btn btn-default btn-round">Daftar Sekarang!</button>
+				<a href="{{ url('/register') }}" class="btn btn-primary btn-round">Daftar Sekarang!</a>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-4" id="form-right">
 				<h3 class="form-title text-quintuple">MEMBER LOGIN</h3>
