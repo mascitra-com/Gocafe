@@ -22,6 +22,9 @@ class MenusController extends Controller
      */
     public function index(Cafe $cafe)
     {
+        if (!Cafe::getCafeIdByUserIdNowLoggedIn()) {
+            return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Filled!');
+        }
         $menus = $cafe->findOrFail($cafe->getCafeIdByUserIdNowLoggedIn())->menus->load('category');
         return view('menu.menu', compact('menus'));
     }

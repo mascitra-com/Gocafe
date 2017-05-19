@@ -21,9 +21,13 @@ class Cafe extends Model
     {
         $user = new User();
         if($user->get_role(Auth::user()->id) == 'owner'){
-            return DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first()->id;
+            if($cafe = DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first()){
+                return $cafe->id;
+            }
         } else {
-            return DB::table('cafe_branches')->where('id', Staff::getCafeBranchIdNowLoggedIn())->first()->cafe_id;
+            if($branch = DB::table('cafe_branches')->where('id', Staff::getCafeBranchIdNowLoggedIn())->first()){
+                return $branch->cafe_id;
+            }
         }
     }
 

@@ -19,6 +19,9 @@ class CategoryMenusController extends Controller
      */
     public function index()
     {
+        if (!Cafe::getCafeIdByUserIdNowLoggedIn()) {
+            return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Filled!');
+        }
         $categoryID = idWithPrefix(6);
         $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn());
         return view('menu.kategori', compact('categoryID', 'categories'));
