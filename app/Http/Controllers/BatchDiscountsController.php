@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
-
 use App\Cafe;
 use App\Menu;
 use App\Package;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 /**
  * Class BatchDiscountsController untuk Discount Management

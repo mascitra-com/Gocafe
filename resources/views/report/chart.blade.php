@@ -21,7 +21,7 @@
 					</thead>
 					<tbody>
                     <?php $no = 1 ?>
-                    @if($favMenus) @foreach($favMenus as $favorite)
+                    @if($favProducts) @foreach($favProducts as $favorite)
                         <tr>
 							<td>{{ $no++ }}</td>
 							<td>{{ $favorite->name }}</td>

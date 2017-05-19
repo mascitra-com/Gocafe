@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-
 use App\Cafe;
 use App\Menu;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 /**

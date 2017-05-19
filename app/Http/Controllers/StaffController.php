@@ -2,23 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Staff;
-use App\User;
-use App\Owner;
 use App\Cafe;
 use App\CafeBranch;
+use App\Owner;
 use App\Position;
-
-use Illuminate\Http\Response;
-
-use Illuminate\Support\Facades\Storage;
-
-use Laravolt\Indonesia\Indonesia;
-use Excel;
-
+use App\Staff;
+use App\User;
 use Auth;
+use Excel;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
+use Laravolt\Indonesia\Indonesia;
 
 /**
  * Class StaffController untuk Fitur Staff Management

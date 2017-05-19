@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Cafe;
 use App\CafeBranch;
+use App\CategoryMenu;
 use App\Menu;
 use App\Package;
 use App\Review;
 use App\Staff;
 use App\Transaction;
-use App\CategoryMenu;
-use App\Cafe;
 use App\TransactionDetail;
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {

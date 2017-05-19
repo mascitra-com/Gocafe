@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\CafeBranch;
+use App\Menu;
 use App\Package;
 use App\Transaction;
 use App\TransactionDetail;
-use App\Menu;
-use Charts;
 use Carbon\Carbon;
+use Charts;
 use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller

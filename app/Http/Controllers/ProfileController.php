@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\User;
-use App\Owner;
-use Auth;
-
 use App\Foo;
-
+use App\Owner;
+use App\User;
+use Auth;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Contracts\Encryption\DecryptException;
 
 /**
  * Class ProfileController untuk Fitur Owner Profile

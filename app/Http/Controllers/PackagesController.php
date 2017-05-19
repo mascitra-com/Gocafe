@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Package;
-use App\Menu;
 use App\Cafe;
+use App\Menu;
+use App\Package;
 use Auth;
-
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**

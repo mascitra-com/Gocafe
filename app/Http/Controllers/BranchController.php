@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Cafe;
 use App\CafeBranch;
-use App\Owner;
 use Illuminate\Http\Request;
 use Laravolt\Indonesia\Indonesia;
 use Validator;

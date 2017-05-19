@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Cafe;
 use App\CategoryMenu;
+use Illuminate\Http\Request;
 
 /**
  * Class CategoryMenusController untuk Fitur Category Management

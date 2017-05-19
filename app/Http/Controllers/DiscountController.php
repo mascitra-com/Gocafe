@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Discount;
 use App\Cafe;
+use App\Discount;
 use Auth;
+use Illuminate\Http\Request;
 
 /**
  * Class DiscountController untuk Fitur Promotion Management
