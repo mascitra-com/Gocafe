@@ -89,6 +89,7 @@ class Cafe extends Model
      *
      * @param CategoryMenu $category
      * @param $cafeId
+     * @return mixed|string
      */
     public function addMenuCategory(CategoryMenu $category, $cafeId)
     {
@@ -101,13 +102,19 @@ class Cafe extends Model
     /**
      * Add New Menu's by Cafe ID given.
      *
-     * @param Menu $category
+     * @param Menu $menu
      * @param $cafeId
+     * @internal param Menu $category
      */
     public function addMenu(Menu $menu, $cafeId)
     {
         $menu->id = idWithPrefix(7);
         $menu->created_by = Auth::user()->id;
         self::find($cafeId)->menus()->save($menu);
+    }
+
+    public function latestMenu()
+    {
+        return $this->menus()->latest()->take(5);
     }
 }

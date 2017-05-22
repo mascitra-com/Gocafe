@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{URL::asset('plugins/jqueryui/css/jquery-ui.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-dashboard.css')}}">
     <link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-helper.css')}}">
+
     {{--<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400" rel="stylesheet">--}}
     @yield('styles')
 </head>

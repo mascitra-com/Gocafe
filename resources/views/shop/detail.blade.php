@@ -87,10 +87,7 @@
         </div>
     </div>
 @endsection
-@section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/homepage.css') }}">
-@endsection
-
 @section('javascripts')
     <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
+    <script src="{{ url('js/shop.js') }}"></script>
 @endsection

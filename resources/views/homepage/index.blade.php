@@ -90,7 +90,7 @@
                 <h3>Rekomendasi Toko</h3>
             </div>
             <div class="right floated right aligned eight wide column">
-                <a href="#">Lihat Semua</a>
+                <a href="{{ url('recommended-shop') }}">Lihat Semua</a>
             </div>
         </div>
         <div class="ui eight doubling cards">
@@ -109,29 +109,24 @@
     {{--Top Picks with Their Products--}}
     <div class="ui vertical segment container">
         <div class="ui text">
-            <div class="ui left aligned grid" id="top-picks">
-                <div class="eight wide column">
-                    <h3>Jelang Ramadhan, Berbuka dan Sahur, Kulinerae!</h3>
-                </div>
-                <div class="right floated right aligned eight wide column">
-                    <a href="#">Lihat Semua</a>
-                </div>
+            <div class="ui left aligned grid" id="top-picks" style="margin-bottom: 2em">
+                <h3>Jelang Ramadhan, Berbuka dan Sahur, Kulinerae!</h3>
             </div>
-            @foreach($recommendedCafe as $recommend)
+            @foreach($recommended as $recommend)
                 <div class="ui card stack fluid">
                     <div class="image">
                         <img src="{{ "https://dummyimage.com/250x250/8C4728/fff.jpg&text=" . str_replace(' ', '+', $recommend->name) }}">
                     </div>
                     <div class="content">
                         <div class="ui four column grid">
-                            @foreach($recommend->menus as $menu)
-                            <div class="column">
+                            @foreach($recommend->latestMenu as $menu)
+                            <a class="column" href="{{ url('product/'.$menu->id) }}">
                                 <div class="ui fluid card">
-                                    <a class="image">
+                                    <div class="image">
                                         <img src="{{ url('menus/showThumbnail/'.$menu->id) }}">
-                                    </a>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                             @endforeach
                         </div>
                     </div>
@@ -251,9 +246,6 @@
             </tr>
         </table>
     </div>
-@endsection
-@section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/homepage.css') }}">
 @endsection
 @section('javascripts')
     <script>

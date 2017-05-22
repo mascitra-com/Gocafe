@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cafe;
-use App\CategoryMenu;
 use App\Menu;
-use App\Package;
-use App\Review;
 use App\TransactionDetail;
 
 class HomeController extends Controller
@@ -19,9 +16,7 @@ class HomeController extends Controller
     public function index()
     {
         $cafes = Cafe::all();
-        $recommendedCafe = Cafe::limit(3)->with(['menus'  => function($q) {
-                            $q->latest()->take(4);
-                        }])->get();
+        $recommended = Cafe::limit(3)->with('latestMenu')->get();
         // Favorite Menus
         $favProducts = TransactionDetail::getTrendingProducts(1);
         foreach ($favProducts as $key => $value){
@@ -36,32 +31,7 @@ class HomeController extends Controller
                 unset($favProducts[$key]);
             }
         }
-        return view('homepage.index', compact('cafes', 'favProducts', 'recommendedCafe'));
-    }
-
-    public function shop($cafeId)
-    {
-        $cafe = Cafe::where('id', $cafeId)->first();
-        $categories = CategoryMenu::all()->where('cafe_id', $cafeId)->sortBy('name');
-        $products = Cafe::findOrFail($cafeId)->menus->where('category_id', $categories->first()->id);
-        return view('homepage.shop', compact('cafe', 'categories', 'products'));
-    }
-
-    public function product($productId)
-    {
-        $product = array();
-        $code_item = substr($productId, 0,3);
-        if($code_item === "MCF"){
-            $product = Menu::find($productId);
-            $product->type = 'Menu';
-        }
-        if($code_item === "PKG"){
-            $product = Package::find($productId);
-            $product->type = 'Paket';
-        }
-        $cafe = Cafe::find($product->cafe_id);
-        $reviews = Review::where('item_id', $productId)->orderBy('id', 'desc')->get();
-        return view('homepage.product', compact('cafe', 'product', 'reviews'));
+        return view('homepage.index', compact('cafes', 'favProducts', 'recommended'));
     }
 
 }
