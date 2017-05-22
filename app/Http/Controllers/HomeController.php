@@ -19,6 +19,9 @@ class HomeController extends Controller
     public function index()
     {
         $cafes = Cafe::all();
+        $recommendedCafe = Cafe::limit(3)->with(['menus'  => function($q) {
+                            $q->latest()->take(4);
+                        }])->get();
         // Favorite Menus
         $favProducts = TransactionDetail::getTrendingProducts(1);
         foreach ($favProducts as $key => $value){
@@ -33,7 +36,7 @@ class HomeController extends Controller
                 unset($favProducts[$key]);
             }
         }
-        return view('homepage.index', compact('cafes', 'favProducts'));
+        return view('homepage.index', compact('cafes', 'favProducts', 'recommendedCafe'));
     }
 
     public function shop($cafeId)

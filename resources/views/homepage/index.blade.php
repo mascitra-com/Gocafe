@@ -83,145 +83,72 @@
             </div>
         </div>
     </div>
-    {{--Recomended Cafe / Restaurant--}}
+    {{--Recommended Cafe / Restaurant--}}
     <div class="ui vertical stripe quote segment container">
-        <h3>Rekomendasi Toko</h3>
+        <div class="ui left aligned grid" id="recommended">
+            <div class="eight wide column">
+                <h3>Rekomendasi Toko</h3>
+            </div>
+            <div class="right floated right aligned eight wide column">
+                <a href="#">Lihat Semua</a>
+            </div>
+        </div>
         <div class="ui eight doubling cards">
             @foreach($cafes as $cafe)
             <a class="card" href="{{ url('shop/'.$cafe->id) }}">
                 <div class="image">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHfIvsQ2CtsjxMC-GVIJFu7ab5I9GTdsMS5pelqZCFfvAYortrg">
+                    <img src="{{ "https://dummyimage.com/250x250/8C4728/fff.jpg&text=" . str_replace(' ', '+', $cafe->name) }}">
                 </div>
-                <div class="content">
-                    <div class="header" style="align-content: center;">{{ $cafe->name }}</div>
+                <div class="content center aligned">
+                    <div class="header">{{ $cafe->name }}</div>
                 </div>
             </a>
             @endforeach
         </div>
     </div>
-    {{--Cafe / Restaurant with Their Products--}}
+    {{--Top Picks with Their Products--}}
     <div class="ui vertical segment container">
         <div class="ui text">
-            <h3 class="ui header">Jelang Ramadhan, Berbuka dan Sahur, Kulinerae!</h3>
-            <div class="ui card stack fluid">
-                <div class="image">
-                    <img src="https://s-media-cache-ak0.pinimg.com/736x/5f/a3/57/5fa357e1da427ab833c03b6d25701e7c.jpg">
+            <div class="ui left aligned grid" id="top-picks">
+                <div class="eight wide column">
+                    <h3>Jelang Ramadhan, Berbuka dan Sahur, Kulinerae!</h3>
                 </div>
-                <div class="content">
-                    <div class="ui four column grid">
-                        <div class="column">
-                            <div class="ui fluid card">
-                                <a class="image">
-                                    <img src="http://media.nationalgeographic.co.id/daily/640/0/201606161542243/b/foto-4-manfaat-kopi-untuk-kecantikan.jpg">
-                                </a>
+                <div class="right floated right aligned eight wide column">
+                    <a href="#">Lihat Semua</a>
+                </div>
+            </div>
+            @foreach($recommendedCafe as $recommend)
+                <div class="ui card stack fluid">
+                    <div class="image">
+                        <img src="{{ "https://dummyimage.com/250x250/8C4728/fff.jpg&text=" . str_replace(' ', '+', $recommend->name) }}">
+                    </div>
+                    <div class="content">
+                        <div class="ui four column grid">
+                            @foreach($recommend->menus as $menu)
+                            <div class="column">
+                                <div class="ui fluid card">
+                                    <a class="image">
+                                        <img src="{{ url('menus/showThumbnail/'.$menu->id) }}">
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="column">
-                            <div class="ui fluid card">
-                                <a class="image">
-                                    <img src="https://bellnu.files.wordpress.com/2016/03/5-consejos-para-dormir-mas-rapido-segun-los-cientificos-5.jpg">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="ui fluid card">
-                                <a class="image">
-                                    <img src="http://manfaat.co.id/wp-content/uploads/2014/08/kopi.jpg">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="ui fluid card">
-                                <a class="image">
-                                    <img src="http://media.nationalgeographic.co.id/daily/640/0/201401131420290/b/foto-rutin-minum-kopi-turunkan-resiko-kematian-dini.jpg">
-                                </a>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="ui card stack fluid">
-                <div class="image">
-                    <img src="https://image.freepik.com/free-vector/best-coffee-house-logo_23-2147498998.jpg">
-                </div>
-                <div class="content">
-                    <div class="ui four column grid">
-                        <div class="column">
-                            <div class="ui fluid card">
-                                <a class="image">
-                                    <img src="http://media.nationalgeographic.co.id/daily/640/0/201606161542243/b/foto-4-manfaat-kopi-untuk-kecantikan.jpg">
-                                </a>
-                                
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="ui fluid card">
-                                <a class="image">
-                                    <img src="https://bellnu.files.wordpress.com/2016/03/5-consejos-para-dormir-mas-rapido-segun-los-cientificos-5.jpg">
-                                </a>
-                                
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="ui fluid card">
-                                <a class="image">
-                                    <img src="http://manfaat.co.id/wp-content/uploads/2014/08/kopi.jpg">
-                                </a>
-                                
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="ui fluid card">
-                                <a class="image">
-                                    <img src="http://media.nationalgeographic.co.id/daily/640/0/201401131420290/b/foto-rutin-minum-kopi-turunkan-resiko-kematian-dini.jpg">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="ui card stack fluid">
-                <div class="image">
-                    <img src="https://s-media-cache-ak0.pinimg.com/736x/ab/ee/47/abee4771b5136fc60a70489218d28563.jpg">
-                </div>
-                <div class="content">
-                    <div class="ui four column grid">
-                        <div class="column">
-                            <div class="ui fluid card">
-                                <a class="image">
-                                    <img src="http://media.nationalgeographic.co.id/daily/640/0/201606161542243/b/foto-4-manfaat-kopi-untuk-kecantikan.jpg">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="ui fluid card">
-                                <a class="image">
-                                    <img src="https://bellnu.files.wordpress.com/2016/03/5-consejos-para-dormir-mas-rapido-segun-los-cientificos-5.jpg">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="ui fluid card">
-                                <a class="image">
-                                    <img src="http://manfaat.co.id/wp-content/uploads/2014/08/kopi.jpg">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="ui fluid card">
-                                <a class="image">
-                                    <img src="http://media.nationalgeographic.co.id/daily/640/0/201401131420290/b/foto-rutin-minum-kopi-turunkan-resiko-kematian-dini.jpg">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     {{--Hot List--}}
     <div class="ui vertical stripe quote segment container">
-        <h3>Trending</h3>
+        <div class="ui left aligned grid" id="hot-list">
+            <div class="eight wide column">
+                <h3>Trending</h3>
+            </div>
+            <div class="right floated right aligned eight wide column">
+                <a href="#">Lihat Semua</a>
+            </div>
+        </div>
         <div class="ui five doubling cards">
             @foreach($favProducts as $product)
                 <div class="card">
@@ -241,7 +168,14 @@
     </div>
     {{--Category--}}
     <div class="ui vertical stripe quote segment container">
-        <h3>Kategori</h3>
+        <div class="ui left aligned grid" id="category-list">
+            <div class="eight wide column">
+                <h3>Kategori</h3>
+            </div>
+            <div class="right floated right aligned eight wide column">
+                <a href="#">Lihat Semua</a>
+            </div>
+        </div>
         <table class="ui celled table">
             <tr>
                 <td class="selectable">
