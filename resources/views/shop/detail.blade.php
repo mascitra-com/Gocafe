@@ -1,5 +1,5 @@
 @extends('_layout.homepage.index')
-
+@section('page_title', $cafe->name)
 @section('content')
     <div class="ui vertical segment container">
         <div class="row">

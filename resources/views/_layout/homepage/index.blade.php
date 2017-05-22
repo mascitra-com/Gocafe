@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>@yield('page_title') | Kulinerae</title>
+    <title>@yield('page_title') | Kulinerae.com</title>
     <link rel="stylesheet" href="{{URL::asset('plugins/fontawesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/semantic-ui/semantic.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/homepage.css') }}">
@@ -54,11 +54,13 @@
                     </div>
                 </div>
                 <div class="six wide column">
-                    <h4 class="ui header">Beli</h4>
+                    <h4 class="ui header">Bantuan</h4>
                     <div class="ui link list">
-                        <a href="#" class="item">Kuliner di Kulinerae</a>
-                        <a href="#" class="item">Hot List</a>
-                        <a href="#" class="item">Trending</a>
+                        <a href="#" class="item">Syarat dan Ketentuan</a>
+                        <a href="#" class="item">Kebijakan Privasi</a>
+                        <a href="#" class="item">Pusat Resolusi</a>
+                        <a href="#" class="item">Hubungi Kami</a>
+                        <a href="#" class="item">Panduan Keamanan</a>
                     </div>
                 </div>
                 <div class="five wide column">
@@ -70,7 +72,7 @@
                         </tr>
                         <tr>
                             <td width="25%"><i class="fa fa-twitter-square"></i> Twitter</td>
-                            <td width="50%">: <a href="#">Kulinerae</a></td>
+                            <td width="50%">: <a href="#">@kulinerae</a></td>
                         </tr>
                         <tr>
                             <td width="25%"><i class="fa fa-instagram"></i> Instagram</td>
@@ -81,6 +83,22 @@
                             <td width="50%">: (+62) 000 000</td>
                         </tr>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui vertical footer segment">
+        <div class="ui container" style="color: rgba(0,0,0,.4); font-size: 9pt">
+            <div class="ui left aligned grid">
+                <div class="eight wide column">
+                    <p>&copy; 2017, PT. Kulinerae</p>
+                    <p>Server process time: {{ number_format((microtime(true) - LARAVEL_START), 3) }}</p>
+                </div>
+                <div class="right floated right aligned eight wide column">
+                    <div class="ui buttons">
+                        <button class="ui brown button active">Indonesia</button>
+                        <button class="ui brown basic button">English</button>
+                    </div>
                 </div>
             </div>
         </div>

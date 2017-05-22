@@ -1,4 +1,5 @@
 @extends('_layout.homepage.index')
+@section('page_title', 'Homepage')
 @section('content')
     {{--Promo & Visitor Favorite--}}
     <div class="ui vertical segment container">
@@ -106,11 +107,17 @@
             @endforeach
         </div>
     </div>
+
     {{--Top Picks with Their Products--}}
     <div class="ui vertical segment container">
         <div class="ui text">
-            <div class="ui left aligned grid" id="top-picks" style="margin-bottom: 2em">
-                <h3>Jelang Ramadhan, Berbuka dan Sahur, Kulinerae!</h3>
+            <div class="ui left aligned grid" id="top-picks">
+                <div class="eight wide column">
+                    <h3>Jelang Ramadhan, Berbuka dan Sahur, Kulinerae!</h3>
+                </div>
+                <div class="right floated right aligned eight wide column">
+                    <a href="{{ url('recommended-shop') }}">Lihat Semua</a>
+                </div>
             </div>
             @foreach($recommended as $recommend)
                 <div class="ui card stack fluid">

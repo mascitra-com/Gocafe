@@ -1,10 +1,13 @@
 @extends('_layout.homepage.index')
-
+@section('page_title', $product->name)
 @section('content')
     <div class="ui grid container">
         {{-- Main Content --}}
         <div class="twelve wide column">
-            <h1 style="color: #8C4728">{{ $product->name }}</h1>
+            <h1 style="color: #8C4728">
+                {{ $product->name }}<br>
+                <small style="color: #F18803">{{ $product->category->name }}</small>
+            </h1>
             <div class="ui segment">
                 Bagikan :
                 <button class="ui facebook button">
@@ -66,8 +69,10 @@
             </div>
             <button class="ui fluid button"><i class="fa fa-heart"></i> &nbsp Tambah ke Wishlist</button>
             <div class="ui center aligned segment container">
-                <h3>{{ $cafe->name }}</h3>
+                <a href="{{ url('shop/' . $cafe->id) }}">
+                <h3 style="color: #8C4728">{{ $cafe->name }}</h3>
                 <img class="ui centered tiny image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHfIvsQ2CtsjxMC-GVIJFu7ab5I9GTdsMS5pelqZCFfvAYortrg"><br>
+                </a>
                 <a target="_blank" href="https://www.facebook.com/{{ $cafe->facebook }}"><i class="fa fa-facebook-square"></i> {{ $cafe->facebook }}</a><br>
                 <a target="_blank" href="https://www.twitter.com/{{ $cafe->twitter }}"><i class="fa fa-twitter-square"></i> {{ $cafe->twitter }}</a><br>
                 <a target="_blank" href="https://www.instagram.com/{{ $cafe->instagram }}"><i class="fa fa-instagram"></i> {{ $cafe->instagram }}</a><br>
