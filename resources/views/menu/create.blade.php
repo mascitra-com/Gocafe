@@ -98,7 +98,12 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<input type="text" class="form-control" name="name" placeholder="nama kategori" id="category_name">
+					<input type="text" class="form-control" name="name" placeholder="nama kategori" id="category_name" list="recommended-category">
+                    <datalist id="recommended-category">
+                        @foreach($recommendedCat as $recommend)
+                            <option value="{{ $recommend->name }}">
+                        @endforeach
+                    </datalist>
 				</div>
 				<div class="form-group">
 					<select name="colour" class="form-control" id="category_colour">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cafe;
 use App\CategoryMenu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CategoryMenusController untuk Fitur Category Management
@@ -24,7 +25,8 @@ class CategoryMenusController extends Controller
         }
         $categoryID = idWithPrefix(6);
         $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn());
-        return view('menu.kategori', compact('categoryID', 'categories'));
+        $recommendedCat = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get();
+        return view('menu.kategori', compact('categoryID', 'categories', 'recommendedCat'));
     }
 
     /**

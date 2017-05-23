@@ -57,7 +57,12 @@
 					</div>
 					<div class="form-group">
 						<label for="">Nama Kategori</label>
-						<input type="text" class="form-control" name="name" placeholder="Nama Kategori">
+						<input type="text" class="form-control" name="name" placeholder="Nama Kategori" list="recommended-category">
+						<datalist id="recommended-category">
+                            @foreach($recommendedCat as $recommend)
+                                <option value="{{ $recommend->name }}">
+                            @endforeach
+                        </datalist>
 					</div>
 					<div class="form-group">
 						<label for="">Warna Label</label>

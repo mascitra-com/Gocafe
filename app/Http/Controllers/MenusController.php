@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cafe;
 use App\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -38,7 +39,8 @@ class MenusController extends Controller
     public function create(Cafe $cafe)
     {
         $categories = $cafe->findOrFail($cafe->getCafeIdByUserIdNowLoggedIn())->menuCategories;
-        return view('menu.create', compact('categories'));
+        $recommendedCat = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get();
+        return view('menu.create', compact('categories', 'recommendedCat'));
     }
 
     /**
