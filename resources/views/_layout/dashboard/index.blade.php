@@ -19,7 +19,7 @@
     <div id="nav-side">
         <div id="nav-side-wrapper">
             <div id="nav-side-thumbnail" class="hidden-sm">
-                <h3><span class="text-quintuple">GO</span>CAFE!</h3>
+                <h3><span class="text-quintuple">KULINER</span>AE!</h3>
             </div>
             <ul class="nav">
                 <li class="nav-close"><a href="#"><i class="fa fa-fw fa-close"></i></a></li>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Login</title>
+	<title>Login | Kulinerae.com</title>
 	<link rel="stylesheet" href="{{URL::asset('plugins/bootstrap/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-sign.css')}}">
 	<link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-helper.css')}}">
@@ -12,8 +12,8 @@
 	<div class="container-fluid">
 		<div class="row form-big" id="form-container">
 			<div class="col-xs-12 col-sm-6 col-md-8 background-img image-fade" id="form-left" data-image="{{URL::asset('images/bg2.jpg')}}">
-				<h2>DIGITAL CAFE<br>MARKETPLACE</h2>
-				<p class="text-size-20">Your perfect place to manage and promote<br>your favorite Cafe</p>
+				<h2>DIGITAL CULINARY<br>MARKETPLACE</h2>
+				<p class="text-size-20">Your perfect place to manage and promote<br>your favorite Culinary</p>
 				<div class="break-50"></div>
 				<a href="{{ url('/register') }}" class="btn btn-primary btn-round">Daftar Sekarang!</a>
 			</div>
