@@ -109,6 +109,7 @@
 <script src="{{ asset('plugins/jquery/jquery-3.1.1.min.js') }}"></script>
 <script src="{{ asset('plugins/semantic-ui/semantic.min.js') }}"></script>
 <script>
+    var hostname = window.location.hostname;
     $(document).ready(function() {
         $('#location')
             .dropdown({
