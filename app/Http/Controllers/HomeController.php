@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cafe;
 use App\Menu;
 use App\TransactionDetail;
+use Illuminate\Support\Facades\DB;
 use Laravolt\Indonesia\Indonesia;
 
 class HomeController extends Controller
@@ -33,7 +34,8 @@ class HomeController extends Controller
                 unset($favProducts[$key]);
             }
         }
-        return view('homepage.index', compact('cafes', 'favProducts', 'recommended'));
+        $categories = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get()->toArray();
+        return view('homepage.index', compact('cafes', 'favProducts', 'recommended', 'categories'));
     }
 
     public function getAllProvincesForSearch(Indonesia $indonesia)

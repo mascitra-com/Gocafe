@@ -179,39 +179,22 @@
             </div>
         </div>
         <table class="ui celled table">
+            @php($i = 0)
+            @while($i < count($categories))
             <tr>
-                <td class="selectable">
-                    <a href="#">Olahan Sapi</a>
-                </td>
-                <td class="selectable">
-                    <a href="#">Olahan Ayam</a>
-                </td>
-                <td class="selectable">
-                    <a href="#">Olahan Kambing</a>
-                </td>
+                @for($j=0; $j < 3; $j++)
+                    <td class="selectable">
+                        <a href="#">{{ $categories[$i]->name }}</a>
+                    </td>
+                    @php
+                        $i++;
+                        if($i == count($categories)) {
+                            break;
+                        }
+                    @endphp
+                @endfor
             </tr>
-            <tr>
-                <td class="selectable">
-                    <a href="#">Jus</a>
-                </td>
-                <td class="selectable">
-                    <a href="#">Kopi</a>
-                </td>
-                <td class="selectable">
-                    <a href="#">Teh</a>
-                </td>
-            </tr>
-            <tr>
-                <td class="selectable">
-                    <a href="#">Masakan Rumah</a>
-                </td>
-                <td class="selectable">
-                    <a href="#">Masakan Korea</a>
-                </td>
-                <td class="selectable">
-                    <a href="#">Masakan Jepang</a>
-                </td>
-            </tr>
+            @endwhile
         </table>
     </div>
     {{--Lokasi--}}
