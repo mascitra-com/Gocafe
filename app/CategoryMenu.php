@@ -4,10 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class CategoryMenu extends Model
 {
 	protected $table = 'categories_menus';
+
+    protected $primaryKey = 'id';
 
     use SoftDeletes;
 
@@ -30,4 +33,8 @@ class CategoryMenu extends Model
     	return $this->belongsTo(Cafe::class);
     }
 
+    public static function getCategoryHasMenu($cafe_id)
+    {
+        return DB::select("select * from `categories_menus` where exists (select * from `menus` where `menus`.`category_id` = `categories_menus`.`id` and `menus`.`deleted_at` is null) and (`cafe_id` = '" . $cafe_id . "') and `categories_menus`.`deleted_at` is null");
+    }
 }

@@ -223,10 +223,10 @@
                     <a href="#">Cafe</a>
                 </td>
                 <td class="selectable">
-                    <a href="#">Restauran</a>
+                    <a href="#">Restoran</a>
                 </td>
                 <td class="selectable">
-                    <a href="#">Mall</a>
+                    <a href="#">Bar</a>
                 </td>
             </tr>
             <tr>
@@ -237,7 +237,7 @@
                     <a href="#">Pinggir Danau</a>
                 </td>
                 <td class="selectable">
-                    <a href="#">Pegunungan</a>
+                    <a href="#">Pinggir Hutan Bakau</a>
                 </td>
             </tr>
             <tr>

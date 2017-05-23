@@ -12,6 +12,8 @@ class Menu extends Model
 
     public $incrementing = false;
 
+    protected $primaryKey = 'id';
+
 	protected $dates = ['deleted_at'];
 
     protected $fillable = ['id', 'cafe_id', 'category_id', 'name', 'description', 'cost', 'price','images_name','mime','status','created_by', 'updated_by', 'deleted_by', 'discount'];

@@ -1,4 +1,8 @@
+.ui.input input:focus, .ui.input.focus input {
+    border: 1px solid rgba(34,36,38,.15);
+}
 .ui.vertical.segment.container {
+}
     padding-bottom: 2em;
 }
 .ui.card.stack.fluid {
@@ -17,13 +21,8 @@
 .ui.card.stack > .content {
     padding: 1.5em;
 }
-.ui.input input:focus,
-.ui.input.focus input,
-.ui.selection.dropdown:focus,
-.ui.selection.dropdown:hover {
-    border: 1px solid rgba(34,36,38,.15);
-}
 .ui.action.input:not([class*="left action"]) input:focus {
+    border: 1px solid rgba(34,36,38,.15);
     border-right-color: transparent !important;
 }
 .menu > a.item, .ui.fixed.menu .ui.item {

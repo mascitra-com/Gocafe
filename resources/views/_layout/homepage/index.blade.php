@@ -21,12 +21,11 @@
     </a>
     <div class="ui item" style="width: 70%">
         <div class="ui fluid action input">
-            <input type="text" placeholder="Cari Produk atau Cafe...">
-            <select class="ui compact selection dropdown" id="location" style="border-left: none">
-                <option value="all">Semua Lokasi</option>
-                <option value="articles">Jember</option>
-                <option value="products">Lumajang</option>
-            </select>
+            <input type="search" placeholder="Cari Produk atau Cafe...">
+            <div class="ui icon input">
+                <input class="prompt" type="search" placeholder="Semua Lokasi" id="location" style="border-left: none">
+            </div>
+            <div class="results"></div>
             <button class="ui brown button" type="submit">Cari</button>
         </div>
         <div class="results"></div>

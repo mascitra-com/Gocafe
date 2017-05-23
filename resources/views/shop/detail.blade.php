@@ -10,27 +10,40 @@
         <div class="ui two column divided grid">
             <div class="row">
                 <div class="six column">
-                    <h3>{{ $cafe->name }}</h3>
-                    <p>{{ $cafe->description }}</p>
-                </div>
-                <div class="six column">
                     <div class="ui grid">
                         <div class="four wide column">
                             <img class="ui small image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHfIvsQ2CtsjxMC-GVIJFu7ab5I9GTdsMS5pelqZCFfvAYortrg">
                         </div>
                         <div class="twelve wide column">
-                            <table class="ui table table-responsive" style="border: none">
-                            <tr>
-                                <td><a target="_blank" href="https://www.facebook.com/{{ $cafe->facebook }}"><i class="fa fa-facebook-square"></i> {{ $cafe->facebook }}</a></td>
-                                <td><a target="_blank" href="https://www.twitter.com/{{ $cafe->twitter }}"><i class="fa fa-twitter-square"></i> {{ $cafe->twitter }}</a></td>
-                            </tr>
-                            <tr>
-                                <td><a target="_blank" href="https://www.instagram.com/{{ $cafe->instagram }}"><i class="fa fa-instagram"></i> {{ $cafe->instagram }}</a</td>
-                                <td style="color: #F18803"><i class="fa fa-phone-square"></i> {{ $cafe->phone }}</td>
-                            </tr>
-                            </table>
+                            <h3>{{ $cafe->name }}</h3>
+                            <p>{{ $cafe->description }}</p>
                         </div>
                     </div>
+                </div>
+                <div class="six column">
+                    <table class="ui celled table">
+                        <thead>
+                        <th>Nama Cabang</th>
+                        <th>Lokasi</th>
+                        <th>Alamat</th>
+                        <th>Jam Buka</th>
+                        <th>Jam Tutup</th>
+                        </thead>
+                        <tbody>
+                        @foreach($branches as $branch)
+                            <tr>
+                                <td>Cabang {{ $branch->location->name }}</td>
+                                <td>
+                                    {{ isset($branch->location->city) ? $branch->location->city->name. ',' : '' }}
+                                    {{ isset($branch->location->province) ? $branch->location->province->name: '' }}
+                                </td>
+                                <td>{{ $branch->address }}</td>
+                                <td>{{ $branch->open_hours }}</td>
+                                <td>{{ $branch->close_hours }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
