@@ -104,6 +104,7 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 //HOMEPAGE
+Route::get('get-provinces', 'HomeController@getAllProvincesForSearch');
 Route::get('recommended-shop', 'ShopController@recommended');
 Route::get('load-recommended/{offset}', 'ShopController@load');
 Route::get('shop/{cafeId}', 'ShopController@detail');

@@ -115,6 +115,6 @@ class Cafe extends Model
 
     public function latestMenu()
     {
-        return $this->menus()->latest()->take(5);
+        return $this->menus()->latest()->take(4);
     }
 }

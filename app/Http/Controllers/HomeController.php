@@ -15,7 +15,7 @@ class HomeController extends Controller
      * @param Indonesia $indonesia
      * @return \Illuminate\Http\Response
      */
-    public function index(Indonesia $indonesia)
+    public function index()
     {
         $cafes = Cafe::all();
         $recommended = Cafe::limit(3)->with('latestMenu')->get();
@@ -33,8 +33,12 @@ class HomeController extends Controller
                 unset($favProducts[$key]);
             }
         }
-        $cities = $indonesia->allCities();
-        return view('homepage.index', compact('cafes', 'favProducts', 'recommended', 'cities'));
+        return view('homepage.index', compact('cafes', 'favProducts', 'recommended'));
     }
 
+    public function getAllProvincesForSearch(Indonesia $indonesia)
+    {
+        $cities = $indonesia->allCities();
+        return response()->json(['cities' => $cities]);
+    }
 }

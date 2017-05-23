@@ -26,11 +26,7 @@
                 <input type="hidden" name="location">
                 <i class="dropdown icon"></i>
                 <div class="default text">Pilih Lokasi</div>
-                <div class="menu">
-                    @foreach($cities as $city)
-                        <div class="item" data-value="{{ $city->id }}">{{ $city->name }}</div>
-                    @endforeach
-                </div>
+                <div class="menu" id="provinceList"></div>
             </div>
             <button class="ui brown button" type="submit">Cari</button>
         </div>
@@ -113,11 +109,23 @@
 <script src="{{ asset('plugins/jquery/jquery-3.1.1.min.js') }}"></script>
 <script src="{{ asset('plugins/semantic-ui/semantic.min.js') }}"></script>
 <script>
-    $('#location')
-        .dropdown({
-            fullTextSearch: true
-        })
-    ;
+    $(document).ready(function() {
+        $('#location')
+            .dropdown({
+                fullTextSearch: true
+            });
+        $.ajax({
+            url: "https://"+ hostname + '/get-provinces',
+            dataType: 'json',
+            success: function (response) {
+                var markup = "";
+                $.each(response.cities, function (i, city) {
+                    markup += "<div class='item' data-value='"+city.id+"'>"+city.name+"</div>";
+                });
+                $("#provinceList").append(markup);
+            }
+        });
+    });
 </script>
 @yield('javascripts')
 </body>
