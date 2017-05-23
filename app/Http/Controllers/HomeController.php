@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Cafe;
 use App\Menu;
 use App\TransactionDetail;
+use Laravolt\Indonesia\Indonesia;
 
 class HomeController extends Controller
 {
     /**
      * Show the application dashboard.
      *
+     * @param Indonesia $indonesia
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Indonesia $indonesia)
     {
         $cafes = Cafe::all();
         $recommended = Cafe::limit(3)->with('latestMenu')->get();
@@ -31,7 +33,8 @@ class HomeController extends Controller
                 unset($favProducts[$key]);
             }
         }
-        return view('homepage.index', compact('cafes', 'favProducts', 'recommended'));
+        $cities = $indonesia->allCities();
+        return view('homepage.index', compact('cafes', 'favProducts', 'recommended', 'cities'));
     }
 
 }

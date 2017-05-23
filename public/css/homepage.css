@@ -1,4 +1,9 @@
-.ui.input input:focus, .ui.input.focus input {
+.ui.selection.active.dropdown, .ui.selection.active.dropdown .menu {
+    border-color: rgba(34,36,38,.15) !important;
+    box-shadow: none !important;
+}
+.ui.selection.dropdown:hover,
+.ui.selection.dropdown:focus {
     border: 1px solid rgba(34,36,38,.15);
 }
 .ui.vertical.segment.container {
@@ -21,10 +26,6 @@
 .ui.card.stack > .content {
     padding: 1.5em;
 }
-.ui.action.input:not([class*="left action"]) input:focus {
-    border: 1px solid rgba(34,36,38,.15);
-    border-right-color: transparent !important;
-}
 .menu > a.item, .ui.fixed.menu .ui.item {
     position: initial !important;
 }
@@ -43,7 +44,7 @@
 div.pusher {
     margin-top: 5em;
 }
-select#location {
+div#location {
     font-size: 10pt;
 }
 .tab {

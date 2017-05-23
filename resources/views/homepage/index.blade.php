@@ -237,18 +237,7 @@
                     <a href="#">Pinggir Danau</a>
                 </td>
                 <td class="selectable">
-                    <a href="#">Pinggir Hutan Bakau</a>
-                </td>
-            </tr>
-            <tr>
-                <td class="selectable">
-                    <a href="#">Pedesaan</a>
-                </td>
-                <td class="selectable">
-                    <a href="#">Perkotaan</a>
-                </td>
-                <td class="selectable">
-                    <a href="#">Pinggiran</a>
+                    <a href="#">Tempat Wisata</a>
                 </td>
             </tr>
         </table>

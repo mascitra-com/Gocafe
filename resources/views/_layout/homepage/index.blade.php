@@ -21,11 +21,17 @@
     </a>
     <div class="ui item" style="width: 70%">
         <div class="ui fluid action input">
-            <input type="search" placeholder="Cari Produk atau Cafe...">
-            <div class="ui icon input">
-                <input class="prompt" type="search" placeholder="Semua Lokasi" id="location" style="border-left: none">
+            <input type="text" placeholder="Cari Produk atau Cafe...">
+            <div class="ui search selection dropdown" id="location" style="border-left: none">
+                <input type="hidden" name="location">
+                <i class="dropdown icon"></i>
+                <div class="default text">Pilih Lokasi</div>
+                <div class="menu">
+                    @foreach($cities as $city)
+                        <div class="item" data-value="{{ $city->id }}">{{ $city->name }}</div>
+                    @endforeach
+                </div>
             </div>
-            <div class="results"></div>
             <button class="ui brown button" type="submit">Cari</button>
         </div>
         <div class="results"></div>
@@ -106,6 +112,13 @@
 @yield('modal')
 <script src="{{ asset('plugins/jquery/jquery-3.1.1.min.js') }}"></script>
 <script src="{{ asset('plugins/semantic-ui/semantic.min.js') }}"></script>
+<script>
+    $('#location')
+        .dropdown({
+            fullTextSearch: true
+        })
+    ;
+</script>
 @yield('javascripts')
 </body>
 </html>
