@@ -20,16 +20,16 @@
         <i class="dropdown icon"></i>
     </a>
     <div class="ui item" style="width: 70%">
-        <div class="ui fluid action input">
-            <input type="text" placeholder="Cari Produk atau Cafe...">
+        <form action="{{ url('search') }}" class="ui fluid action input" method="GET">
+            <input type="text" name="product" placeholder="Cari Produk atau Cafe...">
             <div class="ui search selection dropdown" id="location" style="border-left: none">
                 <input type="hidden" name="location">
                 <i class="dropdown icon"></i>
                 <div class="default text">Pilih Lokasi</div>
                 <div class="menu" id="provinceList"></div>
             </div>
-            <a href="{{ url('product') }}" class="ui brown button" type="submit">Cari</a>
-        </div>
+            <button class="ui brown button" type="submit">Cari</button>
+        </form>
         <div class="results"></div>
     </div>
     <div class="right menu">

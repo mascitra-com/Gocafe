@@ -7,14 +7,27 @@ use App\Menu;
 use App\Package;
 use App\Review;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class ProductController extends Controller
 {
 
-    public function index()
+    public function search()
     {
+        $product = Input::get('product');
+        $category = Input::get('category');
+        $orderBy = Input::get('order');
         $categories = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get()->toArray();
-        return view('product.list', compact('categories'));
+        $query = explode(' ', $product);
+        $list = DB::table('menus')->select('*');
+        foreach($query as $key => $element) {
+            if($key == 0) {
+                $list->where('name', 'like', "%$element%");
+            }
+            $list->orWhere('name', 'like', "%$element%");
+        }
+        $productList = $list->get();
+        return view('product.list', compact('product', 'categories', 'productList'));
     }
     /**
      * Display product detail

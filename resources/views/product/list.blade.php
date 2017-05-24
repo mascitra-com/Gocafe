@@ -66,28 +66,28 @@
             </div>
             <div class="ui divider"></div>
             <div class="ui message">
-                <p>Hasil Pencarian Produk "Menu A" ({{ rand(432, 2412) }} produk)</p>
+                <p>Hasil Pencarian Produk "{{ ucfirst($product) }}" ({{ count($productList) }} produk)</p>
             </div>
             <div class="ui four doubling cards">
-                @for($i=0; $i < 24; $i++)
-                    <a class="card product" href="#">
+                @foreach($productList as $product)
+                    <a class="card product" href="{{ url('product/'.$product->id) }}">
                         <div class="image">
-                            <img src="{{ asset('images/blank-menu.png') }}">
+                            <img src="{{url("menus/showThumbnail/$product->id")}}">
                         </div>
                         <div class="content">
-                            <div class="header">Menu {{ $i + 1 }}</div>
+                            <div class="header">{{ $product->name }}</div>
                         </div>
                         <div class="extra content">
                                 <span>
                                 <i class="money brown icon"></i>
-                                <b>Rp. {{ number_format(rand(8000, 20000), 0, ',', '.') }}</b>
+                                <b>Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
                                 </span>
                             <span class="right floated">
-                                    <div class="ui star rating right floated" data-rating="{{ rand(0, 5) }}"></div>
+                                    <div class="ui star rating right floated" data-rating="{{ floor($product->rating) }}"></div>
                                 </span>
                         </div>
                     </a>
-                @endfor
+                @endforeach
             </div>
             <div class="ui divider"></div>
         </div>

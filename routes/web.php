@@ -118,6 +118,6 @@ Route::get('shop/{cafeId}', 'ShopController@detail');
 //--END SHOP
 
 //PRODUCT
-Route::get('product', 'ProductController@index');
+Route::get('search', ['as' => 'search', 'uses' => 'ProductController@search']);
 Route::get('product/{productId}', 'ProductController@detail');
 //--END PRODUCT
