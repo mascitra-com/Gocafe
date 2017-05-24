@@ -21,10 +21,9 @@
                         <div class="item" data-value="0">Paling Sesuai</div>
                         <div class="item" data-value="1">Ulasan</div>
                         <div class="item" data-value="2">Penjual</div>
-                        <div class="item" data-value="3">Penjual</div>
-                        <div class="item" data-value="4">Termurah</div>
-                        <div class="item" data-value="5">Termahal</div>
-                        <div class="item" data-value="6">Terbaru</div>
+                        <div class="item" data-value="3">Termurah</div>
+                        <div class="item" data-value="4">Termahal</div>
+                        <div class="item" data-value="5">Terbaru</div>
                     </div>
                 </div>
                 <h5>Lokasi</h5>
@@ -54,8 +53,6 @@
                         </div>
                     </div>
                 </div>
-                <br>
-                <button class="ui brown button fluid" type="submit">Cari</button>
             </div>
         </div>
         {{-- Main Content --}}
@@ -66,7 +63,7 @@
             </div>
             <div class="ui divider"></div>
             <div class="ui message">
-                <p>Hasil Pencarian Produk "{{ ucfirst($product) }}" ({{ count($productList) }} produk)</p>
+                <p>Hasil Pencarian Produk "{{ ucfirst($filter['product']) }}" ({{ count($productList) }} produk)</p>
             </div>
             <div class="ui four doubling cards">
                 @foreach($productList as $product)

@@ -14,11 +14,11 @@ class ProductController extends Controller
 
     public function search()
     {
-        $product = Input::get('product');
-        $category = Input::get('category');
-        $orderBy = Input::get('order');
+        $filter['product'] = Input::get('product');
+        $filter['location'] = Input::get('location');
+        $filter['orderBy'] = Input::get('order');
         $categories = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get()->toArray();
-        $query = explode(' ', $product);
+        $query = explode(' ', $filter['product']);
         $list = DB::table('menus')->select('*');
         foreach($query as $key => $element) {
             if($key == 0) {
@@ -27,7 +27,7 @@ class ProductController extends Controller
             $list->orWhere('name', 'like', "%$element%");
         }
         $productList = $list->get();
-        return view('product.list', compact('product', 'categories', 'productList'));
+        return view('product.list', compact('product', 'categories', 'productList', 'filter'));
     }
     /**
      * Display product detail

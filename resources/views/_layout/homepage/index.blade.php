@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>@yield('page_title') | Kulinerae.com</title>
     <link rel="stylesheet" href="{{URL::asset('plugins/fontawesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/semantic-ui/semantic.min.css') }}">
@@ -19,9 +18,9 @@
         Kategori
         <i class="dropdown icon"></i>
     </a>
-    <div class="ui item" style="width: 70%">
-        <form action="{{ url('search') }}" class="ui fluid action input" method="GET">
-            <input type="text" name="product" placeholder="Cari Produk atau Cafe...">
+    <div class="ui item" style="width: 60%">
+        <form action="{{ url('search') }}" class="ui action input" method="GET">
+            <input type="text" name="product" placeholder="Cari Produk atau Cafe..." value="{{ empty($filter['product']) ? '' :  $filter['product']}}">
             <div class="ui search selection dropdown" id="location" style="border-left: none">
                 <input type="hidden" name="location">
                 <i class="dropdown icon"></i>
@@ -35,6 +34,7 @@
     <div class="right menu">
         <a href="{{ url('register') }}" class="item">Daftar</a>
         <a href="{{ url('login') }}" class="item">Masuk</a>
+        <a href="" class="item button" style="margin-right: 4em"><i class="fa fa-th-large"></i></a>
     </div>
 </div>
 
