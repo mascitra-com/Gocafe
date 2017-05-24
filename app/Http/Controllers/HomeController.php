@@ -13,12 +13,11 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @param Indonesia $indonesia
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $cafes = Cafe::all();
+        $cafes = Cafe::limit(15)->get();
         $recommended = Cafe::limit(3)->with('latestMenu')->get();
         // Favorite Menus
         $favProducts = TransactionDetail::getTrendingProducts(1);
@@ -38,6 +37,10 @@ class HomeController extends Controller
         return view('homepage.index', compact('cafes', 'favProducts', 'recommended', 'categories'));
     }
 
+    /**
+     * @param Indonesia $indonesia
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getAllProvincesForSearch(Indonesia $indonesia)
     {
         $cities = $indonesia->allCities();

@@ -103,34 +103,21 @@ Route::group(['middleware' => ['web']], function () {
     //--END REVIEW
 
 });
+// Thumbnail & Image
+Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail');
+Route::get('menus/showImage/{image_file}', 'MenusController@showImage');
+
 //HOMEPAGE
 Route::get('get-provinces', 'HomeController@getAllProvincesForSearch');
+//--END HOMEPAGE
+
+//SHOP
 Route::get('recommended-shop', 'ShopController@recommended');
 Route::get('load-recommended/{offset}', 'ShopController@load');
 Route::get('shop/{cafeId}', 'ShopController@detail');
-Route::get('product/{productId}', 'ShopController@product');
-//--END HOMEPAGE
-Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail'); //get avatar's response
-Route::get('menus/showImage/{image_file}', 'MenusController@showImage'); //get avatar's response
+//--END SHOP
 
-// DUMMIES VIEW
-Route::get('ui/', 'Ui@Index');
-Route::get('ui/dashboard', 'Ui@Dashboard');
-Route::get('ui/login', 'Ui@Login');
-Route::get('ui/profile', 'Ui@Profile');
-Route::get('ui/cafe', 'Ui@Cafe');
-Route::get('ui/staff', 'Ui@Staff');
-Route::get('ui/staff/add', 'Ui@Staff_create');
-Route::get('ui/staff/detail', 'Ui@Staff_detail');
-Route::get('ui/branch', 'Ui@Branch');
-Route::get('ui/branch/detail', 'Ui@Branch_detail');
-Route::get('ui/position', 'Ui@Position');
-Route::get('ui/account', 'Ui@Account');
-Route::get('ui/menu', 'Ui@Menu');
-Route::get('ui/menu/add', 'Ui@Menu_create');
-Route::get('ui/kategori', 'Ui@Kategori');
-Route::get('ui/promo', 'Ui@Promo');
-Route::get('ui/promo/add', 'Ui@Promo_create');
-Route::get('ui/package', 'Ui@Package');
-Route::get('ui/package/add', 'Ui@Package_create');
-Route::get('ui/discount', 'Ui@Discount');
+//PRODUCT
+Route::get('product', 'ProductController@index');
+Route::get('product/{productId}', 'ProductController@detail');
+//--END PRODUCT

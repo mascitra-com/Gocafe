@@ -28,7 +28,7 @@
                 <div class="default text">Pilih Lokasi</div>
                 <div class="menu" id="provinceList"></div>
             </div>
-            <button class="ui brown button" type="submit">Cari</button>
+            <a href="{{ url('product') }}" class="ui brown button" type="submit">Cari</a>
         </div>
         <div class="results"></div>
     </div>

@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Cafe;
 use App\CafeBranch;
 use App\CategoryMenu;
-use App\Menu;
-use App\Package;
-use App\Review;
 use Laravolt\Indonesia\Indonesia;
 
 class ShopController extends Controller
@@ -41,29 +38,6 @@ class ShopController extends Controller
         $categories = CategoryMenu::getCategoryHasMenu($cafeId);
         $products = Cafe::findOrFail($cafeId)->menus->where('category_id', $categories[0]->id);
         return view('shop.detail', compact('cafe', 'branches', 'categories', 'products'));
-    }
-
-    /**
-     * Display product detail
-     *
-     * @param $productId
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function product($productId)
-    {
-        $product = array();
-        $code_item = substr($productId, 0,3);
-        if($code_item === "MCF"){
-            $product = Menu::find($productId);
-            $product->type = 'Menu';
-        }
-        if($code_item === "PKG"){
-            $product = Package::find($productId);
-            $product->type = 'Paket';
-        }
-        $cafe = Cafe::find($product->cafe_id);
-        $reviews = Review::where('item_id', $productId)->orderBy('id', 'desc')->get();
-        return view('homepage.product', compact('cafe', 'product', 'reviews'));
     }
 
     public function load($offset)
