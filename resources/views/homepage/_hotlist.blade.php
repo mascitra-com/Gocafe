@@ -1,7 +1,7 @@
 <div class="ui vertical stripe quote segment container">
     <div class="ui left aligned grid" id="hot-list">
         <div class="eight wide column">
-            <h3>Trending</h3>
+            <h3>Paling Banyak di Pesan</h3>
         </div>
         <div class="right floated right aligned eight wide column">
             <a href="#">Lihat Semua</a>

@@ -7,6 +7,8 @@
     @include('homepage._recommended')
     {{--Top Picks with Their Products--}}
     @include('homepage._toppicks')
+    {{--Top Hit--}}
+    @include('homepage._tophit')
     {{--Hot List--}}
     @include('homepage._hotlist')
     {{--Category List--}}

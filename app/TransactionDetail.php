@@ -38,6 +38,17 @@ class TransactionDetail extends Model
         return $top5menus;
     }
 
+    public static function getTopHitProducts()
+    {
+        // Select Menu Group by ID order by Count of Aggrate Menu
+        $top5menus = DB::table('menus')
+            ->where('hit', '>', 0)
+            ->orderBy('hit', 'desc')
+            ->limit(5, 0)
+            ->get();
+        return $top5menus;
+    }
+
     public static function getHotProducts($intervalMonth)
     {
         // Select Menu Group by ID order by Count of Aggrate Menu

@@ -21,6 +21,7 @@ class HomeController extends Controller
         $recommended = Cafe::limit(3)->with('latestMenu')->get();
         // Favorite Menus
         $favProducts = TransactionDetail::getTrendingProducts(1);
+        $topHit = TransactionDetail::getTopHitProducts();
         foreach ($favProducts as $key => $value){
             $code_item = substr($value->item_id, 0,3);
             if($code_item === "MCF"){
@@ -34,7 +35,7 @@ class HomeController extends Controller
             }
         }
         $categories = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get()->toArray();
-        return view('homepage.index', compact('cafes', 'favProducts', 'recommended', 'categories'));
+        return view('homepage.index', compact('cafes', 'favProducts', 'topHit', 'recommended', 'categories'));
     }
 
     /**
