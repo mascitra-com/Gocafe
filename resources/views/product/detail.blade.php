@@ -30,11 +30,6 @@
                             <img src="{{ url('/menus/showThumbnail/'.$product->id) }}" id="big-thumbnail" class="ui fluid image">
                         </div>
                         <div class="ten wide column">
-                            <div class="ui buttons brown">
-                                <a class="ui button active" data-tab="first">Informasi Produk</a>
-                                <a class="ui button" data-tab="second">Ulasan Produk</a>
-                            </div>
-                            <br>
                             <h4>Deskripsi Produk</h4>
                             <p>{{ $product->description }}</p>
                         </div>

@@ -117,4 +117,11 @@ class Cafe extends Model
     {
         return $this->menus()->latest()->take(4);
     }
+
+    public static function setLastAccessed()
+    {
+        return DB::table('cafes')
+            ->where('id', Cafe::getCafeIdByUserIdNowLoggedIn())
+            ->update(['last_accessed' => date('Y-m-d H:i:s', time())]);
+    }
 }

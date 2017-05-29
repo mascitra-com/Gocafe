@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Cafe;
+
 /**
  * Class DashboardController untuk Halaman Dashboard
  * @package App\Http\Controllers
@@ -21,6 +23,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        Cafe::setLastAccessed();
         return view('dashboard.dashboard');
     }
 }

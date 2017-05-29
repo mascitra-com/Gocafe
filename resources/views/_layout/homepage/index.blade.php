@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>@yield('page_title') | Kulinerae.com</title>
+    <title>Kulinerae | @yield('page_title')</title>
     <link rel="stylesheet" href="{{URL::asset('plugins/fontawesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/semantic-ui/semantic.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/homepage.css') }}">
@@ -19,7 +19,7 @@
         <i class="dropdown icon"></i>
     </a>
     <div class="ui item" style="width: 60%">
-        <form action="{{ url('search') }}" class="ui action input" method="GET">
+        <form action="{{ url('search') }}" class="ui action input" method="GET" id="search">
             <input type="text" name="product" placeholder="Cari Produk atau Cafe..." value="{{ empty($filter['product']) ? '' :  $filter['product']}}">
             <div class="ui search selection dropdown" id="location" style="border-left: none">
                 <input type="hidden" name="location">

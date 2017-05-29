@@ -24,7 +24,10 @@ $("a.brown").click(function(){
                 var name = menu.name;
                 var price = $.number(menu.price, 0, '', '.');
                 var rating = Math.floor(menu.rating);
-                var markup = "<a href='https://" + hostname + "/product/" + id + "' class='card product' data-id='"+id+"'><div class='image'><img src='" + getThumbnail(id) + "'></div><div class='content'><div class='header'>" + name + "</div></div><div class='extra content'><span><i class='money brown icon'></i><b>Rp." + price + "</b></span><span class='right floated'><div class='ui star rating right floated' data-rating='" + rating + "'></div></span></div></a>";
+                var hit = menu.hit;
+                var liked = menu.liked;
+                var reviewed = menu.reviewed;
+                var markup = "<a href='https://" + hostname + "/product/" + id + "' class='card product' data-id='"+id+"'><div class='image'><img src='" + getThumbnail(id) + "'></div><div class='content'><div class='header'>" + name + "</div><span><b>Rp." + price + "</b></span></div><div class='extra content'><i class='fa fa-heart'></i> "+liked+" <span class='right floated'><div class='ui tiny star rating' data-rating='" + rating + "'></div>("+reviewed+")</span></div></a>";
                 $("#productList").append(markup);
             });
             $('.ui.star.rating').rating({

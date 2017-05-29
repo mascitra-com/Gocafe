@@ -26,6 +26,7 @@ class ReviewController extends Controller
         $newRating = Review::where('item_id', $request->item_id)->avg('rating');
         $menu = Menu::find($request->item_id);
         $menu->rating = $newRating;
+        $menu->reviewed = (int) $menu->reviewed + 1;
         $menu->save();
         return response()->json(['status' => 'success', 'review' => $request->all(), 'newRating' => $newRating]);
     }

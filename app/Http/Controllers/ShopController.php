@@ -15,29 +15,29 @@ class ShopController extends Controller
     public function recommended()
     {
         $recommended = Cafe::limit(5)->with('latestMenu')->get();
-        return view('shop.list', compact('recommended'));
+        return view('shop.recommended', compact('recommended'));
     }
 
     /**
      * Display Shop Detail with All Product Provided
      *
-     * @param $cafeId
+     * @param $shopId
      * @param Indonesia $indonesia
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function detail($cafeId, Indonesia $indonesia)
+    public function detail($shopId, Indonesia $indonesia)
     {
-        $cafe = Cafe::where('id', $cafeId)->first();
-        $branches = CafeBranch::all()->where('cafe_id', $cafeId);
+        $shop = Cafe::where('id', $shopId)->first();
+        $branches = CafeBranch::all()->where('cafe_id', $shopId);
         // Get Location Name for each branch
         if (isset($branches)) {
             foreach ($branches as $branch) {
                 $this->get_location($branch, $indonesia);
             }
         }
-        $categories = CategoryMenu::getCategoryHasMenu($cafeId);
-        $products = Cafe::findOrFail($cafeId)->menus->where('category_id', $categories[0]->id);
-        return view('shop.detail', compact('cafe', 'branches', 'categories', 'products'));
+        $categories = CategoryMenu::getCategoryHasMenu($shopId);
+        $products = Cafe::findOrFail($shopId)->menus->where('category_id', $categories[0]->id);
+        return view('shop.index', compact('shop', 'branches', 'categories', 'products'));
     }
 
     public function load($offset)

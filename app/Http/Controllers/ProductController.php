@@ -26,6 +26,14 @@ class ProductController extends Controller
             }
             $list->orWhere('name', 'like', "%$element%");
         }
+        switch ($filter['orderBy']) {
+            case '3':
+                $list->orderBy('price', 'asc');
+                break;
+            case '4':
+                $list->orderBy('price', 'desc');
+                break;
+        }
         $productList = $list->get();
         return view('product.list', compact('product', 'categories', 'productList', 'filter'));
     }
@@ -41,11 +49,14 @@ class ProductController extends Controller
         $code_item = substr($productId, 0,3);
         if($code_item === "MCF"){
             $product = Menu::find($productId);
+            $product->hit = (int) $product->hit + 1;
+            $product->save();
             $product->type = 'Menu';
         }
         if($code_item === "PKG"){
             $product = Package::find($productId);
             $product->type = 'Paket';
+            // TODO Set Hit
         }
         $cafe = Cafe::find($product->cafe_id);
         $reviews = Review::where('item_id', $productId)->orderBy('id', 'desc')->get();
