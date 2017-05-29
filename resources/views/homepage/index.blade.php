@@ -36,6 +36,7 @@
         </div>
     </div>
 @endsection
+
 @section('javascripts')
     <script>
         $(document).ready(function() {
@@ -56,13 +57,6 @@
                 });
             // create sidebar and attach to menu open
             $('.ui.sidebar').sidebar('attach events', '.toc.item');
-        });
-
-        $('.slider').glide({
-            autoplay: false,
-            arrowsWrapperClass: 'slider-arrows',
-            arrowRightText: '',
-            arrowLeftText: ''
         });
     </script>
 @endsection

@@ -14,10 +14,7 @@
 <!-- Following Menu -->
 <div class="ui large top fixed hidden menu">
     <a class="item" href="{{ url('/') }}"><b>KULINERAE</b></a>
-    <a class="category item">
-        Kategori
-        <i class="dropdown icon"></i>
-    </a>
+    @include('_layout.homepage._categories')
     <div class="ui item" style="width: 60%">
         <form action="{{ url('search') }}" class="ui action input" method="GET" id="search">
             <input type="text" name="product" placeholder="Cari Produk atau Cafe..." value="{{ empty($filter['product']) ? '' :  $filter['product']}}">
@@ -111,6 +108,9 @@
 <script>
     var hostname = window.location.hostname;
     $(document).ready(function() {
+        $('.category.item').popup({
+            hoverable: true
+        });
         $('#location')
             .dropdown({
                 fullTextSearch: true
