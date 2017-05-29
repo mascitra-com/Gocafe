@@ -26,7 +26,7 @@ class HomeController extends Controller
             $code_item = substr($value->item_id, 0,3);
             if($code_item === "MCF"){
                 $menu = Menu::find($value->item_id);
-                $favProducts[$key]->name = $menu->name;
+                $favProducts[$key] = $menu;
                 $favProducts[$key]->type = 'Menu';
             }
             if($code_item === "PKG"){
