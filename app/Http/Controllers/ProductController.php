@@ -58,9 +58,9 @@ class ProductController extends Controller
             $product->type = 'Paket';
             // TODO Set Hit
         }
-        $cafe = Cafe::find($product->cafe_id);
+        $shop = Cafe::find($product->cafe_id);
         $reviews = Review::where('item_id', $productId)->orderBy('id', 'desc')->get();
-        return view('product.detail', compact('cafe', 'product', 'reviews'));
+        return view('product.detail', compact('shop', 'product', 'reviews'));
     }
 
 }

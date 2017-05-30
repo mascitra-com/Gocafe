@@ -66,19 +66,15 @@
                     <table width="100%">
                         <tr>
                             <td width="25%"><i class="fa fa-facebook-square"></i> Facebook</td>
-                            <td width="50%">: <a href="#">Kulinerae</a></td>
                         </tr>
                         <tr>
                             <td width="25%"><i class="fa fa-twitter-square"></i> Twitter</td>
-                            <td width="50%">: <a href="#">@kulinerae</a></td>
                         </tr>
                         <tr>
                             <td width="25%"><i class="fa fa-instagram"></i> Instagram</td>
-                            <td width="50%">: <a href="#">Kulinerae</a></td>
                         </tr>
                         <tr>
-                            <td width="25%"><i class="fa fa-phone-square"></i> Contact</td>
-                            <td width="50%">: (+62) 000 000</td>
+                            <td width="50%">(+62) 000 000</td>
                         </tr>
                     </table>
                 </div>

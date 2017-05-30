@@ -22,7 +22,11 @@
                     <div class="eleven wide column">
                         <h3>{{ $shop->name }}</h3>
                         <p>{{ $shop->description }}</p>
-                        <div style="font-size: 8pt" class="ui equal width grid">
+                        <a target="_blank" href="https://www.facebook.com/{{ $shop->facebook }}"><i class="fa fa-lg fa-facebook-square"></i> </a>
+                        <a target="_blank" href="https://www.twitter.com/{{ $shop->twitter }}"><i class="fa fa-lg fa-twitter-square"></i> </a>
+                        <a target="_blank" href="https://www.instagram.com/{{ $shop->instagram }}"><i class="fa fa-lg fa-instagram"></i> </a><br>
+                        <span style="color: #F18803">{{ $shop->phone }}</span>
+                        <div style="font-size: 8pt; margin-top: .5em" class="ui equal width grid">
                             <div class="column">Aktif Sejak : <br>{{ date('d M Y H:i', strtotime($shop->created_at)) }}</div>
                             <div class="column">Terakhir diakses : <br>{{ date('d M Y H:i', strtotime($shop->last_accessed)) }}</div>
                         </div>

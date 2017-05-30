@@ -11,10 +11,17 @@
     @include('homepage._tophit')
     {{--Hot List--}}
     @include('homepage._hotlist')
-    {{--Category List--}}
-    @include('homepage._categorylist')
-    {{--Lokasi List--}}
-    @include('homepage._locationlist')
+    {{--Slogan--}}
+    <div class="ui vertical stripe quote segment container">
+    <div class="ui equal width grid">
+        @for($i=0;$i<3;$i++)
+        <div class="column">
+            <img class="ui tiny left floated image" src="https://dummyimage.com/150x150/8C4728/fff.jpg&text=Image" >
+            Odio optio perferendis quisquam, quo reprehenderit, ut? Consectetur itaque vero voluptates?
+        </div>
+        @endfor
+    </div>
+    </div>
     <div class="ui vertical segment container">
         <div class="ui attached message grid">
             <div class="eight wide column">

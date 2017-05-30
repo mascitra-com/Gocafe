@@ -17,7 +17,7 @@
     flex-direction: row;
 }
 .ui.card.stack > div > img {
-    max-width: 250px;
+    max-width: 300px;
     width: auto;
 }
 .ui.card.stack > div {
@@ -50,14 +50,14 @@ div#location {
 .tab {
     padding: 1em;
 }
-a {
+a, .ui.breadcrumb a {
     color: #F18803;
 }
 .ui.selectable.table tbody tr:hover, .ui.table tbody tr td.selectable:hover {
     background: transparent !important;
     color: #8C4728 !important;
 }
-a:hover {
+a:hover, .ui.breadcrumb a:hover {
     color: #8C4728;
 }
 .ui.card>.content>a.header:hover, .ui.cards>.card>.content>a.header:hover {

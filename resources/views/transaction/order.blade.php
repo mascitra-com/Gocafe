@@ -144,7 +144,7 @@
                         @for($i = 0; $i < 4; $i++)
                             <div class="col-xs-6 col-md-3">
                                 <button class="thumbnail">
-                                    <img src="{{ url("menus/showThumbnail/MCFDK120170419082141")}}" alt="Thumbnail">
+                                    <img src="{{ url("menus/showThumbnail/")}}" alt="Thumbnail">
                                 </button>
                             </div>
                         @endfor

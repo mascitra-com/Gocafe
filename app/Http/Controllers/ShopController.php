@@ -36,8 +36,14 @@ class ShopController extends Controller
             }
         }
         $categories = CategoryMenu::getCategoryHasMenu($shopId);
-        $products = Cafe::findOrFail($shopId)->menus->where('category_id', $categories[0]->id);
+        $products = Cafe::findOrFail($shopId)->menus;
         return view('shop.index', compact('shop', 'branches', 'categories', 'products'));
+    }
+
+    public function allProducts($shopId)
+    {
+        $products = Cafe::findOrFail($shopId)->menus;
+        return response()->json(['products' => $products]);
     }
 
     public function load($offset)
