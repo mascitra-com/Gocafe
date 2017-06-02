@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Cafe;
 use App\CafeBranch;
 use App\CategoryMenu;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Laravolt\Indonesia\Indonesia;
 
 class ShopController extends Controller
@@ -71,5 +73,20 @@ class ShopController extends Controller
                 $branch->location = $indonesia->findDistrict($branch->location_id, ['city', 'province']);
                 break;
         }
+    }
+
+    public function search()
+    {
+        $filter['query'] = Input::get('query');;
+        $query = explode(' ', $filter['query']);
+        $list = DB::table('cafes')->select('*');
+        foreach($query as $key => $element) {
+            if($key == 0) {
+                $list->where('name', 'like', "%$element%");
+            }
+            $list->orWhere('name', 'like', "%$element%");
+        }
+        $shopList = $list->get();
+        return view('shop.list', compact('filter', 'shopList'));
     }
 }

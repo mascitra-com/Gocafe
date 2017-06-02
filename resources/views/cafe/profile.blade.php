@@ -1,6 +1,11 @@
 @extends('_layout/dashboard/index')
 @section('page_title', 'Cafe Profile')
 
+@section('styles')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
+@stop
+
 @section('content')
 	<div class="row">
         @if (count($errors) > 0)
@@ -37,6 +42,13 @@
 							<button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> Reset</button>
 						</div>
 					</form>
+                    <div class="panel-body box-center">
+                        <h4 class="panel-title">Logo</h4>
+                        <img src="{{url('logo/'.$cafe->id)}}" class="image-fit img-circle" width="150px" alt="foto">
+                        <div class="break-10"></div>
+                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#upload">Change Logo</button>
+                        <button class="btn btn-default btn-xs">Delete</button>
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -74,6 +86,28 @@
 	</div>
 @endsection
 
+@section('modal')
+    <div class="modal fade" tabindex="-1" role="dialog" id="upload">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Upload Foto</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="updateAvatar">
+                        <div class="form-group">
+                            <label for="avatar" class="text-quadruple"> Pilih file</label>
+                            <input type="file" name="logo" id="logo">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="change_logo('{{ $cafe->id }}')" id="btn-avt">Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
 @section('styles')
 	<style>
 		.container-fluid > .row > [class*=col-]{
@@ -101,4 +135,67 @@
 			padding: 3px 10px 3px 25px;
 		}
 	</style>
+@endsection
+
+@section('javascripts')
+    <script>
+        var base_url = '{{ url('/') }}';
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        function ajax_config() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': token
+                }
+            });
+        }
+
+        function change_logo(id) {
+
+            var formData = new FormData();
+            formData.append('logo', $('#logo')[0].files[0]);
+
+            ajax_config();
+
+            $.ajax({
+                url: base_url+'/logo/replace/'+id,
+                type: "POST",
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "JSON",
+                success: function(data, status){
+                    if (data.status) {
+                        alert(data.status);
+                        change_logo_name(id ,data.logo_name, data.logo_mime);
+                    }else{
+                        alert('shet');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error');
+                }
+            });
+        }
+        function change_logo_name(id, logo_name, logo_mime) {
+            ajax_config();
+
+            $.post(base_url+'/logo/change/'+id,
+                {
+                    _method: 'put',
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    avatar_name: logo_name,
+                    avatar_mime: logo_mime
+                },
+                function(data, status){
+                    if (data.status) {
+                        // location.reload(true);
+                        alert('Sukses Update Logo');
+                    }else{
+                        alert('Gagal Update Logo');
+                    }
+                });
+        }
+    </script>
 @endsection

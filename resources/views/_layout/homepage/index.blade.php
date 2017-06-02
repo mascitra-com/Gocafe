@@ -17,9 +17,9 @@
     @include('_layout.homepage._categories')
     <div class="ui item" style="width: 60%">
         <form action="{{ url('search') }}" class="ui action input" method="GET" id="search">
-            <input type="text" name="product" placeholder="Cari Produk atau Cafe..." value="{{ empty($filter['product']) ? '' :  $filter['product']}}">
+            <input type="text" name="query" placeholder="Cari Produk atau Cafe..." value="{{ empty($filter['query']) ? '' :  $filter['query']}}" id="query">
             <div class="ui search selection dropdown" id="location" style="border-left: none">
-                <input type="hidden" name="location">
+                <input type="hidden" name="">
                 <i class="dropdown icon"></i>
                 <div class="default text">Pilih Lokasi</div>
                 <div class="menu" id="provinceList"></div>

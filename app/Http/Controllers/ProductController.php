@@ -14,25 +14,50 @@ class ProductController extends Controller
 
     public function search()
     {
-        $filter['product'] = Input::get('product');
         $filter['location'] = Input::get('location');
         $filter['orderBy'] = Input::get('order');
+        $filter['lowPrice'] = str_replace('.', '', Input::get('lowPrice'));
+        $filter['highPrice'] = str_replace('.', '', Input::get('highPrice'));
         $categories = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get()->toArray();
-        $query = explode(' ', $filter['product']);
         $list = DB::table('menus')->select('*');
-        foreach($query as $key => $element) {
-            if($key == 0) {
-                $list->where('name', 'like', "%$element%");
+        $filter['query'] = Input::get('query');
+        // Search By Words
+        $list->orWhere(function ($q) {
+            $query = explode(' ', Input::get('query'));
+            foreach($query as $key => $element) {
+                if($key == 0) {
+                    $q->where('name', 'like', "%$element%");
+                }
+                $q->orWhere('name', 'like', "%$element%");
             }
-            $list->orWhere('name', 'like', "%$element%");
-        }
+        });
+        // Order
         switch ($filter['orderBy']) {
+            case '1':
+                $list->orderBy('reviewed', 'desc');
+                break;
+            case '2':
+                $list->orderBy('rating', 'desc');
+                break;
             case '3':
                 $list->orderBy('price', 'asc');
                 break;
             case '4':
                 $list->orderBy('price', 'desc');
                 break;
+            case '5':
+                $list->orderBy('created_at', 'desc');
+                break;
+            default:
+                $list->orderBy('hit', 'desc');
+                break;
+        }
+        // Search By Price
+        if($filter['lowPrice']) {
+            $list->where('price', '>=', $filter['lowPrice']);
+        }
+        if($filter['highPrice']) {
+            $list->where('price', '<=', $filter['highPrice']);
         }
         $productList = $list->get();
         return view('product.list', compact('product', 'categories', 'productList', 'filter'));

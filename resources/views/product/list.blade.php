@@ -14,13 +14,13 @@
                 </div>
                 <h5>Urutkan</h5>
                 <div class="ui selection dropdown fluid" id="order-by">
-                    <input type="hidden" name="order-by">
+                    <input type="hidden" name="order-by" value="{{ isset($filter['orderBy']) ? $filter['orderBy'] : '0' }}">
                     <i class="dropdown icon"></i>
                     <div class="text">Paling Sesuai</div>
                     <div class="menu">
                         <div class="item" data-value="0">Paling Sesuai</div>
                         <div class="item" data-value="1">Ulasan</div>
-                        <div class="item" data-value="2">Penjual</div>
+                        <div class="item" data-value="2">Rating</div>
                         <div class="item" data-value="3">Termurah</div>
                         <div class="item" data-value="4">Termahal</div>
                         <div class="item" data-value="5">Terbaru</div>
@@ -39,7 +39,8 @@
                         <div class="seven wide column">
                             <div class="ui small labeled input fluid">
                                 <div class="ui label" style="font-size: 9pt">Rp</div>
-                                <input type="text" placeholder="Min" style="font-size: 9pt" class="price">
+                                <input type="text" placeholder="Min" style="font-size: 9pt" class="price" name="lowPrice"
+                                       value="{{ isset($filter['lowPrice']) ? $filter['lowPrice'] : '' }}" id="lowPrice">
                             </div>
                         </div>
                         <div class="one wide column">
@@ -48,7 +49,8 @@
                         <div class="seven wide column">
                             <div class="ui small labeled input fluid">
                                 <div class="ui label" style="font-size: 9pt">Rp</div>
-                                <input type="text" placeholder="Max" style="font-size: 9pt" class="price">
+                                <input type="text" placeholder="Max" style="font-size: 9pt" class="price" name="highPrice"
+                                value="{{ isset($filter['highPrice']) ? $filter['highPrice'] : '' }}" id="highPrice">
                             </div>
                         </div>
                     </div>
@@ -58,12 +60,12 @@
         {{-- Main Content --}}
         <div class="twelve wide column grid">
             <div class="mini ui buttons">
-                <button class="ui brown button active"><i class="fa fa-coffee"></i> Produk</button>
-                <button class="ui brown basic button"><i class="fa fa-map-marker"></i> Nama Tempat</button>
+                <button class="ui brown button active" id="searchProduct"><i class="fa fa-coffee"></i> Produk</button>
+                <button class="ui brown basic button" id="searchShop"><i class="fa fa-map-marker"></i> Nama Tempat</button>
             </div>
             <div class="ui divider"></div>
             <div class="ui message">
-                <p>Hasil Pencarian Produk "{{ ucfirst($filter['product']) }}" ({{ count($productList) }} produk)</p>
+                <p>Hasil Pencarian Produk "{{ ucfirst($filter['query']) }}" ({{ count($productList) }} produk)</p>
             </div>
             <div class="ui four doubling cards">
                 @foreach($productList as $product)
@@ -92,26 +94,5 @@
 @endsection
 @section('javascripts')
     <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
-    <script>
-        var hostname = window.location.hostname;
-        $('input.price').number(true, 0, ',', '.');
-        $('#search-location')
-            .dropdown({
-                fullTextSearch: true
-            });
-        $('#order-by').dropdown();
-        $(document).ready(function() {
-            $.ajax({
-                url: "https://"+ hostname + '/get-provinces',
-                dataType: 'json',
-                success: function (response) {
-                    var markup = "";
-                    $.each(response.cities, function (i, city) {
-                        markup += "<div class='item' data-value='"+city.id+"'>"+city.name+"</div>";
-                    });
-                    $("#provinceListForSearch").append(markup);
-                }
-            });
-        });
-    </script>
+    <script src="{{ asset('js/product.js') }}"></script>
 @endsection

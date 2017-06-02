@@ -11,7 +11,7 @@
         @foreach($cafes as $cafe)
             <a class="card" href="{{ url('shop/'.$cafe->id) }}">
                 <div class="image">
-                    <img src="{{ "https://dummyimage.com/250x250/8C4728/fff.jpg&text=" . str_replace(' ', '+', $cafe->name) }}">
+                    <img src="{{ url('logo/'.$cafe->id) }}">
                 </div>
                 <div class="content center aligned">
                     <div class="header">{{ $cafe->name }}</div>

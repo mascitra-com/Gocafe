@@ -6,6 +6,7 @@ use App\Cafe;
 use App\Owner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 /**
  * Class CafeController untuk Fitur Profile (Cafe)
@@ -26,6 +27,48 @@ class CafeController extends Controller
         return view('cafe.profile', compact('cafe'));
     }
 
+    /**
+     * @param $id
+     * @param Cafe $cafe
+     * @return $this
+     */
+    public function showLogo($id, Cafe $cafe)
+    {
+        $logo_instance = $cafe->getLogo($id, 'logo', 'logo');
+        return (new Response($logo_instance[1], 200))->header('Content-Type', $logo_instance[0]->mime);
+    }
+
+    public function updateLogo(Request $request, $id)
+    {
+        //checking file is present
+        if ($request->hasFile('logo')) {
+            //verify the file is uploading
+            if ($request->file('logo')->isValid()) {
+                $logo_name = idWithPrefix(12);
+                $logo_mime = $request->logo->getClientMimeType();
+                //store to storage/app/owner
+                $request->logo->storeAs('logo', $logo_name, 'logo');
+                //update avatar_ users table
+                $input = array(
+                    'logo_name' => $logo_name,
+                    'logo_mime' => $logo_mime,
+                );
+                $request->merge($input);
+                Cafe::findOrFail($id)->update($request->except('logo'));
+                return response()->json(['response' => 'sukses', 'logo' => $logo_name, 'mime' => $logo_mime, 'status' => TRUE]);
+            } else {
+                return response()->json(['response' => 'gagal upload', 'status' => FALSE]);
+            }
+        } else {
+            return response()->json(['response' => 'file kosong', 'status' => FALSE]);
+        }
+    }
+
+    public function updateLogoName(Request $request)
+    {
+//        User::findOrFail(1)->update($request->all());
+        return response()->json(['response' => 'sukses', 'status' => TRUE]);
+    }
     /**
      * Store a newly Cafe Profile.
      *

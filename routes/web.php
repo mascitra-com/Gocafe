@@ -21,6 +21,9 @@ Route::group(['middleware' => ['web']], function () {
     // CAFE
 	Route::resource('/profile/cafe', 'CafeController');
 	Route::patch('/profile/cafe/updateContact/{contact}', 'CafeController@updateContact');
+    Route::get('logo/{id}', 'CafeController@showLogo'); //get avatar's response
+    Route::post('logo/replace/{id}', 'CafeController@updateLogo');
+    Route::put('logo/change/{id}', 'CafeController@updateLogoName');
     //--END CAFE
 
     // BRANCH
@@ -116,6 +119,7 @@ Route::get('recommended-shop', 'ShopController@recommended');
 Route::get('load-recommended/{offset}', 'ShopController@load');
 Route::get('shop/{cafeId}', 'ShopController@detail');
 Route::get('shop/allProducts/{cafeId}', 'ShopController@allProducts');
+Route::get('search/shop', ['as' => 'search', 'uses' => 'ShopController@search']);
 //--END SHOP
 
 //PRODUCT
