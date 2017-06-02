@@ -35,7 +35,18 @@ class CafeController extends Controller
     public function showLogo($id, Cafe $cafe)
     {
         $logo_instance = $cafe->getLogo($id, 'logo', 'logo');
-        return (new Response($logo_instance[1], 200))->header('Content-Type', $logo_instance[0]->mime);
+        return (new Response($logo_instance[0], 200))->header('Content-Type', $logo_instance[1]);
+    }
+    /**
+     * @param $id
+     * @param Cafe $cafe
+     * @return $this
+     */
+
+    public function showCover($id, Cafe $cafe)
+    {
+        $cover_instance = $cafe->getCover($id, 'cover', 'cover');
+        return (new Response($cover_instance[0], 200))->header('Content-Type', $cover_instance[1]);
     }
 
     public function updateLogo(Request $request, $id)
@@ -64,11 +75,32 @@ class CafeController extends Controller
         }
     }
 
-    public function updateLogoName(Request $request)
+    public function updateCover(Request $request, $id)
     {
-//        User::findOrFail(1)->update($request->all());
-        return response()->json(['response' => 'sukses', 'status' => TRUE]);
+        //checking file is present
+        if ($request->hasFile('cover')) {
+            //verify the file is uploading
+            if ($request->file('cover')->isValid()) {
+                $cover_name = idWithPrefix(13);
+                $cover_mime = $request->cover->getClientMimeType();
+                //store to storage/app/owner
+                $request->cover->storeAs('cover', $cover_name, 'cover');
+                //update avatar_ users table
+                $input = array(
+                    'cover_name' => $cover_name,
+                    'cover_mime' => $cover_mime,
+                );
+                $request->merge($input);
+                Cafe::findOrFail($id)->update($request->except('logo'));
+                return response()->json(['response' => 'sukses', 'cover' => $cover_name, 'mime' => $cover_mime, 'status' => TRUE]);
+            } else {
+                return response()->json(['response' => 'gagal upload', 'status' => FALSE]);
+            }
+        } else {
+            return response()->json(['response' => 'file kosong', 'status' => FALSE]);
+        }
     }
+
     /**
      * Store a newly Cafe Profile.
      *

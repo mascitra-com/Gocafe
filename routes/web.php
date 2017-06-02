@@ -22,8 +22,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('/profile/cafe', 'CafeController');
 	Route::patch('/profile/cafe/updateContact/{contact}', 'CafeController@updateContact');
     Route::get('logo/{id}', 'CafeController@showLogo'); //get avatar's response
+    Route::get('cover/{id}', 'CafeController@showCover'); //get avatar's response
     Route::post('logo/replace/{id}', 'CafeController@updateLogo');
-    Route::put('logo/change/{id}', 'CafeController@updateLogoName');
+    Route::post('cover/replace/{id}', 'CafeController@updateCover');
     //--END CAFE
 
     // BRANCH

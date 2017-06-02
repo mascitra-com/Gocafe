@@ -43,11 +43,22 @@
 						</div>
 					</form>
                     <div class="panel-body box-center">
-                        <h4 class="panel-title">Logo</h4>
-                        <img src="{{url('logo/'.$cafe->id)}}" class="image-fit img-circle" width="150px" alt="foto">
-                        <div class="break-10"></div>
-                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#upload">Change Logo</button>
-                        <button class="btn btn-default btn-xs">Delete</button>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4 class="panel-title">Logo</h4>
+                                <img src="{{url('logo/'.(($cafe != NULL) ? $cafe->id : ''))}}" class="image-fit img-circle" width="150px" alt="foto">
+                                <div class="break-10"></div>
+                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#upload">Ganti Logo</button>
+                                <button class="btn btn-default btn-xs">Hapus</button>
+                            </div>
+                            <div class="col-md-8">
+                                <h4 class="panel-title">Cover</h4>
+                                <img src="{{url('cover/'.(($cafe != NULL) ? $cafe->id : ''))}}" class="image-fit img-rounded" width="400px" alt="foto">
+                                <div class="break-10"></div>
+                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadCover">Ganti Cover</button>
+                                <button class="btn btn-default btn-xs">Hapus</button>
+                            </div>
+                        </div>
                     </div>
 				</div>
 			</div>
@@ -100,7 +111,26 @@
                             <label for="avatar" class="text-quadruple"> Pilih file</label>
                             <input type="file" name="logo" id="logo">
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="change_logo('{{ $cafe->id }}')" id="btn-avt">Upload</button>
+                        <button type="button" class="btn btn-primary" onclick="change_logo('{{ (($cafe != NULL) ? $cafe->id : '') }}')" id="btn-avt">Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="uploadCover">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Upload Foto</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="updateAvatar">
+                        <div class="form-group">
+                            <label for="avatar" class="text-quadruple"> Pilih file</label>
+                            <input type="file" name="cover" id="cover">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="change_cover('{{ (($cafe != NULL) ? $cafe->id : '') }}')" id="btn-avt">Upload</button>
                     </form>
                 </div>
             </div>
@@ -168,7 +198,6 @@
                 success: function(data, status){
                     if (data.status) {
                         alert(data.status);
-                        change_logo_name(id ,data.logo_name, data.logo_mime);
                     }else{
                         alert('shet');
                     }
@@ -178,24 +207,33 @@
                 }
             });
         }
-        function change_logo_name(id, logo_name, logo_mime) {
+        function change_cover(id) {
+
+            var formData = new FormData();
+            formData.append('cover', $('#cover')[0].files[0]);
+
             ajax_config();
 
-            $.post(base_url+'/logo/change/'+id,
-                {
-                    _method: 'put',
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    avatar_name: logo_name,
-                    avatar_mime: logo_mime
-                },
-                function(data, status){
+            $.ajax({
+                url: base_url+'/cover/replace/'+id,
+                type: "POST",
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "JSON",
+                success: function(data, status){
                     if (data.status) {
-                        // location.reload(true);
-                        alert('Sukses Update Logo');
+                        alert(data.status);
                     }else{
-                        alert('Gagal Update Logo');
+                        alert('shet');
                     }
-                });
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error');
+                }
+            });
         }
+
     </script>
 @endsection

@@ -10,8 +10,8 @@
         </div>
     </div>
     <div class="ui vertical segment container">
-        <div class="row">
-            <img class="ui image fluid" src="http://www.giftstokolkata.com/image/restaurant-banner.jpg" alt="Image">
+        <div class="row image" style="width: 1125px; height: 325px">
+            <img class="ui image fluid" src="{{ url('cover/'.$shop->id) }}" alt="Image">
         </div>
     </div>
     {{--Shop Section--}}
@@ -22,7 +22,10 @@
 @section('javascripts')
     <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
     <script src="{{ url('js/shop.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
+    <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
     <script>
+        $('div.image').imagefill();
         $('.fa-stack').popup();
     </script>
 @endsection
