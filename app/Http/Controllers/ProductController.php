@@ -19,16 +19,16 @@ class ProductController extends Controller
         $filter['lowPrice'] = str_replace('.', '', Input::get('lowPrice'));
         $filter['highPrice'] = str_replace('.', '', Input::get('highPrice'));
         $categories = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get()->toArray();
-        $list = DB::table('menus')->select('*');
+        $list = DB::table('menus')->select('menus.*', 'cafes.name as cafe_name');
         $filter['query'] = Input::get('query');
         // Search By Words
         $list->orWhere(function ($q) {
             $query = explode(' ', Input::get('query'));
             foreach($query as $key => $element) {
                 if($key == 0) {
-                    $q->where('name', 'like', "%$element%");
+                    $q->where('menus.name', 'like', "%$element%");
                 }
-                $q->orWhere('name', 'like', "%$element%");
+                $q->orWhere('menus.name', 'like', "%$element%");
             }
         });
         // Order
@@ -46,7 +46,7 @@ class ProductController extends Controller
                 $list->orderBy('price', 'desc');
                 break;
             case '5':
-                $list->orderBy('created_at', 'desc');
+                $list->orderBy('menus.created_at', 'desc');
                 break;
             default:
                 $list->orderBy('hit', 'desc');
@@ -59,6 +59,7 @@ class ProductController extends Controller
         if($filter['highPrice']) {
             $list->where('price', '<=', $filter['highPrice']);
         }
+        $list->join('cafes', 'cafes.id', '=', 'menus.cafe_id');
         $productList = $list->get();
         return view('product.list', compact('product', 'categories', 'productList', 'filter'));
     }

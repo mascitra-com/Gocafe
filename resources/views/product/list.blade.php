@@ -74,16 +74,19 @@
                             <img src="{{url("menus/showThumbnail/$product->id")}}">
                         </div>
                         <div class="content">
-                            <div class="header">{{ $product->name }}</div>
+                            <div class="header">
+                                {{ $product->name }} <br>
+                                <small style="color: #F18803">{{ $product->cafe_name }}</small>
+                            </div>
                         </div>
                         <div class="extra content">
-                                <span>
-                                <i class="money brown icon"></i>
-                                <b>Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
-                                </span>
-                            <span class="right floated">
-                                    <div class="ui star rating right floated" data-rating="{{ floor($product->rating) }}"></div>
-                                </span>
+                            <span>
+                            <i class="money brown icon"></i>
+                            <b>Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
+                            </span>
+                                <span class="right floated">
+                                <div class="ui star rating right floated" data-rating="{{ floor($product->rating) }}"></div>
+                            </span>
                         </div>
                     </a>
                 @endforeach

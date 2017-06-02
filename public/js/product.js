@@ -1,5 +1,5 @@
 var hostname = window.location.hostname;
-$('.ui.rating').rating();
+$('.ui.rating').rating('disable');
 function addSearchAttributes() {
     $('<input />').attr('type', 'hidden')
         .attr('name', "order")
