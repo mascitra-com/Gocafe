@@ -47,7 +47,10 @@
 @endsection
 
 @section('javascripts')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
+    <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
     <script>
+        $('div.image').imagefill();
         $(document).ready(function() {
             $('.ui.rating').rating({
                 maxRating: 5

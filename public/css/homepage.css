@@ -16,13 +16,6 @@
 .ui.card.stack {
     flex-direction: row;
 }
-.ui.card.stack > div > img {
-    max-width: 300px;
-    width: auto;
-}
-.ui.card.stack > div {
-    margin-bottom: 0;
-}
 .ui.card.stack > .content {
     padding: 1.5em;
 }

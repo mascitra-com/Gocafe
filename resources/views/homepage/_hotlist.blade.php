@@ -10,7 +10,7 @@
     <div class="ui five doubling cards">
         @foreach($favProducts as $product)
             <a class="card product" href="{{ url('product/'.$product->id) }}">
-                <div class="image">
+                <div class="image" style="height: 200px; width: 210px">
                     <img src="{{url("menus/showThumbnail/$product->id")}}">
                 </div>
                 <div class="content">
