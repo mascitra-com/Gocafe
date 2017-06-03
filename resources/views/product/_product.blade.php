@@ -9,7 +9,7 @@
         </span>
     </div>
     <div class="extra content">
-        <i class="fa fa-heart"></i> {{ $product->liked }}
+        <div class="ui heart rating" data-rating="0" data-max-rating="1"></div> {{ $product->liked }}
         <span class="right floated">
             <div class="ui tiny star rating" data-rating="{{ floor($product->rating) }}"></div>
             ({{ $product->reviewed }})

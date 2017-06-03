@@ -192,6 +192,9 @@
 <script>
     var hostname = window.location.hostname;
     $(document).ready(function() {
+        $('.ui.heart.rating')
+            .rating('enable')
+        ;
         $('.category.item').popup({
             hoverable: true
         });
