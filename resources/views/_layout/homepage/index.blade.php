@@ -142,10 +142,10 @@
                     </button>
                 </div>
                 <div class="four wide column">
-                    <a href="https://www.facebook.com/kulinerae" style="color: #975b33"><i class="fa fa-3x fa-facebook-square"></i></a>
-                    <a href="https://twitter.com/kulinerae" style="color: #975b33"><i class="fa fa-3x fa-twitter-square"></i></a>
-                    <a href="https://www.instagram.com/kulinerae_id/" style="color: #975b33"><i class="fa fa-3x fa-instagram"></i></a>
-                    <a href="#" style="color: #975b33"><i class="fa fa-3x fa-google-plus-square"></i></a>
+                    <a href="https://www.facebook.com/kulinerae"><i class="fa fa-3x fa-facebook-square"></i></a>
+                    <a href="https://twitter.com/kulinerae"><i class="fa fa-3x fa-twitter-square"></i></a>
+                    <a href="https://www.instagram.com/kulinerae_id/"><i class="fa fa-3x fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-3x fa-google-plus-square"></i></a>
                 </div>
                 <div class="four wide column">
                     <style>

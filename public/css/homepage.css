@@ -75,3 +75,15 @@ p.price-last-update {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: rgba(124, 70, 33, 0.51);
 }
+.ui.brown.button, .ui.brown.buttons .button {
+    background-color: #8C4728;
+}
+i.fa.fa-3x {
+    color: #8C4728;
+}
+button.ui.brown.button.active {
+    background-color: #8C4728;
+}
+i.brown.icon {
+    color: #8C4728!important;
+}
