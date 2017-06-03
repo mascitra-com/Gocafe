@@ -169,22 +169,22 @@
             </div>
         </div>
     </div>
-    {{--<div class="ui vertical footer segment">--}}
-        {{--<div class="ui container" style="color: rgba(0,0,0,.4); font-size: 9pt">--}}
-            {{--<div class="ui left aligned grid">--}}
-                {{--<div class="eight wide column">--}}
-                    {{--<p>&copy; 2017, PT. Kulinerae</p>--}}
-                    {{--<p>Server process time: {{ number_format((microtime(true) - LARAVEL_START), 3) }}</p>--}}
-                {{--</div>--}}
-                {{--<div class="right floated right aligned eight wide column">--}}
-                    {{--<div class="ui buttons">--}}
-                        {{--<button class="ui brown button active">Indonesia</button>--}}
-                        {{--<button class="ui brown basic button">English</button>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
+    <div class="ui vertical footer segment">
+        <div class="ui container" style="color: rgba(0,0,0,.4); font-size: 9pt">
+            <div class="ui left aligned grid">
+                <div class="eight wide column">
+                    <p>&copy; 2017, PT. Kulinerae</p>
+                    <p>Server process time: {{ number_format((microtime(true) - LARAVEL_START), 3) }}</p>
+                </div>
+                <div class="right floated right aligned eight wide column">
+                    <div class="ui buttons">
+                        <button class="ui brown button active">Indonesia</button>
+                        <button class="ui brown basic button">English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @yield('modal')
 <script src="{{ asset('plugins/jquery/jquery-3.1.1.min.js') }}"></script>

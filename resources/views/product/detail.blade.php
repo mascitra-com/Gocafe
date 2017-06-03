@@ -60,6 +60,33 @@
                     <div class="row">
                         <div class="column">
                             <h4>&nbsp;&nbsp;<i class="fa fa-list"></i> Penilaian Produk</h4>
+                            <form id="form-review" action="{{ url('/register') }}" class="ui form" method="GET">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="item_id" value="{{ $product->id }}" id="item_id">
+                                <table class="table table-responsive" width="75%" style="margin-left: .5em">
+                                    <tr>
+                                        <td width="20%"><label>Penilaian Anda</label></td>
+                                        <td>
+                                            <div class="field">
+                                                <div class="ui large star rating"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Ulasan Anda</label></td>
+                                        <td>
+                                            <div class="field">
+                                            <textarea name="review" class="form-control" id="review" rows="3"></textarea>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <br><button type="submit" class="ui button pull-right">Simpan</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
                             <table class="ui table" id="table-review">
                                 <tbody>
                                     @foreach($reviews as $review)
@@ -111,7 +138,7 @@
         $(document).ready(function() {
             $('.ui.rating').rating({
                 maxRating: 5
-            }).rating('disable');
+            }).rating();
         });
     </script>
 @endsection
