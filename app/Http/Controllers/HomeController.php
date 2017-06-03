@@ -22,9 +22,10 @@ class HomeController extends Controller
         foreach ($recommended as $key => $recommend) {
             $recommended[$key]->latestMenu = Menu::where('cafe_id', $recommend->id)->limit(4)->get();
         }
-        // Favorite Menus
-        $favProducts = TransactionDetail::getTrendingProducts(1);
+        // Most Hit By User
         $topHit = TransactionDetail::getTopHitProducts();
+        // Favorite Menus by Total Order
+        $favProducts = TransactionDetail::getTrendingProducts(1);
         foreach ($favProducts as $key => $value){
             $code_item = substr($value->item_id, 0,3);
             if($code_item === "MCF"){

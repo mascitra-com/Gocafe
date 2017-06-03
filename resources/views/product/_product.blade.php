@@ -1,5 +1,5 @@
 <a class="card product" href="{{ url('product/'.$product->id) }}">
-    <div class="image" style="width: 280px; height: 250px">
+    <div class="image" style="width: 280px; height: 280px">
         <img src="{{url("menus/showThumbnail/$product->id")}}">
     </div>
     <div class="content">

@@ -34,29 +34,12 @@
                 </div>
             </div>
             <div class="six column">
-                <table class="ui celled table">
-                    <thead>
-                    <th>Nama Cabang</th>
-                    <th>Lokasi</th>
-                    <th>Alamat</th>
-                    <th>Jam Buka</th>
-                    <th>Jam Tutup</th>
-                    </thead>
-                    <tbody>
-                    @foreach($branches as $branch)
-                        <tr>
-                            <td>Cabang {{ $branch->location->name }}</td>
-                            <td>
-                                {{ isset($branch->location->city) ? $branch->location->city->name. ',' : '' }}
-                                {{ isset($branch->location->province) ? $branch->location->province->name: '' }}
-                            </td>
-                            <td>{{ $branch->address }}</td>
-                            <td>{{ $branch->open_hours }}</td>
-                            <td>{{ $branch->close_hours }}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                <h3>Cabang</h3>
+                @foreach($branches as $branch)
+                    {!! $branch->google_maps !!}<br>
+                    Cabang {{ $branch->location->name }}. <br>
+                    Buka dari Pukul {{ $branch->open_hours }} sampai dengan {{ $branch->close_hours }}
+                @endforeach
             </div>
         </div>
     </div>

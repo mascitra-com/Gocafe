@@ -68,6 +68,11 @@
 						<input type="number" class="form-control" name="number_of_tables" placeholder="Jumlah Meja" value="{{ $branch->number_of_tables }}">
 					</div>
 					<div class="form-group">
+						<label for="">Google Maps</label>
+						<textarea name="google_maps" class="form-control" id="google_maps" cols="30" rows="3">{{ $branch->google_maps }}</textarea>
+					</div>
+					{!! $branch->google_maps !!}
+					<div class="form-group">
 						<button class="btn btn-primary" type="submit"><i class="fa fa-save fa-fw"></i> Perbaharui</button>
 						<a href="{{ url('branch') }}" class="btn btn-default"><i class="fa fa-refresh fa-fw"></i> Kembali</a>
 					</div>

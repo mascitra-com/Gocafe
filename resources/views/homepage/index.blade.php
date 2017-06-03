@@ -10,38 +10,16 @@
     {{--Top Hit--}}
     @include('homepage._tophit')
     {{--Hot List--}}
-    @include('homepage._hotlist')
+    {{--@include('homepage._hotlist')--}}
     {{--Slogan--}}
     <div class="ui vertical stripe quote segment container">
-    <div class="ui equal width grid">
-        @for($i=0;$i<3;$i++)
-        <div class="column">
-            <img class="ui tiny left floated image" src="https://dummyimage.com/150x150/8C4728/fff.jpg&text=Image" >
-            Odio optio perferendis quisquam, quo reprehenderit, ut? Consectetur itaque vero voluptates?
-        </div>
-        @endfor
-    </div>
-    </div>
-    <div class="ui vertical segment container">
-        <div class="ui attached message grid">
-            <div class="eight wide column">
-                <div class="header">
-                    Selamat Datang di Kulinerae
-                </div>
-                <p>Daftarkan alamat e-mail anda untuk mendapatkan info & deal menarik dari Kulinerae</p>
+        <div class="ui equal width grid">
+            @for($i=0;$i<3;$i++)
+            <div class="column">
+                <img class="ui tiny left floated image" src="https://dummyimage.com/150x150/8C4728/fff.jpg&text=Image" >
+                Odio optio perferendis quisquam, quo reprehenderit, ut? Consectetur itaque vero voluptates?
             </div>
-            <div class="eight wide column">
-                <form class="ui large form">
-                    <div class="inline fields">
-                        <div class="twelve wide field">
-                            <input type="text" placeholder="Alamat Email">
-                        </div>
-                        <div class="field">
-                            <div class="ui large brown button">Daftar</div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            @endfor
         </div>
     </div>
 @endsection

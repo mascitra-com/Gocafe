@@ -59,7 +59,7 @@
                     </div>
                     <div class="row">
                         <div class="column">
-                            <h4>&nbsp;&nbsp;<i class="fa fa-list"></i> Ringkasan Ulasan 3 Bulan Terakhir</h4>
+                            <h4>&nbsp;&nbsp;<i class="fa fa-list"></i> Penilaian Produk</h4>
                             <table class="ui table" id="table-review">
                                 <tbody>
                                     @foreach($reviews as $review)
