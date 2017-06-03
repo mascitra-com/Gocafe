@@ -12,7 +12,7 @@
     {{--Hot List--}}
     {{--@include('homepage._hotlist')--}}
     {{--Slogan--}}
-    <div class="ui vertical stripe quote segment container">
+    <div class="ui vertical quote segment container" style="padding: 5em 0em">
         <div class="ui center aligned grid container">
             <div class="column">
                 <h3 class="ui header">
@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-    <div class="ui vertical stripe quote segment container">
+    <div class="ui vertical quote segment container">
         <div class="ui equal width grid">
             @for($i=0;$i<3;$i++)
             <div class="column">

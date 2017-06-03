@@ -46,11 +46,8 @@ class CafeController extends Controller
 
     public function showCover($id, Cafe $cafe)
     {
-        if($cover_instance = $cafe->getCover($id, 'cover', 'cover')){
-            return (new Response($cover_instance[0], 200))->header('Content-Type', $cover_instance[1]);
-        } else {
-            return FALSE;
-        }
+        $cover_instance = $cafe->getCover($id, 'cover', 'cover');
+        return (new Response($cover_instance[0], 200))->header('Content-Type', $cover_instance[1]);
     }
 
     public function updateLogo(Request $request, $id)

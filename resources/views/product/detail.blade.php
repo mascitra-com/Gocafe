@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="column">
                             <h4>&nbsp;&nbsp;<i class="fa fa-list"></i> Penilaian Produk</h4>
-                            <form id="form-review" action="{{ url('/register') }}" class="ui form" method="GET">
+                            <form id="form-review" action="{{ url('/login') }}" class="ui form" method="GET">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="item_id" value="{{ $product->id }}" id="item_id">
                                 <table class="table table-responsive" width="75%" style="margin-left: .5em">

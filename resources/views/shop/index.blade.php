@@ -11,11 +11,7 @@
     </div>
     <div class="ui vertical segment container">
         <div class="row image" style="width: 1125px; height: 325px">
-            @if(url('cover/'.$shop->id))
-                <img class="ui image fluid" src="{{ url('cover/'.$shop->id) }}" alt="Image">
-            @else
-                <img class="ui image fluid" src="http://www.giftstokolkata.com/image/restaurant-banner.jpg" alt="Image">
-            @endif
+            <img class="ui image fluid" src="{{ url('cover/'.$shop->id) }}" alt="Image">
         </div>
     </div>
     {{--Shop Section--}}
