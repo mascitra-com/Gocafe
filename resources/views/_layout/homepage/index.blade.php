@@ -76,8 +76,8 @@
                 <div class="four wide column">
                     <div class="ui header">
                         <h4 style="margin-bottom: .1em">Hubungi kami</h4>
-                        <h2 style="margin-top: .1em; margin-bottom: .1em">(0331) 04350327</h2>
-                        <h5 style="margin-top: .1em">SMS 08563565320</h5>
+                        <h2 style="margin-top: .1em; margin-bottom: .1em">(0331) 4350327</h2>
+                        <h5 style="margin-top: .1em">SMS 081230033880</h5>
                     </div>
                     <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
                     <style type="text/css">

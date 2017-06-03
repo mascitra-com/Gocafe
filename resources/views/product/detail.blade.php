@@ -89,7 +89,7 @@
             <div class="ui center aligned segment container">
                 <a href="{{ url('shop/' . $shop->id) }}">
                 <h3 style="color: #8C4728">{{ $shop->name }}</h3>
-                <img class="ui centered tiny image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHfIvsQ2CtsjxMC-GVIJFu7ab5I9GTdsMS5pelqZCFfvAYortrg"><br>
+                <img class="ui centered tiny image" src="{{ url('logo/'.$shop->id) }}"><br>
                 </a>
                 <a target="_blank" href="https://www.facebook.com/{{ $shop->facebook }}"><i class="fa fa-facebook-square"></i> {{ $shop->facebook }}</a><br>
                 <a target="_blank" href="https://www.twitter.com/{{ $shop->twitter }}"><i class="fa fa-twitter-square"></i> {{ $shop->twitter }}</a><br>
@@ -100,6 +100,7 @@
             </div>
         </div>
     </div>
+    @include('homepage._tophit')
 @endsection
 
 @section('javascripts')

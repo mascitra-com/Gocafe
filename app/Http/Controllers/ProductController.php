@@ -6,6 +6,7 @@ use App\Cafe;
 use App\Menu;
 use App\Package;
 use App\Review;
+use App\TransactionDetail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
@@ -86,7 +87,8 @@ class ProductController extends Controller
         }
         $shop = Cafe::find($product->cafe_id);
         $reviews = Review::where('item_id', $productId)->orderBy('id', 'desc')->get();
-        return view('product.detail', compact('shop', 'product', 'reviews'));
+        $topHit = TransactionDetail::getTopHitProducts();
+        return view('product.detail', compact('shop', 'product', 'reviews', 'topHit'));
     }
 
 }
