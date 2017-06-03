@@ -12,7 +12,7 @@
 	<div class="container-fluid">
 		<div class="row form-big" id="form-container">
 			<div class="col-xs-12 col-sm-6 col-md-8 background-img image-fade" id="form-left" data-image="{{URL::asset('images/bg2.jpg')}}">
-				<h2>DIGITAL CULINARY<br>MARKETPLACE</h2>
+				<h2><a href="{{ url('/') }}" style="color: white">KULINERAE</a></h2>
 				<p class="text-size-20">Your perfect place to manage and promote<br>your favorite Culinary</p>
 				<div class="break-50"></div>
 				<a href="{{ url('/register') }}" class="btn btn-primary btn-round">Daftar Sekarang!</a>

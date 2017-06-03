@@ -100,9 +100,11 @@
 				<div class="form-group">
 					<input type="text" class="form-control" name="name" placeholder="nama kategori" id="category_name" list="recommended-category">
                     <datalist id="recommended-category">
-                        @foreach($recommendedCat as $recommend)
-                            <option value="{{ $recommend->name }}">
-                        @endforeach
+						@if(isset($recommendedCat))
+                            @foreach($recommendedCat as $recommend)
+                                <option value="{{ $recommend->name }}">
+                            @endforeach
+                        @endif
                     </datalist>
 				</div>
 				<div class="form-group">
