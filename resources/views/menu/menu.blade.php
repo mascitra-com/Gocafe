@@ -38,7 +38,14 @@
 								<span class="text-size-12" style="color:green">{{ $menu->category->name }}</span>
 							</td>
 							<td>{{ $menu->description }}</td>
-							<td class="text-right price"><b>{{ $menu->price }}</b></td>
+							<td class="text-right price">
+								@if($menu->discount)
+									<span style="text-decoration: line-through;">Rp. {{ number_format($menu->price, 0, ',', '.') }}</span>&nbsp;
+									<b>Rp. {{ number_format($menu->price - ($menu->price * $menu->discount), 0, ',', '.') }}</b>
+								@else
+									<b>Rp. {{ number_format($menu->price, 0, ',', '.') }}</b>
+								@endif
+							</td>
 							<td class="text-center text-nowrap">
 								<a class="btn btn-xs btn-default" href="{{ url('menus/'.$menu->id.'/edit') }}">...</a>
 								<button class="btn btn-xs btn-default" onclick="delete_menu('{{ $menu->id }}')"><i class="fa fa-trash"></i></button>

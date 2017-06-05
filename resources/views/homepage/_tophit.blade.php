@@ -16,7 +16,12 @@
                 <div class="content">
                     <div class="header">{{ $product->name }}</div>
                     <span>
-                        <b>Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
+                        @if($product->discount)
+                            <del style="color: grey">Rp. {{ number_format($product->price, 0, ',', '.') }}</del>&nbsp;
+                            <b>Rp. {{ number_format($product->price - ($product->price * $product->discount), 0, ',', '.') }}</b>
+                        @else
+                            <b>Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
+                        @endif
                     </span>
                 </div>
                 <div class="extra content">

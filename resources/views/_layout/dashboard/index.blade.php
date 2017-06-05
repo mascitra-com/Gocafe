@@ -30,14 +30,16 @@
                                 class="hidden-sm">Owner Profile</span></a></li>
                 <li class="nav-title">Cafe</li>
                 <li><a href="{{ url('profile/cafe') }}"><i class="fa fa-fw fa-user"></i><span
-                                class="hidden-sm">Profile</span></a></li>
+                                class="hidden-sm">Cafe Profile</span></a></li>
                 <li class="nav-title">Cafe Branches</li>
                 <li><a href="{{ url('branch') }}"><i class="fa fa-fw fa-users"></i><span
                                 class="hidden-sm">Branches</span></a></li>
                 <li class="nav-title">Menu</li>
                 <li><a href="{{ url('menus') }}"><i class="fa fa-fw fa-cutlery"></i><span
                                 class="hidden-sm">Menu Management</span></a></li>
-                <li><a href="{{ url('categories') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Category Management</span></a>
+                <li><a href="{{ url('categories') }}"><i class="fa fa-fw fa-tag"></i><span class="hidden-sm">Category Management</span></a>
+                <li class="nav-title">Promotion</li>
+                <li><a href="{{ url('batch_discount') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Discount Management</span></a>
                 </li>
             </ul>
         </div>

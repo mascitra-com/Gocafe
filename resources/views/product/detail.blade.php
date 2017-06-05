@@ -109,7 +109,16 @@
         {{-- Sidebar --}}
         <div class="four wide column">
             <div class="ui center aligned segment">
-                <h2 style="color: #8C4728">Rp. {{ number_format($product->price, 0, ',', '.') }},-</h2>
+                @if($product->discount)
+                    <del style="color: grey">Rp. {{ number_format($product->price, 0, ',', '.') }}</del>
+                    <h2 style="color: #8C4728; margin-top: .1em">
+                    <b>Rp. {{ number_format($product->price - ($product->price * $product->discount), 0, ',', '.') }}</b>
+                    </h2>
+                @else
+                    <h2 style="color: #8C4728">
+                    <b>Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
+                    </h2>
+                @endif
                 <p class="price-last-update">Perubahan Harga Terakhir: {{ date('d-m-Y, H:i') }}</p>
             </div>
             <button class="ui fluid button"><i class="fa fa-heart"></i> &nbsp Tambah ke Wishlist</button>

@@ -24,15 +24,25 @@ $("a.brown").click(function(){
                     var id = menu.id;
                     var name = menu.name;
                     var price = $.number(menu.price, 0, '', '.');
+                    var discount = menu.discount;
                     var rating = Math.floor(menu.rating);
                     var liked = menu.liked;
                     var reviewed = menu.reviewed;
-                    var markup = "<a href='https://" + hostname + "/product/" + id + "' class='card product' data-id='" + id + "'><div class='image'><img src='" + getThumbnail(id) + "'></div><div class='content'><div class='header'>" + name + "</div><span><b>Rp." + price + "</b></span></div><div class='extra content'><i class='fa fa-heart'></i> " + liked + " <span class='right floated'><div class='ui tiny star rating' data-rating='" + rating + "'></div>(" + reviewed + ")</span></div></a>";
+                    var markup = "<a href='https://" + hostname + "/product/" + id + "' class='card product' data-id='" + id + "'><div class='image'><img src='" + getThumbnail(id) + "'></div><div class='content'><div class='header'>" + name + "</div><span>";
+                    if(!discount){
+                        markup += "<b>Rp. "+price+"</b>";
+                    } else {
+                        markup += "<del style='color: grey'>Rp. "+price+"&nbsp;</del>";
+                        price = menu.price - (menu.price * discount);
+                        markup += "<b>&nbsp;Rp. "+ $.number(price) +"</b>";
+                    }
+                    markup += "</span></div><div class='extra content'><div class='ui heart rating' data-rating='"+liked+"' data-max-rating='1'></div> " + liked + " <span class='right floated'><div class='ui tiny star rating' data-rating='" + rating + "'></div>(" + reviewed + ")</span></div></a>";
                     $("#productList").append(markup);
                 });
                 $('.ui.star.rating').rating({
                     maxRating: 5
                 }).rating('disable');
+                $('.ui.heart.rating').rating('enable');
             }
         });
     }
@@ -48,16 +58,26 @@ $("#allMenu").click(function(){
             $.each(response.products, function (i, product) {
                 var id = product.id;
                 var name = product.name;
+                var discount = product.discount;
                 var price = $.number(product.price, 0, '', '.');
                 var rating = Math.floor(product.rating);
                 var liked = product.liked;
                 var reviewed = product.reviewed;
-                var markup = "<a href='https://" + hostname + "/product/" + id + "' class='card product' data-id='" + id + "'><div class='image'><img src='" + getThumbnail(id) + "'></div><div class='content'><div class='header'>" + name + "</div><span><b>Rp." + price + "</b></span></div><div class='extra content'><i class='fa fa-heart'></i> " + liked + " <span class='right floated'><div class='ui tiny star rating' data-rating='" + rating + "'></div>(" + reviewed + ")</span></div></a>";
+                var priceMarkup = '';
+                if(!discount){
+                    priceMarkup += "<b>Rp. "+price+"</b>";
+                } else {
+                    priceMarkup += "<del style='color: grey'>Rp. "+price+"&nbsp;</del>";
+                    price = product.price - (product.price * discount);
+                    priceMarkup += "<b>&nbsp;Rp. "+ $.number(price) +"</b>";
+                }
+                var markup = "<a href='https://" + hostname + "/product/" + id + "' class='card product' data-id='" + id + "'><div class='image'><img src='" + getThumbnail(id) + "'></div><div class='content'><div class='header'>" + name + "</div><span>" + priceMarkup + "</span></div><div class='extra content'><div class='ui heart rating' data-rating='"+liked+"' data-max-rating='1'></div> " + liked + " <span class='right floated'><div class='ui tiny star rating' data-rating='" + rating + "'></div>(" + reviewed + ")</span></div></a>";
                 $("#productList").append(markup);
             });
             $('.ui.star.rating').rating({
                 maxRating: 5
             }).rating('disable');
+            $('.ui.heart.rating').rating('enable');
         }
     });
 });

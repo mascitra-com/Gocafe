@@ -21,7 +21,7 @@
             <div class="ui search selection dropdown" id="location" style="border-left: none">
                 <input type="hidden" name="">
                 <i class="dropdown icon"></i>
-                <div class="default text">Pilih Lokasi</div>
+                <div class="default text">Semua Lokasi</div>
                 <div class="menu" id="provinceList"></div>
             </div>
             <button class="ui brown button" type="submit">Cari</button>
@@ -206,7 +206,7 @@
             url: "https://"+ hostname + '/get-provinces',
             dataType: 'json',
             success: function (response) {
-                var markup = "";
+                var markup = "<div class='item' data-value='0'>Semua Lokasi</div>";
                 $.each(response.cities, function (i, city) {
                     markup += "<div class='item' data-value='"+city.id+"'>"+city.name+"</div>";
                 });
