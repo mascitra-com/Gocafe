@@ -8,7 +8,7 @@
     <div class="ui container">
         <div class="ui grid">
             <div class="ten wide column">
-                <form class="ui form" action="mailto:idea@kulinerae.com" enctype="text/plain" method="GET" id="idea-box">
+                <form class="ui form" action="mailto:idea@kulinerae.com" method="GET" id="idea-box" enctype="multipart/form-data">
                     <div class="field">
                         <label>Nama</label>
                         <input type="text" name="name" placeholder="Nama Lengkap">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="field">
                         <label>Handphone / Telepon</label>
-                        <input type="text" name="text" placeholder="Nomor Yang Dapat di Hubungi">
+                        <input type="text" name="phone" placeholder="Nomor Yang Dapat di Hubungi">
                     </div>
                     <div class="field">
                         <label>Subyek</label>
@@ -65,6 +65,7 @@
             }
             // Modify the hidden body input field that is required for the mailto: scheme
             target.elements["body"].value = message;
+            target.elements["subject"].value = 'Kulinerae.com-' + $('input[name=subject]').val();
 
             // Submit the form since we previously stopped it. May cause recursive loop in some browsers? Should research this.
             this.submit();
