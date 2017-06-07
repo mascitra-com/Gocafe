@@ -127,3 +127,7 @@ Route::get('search/shop', ['as' => 'search', 'uses' => 'ShopController@search'])
 Route::get('search', ['as' => 'search', 'uses' => 'ProductController@search']);
 Route::get('product/{productId}', 'ProductController@detail');
 //--END PRODUCT
+
+//MAIL
+Route::get('idea-box', 'HomeController@ideaBox');
+//-END MAIL

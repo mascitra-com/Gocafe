@@ -24,10 +24,7 @@ function addSearchAttributes() {
     }
     var location = $('#add-search-location').val();
     if(location){
-        $('<input />').attr('type', 'hidden')
-            .attr('name', "location")
-            .attr('value', location)
-            .appendTo('#search');
+        $('input[name=location]').val(location);
     }
 }
 $("#search-location").change(function() {

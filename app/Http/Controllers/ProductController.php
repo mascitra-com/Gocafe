@@ -61,6 +61,7 @@ class ProductController extends Controller
         if($filter['highPrice']) {
             $list->where('price', '<=', $filter['highPrice']);
         }
+        $list->where('menus.deleted_at', NULL);
         $list->join('cafes', 'cafes.id', '=', 'menus.cafe_id');
         $list->join('cafe_branches', 'cafes.id', '=', 'cafe_branches.cafe_id');
         $list->join('indonesia_cities', 'cafe_branches.city_id', '=', 'indonesia_cities.id');

@@ -154,7 +154,7 @@
                             box-shadow: none;
                         }
                     </style>
-                    <a href="#">
+                    <a href="{{ url('idea-box') }}">
                         <div class="ui icon message" id="feedback">
                             <i class="mail brown icon"></i>
                             <div class="content">

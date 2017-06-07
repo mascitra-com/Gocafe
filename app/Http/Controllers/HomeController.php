@@ -51,4 +51,9 @@ class HomeController extends Controller
         $cities = $indonesia->allCities();
         return response()->json(['cities' => $cities]);
     }
+
+    public function ideaBox()
+    {
+        return view('homepage.mailform');
+    }
 }
