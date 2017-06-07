@@ -47,44 +47,15 @@ class StaffController extends Controller
      *
      * @param User $user
      * @param Owner $owner
-     * @param Indonesia $indonesia
      * @return Response
      */
-    public function create(User $user, Owner $owner, Indonesia $indonesia)
+    public function create(User $user, Owner $owner)
     {
         $owner_id = $user->getAccountByUserId(Auth::user()->id)->id;
         $cafe_id = $owner->getCafeByOwnerId($owner_id)->id;
         $branches = Cafe::findOrFail($cafe_id)->branches;
-        // Get Location Name for each branch
-        if (isset($branches)) {
-            foreach ($branches as $branch) {
-                $this->get_location($branch, $indonesia);
-            }
-        }
         $positions = Cafe::findOrFail($cafe_id)->positions;
         return view('staff.create', compact('branches', 'positions'));
-    }
-
-    /**
-     * Get Location Name by ID Location and Length of ID that determine location type.
-     *
-     * @param $branch
-     * @param Indonesia $indonesia
-     */
-    private function get_location($branch, Indonesia $indonesia)
-    {
-        $locationLength = strlen($branch->location_id);
-        switch ($locationLength) {
-            case 2:
-                $branch->location = $indonesia->findProvince($branch->location_id);
-                break;
-            case 4:
-                $branch->location = $indonesia->findCity($branch->location_id, ['province']);
-                break;
-            case 7:
-                $branch->location = $indonesia->findDistrict($branch->location_id, ['city', 'province']);
-                break;
-        }
     }
 
     /**

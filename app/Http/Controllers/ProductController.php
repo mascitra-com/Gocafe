@@ -9,6 +9,7 @@ use App\Review;
 use App\TransactionDetail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Laravolt\Indonesia\Indonesia;
 
 class ProductController extends Controller
 {
@@ -61,8 +62,15 @@ class ProductController extends Controller
             $list->where('price', '<=', $filter['highPrice']);
         }
         $list->join('cafes', 'cafes.id', '=', 'menus.cafe_id');
+        $list->join('cafe_branches', 'cafes.id', '=', 'cafe_branches.cafe_id');
+        $list->join('indonesia_cities', 'cafe_branches.city_id', '=', 'indonesia_cities.id');
+        if($filter['location']) {
+            $list->where('indonesia_cities.id', '<=', $filter['location']);
+        }
         $productList = $list->get();
-        return view('product.list', compact('product', 'categories', 'productList', 'filter'));
+        $indonesia = new Indonesia();
+        $location = $indonesia->findCity($filter['location']);
+        return view('product.list', compact('product', 'location', 'categories', 'productList', 'filter'));
     }
     /**
      * Display product detail

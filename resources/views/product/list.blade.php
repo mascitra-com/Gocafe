@@ -28,9 +28,9 @@
                 </div>
                 <h5>Lokasi</h5>
                 <div class="ui search selection dropdown fluid" id="search-location">
-                    <input type="hidden" name="location">
+                    <input type="hidden" name="location" id="add-search-location" value="{{ isset($location) ? $location->id : '' }}">
                     <i class="dropdown icon"></i>
-                    <div class="text">Pilih Lokasi</div>
+                    <div class="text">{{ isset($location) ? $location->name : 'Semua Lokasi' }}</div>
                     <div class="menu" id="provinceListForSearch"></div>
                 </div>
                 <h5>Harga</h5>

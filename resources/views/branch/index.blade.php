@@ -42,10 +42,10 @@
                         <tbody>
                         @foreach($branches as $branch)
                             <tr>
-                                <td>Cabang {{ $branch->location->name }}</td>
+                                <td>Cabang {{ $branch->district->name }}</td>
                                 <td>
-                                    {{ isset($branch->location->city) ? $branch->location->city->name. ',' : '' }}
-                                    {{ isset($branch->location->province) ? $branch->location->province->name: '' }}
+                                    {{ $branch->city->name }},
+                                    {{ $branch->province->name }}
                                 </td>
                                 <td>{{ $branch->address }}</td>
                                 <td>{{ $branch->open_hours }}</td>

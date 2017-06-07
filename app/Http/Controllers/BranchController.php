@@ -28,35 +28,7 @@ class BranchController extends Controller
         // Get All Provinces and All Cafe Branch by Cafe ID and Owner ID
         $provinces = $indonesia->allProvinces();
         $branches = CafeBranch::all()->where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn());
-        // Get Location Name for each branch
-        if (isset($branches)) {
-            foreach ($branches as $branch) {
-                $this->get_location($branch, $indonesia);
-            }
-        }
         return view('branch.index', compact('provinces', 'branches'));
-    }
-
-    /**
-     * Get Location Name by ID Location and Length of ID that determine location type.
-     *
-     * @param $branch
-     * @param Indonesia $indonesia
-     */
-    public static function get_location($branch, Indonesia $indonesia)
-    {
-        $locationLength = strlen($branch->location_id);
-        switch ($locationLength) {
-            case 2:
-                $branch->location = $indonesia->findProvince($branch->location_id);
-                break;
-            case 4:
-                $branch->location = $indonesia->findCity($branch->location_id, ['province']);
-                break;
-            case 7:
-                $branch->location = $indonesia->findDistrict($branch->location_id, ['city', 'province']);
-                break;
-        }
     }
 
     /**
@@ -86,32 +58,10 @@ class BranchController extends Controller
                 ->withErrors('Location must be selected')
                 ->withInput();
         }
-        // Set Location ID and add Location ID as request attribute
-        $location_id = $this->set_location_id($request);
-        $request->request->add(array('location_id' => $location_id));
         // Save request except 3 parameters which won't be store to the database
-        $cafeBranch = new CafeBranch($request->except('province_id', 'city_id', 'district_id'));
+        $cafeBranch = new CafeBranch($request->all());
         $cafe->addBranch($cafeBranch, Cafe::getCafeIdByUserIdNowLoggedIn());
         return redirect('branch')->with('status', 'Branch added!');
-    }
-
-    /**
-     * Set Location ID by the last location selected. Left to Right Priority province_id|city_id|district_id.
-     *
-     * @param Request $request
-     * @return Location ID
-     */
-    public static function set_location_id(Request $request)
-    {
-        $location_id = $request->province_id;
-        if ($request->city_id) {
-            $location_id = $request->city_id;
-        }
-        if ($request->district_id) {
-            $location_id = $request->district_id;
-            return $location_id;
-        }
-        return $location_id;
     }
 
     /**
@@ -124,7 +74,6 @@ class BranchController extends Controller
     public function edit($id, Indonesia $indonesia)
     {
         $branch = CafeBranch::findOrFail($id);
-        $this->get_location($branch, $indonesia);
         $currentLocation = $indonesia->findDistrict($branch->location_id, ['city.province']);
         $current = new \stdClass();
         $current->district = $currentLocation;
@@ -145,11 +94,7 @@ class BranchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Set Location ID and add Location ID as request attribute
-        $location_id = $this->set_location_id($request);
-        $request->request->add(array('location_id' => $location_id));
-        // Save request except 3 parameters which not include in database
-        CafeBranch::find($id)->update($request->except('province_id', 'city_id', 'district_id'));
+        CafeBranch::find($id)->update($request->all());
         return redirect('branch')->with('status', 'Branch updated!');
     }
 

@@ -37,7 +37,7 @@
                 <h3>Cabang</h3>
                 @foreach($branches as $branch)
                     {!! $branch->google_maps !!}<br>
-                    Cabang {{ $branch->location->name }}. <br>
+                    Cabang {{ $branch->district->name }}. {{ $branch->city->name }}, {{ $branch->province->name }}. <br>
                     Buka dari Pukul {{ $branch->open_hours }} sampai dengan {{ $branch->close_hours }}
                 @endforeach
             </div>

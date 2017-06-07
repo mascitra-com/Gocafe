@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use Laravolt\Indonesia\Models\City;
+use Laravolt\Indonesia\Models\District;
+use Laravolt\Indonesia\Models\Province;
 
 class CafeBranch extends Model
 {
@@ -51,6 +54,21 @@ class CafeBranch extends Model
 	public function positions()
 	{
 		return $this->hasMany(Position::class, 'branch_id');
+	}
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+	}
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+	}
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
 	}
 
 }

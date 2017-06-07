@@ -19,9 +19,9 @@
         <form action="{{ url('search') }}" class="ui action input" method="GET" id="search">
             <input type="text" name="query" placeholder="Cari Produk atau Cafe..." value="{{ empty($filter['query']) ? '' :  $filter['query']}}" id="query">
             <div class="ui search selection dropdown" id="location" style="border-left: none">
-                <input type="hidden" name="">
+                <input type="hidden" name="location" value="{{ isset($location) ? $location->id : '' }}">
                 <i class="dropdown icon"></i>
-                <div class="default text">Semua Lokasi</div>
+                <div class="text">{{ isset($location) ? $location->name : 'Semua Lokasi' }}</div>
                 <div class="menu" id="provinceList"></div>
             </div>
             <button class="ui brown button" type="submit">Cari</button>

@@ -1,19 +1,39 @@
 var hostname = window.location.hostname;
 $('.ui.rating').rating('disable');
 function addSearchAttributes() {
-    $('<input />').attr('type', 'hidden')
-        .attr('name', "order")
-        .attr('value', $('input[name=order-by]').val())
-        .appendTo('#search');
-    $('<input />').attr('type', 'hidden')
-        .attr('name', "lowPrice")
-        .attr('value', $('input[name=lowPrice]').val())
-        .appendTo('#search');
-    $('<input />').attr('type', 'hidden')
-        .attr('name', "highPrice")
-        .attr('value', $('input[name=highPrice]').val())
-        .appendTo('#search');
+    var order = $('input[name=order-by]').val();
+    if(order) {
+        $('<input />').attr('type', 'hidden')
+            .attr('name', "order")
+            .attr('value', order)
+            .appendTo('#search');
+    }
+    var lowPrice = $('input[name=lowPrice]').val();
+    if(lowPrice){
+        $('<input />').attr('type', 'hidden')
+            .attr('name', "lowPrice")
+            .attr('value', lowPrice)
+            .appendTo('#search');
+    }
+    var highPrice = $('input[name=highPrice]').val();
+    if(highPrice){
+        $('<input />').attr('type', 'hidden')
+            .attr('name', "highPrice")
+            .attr('value', highPrice)
+            .appendTo('#search');
+    }
+    var location = $('#add-search-location').val();
+    if(location){
+        $('<input />').attr('type', 'hidden')
+            .attr('name', "location")
+            .attr('value', location)
+            .appendTo('#search');
+    }
 }
+$("#search-location").change(function() {
+    addSearchAttributes();
+    document.getElementById("search").submit();
+});
 $("#order-by").change(function() {
     addSearchAttributes();
     document.getElementById("search").submit();
