@@ -19,7 +19,7 @@
 								<select name="province_id" class="form-control" id="provinces">
 									<option value="">Pilih Provinsi</option>
                                     @foreach($provinces as $province)
-                                        <option value="{{ $province->id }}" {{ $province->id !== $current->province->id ? '' : 'selected' }}>{{ $province->name }}</option>
+                                        <option value="{{ $province->id }}" {{ $province->id !== $branch->province->id ? '' : 'selected' }}>{{ $province->name }}</option>
                                     @endforeach
 								</select>
                             </div>
@@ -27,7 +27,7 @@
                                 <select name="city_id" class="form-control" id="cities">
                                     <option value="">Pilih Kabupaten</option>
                                     @foreach($cities as $city)
-                                        <option value="{{ $city->id }}" {{ $city->id !== $current->city->id ? '' : 'selected' }}>{{ $city->name }}</option>
+                                        <option value="{{ $city->id }}" {{ $city->id !== $branch->city->id ? '' : 'selected' }}>{{ $city->name }}</option>
                                     @endforeach
                                 </select>
 							</div>
@@ -35,7 +35,7 @@
                                 <select name="district_id" class="form-control" id="districts">
                                     <option value="">Pilih Kecamatan</option>
                                     @foreach($districts as $district)
-                                        <option value="{{ $district->id }}" {{ $district->id !== $current->district->id ? '' : 'selected' }}>{{ $district->name }}</option>
+                                        <option value="{{ $district->id }}" {{ $district->id !== $branch->district->id ? '' : 'selected' }}>{{ $district->name }}</option>
                                     @endforeach
                                 </select>
 							</div>

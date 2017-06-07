@@ -74,15 +74,10 @@ class BranchController extends Controller
     public function edit($id, Indonesia $indonesia)
     {
         $branch = CafeBranch::findOrFail($id);
-        $currentLocation = $indonesia->findDistrict($branch->location_id, ['city.province']);
-        $current = new \stdClass();
-        $current->district = $currentLocation;
-        $current->city = $currentLocation->city;
-        $current->province = $currentLocation->city->province;
         $provinces = $indonesia->allProvinces();
-        $cities = $indonesia->findProvince($current->province->id, ['cities'])->cities;
-        $districts = $indonesia->findCity($current->city->id, ['districts'])->districts;
-        return view('branch.detail', compact('branch', 'current', 'provinces', 'cities', 'districts'));
+        $cities = $indonesia->findProvince($branch->province->id, ['cities'])->cities;
+        $districts = $indonesia->findCity($branch->city->id, ['districts'])->districts;
+        return view('branch.detail', compact('branch', 'provinces', 'cities', 'districts'));
     }
 
     /**

@@ -3,7 +3,7 @@ var hostname = window.location.origin;
 $("#provinces").on('change', function () {
     $("#cities").html("<option>Pilih Kabupaten / Kota</option>")
         .prop('disabled', true);
-    $("#districts").html("<option>Pilih Kabupaten / Kota</option>")
+    $("#districts").html("<option>Pilih Kecamatan</option>")
         .prop('disabled', true);
     var id;
     var x = document.getElementById("provinces");
@@ -27,7 +27,7 @@ $("#provinces").on('change', function () {
     });
 });
 $("#cities").on('change', function () {
-    $("#districts").html("<option>Pilih Kabupaten / Kota</option>")
+    $("#districts").html("<option>Pilih Kecamatan</option>")
         .prop('disabled', true);
     var id;
     var x = document.getElementById("cities");
