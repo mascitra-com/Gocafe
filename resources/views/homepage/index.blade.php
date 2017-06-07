@@ -19,14 +19,9 @@
                     Mau Kafe / Rumah Makan Kamu di Kenal Banyak Orang? Daftarkan Segera di Kulinerae
                 </h3>
                 <form class="ui form" method="get" action="{{ url('register') }}">
-                    <div class="field inline">
-                        <div class="ui huge input">
-                            <input type="email" name="email_address" data-validate="email" placeholder="E-mail" style="width: 600px">
-                        </div>
-                        <button type="submit" value="Subscribe" class="ui huge brown submit button">
-                            Daftar
-                        </button>
-                    </div>
+                    <button type="submit" value="Subscribe" class="ui huge brown submit button">
+                        Daftar
+                    </button>
                 </form>
             </div>
         </div>

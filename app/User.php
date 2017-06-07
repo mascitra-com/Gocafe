@@ -29,6 +29,12 @@ class User extends Authenticatable
     //     'password', 'remember_token',
     // ];
 
+    /**
+     * @param User $user
+     * @param $password
+     * @param $role
+     * @return mixed
+     */
     public function addUser(User $user, $password, $role)
     {
         $user->password = bcrypt($password);

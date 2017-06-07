@@ -194,7 +194,7 @@
     $(document).ready(function() {
         $('.ui.rating.star').rating({
             maxRating: 5
-        }).rating('disable');
+        }).rating('enable');
         $('.ui.heart.rating')
             .rating('enable')
         ;
