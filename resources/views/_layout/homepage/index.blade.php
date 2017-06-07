@@ -192,6 +192,9 @@
 <script>
     var hostname = window.location.hostname;
     $(document).ready(function() {
+        $('.ui.rating.star').rating({
+            maxRating: 5
+        }).rating('disable');
         $('.ui.heart.rating')
             .rating('enable')
         ;

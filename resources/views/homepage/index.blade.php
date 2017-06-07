@@ -49,9 +49,6 @@
     <script>
         $('div.image').imagefill();
         $(document).ready(function() {
-            $('.ui.rating.star').rating({
-                maxRating: 5
-            }).rating('disable');
             $('.menu .item').tab();
             // fix menu when passed
             $('.masthead')
