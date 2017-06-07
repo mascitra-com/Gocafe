@@ -43,6 +43,7 @@ class TransactionDetail extends Model
         // Select Menu Group by ID order by Count of Aggrate Menu
         $top5menus = DB::table('menus')
             ->where('hit', '>', 0)
+            ->where('deleted_at', NULL)
             ->orderBy('hit', 'desc')
             ->limit(5, 0)
             ->get();
