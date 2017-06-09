@@ -33,15 +33,6 @@ class ProductController extends Controller
                 $q->orWhere('menus.name', 'like', "%$element%");
             }
         });
-        $list->orWhere(function ($q) {
-            $query = explode(' ', Input::get('query'));
-            foreach($query as $key => $element) {
-                if($key == 0) {
-                    $q->where('menus.description', 'like', "%$element%");
-                }
-                $q->orWhere('menus.description', 'like', "%$element%");
-            }
-        });
         // Order
         switch ($filter['orderBy']) {
             case '1':

@@ -45,20 +45,21 @@
                 <div class="four wide column">
                     <h4 class="ui header">Kulinerae</h4>
                     <div class="ui link list">
-                        <a href="#" class="item">Tentang Kami</a>
-                        <a href="#" class="item">Media Kit</a>
-                        <a href="#" class="item">Kegiatan Kami</a>
-                        <a href="#" class="item">Kisah Penjual</a>
+                        @foreach($footer as $info)
+                            @if($info->part == '1')
+                                <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
                 <div class="four wide column">
                     <h4 class="ui header">Layanan Pelanggan</h4>
                     <div class="ui link list">
-                        <a href="#" class="item">Hubungi Kami</a>
-                        <a href="#" class="item">Syarat dan Kondisi</a>
-                        <a href="#" class="item">Kebijakan Privasi</a>
-                        <a href="#" class="item">Peta Situs</a>
-                        <a href="#" class="item">Bantuan</a>
+                        @foreach($footer as $info)
+                            @if($info->part == '2')
+                                <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
                 <div class="four wide column">
@@ -66,11 +67,11 @@
                         Fitur Seru Kami
                     </div>
                     <div class="ui link list">
-                        <a href="#" class="item">eCoupon</a>
-                        <a href="#" class="item">Menjadi Anggota</a>
-                        <a href="#" class="item">Kulinerae Mobile App</a>
-                        <a href="#" class="item">Kulinerae Affiliate</a>
-                        <a href="#" class="item">Kulinerae Marketplace</a>
+                        @foreach($footer as $info)
+                            @if($info->part == '3')
+                                <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
                 <div class="four wide column">

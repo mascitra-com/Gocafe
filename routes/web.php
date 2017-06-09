@@ -131,3 +131,14 @@ Route::get('product/{productId}', 'ProductController@detail');
 //MAIL
 Route::get('idea-box', 'HomeController@ideaBox');
 //-END MAIL
+
+//INFORMATION
+Route::get('info', 'InformationController@index');
+Route::get('info/create', 'InformationController@create');
+Route::get('info/{infoId}/edit', 'InformationController@edit');
+Route::post('info', 'InformationController@store');
+Route::patch('info/{infoId}', 'InformationController@update');
+Route::get('info/destroy/{infoId}', 'InformationController@destroy');
+Route::get('info/activate/{infoId}', 'InformationController@activate');
+Route::get('info/deactivate/{infoId}', 'InformationController@deactivate');
+//-END INFORMATION

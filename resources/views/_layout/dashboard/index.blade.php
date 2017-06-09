@@ -16,71 +16,9 @@
 </head>
 <body>
 <div class="container-fluid" id="wrapper">
-    <div id="nav-side">
-        <div id="nav-side-wrapper">
-            <div id="nav-side-thumbnail" class="hidden-sm">
-                <h3><span class="text-quintuple">KULINER</span>AE!</h3>
-            </div>
-            <ul class="nav">
-                <li class="nav-close"><a href="#"><i class="fa fa-fw fa-close"></i></a></li>
-                <li class="nav-active"><a href="#"><i class="fa fa-fw fa-home"></i><span
-                                class="hidden-sm">Dashboard</span></a></li>
-                <li class="nav-title">Information</li>
-                <li><a href="{{ url('profile') }}"><i class="fa fa-fw fa-user"></i><span
-                                class="hidden-sm">Owner Profile</span></a></li>
-                <li class="nav-title">Cafe</li>
-                <li><a href="{{ url('profile/cafe') }}"><i class="fa fa-fw fa-user"></i><span
-                                class="hidden-sm">Cafe Profile</span></a></li>
-                <li class="nav-title">Cafe Branches</li>
-                <li><a href="{{ url('branch') }}"><i class="fa fa-fw fa-users"></i><span
-                                class="hidden-sm">Branches</span></a></li>
-                <li class="nav-title">Menu</li>
-                <li><a href="{{ url('menus') }}"><i class="fa fa-fw fa-cutlery"></i><span
-                                class="hidden-sm">Menu Management</span></a></li>
-                <li><a href="{{ url('categories') }}"><i class="fa fa-fw fa-tag"></i><span class="hidden-sm">Category Management</span></a>
-                <li class="nav-title">Promotion</li>
-                <li><a href="{{ url('batch_discount') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Discount Management</span></a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    @include('_layout.dashboard._sidebar')
     <div id="main-panel">
-        <nav class="navbar navbar-default" id="nav-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#" id="btn-menu" data-menu="#nav-side"><i
-                                class="fa fa-bars btn-responsive"></i>@yield('page_title')</a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><i class="fa fa-fw fa-cog text-secondary"></i></a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-user text-secondary"></i><span
-                                        class="caret text-secondary"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();
-								document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off text-secondary"></i></a>
-                        </li>
-                        {{-- TODO Make this with AJAX --}}
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        @include('_layout.dashboard._topbar')
         <div id="content">
             <div class="container-fluid">
                 @yield('content')
