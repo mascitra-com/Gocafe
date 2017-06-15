@@ -87,3 +87,6 @@ button.ui.brown.button.active {
 i.brown.icon {
     color: #8C4728!important;
 }
+.ui.message {
+    background: none;
+}

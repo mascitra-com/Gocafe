@@ -2,8 +2,7 @@
 @section('page_title', 'Tentang Kami')
 @section('content')
     <div class="ui main text center aligned container">
-        <h1 class="ui header">MENGAPA HARUS BERGABUNG DI KULINERAE?</h1>
-        <h3>Berkembang bersama Kulinerae, kelola bisnis kuliner dengan mudah!</h3>
+        <h3 class="ui header">Berkembang bersama Kulinerae, kelola bisnis kuliner dengan mudah!</h3>
         <p>
             Bersama Kulinerae.com, kami percaya bisnis kuliner yang konvensional yang telah ada dapat dikembangkan
             secara luas dengan sistem yang kami miliki. Tidak hanya sebagai marketplace bagi para pelaku bisnis kuliner
