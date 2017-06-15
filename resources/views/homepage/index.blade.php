@@ -28,12 +28,18 @@
     </div>
     <div class="ui vertical quote segment container">
         <div class="ui equal width grid">
-            @for($i=0;$i<3;$i++)
             <div class="column">
-                <img class="ui tiny left floated image" src="https://dummyimage.com/150x150/8C4728/fff.jpg&text=Image" >
-                Odio optio perferendis quisquam, quo reprehenderit, ut? Consectetur itaque vero voluptates?
+                <img class="ui tiny left floated image" src="https://dummyimage.com/150x150/8C4728/fff.jpg&text= +MUDAH" >
+                Bersama Kulinerae Anda pencinta kuliner dapat dengan mudah menemukan cafe dan restoran favorit dilokasimu
             </div>
-            @endfor
+            <div class="column">
+                <img class="ui tiny left floated image" src="https://dummyimage.com/150x150/8C4728/fff.jpg&text= +LENGKAP" >
+                Temukan ragam kuliner nusantara hingga kuliner dunia paling lengkap dengan katalog kami
+            </div>
+            <div class="column">
+                <img class="ui tiny left floated image" src="https://dummyimage.com/150x150/8C4728/fff.jpg&text=+GRATIS" >
+                Buka dan kelola gerai online Anda secara mudah ,nyaman dan gratis
+            </div>
         </div>
     </div>
 @endsection

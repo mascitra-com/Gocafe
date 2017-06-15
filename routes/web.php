@@ -141,4 +141,6 @@ Route::patch('info/{infoId}', 'InformationController@update');
 Route::get('info/destroy/{infoId}', 'InformationController@destroy');
 Route::get('info/activate/{infoId}', 'InformationController@activate');
 Route::get('info/deactivate/{infoId}', 'InformationController@deactivate');
+
+Route::get('about-us', 'InformationController@aboutUs');
 //-END INFORMATION

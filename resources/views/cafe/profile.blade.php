@@ -25,21 +25,36 @@
 		<div class="col-xs-12 col-md-8">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<h3 class="panel-title">Basic Info</h3>
+					<h3 class="panel-title">Informasi Dasar</h3><br>
 					<form action="{{ URL('profile/cafe/'.(($cafe != NULL) ? $cafe->id : '')) }}" method="POST">
                         {{ ($cafe != NULL) ? method_field('PATCH') : ''}}
                         {{ csrf_field() }}
-                        <div class="form-group">
-							<label for="">Cafe Name</label>
-							<input type="text" class="form-control" name="name" placeholder="Cafe Name" value="{{ ($cafe == NULL) ? old('name') : $cafe->name }}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Nama Toko</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Cafe Name" value="{{ ($cafe == NULL) ? old('name') : $cafe->name }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Jenis Toko</label>
+                                    <select name="shop_category_id" id="shop_category_id" class="form-control">
+                                        <option value="">Pilih Jenis Toko</option>
+                                        @foreach($shop_cat as $category)
+                                            <option value="{{ $category->id }}" {{ $category->id == $cafe->shop_category_id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label for="">Deskripsi Toko</label>
+							<textarea name="description" class="form-control" placeholder="Cafe Description" rows="5">{{ ($cafe == NULL) ? old('description') : $cafe->description }}</textarea>
 						</div>
 						<div class="form-group">
-							<label for="">Description</label>
-							<textarea name="description" class="form-control" placeholder="Cafe Description">{{ ($cafe == NULL) ? old('description') : $cafe->description }}</textarea>
-						</div>
-						<div class="form-group">
-							<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save Basic Info</button>
-							<button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> Reset</button>
+							<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Simpan</button>
+							<button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> Kembalikan</button>
 						</div>
 					</form>
                     <div class="panel-body box-center">
@@ -66,7 +81,7 @@
 		<div class="col-xs-12 col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<h3 class="panel-title">Contact Info</h3>
+					<h3 class="panel-title">Info Kontak</h3><br>
                     <form action="{{ URL('profile/cafe/updateContact/'.($cafe == NULL ? '' : $cafe->id)) }}" method="POST">
                         {{ method_field('PATCH')}}
                         {{ csrf_field() }}
@@ -87,8 +102,8 @@
 							<input type="text" class="form-control" name="instagram" placeholder="Instagram" value="{{ ($cafe == NULL) ? old('instagram') : $cafe->instagram }}">
 						</div>
 						<div class="form-group">
-							<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save Contact Info</button>
-							<button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> Reset</button>
+							<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Simpan</button>
+							<button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> Kembalikan</button>
 						</div>
 					</form>
 				</div>

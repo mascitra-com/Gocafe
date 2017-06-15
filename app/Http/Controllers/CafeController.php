@@ -24,7 +24,8 @@ class CafeController extends Controller
     {
         // Show Profile Cafe with Owner ID currently logged in
         $cafe = DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first();
-        return view('cafe.profile', compact('cafe'));
+        $shop_cat = DB::table('shop_category')->get();
+        return view('cafe.profile', compact('cafe', 'shop_cat'));
     }
 
     /**
@@ -114,6 +115,7 @@ class CafeController extends Controller
         // Validate the required data
         $this->validate($request, [
             'name' => 'min:3|max:255|required',
+            'shop_category_id' => 'required',
             'description' => 'min:3|required',
             'phone' => 'max:20',
             'facebook' => 'max:255',
@@ -138,6 +140,7 @@ class CafeController extends Controller
         // Validate the required data
         $this->validate($request, [
             'name' => 'min:3|max:255|required',
+            'shop_category_id' => 'required',
             'description' => 'min:3|required',
         ]);
         Cafe::findOrFail($id)->update($request->all());

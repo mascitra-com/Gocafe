@@ -118,6 +118,17 @@ class InformationController extends Controller
     }
 
     /**
+     * About Us.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function aboutUs()
+    {
+        return view('info.about-us');
+    }
+
+    /**
      *
      */
     private function footerPart()

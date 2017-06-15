@@ -138,9 +138,9 @@
                     </button>
                 </div>
                 <div class="four wide column">
-                    <button class="medium ui brown button">
-                        <i class="icon handshake"></i> Berkarir dengan Kami
-                    </button>
+                    <a class="medium ui brown button" href="{{ url('about-us') }}">
+                        <i class="icon fa-home"></i> Tentang Kami
+                    </a>
                 </div>
                 <div class="four wide column">
                     <a href="https://www.facebook.com/kulinerae"><i class="fa fa-3x fa-facebook-square"></i></a>
