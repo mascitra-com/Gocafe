@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cafe;
 use App\CafeBranch;
 use App\CategoryMenu;
+use App\Menu;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Laravolt\Indonesia\Indonesia;
@@ -16,7 +17,10 @@ class ShopController extends Controller
      */
     public function recommended()
     {
-        $recommended = Cafe::limit(5)->with('latestMenu')->get();
+        $recommended = Cafe::limit(5)->get();
+        foreach ($recommended as $key => $recommend) {
+            $recommended[$key]->latestMenu = Menu::where('cafe_id', $recommend->id)->limit(4)->get();
+        }
         return view('shop.recommended', compact('recommended'));
     }
 

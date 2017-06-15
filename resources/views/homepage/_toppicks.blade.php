@@ -5,7 +5,7 @@
                 <h3>Jelang Ramadhan, Berbuka dan Sahur, Kulinerae!</h3>
             </div>
             <div class="right floated right aligned eight wide column">
-                <a href="#">Lihat Semua</a>
+                <a href="{{ url('recommended-shop') }}">Lihat Semua</a>
             </div>
         </div>
         @foreach($recommended as $recommend)
