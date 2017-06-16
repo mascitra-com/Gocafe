@@ -68,7 +68,7 @@ $(document).ready(function() {
         url: "https://"+ hostname + '/get-provinces',
         dataType: 'json',
         success: function (response) {
-            var markup = "";
+            var markup = "<div class='item' data-value='0'>Semua Lokasi</div>";
             $.each(response.cities, function (i, city) {
                 markup += "<div class='item' data-value='"+city.id+"'>"+city.name+"</div>";
             });
