@@ -27,7 +27,8 @@ function change_avatar(id) {
 			if (data.status) {
 				alert(data.status);
 				change_avatar_name(id ,data.avatar_name, data.avatar_mime);
-			}else{
+                location.reload(true);
+            }else{
 				alert('shet');
 			}
 		},

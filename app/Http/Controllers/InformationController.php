@@ -52,7 +52,8 @@ class InformationController extends Controller
      */
     public function show($id)
     {
-        //
+        $info = Info::find($id);
+        return view('info.index', compact('info'));
     }
 
     /**

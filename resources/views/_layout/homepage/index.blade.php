@@ -47,7 +47,11 @@
                     <div class="ui link list">
                         @foreach($footer as $info)
                             @if($info->part == '1')
-                                <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
+                                @if($info->link)
+                                    <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
+                                @else
+                                    <a href="{{ url("info/$info->id") }}" class="item">{{ $info->title }}</a>
+                                @endif
                             @endif
                         @endforeach
                     </div>
@@ -57,7 +61,11 @@
                     <div class="ui link list">
                         @foreach($footer as $info)
                             @if($info->part == '2')
-                                <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
+                                @if($info->link)
+                                    <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
+                                @else
+                                    <a href="{{ url("info/$info->id") }}" class="item">{{ $info->title }}</a>
+                                @endif
                             @endif
                         @endforeach
                     </div>
@@ -69,7 +77,11 @@
                     <div class="ui link list">
                         @foreach($footer as $info)
                             @if($info->part == '3')
-                                <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
+                                @if($info->link)
+                                    <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
+                                @else
+                                    <a href="{{ url("info/$info->id") }}" class="item">{{ $info->title }}</a>
+                                @endif
                             @endif
                         @endforeach
                     </div>

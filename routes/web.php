@@ -143,4 +143,5 @@ Route::get('info/activate/{infoId}', 'InformationController@activate');
 Route::get('info/deactivate/{infoId}', 'InformationController@deactivate');
 
 Route::get('about-us', 'InformationController@aboutUs');
+Route::get('info/{infoId}', 'InformationController@show');
 //-END INFORMATION

@@ -213,6 +213,7 @@
                 success: function(data, status){
                     if (data.status) {
                         alert(data.status);
+                        location.reload(true);
                     }else{
                         alert('shet');
                     }
@@ -240,6 +241,7 @@
                 success: function(data, status){
                     if (data.status) {
                         alert(data.status);
+                        location.reload(true);
                     }else{
                         alert('shet');
                     }

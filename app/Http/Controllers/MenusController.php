@@ -120,6 +120,31 @@ class MenusController extends Controller
         $requestData['cost'] = str_replace('.', '', $request->cost);
         $requestData['price'] = str_replace('.', '', $request->price);
         $request->merge($requestData);
+        $images_name = "";
+        $mime = "";
+        for ($i = 1; $i <= 4; $i++) {
+            if ($request->hasFile('image' . $i)) {
+                if ($request->file('image' . $i)->isValid()) {
+                    $image_name = idWithPrefix(0);
+                    $image_mime = $request->file('image' . $i)->getClientMimeType();
+                    //store to storage/app/menus
+                    $request->file('image' . $i)->storeAs('menus', $image_name, 'menus');
+                    //add current image_name to images_name array
+                    $images_name .= $image_name . ":";
+                    $mime .= $image_mime . ":";
+                } else {
+                    echo "file image" . $i . " tidak valid <br>";
+                }
+            } else {
+                $images_name .= 'default:';
+                $mime .= 'image/jpeg:';
+            }
+        }
+        //manage requests
+        $request->request->add(array(
+            'images_name' => $images_name,
+            'mime' => $mime
+        ));
         Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->find($menu->id)->update(($request->except(['category_name', 'image1', 'image2', 'image3', 'image4'])));
         return redirect('menus')->with('status', 'Menu Updated!');
     }

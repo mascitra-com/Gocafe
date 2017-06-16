@@ -25,6 +25,7 @@
 						<th colspan="2">Nama</th>
 						<th>Deskripsi</th>
 						<th width="10%">Harga</th>
+						<th width="10%">Diskon</th>
 						<th>Aksi</th>
 					</thead>
 					<tbody>
@@ -39,11 +40,11 @@
 							</td>
 							<td>{{ $menu->description }}</td>
 							<td class="text-right price">
+								<b>Rp. {{ number_format($menu->price, 0, ',', '.') }}</b>
+							</td>
+							<td class="text-right price">
 								@if($menu->discount)
-									<span style="text-decoration: line-through;">Rp. {{ number_format($menu->price, 0, ',', '.') }}</span>&nbsp;
-									<b>Rp. {{ number_format($menu->price - ($menu->price * $menu->discount), 0, ',', '.') }}</b>
-								@else
-									<b>Rp. {{ number_format($menu->price, 0, ',', '.') }}</b>
+									<b>Rp. {{ number_format(($menu->price * $menu->discount), 0, ',', '.') }}</b>
 								@endif
 							</td>
 							<td class="text-center text-nowrap">

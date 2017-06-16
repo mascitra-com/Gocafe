@@ -68,7 +68,7 @@ class CafeController extends Controller
                 );
                 $request->merge($input);
                 Cafe::findOrFail($id)->update($request->except('logo'));
-                return response()->json(['response' => 'sukses', 'logo' => $logo_name, 'mime' => $logo_mime, 'status' => TRUE]);
+                return response()->json(['response' => 'sukses', 'logo' => $logo_name, 'mime' => $logo_mime, 'status' => 'Logo Berhasil di simpan']);
             } else {
                 return response()->json(['response' => 'gagal upload', 'status' => FALSE]);
             }
@@ -94,7 +94,7 @@ class CafeController extends Controller
                 );
                 $request->merge($input);
                 Cafe::findOrFail($id)->update($request->except('logo'));
-                return response()->json(['response' => 'sukses', 'cover' => $cover_name, 'mime' => $cover_mime, 'status' => TRUE]);
+                return response()->json(['response' => 'sukses', 'cover' => $cover_name, 'mime' => $cover_mime, 'status' => 'Cover Berhasil di simpan']);
             } else {
                 return response()->json(['response' => 'gagal upload', 'status' => FALSE]);
             }
