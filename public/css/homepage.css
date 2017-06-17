@@ -90,3 +90,11 @@ i.brown.icon {
 .ui.message {
     background: none;
 }
+.site-logo {
+    width: auto;
+    height: 20px;
+}
+.ui.menu a.item:hover {
+    background: whitesmoke;
+    cursor: pointer;
+}

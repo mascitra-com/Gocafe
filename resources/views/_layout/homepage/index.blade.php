@@ -13,7 +13,9 @@
 
 <!-- Following Menu -->
 <div class="ui large top fixed hidden menu">
-    <a class="item" href="{{ url('/') }}"><b>KULINERAE</b></a>
+    <a class="item" href="{{ url('/') }}" style="width: 125px">
+        <img src="{{ asset('images/logoname.png') }}" alt="Kulinerae" class="ui site-logo">
+    </a>
     @include('_layout.homepage._categories')
     <div class="ui item" style="width: 60%">
         <form action="{{ url('search') }}" class="ui action input" method="GET" id="search">
