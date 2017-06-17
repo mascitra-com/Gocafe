@@ -98,3 +98,11 @@ i.brown.icon {
     background: whitesmoke;
     cursor: pointer;
 }
+
+div.ui.card > div.content > div.header {
+    font-size: 12pt !important;
+}
+
+.price {
+    font-size: 9pt !important;
+}

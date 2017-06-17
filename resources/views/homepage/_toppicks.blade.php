@@ -10,32 +10,32 @@
         </div>
         @foreach($recommended as $recommend)
             <div class="ui card stack fluid">
-                <div class="image" style="width: 300px; height: 330px">
+                <div class="image" style="width: 250px; height: 270px">
                     <img src="{{ url('logo/'.$recommend->id) }}" height="400px">
                 </div>
                 <div class="content">
-                    <div class="ui four column grid">
+                    <div class="ui five column grid">
                         @foreach($recommend->latestMenu as $product)
                             <a class="column" href="{{ url('product/'.$product->id) }}">
                                 <div class="ui fluid card">
-                                    <div class="image" style="width: 175px; height: 175px">
+                                    <div class="image" style="width: 145px; height: 120px">
                                         <img src="{{ url('menus/showThumbnail/'.$product->id) }}">
                                     </div>
                                     <div class="content">
                                         <div class="header">{{ $product->name }}</div>
                                         <span>
                                             @if($product->discount)
-                                                <del style="color: grey">Rp. {{ number_format($product->price, 0, ',', '.') }}</del>&nbsp;
-                                                <b>Rp. {{ number_format($product->price - ($product->price * $product->discount), 0, ',', '.') }}</b>
+                                                <del style="color: grey" class="price">Rp. {{ number_format($product->price, 0, ',', '.') }}</del>&nbsp;
+                                                <b class="price">Rp. {{ number_format($product->price - ($product->price * $product->discount), 0, ',', '.') }}</b>
                                             @else
-                                                <b>Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
+                                                <b class="price">Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
                                             @endif
                                         </span>
                                     </div>
                                     <div class="extra content">
-                                        <div class="ui heart rating" data-rating="0" data-max-rating="1"></div> {{ $product->liked }}
+                                        <div class="ui mini heart rating" data-rating="0" data-max-rating="1"></div> {{ $product->liked }}
                                         <span class="right floated">
-                                            <div class="ui tiny star rating" data-rating="{{ floor($product->rating) }}"></div>
+                                            <div class="ui mini star rating" data-rating="{{ floor($product->rating) }}"></div>
                                             ({{ $product->reviewed }})
                                         </span>
                                     </div>

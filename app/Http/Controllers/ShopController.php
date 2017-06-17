@@ -19,7 +19,7 @@ class ShopController extends Controller
     {
         $recommended = Cafe::limit(5)->get();
         foreach ($recommended as $key => $recommend) {
-            $recommended[$key]->latestMenu = Menu::where('cafe_id', $recommend->id)->limit(4)->get();
+            $recommended[$key]->latestMenu = Menu::where('cafe_id', $recommend->id)->limit(5)->get();
         }
         return view('shop.recommended', compact('recommended'));
     }
