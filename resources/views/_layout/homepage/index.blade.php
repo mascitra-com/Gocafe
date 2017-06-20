@@ -213,8 +213,9 @@
         $('.ui.heart.rating')
             .rating('enable')
         ;
-        $('.category.item').popup({
-            hoverable: true
+        $('.category.item').dropdown({
+        hoverable  : true,
+        position   : 'bottom left',
         });
         $('#location')
             .dropdown({
