@@ -29,27 +29,38 @@
     <div class="ui vertical quote segment container">
         <div class="ui equal width grid">
             <div class="column">
-                <img class="ui tiny left floated image" src="https://dummyimage.com/150x150/8C4728/fff.jpg&text= +MUDAH" >
+                <img class="ui left floated image" src="{{ asset('images/mudah1.png') }}" height="100px">
                 Bersama Kulinerae Anda pencinta kuliner dapat dengan mudah menemukan cafe dan restoran favorit dilokasimu
             </div>
             <div class="column">
-                <img class="ui tiny left floated image" src="https://dummyimage.com/150x150/8C4728/fff.jpg&text= +LENGKAP" >
+                <img class="ui left floated image" src="{{ asset('images/lengkap1.png') }}" height="100px">
                 Temukan ragam kuliner nusantara hingga kuliner dunia paling lengkap dengan katalog kami
             </div>
             <div class="column">
-                <img class="ui tiny left floated image" src="https://dummyimage.com/150x150/8C4728/fff.jpg&text=+GRATIS" >
+                <img class="ui left floated image" src="{{ asset('images/gratis1.png') }}" height="100px">
                 Buka dan kelola gerai online Anda secara mudah ,nyaman dan gratis
             </div>
         </div>
     </div>
 @endsection
-
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
+@endsection
 @section('javascripts')
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
     <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
     <script>
         $('div.image').imagefill();
         $(document).ready(function() {
+            $('.main-ads').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                autoplay: true
+            });
             $('.menu .item').tab();
             // fix menu when passed
             $('.masthead')

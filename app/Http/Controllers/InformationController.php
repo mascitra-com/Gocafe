@@ -41,7 +41,6 @@ class InformationController extends Controller
         $info = new Info($request->all());
         $info->created_by = Auth::user()->id;
         $info->save();
-        return redirect('info')->with('status', 'Informasi baru telah di tambahkan');
     }
 
     /**

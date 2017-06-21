@@ -97,6 +97,9 @@ if (! function_exists('idWithPrefix')) {
             case 13: //id TRANSACTION DETAIL'S CAFE
                 $pre = 'CVR';
                 break;
+            case 14: //id TRANSACTION DETAIL'S CAFE
+                $pre = 'ADS';
+                break;
             default:
                 $pre = 'IMG';
                 break;

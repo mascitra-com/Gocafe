@@ -24,6 +24,7 @@
             <li><a href="{{ url('batch_discount') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Discount Management</span></a>
             </li><li class="nav-title">Information</li>
             <li><a href="{{ url('info') }}"><i class="fa fa-fw fa-list"></i><span class="hidden-sm">Footer Content</span></a>
+            <li><a href="{{ url('ads') }}"><i class="fa fa-fw fa-square"></i><span class="hidden-sm">Ads Content</span></a>
             </li>
         </ul>
     </div>

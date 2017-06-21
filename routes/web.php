@@ -145,3 +145,8 @@ Route::get('info/deactivate/{infoId}', 'InformationController@deactivate');
 Route::get('about-us', 'InformationController@aboutUs');
 Route::get('info/{infoId}', 'InformationController@show');
 //-END INFORMATION
+
+//ADS
+Route::resource('ads', 'AdsController');
+Route::get('adsBanner/{id}', 'AdsController@showBanner');
+//-END ADS
