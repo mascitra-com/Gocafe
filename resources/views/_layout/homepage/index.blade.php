@@ -33,7 +33,7 @@
     <div class="right menu">
         <a href="{{ url('register') }}" class="item">Daftar</a>
         <a href="{{ url('login') }}" class="item">Masuk</a>
-        <a href="" class="item button" style="margin-right: 4em"><i class="fa fa-th-large"></i></a>
+        <span style="margin-right: 7.5em"></a>
     </div>
 </div>
 

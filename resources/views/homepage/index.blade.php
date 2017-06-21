@@ -54,6 +54,7 @@
     <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
     <script>
         $('div.image').imagefill();
+        $('a.image').imagefill();
         $(document).ready(function() {
             $('.main-ads').slick({
                 dots: true,

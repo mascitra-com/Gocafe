@@ -1,7 +1,7 @@
 <div class="ui pointing dropdown link">
     <a class="category item">
     Kategori
-    <i class="dropdown icon"></i>
+    <i class="ui floating dropdown icon"></i>
         <div class="menu">
         <div class="item">
         <i class="dropdown icon"></i>
