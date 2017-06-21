@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ads;
 use App\Cafe;
 use App\Menu;
 use App\TransactionDetail;
@@ -39,7 +40,10 @@ class HomeController extends Controller
             }
         }
         $categories = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get()->toArray();
-        return view('homepage.index', compact('cafes', 'favProducts', 'topHit', 'recommended', 'categories'));
+        $banner = Ads::where('page', '1')->get();
+        $topBanner = Ads::where('page', '2')->first();
+        $bottomBanner = Ads::where('page', '3')->first();
+        return view('homepage.index', compact('cafes', 'favProducts', 'topHit', 'recommended', 'categories', 'banner', 'topBanner', 'bottomBanner'));
     }
 
     /**
