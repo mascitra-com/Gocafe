@@ -14,11 +14,11 @@
                 </div>
                 <h5>Urutkan</h5>
                 <div class="ui selection dropdown fluid" id="order-by">
-                    <input type="hidden" name="order-by" value="{{ isset($filter['orderBy']) ? $filter['orderBy'] : '0' }}">
+                    <input type="hidden" name="order-by" value="{{ isset($filter['orderBy']) ? $filter['orderBy'] : '' }}">
                     <i class="dropdown icon"></i>
                     <div class="text">Paling Sesuai</div>
                     <div class="menu">
-                        <div class="item" data-value="0">Paling Sesuai</div>
+                        <div class="item" data-value="">Paling Sesuai</div>
                         <div class="item" data-value="1">Ulasan</div>
                         <div class="item" data-value="2">Rating</div>
                         <div class="item" data-value="3">Termurah</div>
@@ -27,11 +27,18 @@
                     </div>
                 </div>
                 <h5>Lokasi</h5>
-                <div class="ui search selection dropdown fluid" id="search-location">
-                    <input type="hidden" name="location" id="add-search-location" value="{{ isset($location) ? $location->id : '' }}">
+                <div class="ui search selection dropdown fluid" id="search-by-province">
+                    <input type="hidden" name="province" id="add-search-province" value="{{ (isset($province)) ? $province->id : (isset($city) ? $city->province->id : '')}}">
                     <i class="dropdown icon"></i>
-                    <div class="text">{{ isset($location) ? $location->name : 'Semua Lokasi' }}</div>
+                    <div class="text">{{ (isset($province)) ? $province->name : (isset($city) ? $city->province->name : 'Semua Lokasi') }}</div>
                     <div class="menu" id="provinceListForSearch"></div>
+                </div>
+                <br>
+                <div class="ui search selection dropdown fluid" id="search-by-city">
+                    <input type="hidden" name="city" id="add-search-city" value="{{ isset($city) ? $city->id : '' }}">
+                    <i class="dropdown icon"></i>
+                    <div class="text">{{ isset($city) ? $city->name : 'Semua Lokasi' }}</div>
+                    <div class="menu" id="cityListForSearch"></div>
                 </div>
                 <h5>Harga</h5>
                 <div class="ui internally grid">

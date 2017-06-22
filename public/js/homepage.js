@@ -5,7 +5,7 @@ $(document).ready(function() {
             fullTextSearch: true
         });
     $.ajax({
-        url: "https://"+ hostname + '/get-provinces',
+        url: "https://"+ hostname + '/get-cities',
         dataType: 'json',
         success: function (response) {
             var markup = "";

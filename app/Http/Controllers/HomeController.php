@@ -50,9 +50,28 @@ class HomeController extends Controller
      * @param Indonesia $indonesia
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getAllProvincesForSearch(Indonesia $indonesia)
+    public function getAllCitiesForSearch(Indonesia $indonesia)
     {
         $cities = $indonesia->allCities();
+        return response()->json(['cities' => $cities]);
+    }
+    /**
+     * @param Indonesia $indonesia
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAllProvincesForSearch(Indonesia $indonesia)
+    {
+        $provinces = $indonesia->allProvinces();
+        return response()->json(['provinces' => $provinces]);
+    }
+
+    /**
+     * @param Indonesia $indonesia
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getCitiesByProvinceForSearch($id, Indonesia $indonesia)
+    {
+        $cities = $indonesia->findProvince($id, ['cities'])->cities;
         return response()->json(['cities' => $cities]);
     }
 

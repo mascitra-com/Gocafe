@@ -111,9 +111,11 @@ Route::group(['middleware' => ['web']], function () {
 Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail');
 Route::get('menus/showImage/{image_file}', 'MenusController@showImage');
 
-//HOMEPAGE
+//SEARCH FUNCTION
+Route::get('get-cities', 'HomeController@getAllCitiesForSearch');
+Route::get('get-city-by-province/{provinceId}', 'HomeController@getCitiesByProvinceForSearch');
 Route::get('get-provinces', 'HomeController@getAllProvincesForSearch');
-//--END HOMEPAGE
+//--END SEARCH FUNCTION
 
 //SHOP
 Route::get('recommended-shop', 'ShopController@recommended');

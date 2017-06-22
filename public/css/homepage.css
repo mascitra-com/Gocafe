@@ -7,7 +7,6 @@
     border: 1px solid rgba(34,36,38,.15);
 }
 .ui.vertical.segment.container {
-}
     padding-bottom: 2em;
 }
 .ui.card.stack.fluid {
@@ -105,4 +104,25 @@ div.ui.card > div.content > div.header {
 
 .price {
     font-size: 9pt !important;
+}
+a.category.item {
+    position: initial !important;
+}
+
+.ui.menu .item {
+    line-height: normal !important;
+}
+.ui.dropdown.link {
+    position: initial !important;
+}
+a.category.item {
+    background: transparent !important;
+}
+.menu.transition.visible {
+    margin-left: 9em;
+    margin-top: .25em;
+}
+.menu.transition.animating {
+    margin-left: 9em;
+    margin-top: .25em;
 }

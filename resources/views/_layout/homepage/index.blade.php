@@ -21,11 +21,12 @@
         <form action="{{ url('search') }}" class="ui action input" method="GET" id="search">
             <input type="text" name="query" placeholder="Cari Produk atau Cafe..." value="{{ empty($filter['query']) ? '' :  $filter['query']}}" id="query">
             <div class="ui search selection dropdown" id="location" style="border-left: none">
-                <input type="hidden" name="location" value="{{ isset($location) ? $location->id : '' }}">
+                <input type="hidden" name="city" value="{{ isset($city) ? $city->id : '' }}">
                 <i class="dropdown icon"></i>
-                <div class="text">{{ isset($location) ? $location->name : 'Semua Lokasi' }}</div>
+                <div class="text">{{ isset($city) ? $city->name : 'Semua Lokasi' }}</div>
                 <div class="menu" id="provinceList"></div>
             </div>
+            <input type="hidden" name="province" value="{{ isset($province) ? $province->id : '' }}">
             <button class="ui brown button" type="submit">Cari</button>
         </form>
         <div class="results"></div>
@@ -222,7 +223,7 @@
                 fullTextSearch: true
             });
         $.ajax({
-            url: "https://"+ hostname + '/get-provinces',
+            url: "https://"+ hostname + '/get-cities',
             dataType: 'json',
             success: function (response) {
                 var markup = "<div class='item' data-value='0'>Semua Lokasi</div>";

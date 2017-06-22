@@ -16,10 +16,12 @@ class ProductController extends Controller
 
     public function search()
     {
-        $filter['location'] = Input::get('location');
+        $indonesia = new Indonesia();
+        $filter['province'] = Input::get('province');
+        $filter['city'] = Input::get('city');
         $filter['orderBy'] = Input::get('order');
-        $filter['lowPrice'] = str_replace('.', '', Input::get('lowPrice'));
-        $filter['highPrice'] = str_replace('.', '', Input::get('highPrice'));
+        $filter['lowPrice'] = Input::get('lowPrice') ? str_replace('.', '', Input::get('lowPrice')) : '';
+        $filter['highPrice'] = Input::get('highPrice') ? str_replace('.', '', Input::get('highPrice')) : '';
         $categories = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get()->toArray();
         $list = DB::table('menus')->select('menus.*', 'cafes.name as cafe_name');
         $filter['query'] = Input::get('query');
@@ -65,13 +67,25 @@ class ProductController extends Controller
         $list->join('cafes', 'cafes.id', '=', 'menus.cafe_id');
         $list->join('cafe_branches', 'cafes.id', '=', 'cafe_branches.cafe_id');
         $list->join('indonesia_cities', 'cafe_branches.city_id', '=', 'indonesia_cities.id');
-        if($filter['location']) {
-            $list->where('indonesia_cities.id', '<=', $filter['location']);
+        $list->join('indonesia_provinces', 'indonesia_cities.province_id', '=', 'indonesia_provinces.id');
+        if(isset($filter['province']) && $filter['province'] != 0) {
+            $list->where('indonesia_provinces.id', '<=', $filter['province']);
+            $province = $indonesia->findProvince($filter['province']);
         }
+        if(isset($filter['city']) && $filter['city'] != 0) {
+            $list->where('indonesia_cities.id', '<=', $filter['city']);
+            if($filter['province'] === '') {
+                $filter['province'] = $indonesia->findCity($filter['city'], ['province'])->province;
+                $province = $indonesia->findProvince($filter['province']->id);
+                $filter['province'] = $province;
+            } else {
+                $province = $indonesia->findProvince($filter['province']);
+            }
+        }
+//        dd($province->name);
         $productList = $list->get();
-        $indonesia = new Indonesia();
-        $location = $indonesia->findCity($filter['location']);
-        return view('product.list', compact('product', 'location', 'categories', 'productList', 'filter'));
+        $city = $indonesia->findCity($filter['city'], ['province']);
+        return view('product.list', compact('product', 'province', 'city', 'categories', 'productList', 'filter'));
     }
     /**
      * Display product detail
