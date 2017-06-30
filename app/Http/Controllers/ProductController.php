@@ -82,10 +82,14 @@ class ProductController extends Controller
                 $province = $indonesia->findProvince($filter['province']);
             }
         }
-//        dd($province->name);
         $productList = $list->get();
         $city = $indonesia->findCity($filter['city'], ['province']);
         return view('product.list', compact('product', 'province', 'city', 'categories', 'productList', 'filter'));
+    }
+
+    public function searchP($idProvince)
+    {
+        redirect('/search?&province=' . $idProvince);
     }
     /**
      * Display product detail
