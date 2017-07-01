@@ -45,7 +45,8 @@ return [
 
         'banner' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path('app/public'),
+            'visibility' => 'public',
         ],
 
         'local' => [
@@ -56,31 +57,37 @@ return [
         'cover' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            'visibility' => 'public',
         ],
 
         'logo' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            'visibility' => 'public',
         ],
 
         'owner' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            'visibility' => 'public',
         ],
 
         'staff' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            'visibility' => 'public',
         ],
 
         'menus' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            'visibility' => 'public',
         ],
 
         'packages' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            'visibility' => 'public',
         ],
 
         'public' => [

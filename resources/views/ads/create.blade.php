@@ -31,7 +31,7 @@
                             <label for="description">Pilih Banner Iklan</label>
                             <input type="file" name="file">
                             @if(isset($ads))
-                            <br><img src="{{url('adsBanner/'.$ads->id)}}" class="img-rounded" width="800px" alt="foto">
+                            <br><img src="{{ $banner }}" class="img-rounded" alt="foto">
                             @endif
                         </div>
                         <div class="form-group">

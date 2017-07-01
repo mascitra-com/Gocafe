@@ -5,10 +5,10 @@
         </div>
         <div class="six wide column">
             <div class="row">
-                <img src="{{ url('adsBanner/'.$topBanner->id) }}" width="400px" alt="Image">
+                <img src="{{ $topBanner }}" width="405px" alt="Image">
             </div>
             <div class="row">
-                <img src="{{ url('adsBanner/'.$bottomBanner->id) }}" width="400px" alt="Image">
+                <img src="{{ $bottomBanner }}" width="405px" alt="Image">
             </div>
         </div>
     </div>

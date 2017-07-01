@@ -6,6 +6,7 @@ use App\Ads;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AdsController extends Controller
 {
@@ -41,14 +42,9 @@ class AdsController extends Controller
         if ($request->hasFile('file')) {
             //verify the file is uploading
             if ($request->file('file')->isValid()) {
-                $banner_name = idWithPrefix(14);
-                $banner_mime = $request->file->getClientMimeType();
-                //store to storage/app/owner
-                $request->file->storeAs('banner', $banner_name, 'banner');
-                //update avatar_ users table
+                $path = $request->file('file')->store('banner', 'banner');
                 $input = array(
-                    'banner' => $banner_name,
-                    'banner_mime' => $banner_mime,
+                    'banner' => $path,
                 );
                 $request->merge($input);
                 $ads = new Ads($request->except('file'));
@@ -83,7 +79,9 @@ class AdsController extends Controller
     public function edit($id)
     {
         $ads = Ads::find($id);
-        return view('ads.create', compact('ads'));
+        $banner = '';
+        $banner = Storage::url($ads->banner);
+        return view('ads.create', compact('ads', 'banner'));
     }
 
     /**
@@ -98,14 +96,9 @@ class AdsController extends Controller
         if ($request->hasFile('file')) {
             //verify the file is uploading
             if ($request->file('file')->isValid()) {
-                $banner_name = idWithPrefix(14);
-                $banner_mime = $request->file->getClientMimeType();
-                //store to storage/app/owner
-                $request->file->storeAs('banner', $banner_name, 'banner');
-                //update avatar_ users table
+                $path = $request->file('file')->store('banner', 'banner');
                 $input = array(
-                    'banner' => $banner_name,
-                    'banner_mime' => $banner_mime,
+                    'banner' => $path,
                 );
                 $request->merge($input);
                 $ads = Ads::find($id);
@@ -130,15 +123,4 @@ class AdsController extends Controller
         //
     }
 
-    /**
-     * @param $id
-     * @param Ads $ads
-     * @return $this
-     * @internal param Cafe $cafe
-     */
-    public function showBanner($id, Ads $ads)
-    {
-        $banner_instance = $ads->getBanner($id, 'banner', 'banner');
-        return (new Response($banner_instance[0], 200))->header('Content-Type', $banner_instance[1]);
-    }
 }

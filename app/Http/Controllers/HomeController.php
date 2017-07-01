@@ -7,6 +7,7 @@ use App\Cafe;
 use App\Menu;
 use App\TransactionDetail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Laravolt\Indonesia\Indonesia;
 
 class HomeController extends Controller
@@ -40,9 +41,13 @@ class HomeController extends Controller
             }
         }
         $categories = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get()->toArray();
-        $banner = Ads::where('page', '1')->get();
-        $topBanner = Ads::where('page', '2')->first();
-        $bottomBanner = Ads::where('page', '3')->first();
+        $ads = Ads::where('page', '1')->get();
+        $banner = array();
+        foreach ($ads as $item) {
+            $banner[] .= str_replace('banner/', 'img/cache/main-ads/', $item->banner);
+        }
+        $topBanner = str_replace('banner/', 'img/cache/small-ads/', Ads::where('page', '2')->first()->banner);
+        $bottomBanner = str_replace('banner/', 'img/cache/small-ads/', Ads::where('page', '3')->first()->banner);
         return view('homepage.index', compact('cafes', 'favProducts', 'topHit', 'recommended', 'categories', 'banner', 'topBanner', 'bottomBanner'));
     }
 

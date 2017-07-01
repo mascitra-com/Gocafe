@@ -24,7 +24,7 @@
     <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:700px;height:230px;overflow:hidden;">
         @foreach($banner as $item)
             <div>
-                <img src="{{ url('adsBanner/'.$item->id) }}" width="700px" alt="Image">
+                <img src="{{ $item }}" width="700px" alt="Image">
             </div>
         @endforeach
         <a data-u="any" href="https://www.jssor.com" style="display:none">responsive slider</a>
