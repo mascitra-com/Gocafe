@@ -122,6 +122,9 @@ class CafeController extends Controller
             'twitter' => 'max:255',
             'instagram' => 'max:255',
         ]);
+        $request->request->add([
+            'slug' => str_slug($request->name, '-')
+        ]);
         // Add Profile Cafe with Owner ID currently logged in
         $cafe = new Cafe($request->all());
         $owner->addProfileCafe($cafe, Owner::getOwnerIdNowLoggedIn());
@@ -142,6 +145,9 @@ class CafeController extends Controller
             'name' => 'min:3|max:255|required',
             'shop_category_id' => 'required',
             'description' => 'min:3|required',
+        ]);
+        $request->request->add([
+            'slug' => str_slug($request->name, '-')
         ]);
         Cafe::findOrFail($id)->update($request->all());
         return redirect('profile/cafe')->with('status', 'Basic Info updated!');

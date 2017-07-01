@@ -9,7 +9,7 @@
     </div>
     <div class="ui eight doubling cards">
         @foreach($cafes as $cafe)
-            <a class="card" href="{{ url('shop/'.$cafe->id) }}">
+            <a class="card" href="{{ url('shop/'.$cafe->slug) }}">
                 <div class="image" style="height: 100px; width: 131px">
                     <img src="{{ url('logo/'.$cafe->id) }}">
                 </div>

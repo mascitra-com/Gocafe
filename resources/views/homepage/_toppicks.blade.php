@@ -10,7 +10,7 @@
         </div>
         @foreach($recommended as $recommend)
             <div class="ui card stack fluid">
-                <a href="{{ url('shop/'.$recommend->id) }}" class="image" style="width: 250px; height: 270px">
+                <a href="{{ url('shop/'.$recommend->slug) }}" class="image" style="width: 250px; height: 270px">
                     <img src="{{ url('logo/'.$recommend->id) }}" height="400px">
                 </a>
                 <div class="content">

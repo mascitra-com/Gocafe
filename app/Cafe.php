@@ -11,7 +11,7 @@ class Cafe extends Model
 {
     public $incrementing = FALSE;
 
-    protected $fillable = ['id', 'shop_category_id', 'owner_id', 'name', 'description', 'open_hours', 'close_hours', 'phone', 'facebook', 'twitter', 'instagram', 'logo_name', 'logo_mime', 'cover_name', 'cover_mime'];
+    protected $fillable = ['id', 'shop_category_id', 'owner_id', 'slug', 'name', 'description', 'open_hours', 'close_hours', 'phone', 'facebook', 'twitter', 'instagram', 'logo_name', 'logo_mime', 'cover_name', 'cover_mime'];
 
     /**
      * Get Cafe ID with Owner ID currently logged in
@@ -139,4 +139,5 @@ class Cafe extends Model
             ->where('id', Cafe::getCafeIdByUserIdNowLoggedIn())
             ->update(['last_accessed' => date('Y-m-d H:i:s', time())]);
     }
+
 }

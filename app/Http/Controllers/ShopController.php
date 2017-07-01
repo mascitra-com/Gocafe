@@ -27,15 +27,15 @@ class ShopController extends Controller
     /**
      * Display Shop Detail with All Product Provided
      *
-     * @param $shopId
+     * @param $slug
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function detail($shopId)
+    public function detail($slug)
     {
-        $shop = Cafe::where('id', $shopId)->first();
-        $branches = CafeBranch::all()->where('cafe_id', $shopId);
-        $categories = CategoryMenu::getCategoryHasMenu($shopId);
-        $products = Cafe::findOrFail($shopId)->menus;
+        $shop = Cafe::where('slug', $slug)->first();
+        $branches = CafeBranch::all()->where('cafe_id', $shop->id);
+        $categories = CategoryMenu::getCategoryHasMenu($shop->id);
+        $products = Cafe::findOrFail($shop->id)->menus;
         return view('shop.index', compact('shop', 'branches', 'categories', 'products'));
     }
 
