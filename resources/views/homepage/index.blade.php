@@ -44,24 +44,48 @@
     </div>
 @endsection
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
-    <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
+    <link rel="stylesheet" href="{{ asset('plugins/image-slider/ads.css') }}">
 @endsection
 @section('javascripts')
-    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
     <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
     <script>
         $('div.image').imagefill();
         $('a.image').imagefill();
         $(document).ready(function() {
-            $('.main-ads').slick({
-                dots: true,
-                infinite: true,
-                speed: 500,
-                autoplay: true
-            });
+            var jssor_ads_options = {
+                $AutoPlay: 1,
+                $Idle: 3000,
+                $SlideEasing: $Jease$.$InOutSine,
+                $LazyLoading: 1,
+                $ArrowNavigatorOptions: {
+                    $Class: $JssorArrowNavigator$
+                },
+                $BulletNavigatorOptions: {
+                    $Class: $JssorBulletNavigator$
+                }
+            };
+
+            var jssor_ads_slider = new $JssorSlider$("jssor_ads", jssor_ads_options);
+
+            /*#region responsive code begin*/
+            /*remove responsive code if you don't want the slider scales while window resizing*/
+            function ScaleSlider() {
+                var refSize = jssor_ads_slider.$Elmt.parentNode.clientWidth;
+                if (refSize) {
+                    refSize = Math.min(refSize, 700);
+                    jssor_ads_slider.$ScaleWidth(refSize);
+                }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            }
+            ScaleSlider();
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+            /*#endregion responsive code end*/
+
             $('.menu .item').tab();
             // fix menu when passed
             $('.masthead')
