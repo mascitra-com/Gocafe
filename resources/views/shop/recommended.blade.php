@@ -12,7 +12,7 @@
                 @foreach($recommended as $recommend)
                     <div class="ui card stack fluid">
                         <div class="image" style="width: 300px; height: 330px">
-                            <img src="{{ url('logo/'.$recommend->id) }}">
+                            <img src="{{ url('logo'.$recommend->id) }}">
                         </div>
                         <div class="content">
                             <div class="ui four column grid">

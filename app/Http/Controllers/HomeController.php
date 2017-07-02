@@ -20,9 +20,19 @@ class HomeController extends Controller
     public function index()
     {
         $cafes = Cafe::limit(15)->get();
+        foreach ($cafes as $key => $cafe) {
+            $cafes[$key]->logo = str_replace('storage/logo/', 'img/cache/small-logo/', Storage::url($cafe->logo_path));
+        }
         $recommended = Cafe::limit(5)->get();
         foreach ($recommended as $key => $recommend) {
-            $recommended[$key]->latestMenu = Menu::where('cafe_id', $recommend->id)->limit(5)->get();
+            $latestMenu = Menu::where('cafe_id', $recommend->id)->limit(5)->get();
+            foreach ($latestMenu as $keyMenu => $value) {
+                $thumbnail = Menu::getThumbnail($value->id);
+                $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
+                $latestMenu[$keyMenu]->thumbnail = $thumbnail;
+            }
+            $recommended[$key]->latestMenu = $latestMenu;
+            $recommended[$key]->logo = str_replace('storage/logo/', 'img/cache/medium-logo/', Storage::url($recommend->logo_path));
         }
         // Most Hit By User
         $topHit = TransactionDetail::getTopHitProducts();

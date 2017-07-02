@@ -31,7 +31,10 @@ return array(
     */
     
     'paths' => array(
-        storage_path('app/public/banner')
+        storage_path('app/public/banner'),
+        storage_path('app/public/cover'),
+        storage_path('app/public/logo'),
+        storage_path('app/public/product'),
     ),
 
     /*
@@ -52,7 +55,16 @@ return array(
    
     'templates' => array(
         'main-ads' => 'App\Filters\MainAds',
-        'small-ads' => 'App\Filters\SmallAds'
+        'small-ads' => 'App\Filters\SmallAds',
+        'huge-cover' => 'App\Filters\HugeCover',
+        'small-cover' => 'App\Filters\SmallCover',
+        'medium-logo' => 'App\Filters\MediumLogo',
+        'small-logo' => 'App\Filters\SmallLogo',
+        'tiny-logo' => 'App\Filters\TinyLogo',
+        'tiny-product' => 'App\Filters\TinyProduct',
+        'medium-product' => 'App\Filters\MediumProduct',
+        'small-product' => 'App\Filters\SmallProduct',
+        'large-product' => 'App\Filters\LargeProduct',
     ),
 
     /*

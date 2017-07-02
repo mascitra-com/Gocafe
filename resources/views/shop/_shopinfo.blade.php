@@ -4,7 +4,7 @@
             <div class="six column">
                 <div class="ui grid">
                     <div class="ui center aligned five wide column">
-                        <img class="ui small image" src="{{ url('logo/'.$shop->id) }}">
+                        <img class="ui small image" src="{{ $logo }}">
                         <br>
                         <span class="fa-stack" style="color: grey" data-content="Ijin Toko Belum Terverifikasi">
                           <i class="fa fa-square fa-stack-2x"></i>

@@ -7,6 +7,7 @@ use App\Owner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class CafeController untuk Fitur Profile (Cafe)
@@ -25,30 +26,9 @@ class CafeController extends Controller
         // Show Profile Cafe with Owner ID currently logged in
         $cafe = DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first();
         $shop_cat = DB::table('shop_category')->get();
-        return view('cafe.profile', compact('cafe', 'shop_cat'));
-    }
-
-    /**
-     * @param $id
-     * @param Cafe $cafe
-     * @return $this
-     */
-    public function showLogo($id, Cafe $cafe)
-    {
-        $logo_instance = $cafe->getLogo($id, 'logo', 'logo');
-        return (new Response($logo_instance[0], 200))->header('Content-Type', $logo_instance[1]);
-    }
-
-    /**
-     * @param $id
-     * @param Cafe $cafe
-     * @return $this|bool
-     */
-
-    public function showCover($id, Cafe $cafe)
-    {
-        $cover_instance = $cafe->getCover($id, 'cover', 'cover');
-        return (new Response($cover_instance[0], 200))->header('Content-Type', $cover_instance[1]);
+        $logo = str_replace('storage/logo/', 'img/cache/small-logo/', Storage::url($cafe->logo_path));
+        $cover = str_replace('storage/cover/', 'img/cache/small-cover/', Storage::url($cafe->cover_path));
+        return view('cafe.profile', compact('cafe', 'logo', 'cover', 'shop_cat'));
     }
 
     public function updateLogo(Request $request, $id)
@@ -57,18 +37,15 @@ class CafeController extends Controller
         if ($request->hasFile('logo')) {
             //verify the file is uploading
             if ($request->file('logo')->isValid()) {
-                $logo_name = idWithPrefix(12);
-                $logo_mime = $request->logo->getClientMimeType();
-                //store to storage/app/owner
-                $request->logo->storeAs('logo', $logo_name, 'logo');
-                //update avatar_ users table
+                $path = $request->file('logo')->store('logo', 'logo');
                 $input = array(
-                    'logo_name' => $logo_name,
-                    'logo_mime' => $logo_mime,
+                    'logo_path' => $path,
                 );
                 $request->merge($input);
-                Cafe::findOrFail($id)->update($request->except('logo'));
-                return response()->json(['response' => 'sukses', 'logo' => $logo_name, 'mime' => $logo_mime, 'status' => 'Logo Berhasil di simpan']);
+                $cafe = Cafe::findOrFail($id);
+                Storage::delete("public/$cafe->logo_path");
+                $cafe->update($request->except('logo'));
+                return response()->json(['response' => 'sukses', 'status' => 'Logo Berhasil di simpan']);
             } else {
                 return response()->json(['response' => 'gagal upload', 'status' => FALSE]);
             }
@@ -83,18 +60,15 @@ class CafeController extends Controller
         if ($request->hasFile('cover')) {
             //verify the file is uploading
             if ($request->file('cover')->isValid()) {
-                $cover_name = idWithPrefix(13);
-                $cover_mime = $request->cover->getClientMimeType();
-                //store to storage/app/owner
-                $request->cover->storeAs('cover', $cover_name, 'cover');
-                //update avatar_ users table
+                $path = $request->file('cover')->store('cover', 'cover');
                 $input = array(
-                    'cover_name' => $cover_name,
-                    'cover_mime' => $cover_mime,
+                    'cover_path' => $path,
                 );
                 $request->merge($input);
-                Cafe::findOrFail($id)->update($request->except('logo'));
-                return response()->json(['response' => 'sukses', 'cover' => $cover_name, 'mime' => $cover_mime, 'status' => 'Cover Berhasil di simpan']);
+                $cafe = Cafe::findOrFail($id);
+                Storage::delete("public/$cafe->cover_path");
+                $cafe->update($request->except('cover'));
+                return response()->json(['response' => 'sukses', 'status' => 'Cover Berhasil di simpan']);
             } else {
                 return response()->json(['response' => 'gagal upload', 'status' => FALSE]);
             }

@@ -1,6 +1,6 @@
 <a class="card product" href="{{ url('product/'.$product->id) }}">
-    <div class="image" style="width: 280px; height: 280px">
-        <img src="{{url("menus/showThumbnail/$product->id")}}">
+    <div class="image" style="width: 208px; height: 200px">
+        <img src="{{url("$product->thumbnail")}}">
     </div>
     <div class="content">
         <div class="header">{{ $product->name }}</div>

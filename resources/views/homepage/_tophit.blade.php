@@ -11,7 +11,7 @@
         @foreach($topHit as $product)
             <a class="card product" href="{{ url('product/'.$product->id) }}">
                 <div class="image" style="height: 170px; width: 170px">
-                    <img src="{{url("menus/showThumbnail/$product->id")}}">
+                    <img src="{{url("$product->thumbnail")}}">
                 </div>
                 <div class="content">
                     <div class="header">{{ $product->name }}</div>

@@ -21,8 +21,6 @@ Route::group(['middleware' => ['web']], function () {
     // CAFE
     Route::resource('/profile/cafe', 'CafeController');
     Route::patch('/profile/cafe/updateContact/{contact}', 'CafeController@updateContact');
-    Route::get('logo/{id}', 'CafeController@showLogo'); //get avatar's response
-    Route::get('cover/{id}', 'CafeController@showCover'); //get avatar's response
     Route::post('logo/replace/{id}', 'CafeController@updateLogo');
     Route::post('cover/replace/{id}', 'CafeController@updateCover');
     //--END CAFE
@@ -107,7 +105,6 @@ Route::group(['middleware' => ['web']], function () {
     //--END REVIEW
 
     // Thumbnail & Image
-    Route::get('menus/showThumbnail/{id}', 'MenusController@showThumbnail');
     Route::get('menus/showImage/{image_file}', 'MenusController@showImage');
 
     //SEARCH FUNCTION

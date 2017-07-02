@@ -8,6 +8,7 @@ use App\CategoryMenu;
 use App\Menu;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 use Laravolt\Indonesia\Indonesia;
 
 class ShopController extends Controller
@@ -36,12 +37,24 @@ class ShopController extends Controller
         $branches = CafeBranch::all()->where('cafe_id', $shop->id);
         $categories = CategoryMenu::getCategoryHasMenu($shop->id);
         $products = Cafe::findOrFail($shop->id)->menus;
-        return view('shop.index', compact('shop', 'branches', 'categories', 'products'));
+        foreach ($products as $key => $value) {
+            $thumbnail = Menu::getThumbnail($value->id);
+            $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
+            $products[$key]->thumbnail = $thumbnail;
+        }
+        $cover = str_replace('storage/cover/', 'img/cache/huge-cover/', Storage::url($shop->cover_path));
+        $logo = str_replace('storage/logo/', 'img/cache/small-logo/', Storage::url($shop->logo_path));
+        return view('shop.index', compact('cover', 'logo', 'shop', 'branches', 'categories', 'products'));
     }
 
     public function allProducts($shopId)
     {
         $products = Cafe::findOrFail($shopId)->menus;
+        foreach ($products as $key => $value) {
+            $thumbnail = Menu::getThumbnail($value->id);
+            $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
+            $products[$key]->thumbnail = $thumbnail;
+        }
         return response()->json(['products' => $products]);
     }
 

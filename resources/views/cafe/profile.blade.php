@@ -61,14 +61,14 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <h4 class="panel-title">Logo</h4>
-                                <img src="{{url('logo/'.(($cafe != NULL) ? $cafe->id : ''))}}" class="image-fit img-circle" width="150px" alt="foto">
+                                <img src="{{url((($cafe != NULL) ? $logo : ''))}}" class="image-fit img-circle" width="150px" alt="foto">
                                 <div class="break-10"></div>
                                 <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#upload">Ganti Logo</button>
                                 <button class="btn btn-default btn-xs">Hapus</button>
                             </div>
                             <div class="col-md-8">
                                 <h4 class="panel-title">Cover</h4>
-                                <img src="{{url('cover/'.(($cafe != NULL) ? $cafe->id : ''))}}" class="image-fit img-rounded" width="400px" alt="foto">
+                                <img src="{{url((($cafe != NULL) ? $cover : ''))}}" class="image-fit img-rounded" width="400px" alt="foto">
                                 <div class="break-10"></div>
                                 <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadCover">Ganti Cover</button>
                                 <button class="btn btn-default btn-xs">Hapus</button>

@@ -28,7 +28,7 @@ $("a.brown").click(function(){
                     var rating = Math.floor(menu.rating);
                     var liked = menu.liked;
                     var reviewed = menu.reviewed;
-                    var markup = "<a href='https://" + hostname + "/product/" + id + "' class='card product' data-id='" + id + "'><div class='image'><img src='" + getThumbnail(id) + "'></div><div class='content'><div class='header'>" + name + "</div><span>";
+                    var markup = "<a href='https://" + hostname + "/product/" + id + "' class='card product' data-id='" + id + "'><div class='image'><img src='" + menu.thumbnail + "'></div><div class='content'><div class='header'>" + name + "</div><span>";
                     if(!discount){
                         markup += "<b>Rp. "+price+"</b>";
                     } else {
@@ -71,7 +71,7 @@ $("#allMenu").click(function(){
                     price = product.price - (product.price * discount);
                     priceMarkup += "<b>&nbsp;Rp. "+ $.number(price) +"</b>";
                 }
-                var markup = "<a href='https://" + hostname + "/product/" + id + "' class='card product' data-id='" + id + "'><div class='image'><img src='" + getThumbnail(id) + "'></div><div class='content'><div class='header'>" + name + "</div><span>" + priceMarkup + "</span></div><div class='extra content'><div class='ui heart rating' data-rating='"+liked+"' data-max-rating='1'></div> " + liked + " <span class='right floated'><div class='ui tiny star rating' data-rating='" + rating + "'></div>(" + reviewed + ")</span></div></a>";
+                var markup = "<a href='https://" + hostname + "/product/" + id + "' class='card product' data-id='" + id + "'><div class='image'><img src='" +  product.thumbnail  + "'></div><div class='content'><div class='header'>" + name + "</div><span>" + priceMarkup + "</span></div><div class='extra content'><div class='ui heart rating' data-rating='"+liked+"' data-max-rating='1'></div> " + liked + " <span class='right floated'><div class='ui tiny star rating' data-rating='" + rating + "'></div>(" + reviewed + ")</span></div></a>";
                 $("#productList").append(markup);
             });
             $('.ui.star.rating').rating({
@@ -81,7 +81,3 @@ $("#allMenu").click(function(){
         }
     });
 });
-
-function getThumbnail(idMenu) {
-    return "https://" + hostname + "/menus/showThumbnail/" + idMenu;
-}

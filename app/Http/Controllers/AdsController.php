@@ -79,7 +79,6 @@ class AdsController extends Controller
     public function edit($id)
     {
         $ads = Ads::find($id);
-        $banner = '';
         $banner = Storage::url($ads->banner);
         return view('ads.create', compact('ads', 'banner'));
     }
@@ -102,6 +101,7 @@ class AdsController extends Controller
                 );
                 $request->merge($input);
                 $ads = Ads::find($id);
+                Storage::delete("public/$ads->banner");
                 $ads->update($request->all());
                 return redirect('ads')->with('status', 'Iklan telah di update');
             } else {

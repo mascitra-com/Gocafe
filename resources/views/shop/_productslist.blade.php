@@ -18,7 +18,7 @@
         {{--Product Showcase--}}
         <div class="thirteen wide column" style="padding-left: 2em">
             <h3>Produk</h3>
-            <div class="ui three doubling cards" id="productList">
+            <div class="ui four doubling cards" id="productList">
                 {{--Product Card--}}
                 @each('product._product', $products, 'product')
             </div>

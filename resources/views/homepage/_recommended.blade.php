@@ -11,7 +11,7 @@
         @foreach($cafes as $cafe)
             <a class="card" href="{{ url('shop/'.$cafe->slug) }}">
                 <div class="image" style="height: 100px; width: 131px">
-                    <img src="{{ url('logo/'.$cafe->id) }}">
+                    <img src="{{ $cafe->logo }}">
                 </div>
                 <div class="content center aligned">
                     <div class="header">{{ $cafe->name }}</div>

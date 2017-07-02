@@ -9,6 +9,7 @@ use App\Review;
 use App\TransactionDetail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 use Laravolt\Indonesia\Indonesia;
 
 class ProductController extends Controller
@@ -112,7 +113,11 @@ class ProductController extends Controller
             $product->type = 'Paket';
             // TODO Set Hit
         }
+        $thumbnail = Menu::getThumbnail($product->id);
+        $thumbnail = str_replace('storage/product/', 'img/cache/large-product/', $thumbnail[0]);
+        $product->thumbnail = $thumbnail;
         $shop = Cafe::find($product->cafe_id);
+        $shop->logo = str_replace('storage/logo/', 'img/cache/tiny-logo/', Storage::url($shop->logo_path));
         $reviews = Review::where('item_id', $productId)->orderBy('id', 'desc')->get();
         $topHit = TransactionDetail::getTopHitProducts();
         return view('product.detail', compact('shop', 'product', 'reviews', 'topHit'));

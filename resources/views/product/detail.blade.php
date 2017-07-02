@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="six wide column">
                             <div class="row">
-                                <img src="{{ url('/menus/showThumbnail/'.$product->id) }}" id="big-thumbnail" class="ui fluid image">
+                                <img src="{{ url($product->thumbnail) }}" id="big-thumbnail" class="ui fluid image">
                             </div>
                             <div class="ui equal width grid row" style="margin-top: .25em">
                                 @php $images = explode(':', $product->images_name); @endphp
@@ -125,7 +125,7 @@
             <div class="ui center aligned segment container">
                 <a href="{{ url('shop/' . $shop->id) }}">
                 <h3 style="color: #8C4728">{{ $shop->name }}</h3>
-                <img class="ui centered tiny image" src="{{ url('logo/'.$shop->id) }}"><br>
+                <img class="ui centered tiny image" src="{{ url($shop->logo) }}"><br>
                 </a>
                 <a target="_blank" href="https://www.facebook.com/{{ $shop->facebook }}"><i class="fa fa-facebook-square"></i> {{ $shop->facebook }}</a><br>
                 <a target="_blank" href="https://www.twitter.com/{{ $shop->twitter }}"><i class="fa fa-twitter-square"></i> {{ $shop->twitter }}</a><br>

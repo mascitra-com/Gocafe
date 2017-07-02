@@ -56,13 +56,13 @@ return [
 
         'cover' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path('app/public'),
             'visibility' => 'public',
         ],
 
         'logo' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path('app/public'),
             'visibility' => 'public',
         ],
 
@@ -78,9 +78,9 @@ return [
             'visibility' => 'public',
         ],
 
-        'menus' => [
+        'product' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path('app/public'),
             'visibility' => 'public',
         ],
 

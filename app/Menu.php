@@ -16,7 +16,7 @@ class Menu extends Model
 
 	protected $dates = ['deleted_at'];
 
-    protected $fillable = ['id', 'cafe_id', 'category_id', 'name', 'description', 'cost', 'price','images_name','mime','status','created_by', 'updated_by', 'deleted_by', 'discount'];
+    protected $fillable = ['id', 'cafe_id', 'category_id', 'name', 'description', 'cost', 'price','images','status','created_by', 'updated_by', 'deleted_by', 'discount'];
 
     protected $hidden = ['cafe_id', 'category_id', 'created_by', 'updated_by', 'deleted_by'];
 
@@ -24,26 +24,21 @@ class Menu extends Model
      * Get One Image from Menu
      *
      * @param $id
-     * @param $disk
-     * @param $path
      * @return array
      */
-    public function getThumbnail($id, $disk, $path)
+    public static function getThumbnail($id)
     {
-        $menu = $this->findOrFail($id)->attributes;
-        $images = explode(':', $menu['images_name']);
-        $mimes = explode(':', $menu['mime']);
-        $thumb = 'default';
-        $mime = 'jpeg:image';
+        $menu =  parent::findOrFail($id)->attributes;
+        $images = explode(':', $menu['images']);
+        $thumb = '/storage/default';
         foreach ($images as $key => $image){
             if($image !== 'default'){
                 $thumb = $image;
-                $mime = $mimes[$key];
                 break;
             }
         }
-        $thumbnail = Storage::disk($disk)->get($path.'/'.$thumb);
-        return array($thumbnail, $mime);
+        $thumbnail = Storage::disk('product')->url($thumb);
+        return array($thumbnail);
     }
 
     //RELATIONS

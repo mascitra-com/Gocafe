@@ -27,6 +27,11 @@ class MenusController extends Controller
             return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Filled!');
         }
         $menus = $cafe->findOrFail($cafe->getCafeIdByUserIdNowLoggedIn())->menus->load('category');
+        foreach ($menus as $key => $value) {
+            $thumbnail = Menu::getThumbnail($value->id);
+            $thumbnail = str_replace('storage/product/', 'img/cache/tiny-product/', $thumbnail[0]);
+            $menus[$key]->thumbnail = $thumbnail;
+        }
         return view('menu.menu', compact('menus'));
     }
 
@@ -61,30 +66,23 @@ class MenusController extends Controller
         $requestData['cost'] = str_replace('.', '', $request->cost);
         $requestData['price'] = str_replace('.', '', $request->price);
         $request->merge($requestData);
-        $images_name = "";
+        $images = "";
         $mime = "";
         for ($i = 1; $i <= 4; $i++) {
             if ($request->hasFile('image' . $i)) {
                 if ($request->file('image' . $i)->isValid()) {
-                    $image_name = idWithPrefix(0);
-                    $image_mime = $request->file('image' . $i)->getClientMimeType();
-                    //store to storage/app/menus
-                    $request->file('image' . $i)->storeAs('menus', $image_name, 'menus');
-                    //add current image_name to images_name array
-                    $images_name .= $image_name . ":";
-                    $mime .= $image_mime . ":";
+                    $path = $request->file('image' . $i)->store('product', 'product');
+                    $images .= "$path:";
                 } else {
                     echo "file image" . $i . " tidak valid <br>";
                 }
             } else {
-                $images_name .= 'default:';
-                $mime .= 'image/jpeg:';
+                $images .= 'default:';
             }
         }
         //manage requests
         $request->request->add(array(
-            'images_name' => $images_name,
-            'mime' => $mime
+            'images' => $images
         ));
         //insert to menus table
         $menu = new Menu($request->except('category_name', 'image1', 'image2', 'image3', 'image4'));
@@ -102,7 +100,10 @@ class MenusController extends Controller
     public function edit(Menu $menu)
     {
         $menu = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->find($menu->id)->load('category');
-        $images = explode(':', $menu->getattributes()['images_name']);
+        $images = explode(':', $menu->getattributes()['images']);
+        foreach ($images as $key => $value) {
+            $images[$key] = str_replace('storage/product/', 'img/cache/small-product/', Storage::url($value));
+        }
         $categories = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menuCategories;
         return view('menu.create', compact('menu', 'categories', 'images'));
     }
@@ -120,30 +121,29 @@ class MenusController extends Controller
         $requestData['cost'] = str_replace('.', '', $request->cost);
         $requestData['price'] = str_replace('.', '', $request->price);
         $request->merge($requestData);
-        $images_name = "";
-        $mime = "";
+        $menu = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->find($menu->id)->load('category');
+        $images = explode(':', $menu->getattributes()['images']);
+        foreach ($images as $image) {
+            if($image != 'default' && !empty($image)){
+                Storage::delete("public/$image");
+            }
+        }
+        $images = "";
         for ($i = 1; $i <= 4; $i++) {
             if ($request->hasFile('image' . $i)) {
                 if ($request->file('image' . $i)->isValid()) {
-                    $image_name = idWithPrefix(0);
-                    $image_mime = $request->file('image' . $i)->getClientMimeType();
-                    //store to storage/app/menus
-                    $request->file('image' . $i)->storeAs('menus', $image_name, 'menus');
-                    //add current image_name to images_name array
-                    $images_name .= $image_name . ":";
-                    $mime .= $image_mime . ":";
+                    $path = $request->file('image' . $i)->store('product', 'product');
+                    $images .= "$path:";
                 } else {
                     echo "file image" . $i . " tidak valid <br>";
                 }
             } else {
-                $images_name .= 'default:';
-                $mime .= 'image/jpeg:';
+                $images .= 'default:';
             }
         }
         //manage requests
         $request->request->add(array(
-            'images_name' => $images_name,
-            'mime' => $mime
+            'images' => $images,
         ));
         Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->find($menu->id)->update(($request->except(['category_name', 'image1', 'image2', 'image3', 'image4'])));
         return redirect('menus')->with('status', 'Menu Updated!');
@@ -169,8 +169,11 @@ class MenusController extends Controller
     {
         if($idCategory) {
             $menus = Menu::where('category_id', $idCategory)->get();
-        } else {
-
+            foreach ($menus as $key => $value) {
+                $thumbnail = Menu::getThumbnail($value->id);
+                $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
+                $menus[$key]->thumbnail = $thumbnail;
+            }
         }
         return response()->json(['success' => true, 'menus' => $menus]);
     }
@@ -183,19 +186,6 @@ class MenusController extends Controller
     {
         $menu = Menu::where('id', $idMenu)->get();
         return response()->json(['success' => true, 'menu' => $menu]);
-    }
-
-    /**
-     * Show Thumbnail of Menu
-     *
-     * @param $id
-     * @param Menu $menu
-     * @return $this
-     */
-    public function showThumbnail($id, Menu $menu)
-    {
-        $thumbnail = $menu->getThumbnail($id, 'menus', 'menus');
-        return Response($thumbnail[0], 200)->header('Content-Type', $thumbnail[1]);
     }
 
     /**

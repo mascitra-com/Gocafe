@@ -11,7 +11,7 @@ class Cafe extends Model
 {
     public $incrementing = FALSE;
 
-    protected $fillable = ['id', 'shop_category_id', 'owner_id', 'slug', 'name', 'description', 'open_hours', 'close_hours', 'phone', 'facebook', 'twitter', 'instagram', 'logo_name', 'logo_mime', 'cover_name', 'cover_mime'];
+    protected $fillable = ['id', 'shop_category_id', 'owner_id', 'slug', 'name', 'description', 'open_hours', 'close_hours', 'phone', 'facebook', 'twitter', 'instagram', 'logo_path', 'cover_path'];
 
     /**
      * Get Cafe ID with Owner ID currently logged in
@@ -30,20 +30,6 @@ class Cafe extends Model
                 return $branch->cafe_id;
             }
         }
-    }
-
-    public function getLogo($id, $disk, $path)
-    {
-        $entry = Cafe::find($id);
-        $logo = Storage::disk($disk)->get($path.'/'.$entry->logo_name);
-        return array($logo, $entry->logo_mime);
-    }
-
-    public function getCover($id, $disk, $path)
-    {
-        $entry = Cafe::find($id);
-        $cover = Storage::disk($disk)->get($path.'/'.$entry->cover_name);
-        return array($cover, $entry->cover_mime);
     }
 
     public function owner()

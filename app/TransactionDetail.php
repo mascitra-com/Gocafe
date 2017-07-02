@@ -47,6 +47,11 @@ class TransactionDetail extends Model
             ->orderBy('hit', 'desc')
             ->limit(5, 0)
             ->get();
+        foreach ($top5menus as $key => $value) {
+            $thumbnail = Menu::getThumbnail($value->id);
+            $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
+            $top5menus[$key]->thumbnail = $thumbnail;
+        }
         return $top5menus;
     }
 
