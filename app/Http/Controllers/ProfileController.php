@@ -8,6 +8,7 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class ProfileController untuk Fitur Owner Profile
@@ -15,16 +16,6 @@ use Illuminate\Http\Response;
  */
 class ProfileController extends Controller
 {
-
-    /**
-     * @param User $user
-     * @return $this
-     */
-    public function showAvatar(User $user)
-    {
-        $avatar_instance = $user->getAvatar(Auth::user()->id, 'owner', 'owner');
-        return (new Response($avatar_instance[1], 200))->header('Content-Type', $avatar_instance[0]->mime);
-    }
 
     /**
      * @param User $user
@@ -36,7 +27,11 @@ class ProfileController extends Controller
 
         if ($role === 'owner') {
             $profile = User::find(Auth::user()->id)->owner;
-            return view('owner.owner_profile', compact('profile'));
+            if($profile) {
+                $user = User::find(Auth::user()->id);
+                $avatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($user->avatar_name));
+            }
+            return view('owner.owner_profile', compact('profile', 'avatar'));
         } elseif ($role === 'staff') {
             return 'ambil profil staff (progress)';
         } else {
@@ -65,29 +60,23 @@ class ProfileController extends Controller
         if ($request->hasFile('avatar')) {
             //verify the file is uploading
             if ($request->file('avatar')->isValid()) {
-                $avatar_name = idWithPrefix(3);
-                $avatar_mime = $request->avatar->getClientMimeType();
                 //store to storage/app/owner
-                $request->avatar->storeAs('owner', $avatar_name, 'owner');
+                $path = $request->file('avatar')->store('owner', 'owner');
                 //update avatar_ users table
                 $input = array(
-                    'avatar_name' => $avatar_name,
-                    'avatar_mime' => $avatar_mime,
+                    'avatar_name' => $path,
                 );
                 $request->merge($input);
-                User::findOrFail(decrypt($id))->update($request->except('avatar'));
-                return response()->json(['response' => 'sukses', 'avatar_name' => $avatar_name, 'avatar_mime' => $avatar_mime, 'status' => TRUE]);
+                $user = User::findOrFail(decrypt($id));
+                if($exists = Storage::disk('owner')->exists($user->avatar_name))
+                    Storage::delete("public/$user->avatar_name");
+                $user->update($request->except('avatar'));
+                return response()->json(['response' => 'sukses', 'status' => TRUE]);
             } else {
                 return response()->json(['response' => 'gagal upload', 'status' => FALSE]);
             }
         } else {
             return response()->json(['response' => 'file kosong', 'status' => FALSE]);
         }
-    }
-
-    public function updateAvatarName(Request $request)
-    {
-        User::findOrFail(1)->update($request->all());
-        return response()->json(['response' => 'sukses', 'status' => TRUE]);
     }
 }

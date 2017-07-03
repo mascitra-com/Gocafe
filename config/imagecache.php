@@ -35,6 +35,7 @@ return array(
         storage_path('app/public/cover'),
         storage_path('app/public/logo'),
         storage_path('app/public/product'),
+        storage_path('app/public/owner'),
     ),
 
     /*
@@ -57,6 +58,7 @@ return array(
         'main-ads' => 'App\Filters\MainAds',
         'small-ads' => 'App\Filters\SmallAds',
         'huge-cover' => 'App\Filters\HugeCover',
+        'small-avatar' => 'App\Filters\SmallAvatar',
         'small-cover' => 'App\Filters\SmallCover',
         'medium-logo' => 'App\Filters\MediumLogo',
         'small-logo' => 'App\Filters\SmallLogo',

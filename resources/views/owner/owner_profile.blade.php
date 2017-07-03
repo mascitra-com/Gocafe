@@ -12,7 +12,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body box-center">
 				<h4 class="panel-title">Profile Picture</h4>
-				<img src="{{route('getAvatar')}}" class="image-fit img-circle" width="80%" alt="foto">
+				<img src="{{url($avatar)}}" class="image-fit img-circle" width="80%" alt="foto">
 				<div class="break-10"></div>
 				<h4 class="text-quadruple">{{ $profile->first_name.' '.$profile->last_name }}</h4>
 				<div class="break-10"></div>
