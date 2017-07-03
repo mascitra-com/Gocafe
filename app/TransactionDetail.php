@@ -46,7 +46,7 @@ class TransactionDetail extends Model
             ->where('deleted_at', NULL)
             ->where('images', '<>', 'default:default:default:default:')
             ->orderBy('hit', 'desc')
-            ->limit(5, 0)
+            ->limit(6, 0)
             ->get();
         foreach ($top5menus as $key => $value) {
             $thumbnail = Menu::getThumbnail($value->id);

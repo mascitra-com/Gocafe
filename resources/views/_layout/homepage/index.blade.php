@@ -173,7 +173,7 @@
                     </style>
                     <a href="{{ url('idea-box') }}">
                         <div class="ui icon message" id="feedback">
-                            <i class="mail brown icon"></i>
+                            <img class="icon" src="{{ asset('images/mailbox.png') }}">
                             <div class="content">
                                 <div class="header">
                                     Kirim Saran

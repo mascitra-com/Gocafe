@@ -5,7 +5,7 @@
         <div class="twelve wide column">
         <a class="section" href="{{ url('/') }}">Home</a>
         <i class="right angle icon divider"></i>
-        <a class="section" href="{{ url('shop/'.$shop->id) }}">{{ $shop->name }}</a>
+        <a class="section" href="{{ url('shop/'.$shop->slug) }}">{{ $shop->name }}</a>
         <i class="right angle icon divider"></i>
         <div class="active section">{{ $product->name }}</div>
         </div>
@@ -140,6 +140,9 @@
 @endsection
 
 @section('javascripts')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
+    <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
     <script>
         function changeBigThumbnail(src) {
             $('#big-thumbnail').attr('src', src);
@@ -148,6 +151,14 @@
             $('.ui.rating').rating({
                 maxRating: 5
             }).rating();
+        });
+        $('.img-hit').lazy({
+            delay: 500,
+            enableThrottle: true,
+            afterLoad: function() {
+                $('div.image').imagefill();
+                $('a.image').imagefill();
+            }
         });
     </script>
 @endsection
