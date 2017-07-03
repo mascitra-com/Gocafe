@@ -84,6 +84,12 @@ class ProductController extends Controller
             }
         }
         $productList = $list->get();
+
+        foreach ($productList as $key => $value) {
+            $thumbnail = Menu::getThumbnail($value->id);
+            $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
+            $productList[$key]->thumbnail = $thumbnail;
+        }
         $city = $indonesia->findCity($filter['city'], ['province']);
         return view('product.list', compact('product', 'province', 'city', 'categories', 'productList', 'filter'));
     }

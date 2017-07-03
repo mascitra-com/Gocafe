@@ -101,7 +101,8 @@ class AdsController extends Controller
                 );
                 $request->merge($input);
                 $ads = Ads::find($id);
-                Storage::delete("public/$ads->banner");
+                if($exists = Storage::disk('banner')->exists($ads->banner))
+                    Storage::delete("public/$ads->banner");
                 $ads->update($request->all());
                 return redirect('ads')->with('status', 'Iklan telah di update');
             } else {

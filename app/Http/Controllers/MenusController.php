@@ -122,23 +122,20 @@ class MenusController extends Controller
         $requestData['price'] = str_replace('.', '', $request->price);
         $request->merge($requestData);
         $menu = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->menus->find($menu->id)->load('category');
-        $images = explode(':', $menu->getattributes()['images']);
-        foreach ($images as $image) {
-            if($image != 'default' && !empty($image)){
-                Storage::delete("public/$image");
-            }
-        }
+        $temp = explode(':', $menu->getattributes()['images']);
         $images = "";
         for ($i = 1; $i <= 4; $i++) {
             if ($request->hasFile('image' . $i)) {
                 if ($request->file('image' . $i)->isValid()) {
                     $path = $request->file('image' . $i)->store('product', 'product');
                     $images .= "$path:";
+                    if($exists = Storage::disk('product')->exists('public/' . $temp[$i-1]))
+                        Storage::delete('public/'. $temp[$i-1]);
                 } else {
                     echo "file image" . $i . " tidak valid <br>";
                 }
             } else {
-                $images .= 'default:';
+                $images .= $temp[$i-1] . ':';
             }
         }
         //manage requests

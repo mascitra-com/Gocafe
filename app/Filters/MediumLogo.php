@@ -10,6 +10,6 @@ class MediumLogo implements  FilterInterface
 
     public function applyFilter(Image $image)
     {
-        return $image->fit(300, 300);
+        return $image->fit(300, 300)->encode('jpg', 70);
     }
 }

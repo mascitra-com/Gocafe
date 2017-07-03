@@ -44,6 +44,7 @@ class TransactionDetail extends Model
         $top5menus = DB::table('menus')
             ->where('hit', '>', 0)
             ->where('deleted_at', NULL)
+            ->where('images', '<>', 'default:default:default:default:')
             ->orderBy('hit', 'desc')
             ->limit(5, 0)
             ->get();

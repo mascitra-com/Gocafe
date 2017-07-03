@@ -20,7 +20,14 @@ class ShopController extends Controller
     {
         $recommended = Cafe::limit(5)->get();
         foreach ($recommended as $key => $recommend) {
-            $recommended[$key]->latestMenu = Menu::where('cafe_id', $recommend->id)->limit(5)->get();
+            $latestMenu = Menu::where('cafe_id', $recommend->id)->limit(5)->get();
+            foreach ($latestMenu as $keyMenu => $value) {
+                $thumbnail = Menu::getThumbnail($value->id);
+                $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
+                $latestMenu[$keyMenu]->thumbnail = $thumbnail;
+            }
+            $recommended[$key]->latestMenu = $latestMenu;
+            $recommended[$key]->logo = str_replace('storage/logo/', 'img/cache/medium-logo/', Storage::url($recommend->logo_path));
         }
         return view('shop.recommended', compact('recommended'));
     }
@@ -76,6 +83,9 @@ class ShopController extends Controller
             $list->orWhere('name', 'like', "%$element%");
         }
         $shopList = $list->get();
+        foreach ($shopList as $key => $list) {
+            $shopList[$key]->logo = str_replace('storage/logo/', 'img/cache/medium-logo/', Storage::url($list->logo_path));
+        }
         return view('shop.list', compact('filter', 'shopList'));
     }
 }

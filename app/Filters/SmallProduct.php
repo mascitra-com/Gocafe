@@ -10,6 +10,6 @@ class SmallProduct implements  FilterInterface
 
     public function applyFilter(Image $image)
     {
-        return $image->fit(175, 175);
+        return $image->fit(175, 175)->encode('jpg', 75);
     }
 }

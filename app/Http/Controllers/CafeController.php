@@ -26,8 +26,10 @@ class CafeController extends Controller
         // Show Profile Cafe with Owner ID currently logged in
         $cafe = DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first();
         $shop_cat = DB::table('shop_category')->get();
-        $logo = str_replace('storage/logo/', 'img/cache/small-logo/', Storage::url($cafe->logo_path));
-        $cover = str_replace('storage/cover/', 'img/cache/small-cover/', Storage::url($cafe->cover_path));
+        if($cafe) {
+            $logo = str_replace('storage/logo/', 'img/cache/small-logo/', Storage::url($cafe->logo_path));
+            $cover = str_replace('storage/cover/', 'img/cache/small-cover/', Storage::url($cafe->cover_path));
+        }
         return view('cafe.profile', compact('cafe', 'logo', 'cover', 'shop_cat'));
     }
 
@@ -43,7 +45,8 @@ class CafeController extends Controller
                 );
                 $request->merge($input);
                 $cafe = Cafe::findOrFail($id);
-                Storage::delete("public/$cafe->logo_path");
+                if($exists = Storage::disk('logo')->exists($cafe->logo_path))
+                    Storage::delete("public/$cafe->logo_path");
                 $cafe->update($request->except('logo'));
                 return response()->json(['response' => 'sukses', 'status' => 'Logo Berhasil di simpan']);
             } else {
@@ -66,6 +69,7 @@ class CafeController extends Controller
                 );
                 $request->merge($input);
                 $cafe = Cafe::findOrFail($id);
+                if($exists = Storage::disk('cover')->exists($cafe->cover_path))
                 Storage::delete("public/$cafe->cover_path");
                 $cafe->update($request->except('cover'));
                 return response()->json(['response' => 'sukses', 'status' => 'Cover Berhasil di simpan']);
