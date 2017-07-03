@@ -9,7 +9,7 @@
 
 <!-- #region Jssor Slider Begin -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
-<script src="{{ asset('plugins/image-slider/js/jssor.slider-25.0.7.min.js') }}" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jssor-slider/25.0.8/jssor.slider.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
 

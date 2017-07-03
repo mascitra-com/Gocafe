@@ -29,15 +29,15 @@
     <div class="ui vertical quote segment container">
         <div class="ui equal width grid">
             <div class="column">
-                <img class="ui left floated image" src="{{ asset('images/mudah1.png') }}" height="100px">
+                <img class="ui left floated image" data-src="{{ asset('images/mudah1.png') }}" height="100px">
                 Bersama Kulinerae Anda pencinta kuliner dapat dengan mudah menemukan cafe dan restoran favorit dilokasimu
             </div>
             <div class="column">
-                <img class="ui left floated image" src="{{ asset('images/lengkap1.png') }}" height="100px">
+                <img class="ui left floated image" data-src="{{ asset('images/lengkap1.png') }}" height="100px">
                 Temukan ragam kuliner nusantara hingga kuliner dunia paling lengkap dengan katalog kami
             </div>
             <div class="column">
-                <img class="ui left floated image" src="{{ asset('images/gratis1.png') }}" height="100px">
+                <img class="ui left floated image" data-src="{{ asset('images/gratis1.png') }}" height="100px">
                 Buka dan kelola gerai online Anda secara mudah ,nyaman dan gratis
             </div>
         </div>
@@ -47,12 +47,30 @@
     <link rel="stylesheet" href="{{ asset('plugins/image-slider/ads.css') }}">
 @endsection
 @section('javascripts')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
     <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
     <script>
-        $('div.image').imagefill();
-        $('a.image').imagefill();
         $(document).ready(function() {
+            $('.img-ads').lazy({
+                delay: 250
+            });
+            $('.img-pick').lazy({
+                delay: 500,
+                enableThrottle: true
+            });
+            $('.img-hit').lazy({
+                delay: 750,
+                enableThrottle: true
+            });
+            $('img').lazy({
+                delay: 1000,
+                enableThrottle: true,
+                afterLoad: function() {
+                    $('div.image').imagefill();
+                    $('a.image').imagefill();
+                }
+            });
             var jssor_ads_options = {
                 $AutoPlay: 1,
                 $Idle: 3000,

@@ -1,5 +1,5 @@
 <div class="ui vertical stripe quote segment container">
-    <div class="ui left aligned grid" id="recommended">
+    <div class="ui left aligned grid" id="top-hit">
         <div class="eight wide column">
             <h3>Paling Banyak Diminati</h3>
         </div>
@@ -11,7 +11,7 @@
         @foreach($topHit as $product)
             <a class="card product" href="{{ url('product/'.$product->id) }}">
                 <div class="image" style="height: 170px; width: 170px">
-                    <img src="{{url("$product->thumbnail")}}">
+                    <img class="img-hit" data-src="{{url("$product->thumbnail")}}">
                 </div>
                 <div class="content">
                     <div class="header">{{ $product->name }}</div>
