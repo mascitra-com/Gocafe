@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Login</title>
-	<link rel="stylesheet" href="{{URL::asset('plugins/bootstrap/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-sign.css')}}">
 	<link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-helper.css')}}">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400" rel="stylesheet"> 
@@ -46,7 +46,7 @@
 		</div>
 	</div>
 </body>
-<script src="{{URL::asset('plugins/jquery/jquery-3.1.1.min.js')}}"></script>
-<script src="{{URL::asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="{{URL::asset('plugins/theme/js/theme-helper.js')}}"></script>
 </html>

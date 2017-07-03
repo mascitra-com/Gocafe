@@ -11,34 +11,34 @@
             <div id="list">
                 @foreach($recommended as $recommend)
                     <div class="ui card stack fluid">
-                        <div class="image" style="width: 300px; height: 330px">
-                            <img src="{{ url('logo'.$recommend->id) }}">
-                        </div>
+                        <a href="{{ url('shop/'.$recommend->slug) }}" class="image" style="width: 230px; height: 270px">
+                            <img src="{{ $recommend->logo }}" height="400px">
+                        </a>
                         <div class="content">
-                            <div class="ui four column grid">
+                            <div class="ui five column grid">
                                 @foreach($recommend->latestMenu as $product)
                                     <a class="column" href="{{ url('product/'.$product->id) }}">
                                         <div class="ui fluid card">
-                                            <div class="image" style="width: 175px; height: 175px">
-                                                <img src="{{ url('menus/showThumbnail/'.$product->id) }}">
+                                            <div class="image" style="width: 149px; height: 120px">
+                                                <img src="{{ url("$product->thumbnail") }}">
                                             </div>
                                             <div class="content">
                                                 <div class="header">{{ $product->name }}</div>
                                                 <span>
-                                                    @if($product->discount)
-                                                        <del style="color: grey">Rp. {{ number_format($product->price, 0, ',', '.') }}</del>&nbsp;
-                                                        <b>Rp. {{ number_format($product->price - ($product->price * $product->discount), 0, ',', '.') }}</b>
+                                            @if($product->discount)
+                                                        <del style="color: grey" class="price">Rp. {{ number_format($product->price, 0, ',', '.') }}</del>&nbsp;
+                                                        <b class="price">Rp. {{ number_format($product->price - ($product->price * $product->discount), 0, ',', '.') }}</b>
                                                     @else
-                                                        <b>Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
+                                                        <b class="price">Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
                                                     @endif
-                                                </span>
+                                        </span>
                                             </div>
                                             <div class="extra content">
-                                                <div class="ui heart rating" data-rating="0" data-max-rating="1"></div> {{ $product->liked }}
+                                                <div class="ui mini heart rating" data-rating="0" data-max-rating="1"></div> {{ $product->liked }}
                                                 <span class="right floated">
-                                                    <div class="ui tiny star rating" data-rating="{{ floor($product->rating) }}"></div>
-                                                    ({{ $product->reviewed }})
-                                                </span>
+                                            <div class="ui mini star rating" data-rating="{{ floor($product->rating) }}"></div>
+                                            ({{ $product->reviewed }})
+                                        </span>
                                             </div>
                                         </div>
                                     </a>
@@ -59,6 +59,7 @@
     <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
     <script>
         $('div.image').imagefill();
+        $('a.image').imagefill();
         var hostname = window.location.hostname;
         var offset = {{ count($recommended) }};
         $('#shop-list')

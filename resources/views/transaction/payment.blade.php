@@ -170,7 +170,7 @@
 @endsection
 
 @section('javascripts')
-    <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
     <script src="{{ url('js/payment.js') }}"></script>
     <script>
         var url = "{{ url('') }}";

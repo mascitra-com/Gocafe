@@ -8,7 +8,7 @@
 <body style="padding:0px; margin:0px; background-color:#fff;font-family:'Open Sans',sans-serif,arial,helvetica,verdana">
 
 <!-- #region Jssor Slider Begin -->
-<script src="{{ asset('plugins/image-slider/js/jquery-1.11.3.min.js') }}" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
 <script src="{{ asset('plugins/image-slider/js/jssor.slider-25.0.7.min.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {

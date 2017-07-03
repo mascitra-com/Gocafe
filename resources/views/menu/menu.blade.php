@@ -127,7 +127,7 @@
 
 @section('javascripts')
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js"></script>
-    <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
     <script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
     <script type="text/javascript">
 	var token = $('meta[name="csrf-token"]').attr('content');

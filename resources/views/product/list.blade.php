@@ -78,7 +78,7 @@
                 @foreach($productList as $product)
                     <a class="card product" href="{{ url('product/'.$product->id) }}">
                         <div class="image">
-                            <img src="{{url("menus/showThumbnail/$product->id")}}">
+                            <img src="{{url($product->thumbnail)}}">
                         </div>
                         <div class="content">
                             <div class="header">
@@ -103,6 +103,6 @@
     </div>
 @endsection
 @section('javascripts')
-    <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
     <script src="{{ asset('js/product.js') }}"></script>
 @endsection

@@ -16,7 +16,7 @@
                 @foreach($shopList as $shop)
                     <a class="card product" href="{{ url('product/'.$shop->id) }}">
                         <div class="image">
-                            <img src="{{url("logo$shop->id")}}">
+                            <img src="{{url($shop->logo)}}">
                         </div>
                         <div class="content">
                             <div class="header">{{ $shop->name }}</div>

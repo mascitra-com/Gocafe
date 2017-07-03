@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Kulinerae | @yield('page_title')</title>
-    <link rel="stylesheet" href="{{URL::asset('plugins/fontawesome/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/semantic-ui/semantic.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/homepage.css') }}">
     @yield('styles')
 </head>
@@ -203,8 +203,8 @@
     </div>
 </div>
 @yield('modal')
-<script src="{{ asset('plugins/jquery/jquery-3.1.1.min.js') }}"></script>
-<script src="{{ asset('plugins/semantic-ui/semantic.min.js') }}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
 <script>
     var hostname = window.location.hostname;
     $(document).ready(function() {

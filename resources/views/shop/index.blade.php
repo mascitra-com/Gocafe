@@ -20,7 +20,7 @@
     @include('shop._productslist')
 @endsection
 @section('javascripts')
-    <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
     <script src="{{ url('js/shop.js') }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
     <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>

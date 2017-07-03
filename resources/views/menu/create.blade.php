@@ -191,7 +191,7 @@
 @endsection
 
 @section('javascripts')
-    <script src="{{ url('plugins/jquery/jquery.number.min.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
     <script type="text/javascript" src="{{URL::asset('js/Category_Menu/category_menu.js')}}"></script>
 <script>
     $('input.currency').number(true, 0, ',', '.');
