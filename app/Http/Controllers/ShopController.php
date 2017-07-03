@@ -18,7 +18,7 @@ class ShopController extends Controller
      */
     public function recommended()
     {
-        $recommended = Cafe::limit(5)->get();
+        $recommended = Cafe::where('logo_path', '<>', 'null')->limit(5)->get();
         foreach ($recommended as $key => $recommend) {
             $latestMenu = Menu::where('cafe_id', $recommend->id)->limit(5)->get();
             foreach ($latestMenu as $keyMenu => $value) {
@@ -67,7 +67,18 @@ class ShopController extends Controller
 
     public function load($offset)
     {
-        $recommended = Cafe::offset($offset)->limit(3)->with('latestMenu')->get();
+        $recommended = Cafe::where('logo_path', '<>', 'null')
+            ->offset($offset)->limit(3)->with('latestMenu')->get();
+        foreach ($recommended as $key => $recommend) {
+            $latestMenu = Menu::where('cafe_id', $recommend->id)->limit(5)->get();
+            foreach ($latestMenu as $keyMenu => $value) {
+                $thumbnail = Menu::getThumbnail($value->id);
+                $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
+                $latestMenu[$keyMenu]->thumbnail = $thumbnail;
+            }
+            $recommended[$key]->latestMenu = $latestMenu;
+            $recommended[$key]->logo = str_replace('storage/logo/', 'img/cache/medium-logo/', Storage::url($recommend->logo_path));
+        }
         return response()->json(['recommended' => $recommended]);
     }
 

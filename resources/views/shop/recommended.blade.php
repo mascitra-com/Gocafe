@@ -25,20 +25,20 @@
                                             <div class="content">
                                                 <div class="header">{{ $product->name }}</div>
                                                 <span>
-                                            @if($product->discount)
-                                                        <del style="color: grey" class="price">Rp. {{ number_format($product->price, 0, ',', '.') }}</del>&nbsp;
-                                                        <b class="price">Rp. {{ number_format($product->price - ($product->price * $product->discount), 0, ',', '.') }}</b>
-                                                    @else
-                                                        <b class="price">Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
-                                                    @endif
-                                        </span>
+                                                @if($product->discount)
+                                                    <del style="color: grey" class="price">Rp. {{ number_format($product->price, 0, ',', '.') }}</del>&nbsp;
+                                                    <b class="price">Rp. {{ number_format($product->price - ($product->price * $product->discount), 0, ',', '.') }}</b>
+                                                @else
+                                                    <b class="price">Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
+                                                @endif
+                                                </span>
                                             </div>
                                             <div class="extra content">
                                                 <div class="ui mini heart rating" data-rating="0" data-max-rating="1"></div> {{ $product->liked }}
                                                 <span class="right floated">
-                                            <div class="ui mini star rating" data-rating="{{ floor($product->rating) }}"></div>
-                                            ({{ $product->reviewed }})
-                                        </span>
+                                                    <div class="ui mini star rating" data-rating="{{ floor($product->rating) }}"></div>
+                                                    ({{ $product->reviewed }})
+                                                </span>
                                             </div>
                                         </div>
                                     </a>
@@ -56,7 +56,9 @@
 @endsection
 @section('javascripts')
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
     <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
+    <script src="{{ asset('plugins/js/shop.js') }}"></script>
     <script>
         $('div.image').imagefill();
         $('a.image').imagefill();
@@ -78,23 +80,26 @@
                 dataType: 'json',
                 success: function (response) {
                     $.each(response.recommended, function (i, recommended) {
-                        var name = recommended.name;
                         var products = "";
-                        console.log(recommended);
-                        $.each(recommended.latest_menu, function (i, menu) {
-                            console.log(menu.id);
-                            products += "<div class='column'><div class='ui fluid card'><a class='image'><img src='" + getThumbnail(menu.id) + "'></a></div></div>";
+                        $.each(recommended.latestMenu, function (i, menu) {
+                            var image = "<a class='image' style='width: 149px; height: 120px'><img src='"+ menu.thumbnail +"'></a>";
+                            var price = 0;
+                            if(menu.discount) {
+                                price = "<del style='color: grey' class='price'>Rp. "+ $.number(menu.price) +"</del>&nbsp;<b class='price'>Rp. "+ $.number(menu.price - (menu.price * menu.discount)) +"</b>";
+                            } else {
+                                price = "<b class='price'>Rp. "+ $.number(menu.price) +"</b>";
+                            }
+                            var content = "<div class='content'><div class='header'>" + menu.name + "</div><span>" + price + "</span></div>";
+                            products += "<a class='column' href='https://'"+ hostname + "/product/"+menu.id+"><div class='ui fluid card'>" + image + content +"</div></a>";
                         });
-                        var markup = "<div class='ui card stack fluid'><div class='image'><img src='https://dummyimage.com/250x250/8C4728/fff.jpg&text=" + name + "'></div><div class='content'><div class='ui four column grid'>" + products + "</div></div></div>";
+                        var markup = "<div class='ui card stack fluid'><div class='image' style='width: 230px; height: 270px'><img src='"+ recommended.logo +"'></div><div class='content'><div class='ui five column grid'>" + products + "</div></div></div>";
                         $('#list').append(markup);
                         offset += {{ count($recommended) }};
                     });
+                    $('div.image').imagefill();
+                    $('a.image').imagefill();
                 }
             });
-        }
-
-        function getThumbnail(idMenu) {
-            return "https://" + hostname + "/menus/showThumbnail/" + idMenu;
         }
     </script>
 @endsection
