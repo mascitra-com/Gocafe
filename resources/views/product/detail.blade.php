@@ -37,7 +37,16 @@
                     <div class="row">
                         <div class="six wide column">
                             <div class="row">
-                                <img src="{{ url($product->thumbnail) }}" id="big-thumbnail" class="ui fluid image">
+                                <div class="column">
+                                    <div class="ui fluid image" style="height: 285px; width: 285px">
+                                        @if($product->halal)
+                                            <div class="ui green left corner label">
+                                                <img src="{{ asset('images/halal-sign.svg') }}">
+                                            </div>
+                                        @endif
+                                            <img src="{{ url($product->thumbnail) }}" id="big-thumbnail" class="ui image">
+                                    </div>
+                                </div>
                             </div>
                             <div class="ui equal width grid row" style="margin-top: .25em">
                                 @php $images = explode(':', $product->images_name); @endphp

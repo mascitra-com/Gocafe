@@ -10,7 +10,7 @@
         </div>
         @foreach($recommended as $recommend)
             <div class="ui card stack fluid">
-                <a href="{{ url('shop/'.$recommend->slug) }}" class="image" style="width: 230px; height: 270px">
+                <a href="{{ url('shop/'.$recommend->slug) }}" class="image" style="width: 230px; height: 300px">
                     <img class="logo-pick" data-src="{{ $recommend->logo }}" height="400px">
                 </a>
                 <div class="content">
@@ -18,7 +18,12 @@
                         @foreach($recommend->latestMenu as $product)
                             <a class="column" href="{{ url('product/'.$product->id) }}">
                                 <div class="ui fluid card">
-                                    <div class="image" style="width: 149px; height: 120px">
+                                    <div class="image" style="width: 149px; height: 149px">
+                                        @if($product->halal)
+                                            <div class="ui green left corner label">
+                                                <img src="{{ asset('images/halal-sign.svg') }}" class="halal-sign">
+                                            </div>
+                                        @endif
                                         <img class="img-pick" data-src="{{ url("$product->thumbnail") }}">
                                     </div>
                                     <div class="content">

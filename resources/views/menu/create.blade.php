@@ -56,6 +56,25 @@
 							</div>
 						</div>
 					</div>
+					<div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="price">Status Halal</label>
+                                <div class="radio" style="margin-left: .5em">
+                                    <label>
+                                        <input type="radio" name="halal" id="optionsRadios1" value="1" {{ ($menu->halal) ? 'checked': '' }}>
+                                        Halal
+                                    </label>
+                                </div>
+                                <div class="radio" style="margin-left: .5em">
+                                    <label>
+                                        <input type="radio" name="halal" id="optionsRadios2" value="0" {{ (!$menu->halal) ? 'checked': '' }}>
+                                        Non-Halal
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 					<div class="form-group break-20">
 						<label for="images">Unggah foto</label>
 						<div class="row">

@@ -62,6 +62,7 @@ class MenusController extends Controller
             'name' => 'min:3|max:255|required',
             'description' => 'required',
             'price' => 'required',
+            'halal' => 'required',
         ]);
         $requestData['cost'] = str_replace('.', '', $request->cost);
         $requestData['price'] = str_replace('.', '', $request->price);

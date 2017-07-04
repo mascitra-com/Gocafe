@@ -78,6 +78,11 @@
                 @foreach($productList as $product)
                     <a class="card product" href="{{ url('product/'.$product->id) }}">
                         <div class="image">
+                            @if($product->halal)
+                                <div class="ui green left corner label">
+                                    <img src="{{ asset('images/halal-sign.svg') }}">
+                                </div>
+                            @endif
                             <img src="{{url($product->thumbnail)}}">
                         </div>
                         <div class="content">
@@ -101,6 +106,13 @@
             <div class="ui divider"></div>
         </div>
     </div>
+@endsection
+@section('styles')
+    <style>
+        .ui.label>img {
+            margin-left: -1.5em !important;
+        }
+    </style>
 @endsection
 @section('javascripts')
     <script src="//cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>

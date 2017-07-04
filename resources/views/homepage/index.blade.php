@@ -52,8 +52,11 @@
         div#column-side-ads {
              padding-left: 5px;
         }
-        .logo-pick, .img-hit, .img-pick{
+        .img-hit, .img-pick{
             /* optional way, set loading as background */
+            background: url('/images/loading.gif') no-repeat 50% 50%;
+        }
+        .logo-pick {
             background: url('/images/loading.gif') no-repeat 50% 50%;
         }
     </style>

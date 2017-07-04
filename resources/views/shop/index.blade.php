@@ -19,6 +19,13 @@
     {{--Product List--}}
     @include('shop._productslist')
 @endsection
+@section('styles')
+    <style>
+        .ui.label>img {
+            top: 2px !important;
+        }
+    </style>
+@endsection
 @section('javascripts')
     <script src="//cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
     <script src="{{ url('js/shop.js') }}"></script>
