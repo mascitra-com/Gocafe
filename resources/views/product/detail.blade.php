@@ -32,7 +32,7 @@
                     Google Plus
                 </button>
             </div>
-            <div class="ui segment">
+            <div class="ui segment" style="margin-bottom: 1em">
                 <div class="ui grid">
                     <div class="row">
                         <div class="six wide column">
@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="column">
                             <h4>&nbsp;&nbsp;<i class="fa fa-list"></i> Penilaian Produk</h4>
-                            <form id="form-review" action="{{ url('/login') }}" class="ui form" method="GET">
+                            <form id="form-review" action="{{ url('review') }}" class="ui form" method="POST" id="form-review">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="item_id" value="{{ $product->id }}" id="item_id">
                                 <table class="table table-responsive" width="75%" style="margin-left: .5em">
@@ -68,7 +68,7 @@
                                         <td width="20%"><label>Penilaian Anda</label></td>
                                         <td>
                                             <div class="field">
-                                                <div class="ui large star rating"></div>
+                                                <div class="ui large star rating" id="field-rating"></div>
                                             </div>
                                         </td>
                                     </tr>
@@ -93,7 +93,7 @@
                                         <tr>
                                             <td width='15%'><img src='/images/blank-avatar.png' alt='' class='ui tiny circular image'></td>
                                             <td>
-                                                <p><div class='ui rating' data-rating='{{ $review->rating }}'></div></p>
+                                                <p><div class='ui star rating disable' data-rating='{{ $review->rating }}'></div></p>
                                                 <p>{{ $review->review }}</p>
                                                 <p><span class='label label-default'>{{ date('d-m-Y', strtotime($review->created_at)) }}</span></p>
                                             </td>
@@ -144,13 +144,21 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
     <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
     <script>
+        $("#form-review").submit( function(eventObj) {
+            $('<input />').attr('type', 'hidden')
+                .attr('name', "rating")
+                .attr('value', $("#field-rating").rating("get rating"))
+                .appendTo('#form-review');
+            return true;
+        });
         function changeBigThumbnail(src) {
             $('#big-thumbnail').attr('src', src);
         }
         $(document).ready(function() {
-            $('.ui.rating').rating({
+            $('#field-rating').rating({
                 maxRating: 5
-            }).rating();
+            });
+            $('.ui.star.rating.disable').rating('disable');
         });
         $('.img-hit').lazy({
             delay: 500,

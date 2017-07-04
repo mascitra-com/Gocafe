@@ -28,7 +28,7 @@ class ReviewController extends Controller
         $menu->rating = $newRating;
         $menu->reviewed = (int) $menu->reviewed + 1;
         $menu->save();
-        return response()->json(['status' => 'success', 'review' => $request->all(), 'newRating' => $newRating]);
+        return back();
     }
 
     /**

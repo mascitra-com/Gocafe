@@ -16,7 +16,7 @@ class Menu extends Model
 
 	protected $dates = ['deleted_at'];
 
-    protected $fillable = ['id', 'cafe_id', 'category_id', 'name', 'description', 'cost', 'price','images','status','created_by', 'updated_by', 'deleted_by', 'discount'];
+    protected $fillable = ['id', 'cafe_id', 'category_id', 'name', 'description', 'cost', 'price','images','status','created_by', 'updated_by', 'deleted_by', 'discount', 'halal'];
 
     protected $hidden = ['cafe_id', 'category_id', 'created_by', 'updated_by', 'deleted_by'];
 

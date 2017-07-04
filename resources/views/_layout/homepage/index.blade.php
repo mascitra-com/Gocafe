@@ -34,7 +34,7 @@
     </div>
     <div class="right menu">
         @if(Auth::check())
-            <a href="{{ url('dasbhboard') }}" class="item">Dashboard</a>
+            <a href="{{ url('dashboard') }}" class="item">Dashboard</a>
             <span style="margin-right: 6.5em"></a>
             @else
             <a href="{{ url('register') }}" class="item">Daftar</a>

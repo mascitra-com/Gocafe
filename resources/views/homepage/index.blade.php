@@ -51,12 +51,8 @@
         }
         div#column-side-ads {
              padding-left: 5px;
-         }
-        .img-pick{
-            /* optional way, set loading as background */
-            background: url('/images/loading.gif') no-repeat 50% 25%;
         }
-        .logo-pick, .img-hit {
+        .logo-pick, .img-hit, .img-pick{
             /* optional way, set loading as background */
             background: url('/images/loading.gif') no-repeat 50% 50%;
         }
@@ -69,24 +65,19 @@
     <script>
         $(document).ready(function() {
             $('.img-ads').lazy({
-                placeholder: "images/loading.gif",
                 delay: 250
             });
             $('.logo-pick').lazy({
-                placeholder: "/images/loading.gif",
-                delay: 500
+                delay: 250
             });
             $('.img-pick').lazy({
-                placeholder: "/images/loading.gif",
-                delay: 500
+                delay: 250
             });
             $('.img-hit').lazy({
-                placeholder: "/images/loading.gif",
-                delay: 750
+                delay: 250
             });
             $('img').lazy({
-                placeholder: "/images/loading.gif",
-                delay: 1000,
+                delay: 250,
                 afterLoad: function() {
                     $('div.image').imagefill();
                     $('a.image').imagefill();
