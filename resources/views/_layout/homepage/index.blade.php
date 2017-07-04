@@ -33,9 +33,14 @@
         <div class="results"></div>
     </div>
     <div class="right menu">
-        <a href="{{ url('register') }}" class="item">Daftar</a>
-        <a href="{{ url('login') }}" class="item">Masuk</a>
-        <span style="margin-right: 7.5em"></a>
+        @if(Auth::check())
+            <a href="{{ url('dasbhboard') }}" class="item">Dashboard</a>
+            <span style="margin-right: 6.5em"></a>
+            @else
+            <a href="{{ url('register') }}" class="item">Daftar</a>
+            <a href="{{ url('login') }}" class="item">Masuk</a>
+            <span style="margin-right: 7.5em"></a>
+        @endif
     </div>
 </div>
 

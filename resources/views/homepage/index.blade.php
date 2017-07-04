@@ -45,6 +45,22 @@
 @endsection
 @section('styles')
     <link rel="stylesheet" href="{{ asset('plugins/image-slider/ads.css') }}">
+    <style>
+        div#column-main-ads {
+            padding-right: 5px;
+        }
+        div#column-side-ads {
+             padding-left: 5px;
+         }
+        .img-pick{
+            /* optional way, set loading as background */
+            background: url('/images/loading.gif') no-repeat 50% 25%;
+        }
+        .logo-pick, .img-hit {
+            /* optional way, set loading as background */
+            background: url('/images/loading.gif') no-repeat 50% 50%;
+        }
+    </style>
 @endsection
 @section('javascripts')
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js"></script>
@@ -53,19 +69,24 @@
     <script>
         $(document).ready(function() {
             $('.img-ads').lazy({
+                placeholder: "images/loading.gif",
                 delay: 250
             });
+            $('.logo-pick').lazy({
+                placeholder: "/images/loading.gif",
+                delay: 500
+            });
             $('.img-pick').lazy({
-                delay: 500,
-                enableThrottle: true
+                placeholder: "/images/loading.gif",
+                delay: 500
             });
             $('.img-hit').lazy({
-                delay: 750,
-                enableThrottle: true
+                placeholder: "/images/loading.gif",
+                delay: 750
             });
             $('img').lazy({
+                placeholder: "/images/loading.gif",
                 delay: 1000,
-                enableThrottle: true,
                 afterLoad: function() {
                     $('div.image').imagefill();
                     $('a.image').imagefill();
