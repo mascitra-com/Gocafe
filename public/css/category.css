@@ -1,0 +1,63 @@
+#menkat,
+#menkat > #menu,
+#menkat .content {
+    height: 100%;
+}
+
+#menkat{
+    position: relative;
+}
+
+#menkat > #menu{
+    padding: 0;
+    padding-top: 10px;
+    float: left;
+    width: 100%;
+    background-color: rgba(0,0,0,.5);
+    overflow-y: auto;
+}
+
+#menkat > #menu > li{
+    display: block;
+    list-style: none;
+    width: 100%;
+    height: 30px;
+    padding: 10px 30px;
+    padding-left: 20px;
+    cursor: pointer;
+    font-family: Arial,Verdana;
+}
+
+#menkat > #menu > li,
+#menkat > #menu > li *{
+    color: #FFF;
+    font-size: 10pt;
+}
+
+#menkat > #menu > li:hover,
+#menkat > #menu > li:hover * {
+    color: #CCC;
+}
+
+#menkat > #menu > li > .icon{
+    margin-right: 20px;
+}
+
+#menkat .content{
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+#menkat .content-value {
+    position: absolute;
+    display: none;
+    width: 800px;
+    min-height: 100%;
+    padding: 15px 30px;
+    background-color: yellow;
+    z-index: 99999;
+}
+
+#menkat .content-show{
+    display: inline;
+}

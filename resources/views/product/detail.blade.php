@@ -40,7 +40,7 @@
                                 <div class="column">
                                     <div class="ui fluid image" style="height: 285px; width: 285px">
                                         @if($product->halal)
-                                            <div class="ui green left corner label">
+                                            <div class="ui transparent left corner label">
                                                 <img src="{{ asset('images/halal-sign.svg') }}">
                                             </div>
                                         @endif
@@ -146,6 +146,18 @@
         </div>
     </div>
     @include('homepage._tophit')
+@endsection
+
+@section('styles')
+    <style>
+        .ui.label>img {
+            top: 10px !important;
+            left: 10px !important;
+        }
+        .ui.transparent.left.corner.label {
+            border-color: transparent;
+        }
+    </style>
 @endsection
 
 @section('javascripts')

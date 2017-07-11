@@ -20,7 +20,7 @@
                                 <div class="ui fluid card">
                                     <div class="image" style="width: 149px; height: 149px">
                                         @if($product->halal)
-                                            <div class="ui green left corner label">
+                                            <div class="ui transparent left corner label">
                                                 <img src="{{ asset('images/halal-sign.svg') }}" class="halal-sign">
                                             </div>
                                         @endif

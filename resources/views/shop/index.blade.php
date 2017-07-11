@@ -22,7 +22,11 @@
 @section('styles')
     <style>
         .ui.label>img {
-            top: 2px !important;
+            top: 5px !important;
+            left: 5px !important;
+        }
+        .ui.transparent.left.corner.label {
+            border-color: transparent;
         }
     </style>
 @endsection

@@ -126,3 +126,42 @@ a.category.item {
     margin-left: 9em;
     margin-top: .25em;
 }
+
+.section {
+    background-size: 100% auto;
+    background: no-repeat center;
+    display: flex;
+    width: 100%;
+    height: 620px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#first {
+    background: url("../images/about-us/first.jpg");
+    margin-top: -2em;
+}
+
+#second {
+    background: url("../images/about-us/second.jpg");
+}
+
+#third {
+    background: url("../images/about-us/third.jpg");
+}
+
+#fourth {
+    background: url("../images/about-us/fourth.jpg");
+}
+
+#fifth {
+    background: url("../images/about-us/join-us.jpg");
+    padding-right: 15em;
+}
+
+#fifth span {
+    font-family: "Montserrat", sans-sarif;
+    font-size: 20pt;
+    color: white;
+    line-height: normal;
+}

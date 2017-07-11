@@ -1,7 +1,7 @@
 <a class="card product" href="{{ url('product/'.$product->id) }}">
     <div class="image" style="width: 208px; height: 200px">
         @if($product->halal)
-            <div class="ui green left corner label">
+            <div class="ui transparent left corner label">
                 <img src="{{ asset('images/halal-sign.svg') }}">
             </div>
         @endif

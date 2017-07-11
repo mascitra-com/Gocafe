@@ -2,7 +2,7 @@
 @section('page_title', 'Homepage')
 @section('content')
     {{--Promo & Visitor Favorite--}}
-    @include('homepage._promotion')
+    @include('homepage._top')
     {{--Recommended Cafe / Restaurant--}}
     @include('homepage._recommended')
     {{--Top Picks with Their Products--}}
@@ -13,16 +13,19 @@
     {{--@include('homepage._hotlist')--}}
     {{--Slogan--}}
     <div class="ui vertical quote segment container" style="padding: 5em 0em">
-        <div class="ui center aligned grid container">
-            <div class="column">
-                <h3 class="ui header">
+        <div class="ui grid container">
+            <div class="ten wide column" style="padding-left: 5em; padding-top: 4em">
+                <h2 class="ui header">
                     Mau Kafe / Rumah Makan Kamu di Kenal Banyak Orang? Daftarkan Segera di Kulinerae
-                </h3>
+                </h2>
                 <form class="ui form" method="get" action="{{ url('register') }}">
                     <button type="submit" value="Subscribe" class="ui huge brown submit button">
                         Daftar
                     </button>
                 </form>
+            </div>
+            <div class="six wide column">
+                <img class="ui image" src="{{ asset('images/join.jpg') }}" alt="Join" style="height: 200px; width: auto">
             </div>
         </div>
     </div>
@@ -45,12 +48,20 @@
 @endsection
 @section('styles')
     <link rel="stylesheet" href="{{ asset('plugins/image-slider/ads.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/category.css') }}">
     <style>
         div#column-main-ads {
             padding-right: 5px;
         }
         div#column-side-ads {
              padding-left: 5px;
+        }
+        .ui.label>img {
+            top: 5px !important;
+            left: 5px !important;
+        }
+        .ui.transparent.left.corner.label {
+            border-color: transparent;
         }
         .img-hit, .img-pick{
             /* optional way, set loading as background */
@@ -65,6 +76,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
     <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
+    <script src="{{ asset('js/category.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('.img-ads').lazy({
