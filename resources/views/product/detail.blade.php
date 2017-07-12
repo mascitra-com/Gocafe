@@ -7,7 +7,7 @@
         <i class="right angle icon divider"></i>
         <a class="section" href="{{ url('shop/'.$shop->slug) }}">{{ $shop->name }}</a>
         <i class="right angle icon divider"></i>
-        <div class="active section">{{ $product->name }}</div>
+        <span class="active section">{{ $product->name }}</span>
         </div>
     </div>
     <div class="ui grid container">

@@ -6,7 +6,7 @@
         <div class="twelve wide column">
             <a class="section" href="{{ url('/') }}">Home</a>
             <i class="right angle icon divider"></i>
-            <div class="active section">{{ $shop->name }}</div>
+            <span class="active section">{{ $shop->name }}</span>
         </div>
     </div>
     <div class="ui vertical segment container">

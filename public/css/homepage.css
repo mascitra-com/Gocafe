@@ -130,7 +130,7 @@ a.category.item {
     margin-top: .25em;
 }
 
-.section {
+div.section {
     background-size: 100% auto;
     background: no-repeat center;
     display: flex;
