@@ -60,7 +60,7 @@ class DiscountController extends Controller
         $request = $this->customize_request_data($request);
         $request->merge(array(
             'id' => idWithPrefix(8),
-            'created_by' => Auth::user()->id
+            'created_by' => Auth::id()
         ));
         Discount::create($request->all());
         return redirect('discount')->with('status', 'Discount Added!');

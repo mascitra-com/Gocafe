@@ -40,7 +40,7 @@ class InformationController extends Controller
     public function store(Request $request)
     {
         $info = new Info($request->all());
-        $info->created_by = Auth::user()->id;
+        $info->created_by = Auth::id();
         $info->save();
     }
 

@@ -4,7 +4,7 @@
         <table class="ui celled fixed table">
             <tbody>
             <tr>
-                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/aneka-nasi.png') }}">Aneka Nasi</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/nasi.png') }}">Aneka Nasi</a></td>
                 <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/aneka-ayam.png') }}">Aneka Ayam</a></td>
                 <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/aneka-bebek.png') }}">Aneka Bebek</a></td>
             </tr>
@@ -54,7 +54,7 @@
                 <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/italian.png') }}">Italian Food</a></td>
             </tr>
             <tr>
-                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/western.png') }}">Western Food</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/western-food.png') }}">Western Food</a></td>
                 <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/oleh-oleh.png') }}">Oleh-oleh</a></td>
                 <td class="selectable"><a href="#"></a></td>
             </tr>

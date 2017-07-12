@@ -90,7 +90,7 @@ class PackagesController extends Controller
         $package_id = idWithPrefix(9);
         $request['id'] = $package_id;
         $request['cafe_id'] = Cafe::getCafeIdByUserIdNowLoggedIn();
-        $request['created_by'] = Auth::user()->id;
+        $request['created_by'] = Auth::id();
         Package::create($request->except(['menus_id']));
         //Input current menus with inserted package's id
         $package = Package::find($package_id);

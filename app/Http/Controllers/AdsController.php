@@ -57,7 +57,7 @@ class AdsController extends Controller
                 );
                 $request->merge($input);
                 $ads = new Ads($request->except('file'));
-                $ads->created_by = Auth::user()->id;
+                $ads->created_by = Auth::id();
                 $ads->save();
                 return redirect('ads')->with('status', 'Iklan baru telah di tambahkan');
             } else {

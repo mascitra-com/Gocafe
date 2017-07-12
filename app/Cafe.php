@@ -21,7 +21,7 @@ class Cafe extends Model
     public static function getCafeIdByUserIdNowLoggedIn()
     {
         $user = new User();
-        if($user->get_role(Auth::user()->id) == 'owner'){
+        if($user->get_role(Auth::id()) == 'owner'){
             if($cafe = DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first()){
                 return $cafe->id;
             }

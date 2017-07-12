@@ -28,7 +28,7 @@ class ReviewController extends Controller
     {
         // Save Rating & Review
         $review = new Review($request->all());
-        $review->created_by = Auth::user()->id;
+        $review->created_by = Auth::id();
         $review->save();
         // Get Average Rating
         $newRating = Review::where('item_id', $request->item_id)->avg('rating');

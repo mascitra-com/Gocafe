@@ -31,12 +31,12 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
-        $role = $user->get_role(Auth::user()->id);
+        $role = $user->get_role(Auth::id());
 
         if ($role === 'owner') {
-            $profile = User::find(Auth::user()->id)->owner;
+            $profile = User::find(Auth::id())->owner;
             if($profile) {
-                $user = User::find(Auth::user()->id);
+                $user = User::find(Auth::id());
                 $avatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($user->avatar_name));
             }
             return view('owner.owner_profile', compact('profile', 'avatar'));
