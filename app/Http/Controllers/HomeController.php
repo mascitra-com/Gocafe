@@ -51,6 +51,7 @@ class HomeController extends Controller
             }
         }
         $categories = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get()->toArray();
+        $location = DB::table('indonesia_provinces')->select(DB::raw('distinct(name)'))->get()->toArray();
         $ads = Ads::where('page', '1')->get();
         $banner = array();
         foreach ($ads as $item) {
@@ -58,7 +59,7 @@ class HomeController extends Controller
         }
         $topBanner = str_replace('banner/', 'img/cache/small-ads/', Ads::where('page', '2')->first()->banner);
         $bottomBanner = str_replace('banner/', 'img/cache/small-ads/', Ads::where('page', '3')->first()->banner);
-        return view('homepage.index', compact('cafes', 'favProducts', 'topHit', 'recommended', 'categories', 'banner', 'topBanner', 'bottomBanner'));
+        return view('homepage.index', compact('cafes', 'favProducts', 'topHit', 'recommended', 'categories', 'location', 'banner', 'topBanner', 'bottomBanner'));
     }
 
     /**

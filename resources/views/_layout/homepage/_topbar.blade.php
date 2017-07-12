@@ -47,7 +47,7 @@
                                 'burger', 'sandwich',  'chinese', 'coffee-shop',
                                 'fast-food', 'indian', 'italian', 'japanese',
                                 'korea', 'martabak', 'middle-eastern', 'minuman',
-                                'oleh-oleh', 'pizza', 'pasta', 'roti', 'sate', 'seafood',
+                                'nusantara', 'pizza', 'pasta', 'roti', 'sate', 'seafood',
                                 'snack', 'jajanan', 'soto', 'soup', 'steak', 'sweet-&-dessert',
                                 'thailand', 'western', 'oleh-oleh');
         @endphp

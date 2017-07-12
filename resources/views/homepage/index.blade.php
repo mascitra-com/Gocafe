@@ -11,6 +11,8 @@
     @include('homepage._tophit')
     {{--Category--}}
     @include('homepage._category')
+    {{--Location--}}
+    @include('homepage._location')
     {{--Hot List--}}
     {{--@include('homepage._hotlist')--}}
     {{--Slogan--}}

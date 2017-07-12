@@ -62,13 +62,13 @@
                                 <label for="price">Status Halal</label>
                                 <div class="radio" style="margin-left: .5em">
                                     <label>
-                                        <input type="radio" name="halal" id="optionsRadios1" value="1" {{ ($menu->halal) ? 'checked': '' }}>
+                                        <input type="radio" name="halal" id="optionsRadios1" value="1" {{ (isset($menu) && $menu->halal) ? 'checked': '' }}>
                                         Halal
                                     </label>
                                 </div>
                                 <div class="radio" style="margin-left: .5em">
                                     <label>
-                                        <input type="radio" name="halal" id="optionsRadios2" value="0" {{ (!$menu->halal) ? 'checked': '' }}>
+                                        <input type="radio" name="halal" id="optionsRadios2" value="0" {{ (isset($menu) && !$menu->halal) ? 'checked': '' }}>
                                         Non-Halal
                                     </label>
                                 </div>

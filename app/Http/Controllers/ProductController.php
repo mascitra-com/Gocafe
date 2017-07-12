@@ -66,6 +66,7 @@ class ProductController extends Controller
         }
         $list->where('menus.deleted_at', NULL);
         $list->join('cafes', 'cafes.id', '=', 'menus.cafe_id');
+        $list->join('categories_menus', 'categories_menus.id', '=', 'menus.category_id');
         $list->join('cafe_branches', 'cafes.id', '=', 'cafe_branches.cafe_id');
         $list->join('indonesia_cities', 'cafe_branches.city_id', '=', 'indonesia_cities.id');
         $list->join('indonesia_provinces', 'indonesia_cities.province_id', '=', 'indonesia_provinces.id');

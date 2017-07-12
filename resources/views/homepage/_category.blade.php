@@ -4,58 +4,58 @@
         <table class="ui celled fixed table">
             <tbody>
             <tr>
-                <td class="selectable"><a href="#">Aneka Nasi</a></td>
-                <td class="selectable"><a href="#">Aneka Ayam</a></td>
-                <td class="selectable"><a href="#">Aneka Bebek</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/aneka-nasi.png') }}">Aneka Nasi</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/aneka-ayam.png') }}">Aneka Ayam</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/aneka-bebek.png') }}">Aneka Bebek</a></td>
             </tr>
             <tr>
-                <td class="selectable"><a href="#">Soto</a></td>
-                <td class="selectable"><a href="#">Bakso</a></td>
-                <td class="selectable"><a href="#">Martabak</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/soto.png') }}">Soto</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/bakso.png') }}">Bakso</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/martabak.png') }}">Martabak</a></td>
             </tr>
             <tr>
-                <td class="selectable"><a href="#">Sop</a></td>
-                <td class="selectable"><a href="#">Sate</a></td>
-                <td class="selectable"><a href="#">Bakmie</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/sop.png') }}">Sop</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/sate.png') }}">Sate</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/bakmie.png') }}">Bakmie</a></td>
             </tr>
             <tr>
-                <td class="selectable"><a href="#">Aneka Khas Daerah</a></td>
-                <td class="selectable"><a href="#">Fast Food</a></td>
-                <td class="selectable"><a href="#">Pizza</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/nusantara.png') }}">Makanan Khas Nusantara</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/fast-food.png') }}">Fast Food</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/pizza.png') }}">Pizza</a></td>
             </tr>
             <tr>
-                <td class="selectable"><a href="#">Pasta</a></td>
-                <td class="selectable"><a href="#">Snack</a></td>
-                <td class="selectable"><a href="#">Jajan</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/pasta.png') }}">Pasta</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/snack.png') }}">Snack</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/jajan.png') }}">Jajan</a></td>
             </tr>
             <tr>
-                <td class="selectable"><a href="#">Minuman</a></td>
-                <td class="selectable"><a href="#">Sweets & Desserts</a></td>
-                <td class="selectable"><a href="#">Roti</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/minuman.png') }}">Minuman</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/sweet-dessert.png') }}">Sweets & Desserts</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/roti.png') }}">Roti</a></td>
             </tr>
             <tr>
-                <td class="selectable"><a href="#">Seafood</a></td>
-                <td class="selectable"><a href="#">Burger</a></td>
-                <td class="selectable"><a href="#">Sandwich</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/seafood.png') }}">Seafood</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/burger.png') }}">Burger</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/sandwich.png') }}">Sandwich</a></td>
             </tr>
             <tr>
-                <td class="selectable"><a href="#">Steak</a></td>
-                <td class="selectable"><a href="#">Chinese Food</a></td>
-                <td class="selectable"><a href="#">Korea Food</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/steak.png') }}">Steak</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/chinese.png') }}">Chinese Food</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/korean.png') }}">Korean Food</a></td>
             </tr>
             <tr>
-                <td class="selectable"><a href="#">Indian Food</a></td>
-                <td class="selectable"><a href="#">Middle Eastern Food</a></td>
-                <td class="selectable"><a href="#">Thai Food</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/indian.png') }}">Indian Food</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/middle-eastern.png') }}">Middle Eastern Food</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/thailand.png') }}">Thai Food</a></td>
             </tr>
             <tr>
-                <td class="selectable"><a href="#">Coffee Shop</a></td>
-                <td class="selectable"><a href="#">Japanese Food</a></td>
-                <td class="selectable"><a href="#">Italian Food</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/coffee-shop.png') }}">Coffee Shop</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/japanese.png') }}">Japanese Food</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/italian.png') }}">Italian Food</a></td>
             </tr>
             <tr>
-                <td class="selectable"><a href="#">Western Food</a></td>
-                <td class="selectable"><a href="#">Oleh-oleh</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/western.png') }}">Western Food</a></td>
+                <td class="selectable"><a href="#"><img class="ui avatar image" src="{{ url('images/category-icon/oleh-oleh.png') }}">Oleh-oleh</a></td>
                 <td class="selectable"><a href="#"></a></td>
             </tr>
             </tbody>
