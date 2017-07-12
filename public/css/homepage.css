@@ -1,3 +1,6 @@
+* {
+    transition: background-color 0.5s ease, width 0.5s ease, color 0.5s ease;
+}
 .ui.selection.active.dropdown, .ui.selection.active.dropdown .menu {
     border-color: rgba(34,36,38,.15) !important;
     box-shadow: none !important;
@@ -34,7 +37,7 @@
      margin-bottom: 1vh;
 }
 div.pusher {
-    margin-top: 5em;
+    padding-top: 5em;
 }
 div#location {
     font-size: 10pt;
@@ -165,3 +168,51 @@ a.category.item {
     color: white;
     line-height: normal;
 }
+
+#category-menu {
+    display: block;
+    position: fixed;
+    top: 3em;
+    width: 100%;
+    height: auto;
+    padding: 25px;
+    padding-bottom: 50px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+    background-color: rgba(255, 255, 255, .8);
+    z-index: 99998;
+}
+
+#top-bar {
+    z-index: 99999;
+}
+
+a > .card.card-island {
+    padding: 50px 20px !important;
+    text-align: center;
+    background-size: 100% auto;
+    background-position: center;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+a:hover > .card.card-island {
+    background-color: black;
+    color: white;
+    transition: background-color 0.33s ease;
+}
+a > .card.card-category {
+    padding: 20px 10px !important;
+    text-align: center;
+    background-size: 100% auto;
+    background-position: center;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+a:hover > .card.card-category {
+    background-color: whitesmoke;
+    transition: background-color 0.33s ease;
+}
+

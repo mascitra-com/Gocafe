@@ -9,6 +9,8 @@
     @include('homepage._toppicks')
     {{--Top Hit--}}
     @include('homepage._tophit')
+    {{--Category--}}
+    @include('homepage._category')
     {{--Hot List--}}
     {{--@include('homepage._hotlist')--}}
     {{--Slogan--}}

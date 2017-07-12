@@ -11,39 +11,7 @@
     @yield('styles')
 </head>
 <body>
-
-<!-- Following Menu -->
-<div class="ui large top fixed hidden menu">
-    <a class="item" href="{{ url('/') }}" style="width: 125px">
-        <img src="{{ asset('images/logoname.png') }}" alt="Kulinerae" class="ui site-logo">
-    </a>
-    @include('_layout.homepage._categories')
-    <div class="ui item" style="width: 60%">
-        <form action="{{ url('search') }}" class="ui action input" method="GET" id="search">
-            <input type="text" name="query" placeholder="Cari Produk atau Cafe..." value="{{ empty($filter['query']) ? '' :  $filter['query']}}" id="query">
-            <div class="ui search selection dropdown" id="location" style="border-left: none">
-                <input type="hidden" name="city" value="{{ isset($city) ? $city->id : '' }}">
-                <i class="dropdown icon"></i>
-                <div class="text">{{ isset($city) ? $city->name : 'Semua Lokasi' }}</div>
-                <div class="menu" id="provinceList"></div>
-            </div>
-            <input type="hidden" name="province" value="{{ isset($province) ? $province->id : '' }}">
-            <button class="ui brown button" type="submit">Cari</button>
-        </form>
-        <div class="results"></div>
-    </div>
-    <div class="right menu">
-        @if(Auth::check())
-            <a href="{{ url('dashboard') }}" class="item">Dashboard</a>
-            <span style="margin-right: 6.5em"></a>
-            @else
-            <a href="{{ url('register') }}" class="item">Daftar</a>
-            <a href="{{ url('login') }}" class="item">Masuk</a>
-            <span style="margin-right: 7.5em"></a>
-        @endif
-    </div>
-</div>
-
+@include('_layout.homepage._topbar')
 <!-- Page Contents -->
 <div class="pusher">
     @yield('content')
@@ -211,6 +179,7 @@
 @yield('modal')
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+<script src="{{ asset('js/homepage.js') }}"></script>
 <script>
     var hostname = window.location.hostname;
     $(document).ready(function() {
