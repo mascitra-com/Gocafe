@@ -21,6 +21,15 @@ use Laravolt\Indonesia\Indonesia;
  */
 class StaffController extends Controller
 {
+
+    /**
+     * DashboardController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *

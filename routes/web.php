@@ -40,7 +40,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');
     Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
     Route::get('profile/avatar', [
-        'as' => 'getAvatar', 'uses' => 'ProfileController@showAvatar']); //get avatar's response
+        'as' => 'getAvatar', 'uses' => 'ProfileController@showAvatar']); //getavatar's response
     Route::post('profile/avatar/replace/{id}', 'ProfileController@updateAvatar');
     Route::put('profile/avatar/change/{id}', 'ProfileController@updateAvatarName');
     //--END PROFILE
@@ -67,7 +67,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('packages/getPackages', 'PackagesController@getPackages');
     Route::get('packages/getPackage/{packageId}', 'PackagesController@getPackage');
     Route::resource('packages', 'PackagesController');
-    Route::get('packages/package_image/{id}', 'PackagesController@showImage'); //get avatar's response
+    Route::get('packages/package_image/{id}', 'PackagesController@showImage'); //getavatar's response
     //--END CAFE'S PACKAGE
 
     //PROMO
@@ -149,5 +149,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('ads', 'AdsController');
     Route::get('adsBanner/{id}', 'AdsController@showBanner');
     //-END ADS
-
 });
+    Route::get('admin-login','AdminAuth\LoginController@showLoginForm');
+    Route::post('admin-login','AdminAuth\LoginController@login');
+    Route::post('admin-logout  ','AdminAuth\LoginController@logout');
+    Route::post('admin-password/email','AdminAuth\ForgotPasswordController@sendResetLinkEmail');
+    Route::post('admin-password/reset','AdminAuth\ResetPasswordController@reset');
+    Route::get('admin-password/reset','AdminAuth\ForgotPasswordController@showLinkRequestForm');
+    Route::get('admin-password/reset/{token}','AdminAuth\ResetPasswordController@showResetForm');
+    Route::post('admin-register','AdminAuth\RegisterController@register');
+    Route::get('admin-register','AdminAuth\RegisterController@showRegistrationForm');
+
+    Route::get('admin-dashboard', 'AdminDashboardController@index');

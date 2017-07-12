@@ -17,6 +17,14 @@ class CafeController extends Controller
 {
 
     /**
+     * DashboardController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display Cafe Profile by owner id now logged in.
      *
      * @return \Illuminate\Http\Response

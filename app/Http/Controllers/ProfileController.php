@@ -18,6 +18,14 @@ class ProfileController extends Controller
 {
 
     /**
+     * DashboardController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */

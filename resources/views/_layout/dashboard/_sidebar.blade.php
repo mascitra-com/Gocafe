@@ -5,8 +5,9 @@
         </div>
         <ul class="nav">
             <li class="nav-close"><a href="#"><i class="fa fa-fw fa-close"></i></a></li>
-            <li class="nav-active"><a href="#"><i class="fa fa-fw fa-home"></i><span
+            <li class="nav-active"><a href="{{ Auth::guard("web")->user() ? url('dashboard') : url('admin-dashboard') }}"><i class="fa fa-fw fa-home"></i><span
                             class="hidden-sm">Dashboard</span></a></li>
+            @if(Auth::guard("web")->user())
             <li class="nav-title">Information</li>
             <li><a href="{{ url('profile') }}"><i class="fa fa-fw fa-user"></i><span
                             class="hidden-sm">Owner Profile</span></a></li>
@@ -22,10 +23,12 @@
             <li><a href="{{ url('categories') }}"><i class="fa fa-fw fa-tag"></i><span class="hidden-sm">Category Management</span></a>
             <li class="nav-title">Promotion</li>
             <li><a href="{{ url('batch_discount') }}"><i class="fa fa-fw fa-tags"></i><span class="hidden-sm">Discount Management</span></a>
+            @else
             </li><li class="nav-title">Information</li>
             <li><a href="{{ url('info') }}"><i class="fa fa-fw fa-list"></i><span class="hidden-sm">Footer Content</span></a>
             <li><a href="{{ url('ads') }}"><i class="fa fa-fw fa-square"></i><span class="hidden-sm">Ads Content</span></a>
             </li>
+            @endif
         </ul>
     </div>
 </div>

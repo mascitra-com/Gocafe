@@ -11,6 +11,14 @@ class ReviewController extends Controller
 {
 
     /**
+     * DashboardController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request

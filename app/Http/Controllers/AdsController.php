@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Storage;
 
 class AdsController extends Controller
 {
+
+    /**
+     * DashboardController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin_user');
+    }
+
     /**
      * Display a listing of the resource.
      *
