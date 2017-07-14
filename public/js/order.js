@@ -10,7 +10,7 @@ function showMenus(idCategory) {
                 $.each(response.menus, function (i, menu) {
                     var id = menu.id;
                     var name = menu.name;
-                    markup += "<button class='rectangle product' onclick=\"getProductDetail(\'" + id + "\')\"><img src='"+ getThumbnail(id) + "' alt='Thumbnail'>" + name +"</button>";
+                    markup += "<button class='rectangle product' onclick=\"getProductDetail(\'" + id + "\')\"><img src='"+ menu.thumbnail + "' alt='Thumbnail'>" + name +"</button>";
                 });
                 $("#product").append(markup);
             }
@@ -18,12 +18,10 @@ function showMenus(idCategory) {
     });
 }
 
-function getThumbnail(idMenu) {
-    return "http://"+ hostname + "/menus/showThumbnail/" + idMenu;
-}
-
 function imageUrl(image) {
-    return "http://"+ hostname + "/menus/showImage/" + image ;
+    //str_replace('storage/product/', 'img/cache/small-product/', Storage::url($value));
+    var path = image.replace('product', 'img/cache/small-product');
+    return "https://"+ hostname + "/" +  path;
 }
 
 function getProductDetail(idMenu) {
@@ -37,11 +35,11 @@ function getProductDetail(idMenu) {
                 $('#discount').html("- Rp. " + $.number(menu.price * menu.discount, 0, ',', '.') + ',-');
                 $('#menu-desc').html(menu.description);
                 $('#btn-add').html('<button class="btn btn-primary" onclick="addMenuToCheck(\'' + menu.id +'\')" onmouseup=\"alert(\'Menu/Paket Sudah di Tambahkan, Silahkan Lanjutkan Pesanan Anda.\')\"><i class="fa fa-plus"></i> Pesan</button>');
-                $('#big-thumbnail').attr('src', getThumbnail(menu.id));
+                $('#big-thumbnail').attr('src', menu.thumbnail);
                 $('#item_id').val(menu.id);
                 $('#total-rating').empty().append("<input value='" + menu.rating + "' class='rating-avg' data-size='xs' data-show-clear='false' data-show-caption='false' readonly>");
                 $('.rating-avg').rating({displayOnly: true, step: 0.5});
-                var images = menu.images_name.split(':').filter(n => n);
+                var images = menu.images.split(':').filter(n => n);
                 var thumbnails = '';
                 $('#thumbnails').find('div').remove();
                 var k = 1;

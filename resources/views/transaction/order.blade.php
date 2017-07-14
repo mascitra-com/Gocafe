@@ -75,7 +75,7 @@
                 <div class="list" id="product">
                     @foreach($menus as $menu)
                         <button class="rectangle product" onclick="getProductDetail('{{ $menu->id }}')">
-                            <img src="{{ url("menus/showThumbnail/$menu->id")}}" alt="Thumbnail">{{ $menu->name }}
+                            <img src="{{ url($menu->thumbnail)}}" alt="Thumbnail">{{ $menu->name }}
                         </button>
                     @endforeach
                 </div>
@@ -108,12 +108,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="thumbnail">
-                                <img style="max-height: 185px" src="{{ url("menus/showThumbnail/$firstMenu->id")}}" alt="Thumbnail" id="big-thumbnail">
+                                <img style="max-height: 250px" src="{{ url("$firstMenu->thumbnail")}}" alt="Thumbnail" id="big-thumbnail">
                             </div>
                         </div>
-                        <div class="col-md-6 table-responsive detail-menu">
+                        <div class="col-md-4 table-responsive detail-menu">
                             <h4>Detail :</h4><br>
                             <table class="table">
                                 <tr>
@@ -144,7 +144,7 @@
                         @for($i = 0; $i < 4; $i++)
                             <div class="col-xs-6 col-md-3">
                                 <button class="thumbnail">
-                                    <img src="{{ url("menus/showThumbnail/")}}" alt="Thumbnail">
+                                    <img src="" alt="Thumbnail">
                                 </button>
                             </div>
                         @endfor

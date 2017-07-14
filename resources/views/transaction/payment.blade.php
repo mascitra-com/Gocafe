@@ -44,8 +44,9 @@
                                 @foreach($menus as $menu)
                                     <tr onclick="addMenuToCheck('{{ $menu->id }}')" id="tr-menu"
                                         class="tr-selection text-quintuple">
-                                        <td width="150px"><img src="{{url("menus/showThumbnail/$menu->id")}}"
-                                                               class="img img-responsive" style="width: 150px;" alt="">
+                                        <td width="150px">
+                                            <img src="{{url("$menu->thumbnail")}}"
+                                                               class="img img-responsive" alt="">
                                         </td>
                                         <td>
                                             {{ $menu->name }}
@@ -187,8 +188,8 @@
                 success: function (response) {
                     if(response.transactionId['id']) {
                         $.each(response.items, function (i, item) {
-                            addMenuToCheck(item.item_id);
-                            addPackageToCheck(item.item_id);
+                            addMenuToCheck(item.item_id, item.amount);
+                            addPackageToCheck(item.item_id, item.amount);
                         });
                         $('#form-payment').attr('action', url + '/payment/' + response.transactionId['id'])
                             .append('{{ method_field('PATCH') }}');

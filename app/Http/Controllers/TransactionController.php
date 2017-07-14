@@ -34,6 +34,11 @@ class TransactionController extends Controller
         // Get List of Category and All Menus from first Category
         $categories = CategoryMenu::all()->where('cafe_id', Staff::getCafeIdByStaffIdNowLoggedIn())->sortBy('name');
         $menus = Cafe::findOrFail(Staff::getCafeIdByStaffIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
+        foreach ($menus as $key => $value) {
+            $thumbnail = Menu::getThumbnail($value->id);
+            $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
+            $menus[$key]->thumbnail = $thumbnail;
+        }
         $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
         $table = $this->makeTableLayout($numberOfTables);
         return view('transaction.payment', compact('categories', 'menus', 'numberOfTables', 'table'));
@@ -49,7 +54,15 @@ class TransactionController extends Controller
         // Get List of Category and All Menus from first Category
         $categories = CategoryMenu::all()->where('cafe_id', Staff::getCafeIdByStaffIdNowLoggedIn())->sortBy('name');
         $menus = Cafe::findOrFail(Staff::getCafeIdByStaffIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
+        $thumbnail = Menu::getThumbnail($menus[0]->id);
+        $thumbnail = str_replace('storage/product/', 'img/cache/medium-product/', $thumbnail[0]);
+        $menus[0]->thumbnail = $thumbnail;
         $firstMenu = $menus[0];
+        foreach ($menus as $key => $value) {
+            $thumbnail = Menu::getThumbnail($value->id);
+            $thumbnail = str_replace('storage/product/', 'img/cache/tiny-product/', $thumbnail[0]);
+            $menus[$key]->thumbnail = $thumbnail;
+        }
         $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
         $packages = Package::where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn())->with('menus')->get();
         return view('transaction.order', compact('categories', 'menus', 'firstMenu', 'numberOfTables', 'reviews', 'packages'));

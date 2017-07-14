@@ -191,6 +191,9 @@ class MenusController extends Controller
     public function getMenu($idMenu)
     {
         $menu = Menu::where('id', $idMenu)->get();
+        $thumbnail = Menu::getThumbnail($menu[0]->id);
+        $thumbnail = str_replace('storage/product/', 'img/cache/large-product/', $thumbnail[0]);
+        $menu[0]->thumbnail = $thumbnail;
         return response()->json(['success' => true, 'menu' => $menu]);
     }
 
