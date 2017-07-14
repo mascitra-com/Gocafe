@@ -5,7 +5,7 @@
             <tbody>
             <tr>
             @for($i = 0; $i < count($location); $i++)
-                <td class="selectable"><a href="#">{{ ucwords(strtolower($location[$i]->name)) }}</a></td>
+                <td class="selectable"><a href="{{ url("/search?province=".$location[$i]->id) }}">{{ ucwords(strtolower($location[$i]->name)) }}</a></td>
                 @if(($i + 1) % 3 === 0)
                 </tr><tr>
                 @endif

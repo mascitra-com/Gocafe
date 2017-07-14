@@ -51,7 +51,7 @@ class HomeController extends Controller
             }
         }
         $categories = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get()->toArray();
-        $location = DB::table('indonesia_provinces')->select(DB::raw('distinct(name)'))->get()->toArray();
+        $location = DB::table('indonesia_provinces')->select('id', 'name')->get()->toArray();
         $ads = Ads::where('page', '1')->get();
         $banner = array();
         foreach ($ads as $item) {
