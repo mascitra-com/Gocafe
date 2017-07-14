@@ -62,7 +62,7 @@ h1 *, h2 *, h3 *, h4 *, h5 *, h6 *{
 	margin:0 auto;
 	margin-bottom: 20px;
 	padding: calc(var(--nav-top-padding) - 13px) var(--navside-left-padding);
-	background-color: #F18803;
+	background-color: #232B2D;
 	color: #FFF;
 	/*display: none;*/
 }

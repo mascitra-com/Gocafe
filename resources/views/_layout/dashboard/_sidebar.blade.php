@@ -1,7 +1,9 @@
 <div id="nav-side">
     <div id="nav-side-wrapper">
         <div id="nav-side-thumbnail" class="hidden-sm">
-            <h3><span class="text-quintuple">KULINER</span>AE!</h3>
+            <a href="{{ url('/') }}">
+                <img src="https://gocafe.dev/images/logoname.png" alt="Kulinerae" class="ui site-logo" height="35px">
+            </a>
         </div>
         <ul class="nav">
             <li class="nav-close"><a href="#"><i class="fa fa-fw fa-close"></i></a></li>
