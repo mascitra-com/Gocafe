@@ -10,7 +10,7 @@ function showMenus(idCategory) {
                 $.each(response.menus, function (i, menu) {
                     var id = menu.id;
                     var name = menu.name;
-                    markup += "<button class='rectangle product' onclick=\"getProductDetail(\'" + id + "\')\"><img src='"+ menu.thumbnail + "' alt='Thumbnail'>" + name +"</button>";
+                    markup += "<button class='rectangle product' onclick=\"addMenuToCheck(\'" + id + "\')\"><img src='"+ menu.thumbnail + "' alt='Thumbnail'>" + name +"</button>";
                 });
                 $("#product").append(markup);
             }
@@ -73,5 +73,6 @@ function getProductDetail(idMenu) {
 }
 
 function changeBigThumbnail(src) {
+    src = src.replace('small-product', 'large-product');
     $('#big-thumbnail').attr('src', src);
 }

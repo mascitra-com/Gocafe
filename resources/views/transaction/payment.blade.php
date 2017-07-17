@@ -2,7 +2,7 @@
 @section('page_title', 'Pembayaran')
 
 @section('navbar-right')
-    <div class="pull-right" style="margin-top: .5em">
+    <div class="pull-right">
         <button class="btn btn-primary"  data-toggle="modal" data-target="#table-availability">Ketersediaan Meja</button>
     </div>
 @endsection
@@ -44,12 +44,8 @@
                                 @foreach($menus as $menu)
                                     <tr onclick="addMenuToCheck('{{ $menu->id }}')" id="tr-menu"
                                         class="tr-selection text-quintuple">
-                                        <td width="150px">
-                                            <img src="{{url("$menu->thumbnail")}}"
-                                                               class="img img-responsive" alt="">
-                                        </td>
                                         <td>
-                                            {{ $menu->name }}
+                                            <h5>{{ $menu->name }}</h5>
                                         </td>
                                         <td class="price text-right">
                                             Rp. {{ number_format($menu->price, 0, ',', '.') }} <br>
@@ -81,7 +77,7 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="panel-body table-responsive table-full">
-                                    <table class="table text-quintuple" id="bill">
+                                    <table class="table table-condensed text-quintuple" id="bill">
                                         <thead>
                                         <tr>
                                             <th width="5%"></th>
@@ -95,29 +91,29 @@
                                     </table>
                                     <table class="table text-quintuple">
                                         <tr>
-                                            <td style="font-weight: bold; font-size: 13pt" colspan="2">Total Keseluruhan</td>
-                                            <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16pt">Rp. 0</label></td>
+                                            <td style="font-weight: bold; font-size: 11pt" colspan="2">Total Keseluruhan</td>
+                                            <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 12pt">Rp. 0</label></td>
                                         </tr>
                                         <tr>
-                                            <td style="font-weight: bold; font-size: 13pt" colspan="2">Total Diskon</td>
-                                            <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16pt">- Rp. 0</label></td>
+                                            <td style="font-weight: bold; font-size: 11pt" colspan="2">Total Diskon</td>
+                                            <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 12pt">- Rp. 0</label></td>
                                         </tr>
                                         <tr>
-                                            <td style="font-weight: bold; font-size: 13pt" colspan="2">Total Pembayaran</td>
-                                            <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 20pt">Rp. 0</label></td>
+                                            <td style="font-weight: bold; font-size: 11pt" colspan="2">Total Pembayaran</td>
+                                            <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 14pt">Rp. 0</label></td>
                                         </tr>
                                         <tr>
                                             <td style="font-weight: bold; font-size: 16px" colspan="2" rowspan="3">Jenis Pembayaran</td>
                                             <td><input type="radio" name="type" id="cash" value="1" checked></td>
-                                            <td><label for="type">Tunai</label></td>
+                                            <td><label for="cash">Tunai</label></td>
                                         </tr>
                                         <tr>
                                             <td style="padding-left: 8px;"><input type="radio" name="type" id="credit" value="-1"></td>
-                                            <td><label for="type">Kartu Kredit</label></td>
+                                            <td><label for="type"><label for="credit">Kartu Kredit</label></label></td>
                                         </tr>
                                         <tr>
                                             <td style="padding-left: 8px;"><input type="radio" name="type" id="debit" value="-2"></td>
-                                            <td><label for="type">Kartu Debit</label></td>
+                                            <td><label for="type"><label for="debit">Kartu Debit</label></label></td>
                                         </tr>
                                         <tr class="credit_card">
                                             <td colspan="2"><label for="credit_name">Nama pada Kartu</label></td>

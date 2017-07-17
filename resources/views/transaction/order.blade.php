@@ -4,46 +4,6 @@
 @section('navbar-right')
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                   aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-shopping-cart text-secondary"></i> <span class="text-secondary">Pesanan</span><span
-                            class="caret text-secondary" id="cart"></span></a>
-                <div class="dropdown-menu" style="width: 500px; margin: .5em .5em">
-                    <form action="{{ url('order') }}" method="POST" onsubmit="return validateForm()">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="table_number" value="">
-                        <table class="table text-quintuple" id="bill">
-                            <thead>
-                            <tr>
-                                <th width="5%"></th>
-                                <th width="37.5%">Nama</th>
-                                <th width="27.5%">Jumlah</th>
-                                <th width="25%">Total</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <table class="table text-quintuple">
-                            <tr>
-                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
-                                <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Diskon</td>
-                                <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">- Rp. 0</label></td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
-                                <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 16px">Rp. 0</label></td>
-                            </tr>
-                            <tr>
-                                <td colspan="4"><button class="btn btn-primary btn-block" type="submit"><b style="font-size: 16px">Pesan</b></button></td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-            </li>
             <li>
                 <div class="pull-right row" style="width: 225px; margin-top: .6em">
                     <span for="table_number" class="col-md-6" style="margin-top: .5em; color:#fff;"><b>Nomor Meja</b></span>
@@ -61,7 +21,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12" id="productList">
+        <div class="col-md-8" id="productList">
             <div class="row grid" style="margin-top: 2em;">
                 <h3>KATEGORI</h3>
                 <div class="list">
@@ -74,7 +34,7 @@
                 <h3>PRODUK</h3>
                 <div class="list" id="product">
                     @foreach($menus as $menu)
-                        <button class="rectangle product" onclick="getProductDetail('{{ $menu->id }}')">
+                        <button class="rectangle product" onclick="addMenuToCheck('{{ $menu->id }}')">
                             <img src="{{ url($menu->thumbnail)}}" alt="Thumbnail">{{ $menu->name }}
                         </button>
                     @endforeach
@@ -90,6 +50,41 @@
                     @endforeach
                 </div>
             </div>
+        </div>
+        <div class="col-md-4">
+            <form action="{{ url('order') }}" method="POST" onsubmit="return validateForm()">
+                {{ csrf_field() }}
+                <input type="hidden" name="table_number" value="">
+                <table class="table text-quintuple" id="bill">
+                    <thead>
+                    <tr>
+                        <th width="5%"></th>
+                        <th width="37.5%">Nama</th>
+                        <th width="27.5%">Jumlah</th>
+                        <th width="25%">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <table class="table text-quintuple">
+                    <tr>
+                        <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
+                        <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; font-size: 16px" colspan="2">Total Diskon</td>
+                        <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">- Rp. 0</label></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
+                        <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 16px">Rp. 0</label></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><button class="btn btn-primary btn-block" type="submit"><b style="font-size: 16px">Pesan</b></button></td>
+                    </tr>
+                </table>
+            </form>
         </div>
     </div>
 @endsection
@@ -234,11 +229,8 @@
                 dataType: 'json',
                 success: function (response) {
                     if(response.transactionId['id']) {
-                        var conf = confirm('Meja Ini Masih Terdapat Transaksi yg Belum Dibayarkan / Sudah Di Pesan! Anda');
-                        if (!conf) {
-                            $('#table_number').val('');
-                            $('input[name ="table_number"]').val('');
-                        }
+                        confirm('Meja Ini Masih Terdapat Transaksi yg Belum Dibayarkan / Sudah Di Pesan!');
+                        $("select#table_number").val("");
                     }
                 }
             });

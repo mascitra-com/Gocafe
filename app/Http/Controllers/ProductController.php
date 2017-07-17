@@ -20,6 +20,7 @@ class ProductController extends Controller
         $indonesia = new Indonesia();
         $filter['province'] = Input::get('province');
         $filter['city'] = Input::get('city');
+        $filter['category'] = Input::get('category');
         $filter['orderBy'] = Input::get('order');
         $filter['lowPrice'] = Input::get('lowPrice') ? str_replace('.', '', Input::get('lowPrice')) : '';
         $filter['highPrice'] = Input::get('highPrice') ? str_replace('.', '', Input::get('highPrice')) : '';
@@ -64,6 +65,16 @@ class ProductController extends Controller
         if($filter['highPrice']) {
             $list->where('price', '<=', $filter['highPrice']);
         }
+
+        $list->orWhere(function ($c) {
+            $query = explode(' ', Input::get('category'));
+            foreach($query as $key => $element) {
+                if($key == 0) {
+                    $c->where('categories_menus.name', 'like', "%$element%");
+                }
+                $c->orWhere('categories_menus.name', 'like', "%$element%");
+            }
+        });
         $list->where('menus.deleted_at', NULL);
         $list->join('cafes', 'cafes.id', '=', 'menus.cafe_id');
         $list->join('categories_menus', 'categories_menus.id', '=', 'menus.category_id');

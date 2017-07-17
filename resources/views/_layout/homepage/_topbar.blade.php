@@ -53,7 +53,7 @@
         @endphp
         @foreach($categories_menu as $category)
             <div class="two wide column">
-                <a href="#">
+                <a href="{{ url("search?query=") . str_replace('-', '+', $category) . "&category=" . str_replace('-', '+', $category) }}">
                     <div class="ui fluid card card-category" data-gambar="{{ asset("images/category-bg/{$category}.png") }}">
                         <b>{{ ucwords(str_replace('-', ' ', $category)) }}</b>
                     </div>

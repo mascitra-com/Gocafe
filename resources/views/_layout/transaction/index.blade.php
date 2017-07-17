@@ -38,8 +38,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ url('') }}" id="btn-menu" data-menu="#nav-side"><i
-                                class="fa fa-bars btn-responsive"></i>KULINERAE</a>
+                    <div style="margin-top: .5em">
+                    <a href="{{ url('/dashboard') }}">
+                        <img src="{{ asset('images/logoname-white.png') }}" alt="Kulinerae" class="ui site-logo" height="25px">
+                    </a>
+                    </div>
                 </div>
                 @yield('navbar-right')
             </div>
