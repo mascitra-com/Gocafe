@@ -5,7 +5,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <div class="pull-right row" style="width: 225px; margin-top: .6em">
+                <div class="pull-right row" style="width: 225px; margin-top: .25em">
                     <span for="table_number" class="col-md-6" style="margin-top: .5em; color:#fff;"><b>Nomor Meja</b></span>
                     <select id="table_number" class="form-control col-md-6" style="width: 75px">
                         <option value="">Pilih</option>
@@ -20,71 +20,73 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-md-8" id="productList">
-            <div class="row grid" style="margin-top: 2em;">
-                <h3>KATEGORI</h3>
-                <div class="list">
-                    @foreach($categories as $category)
-                        <button class="rectangle" onclick="showMenus('{{ $category->id }}')">{{ $category->name }}</button>
-                    @endforeach
-                </div>
-            </div>
-            <div class="row grid2">
-                <h3>PRODUK</h3>
-                <div class="list" id="product">
-                    @foreach($menus as $menu)
-                        <button class="rectangle product" onclick="addMenuToCheck('{{ $menu->id }}')">
-                            <img src="{{ url($menu->thumbnail)}}" alt="Thumbnail">{{ $menu->name }}
-                        </button>
-                    @endforeach
-                </div>
-            </div>
-            <div class="row grid2">
-                <h3>PAKET</h3>
-                <div class="list" id="product">
-                    @foreach($packages as $package)
-                        <button class="rectangle product" onclick="addPackageToCheck('{{ $package->id }}')" onmouseup="alert('Paket Sudah ditambahkan. Silahkan Lanjutkan Pesanan Anda.')">
-                            <img src="{{ url("menus/showThumbnail/".$package->menus[0]->id)}}" alt="Thumbnail">{{ $menu->name }}
-                        </button>
-                    @endforeach
-                </div>
-            </div>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav" style="margin-top: 1em">
+                @foreach($categories as $category)
+                    <li>
+                        <span style="font-size: 15pt"><a href="#" onclick="showMenus('{{ $category->id }}')">{{ strtoupper($category->name) }}</a></span>
+                    </li>
+                @endforeach
+            </ul>
         </div>
-        <div class="col-md-4">
-            <form action="{{ url('order') }}" method="POST" onsubmit="return validateForm()">
-                {{ csrf_field() }}
-                <input type="hidden" name="table_number" value="">
-                <table class="table text-quintuple" id="bill">
-                    <thead>
-                    <tr>
-                        <th width="5%"></th>
-                        <th width="37.5%">Nama</th>
-                        <th width="27.5%">Jumlah</th>
-                        <th width="25%">Total</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table class="table text-quintuple">
-                    <tr>
-                        <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
-                        <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: bold; font-size: 16px" colspan="2">Total Diskon</td>
-                        <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">- Rp. 0</label></td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
-                        <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 16px">Rp. 0</label></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><button class="btn btn-primary btn-block" type="submit"><b style="font-size: 16px">Pesan</b></button></td>
-                    </tr>
-                </table>
-            </form>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8" id="productList">
+                        <div class="row grid2">
+                            <div class="list" id="product">
+                                @foreach($menus as $menu)
+                                    <button class="rectangle product" onclick="addMenuToCheck('{{ $menu->id }}')">
+                                        <img src="{{ url($menu->thumbnail)}}" alt="Thumbnail">{{ $menu->name }}
+                                    </button>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <form action="{{ url('order') }}" method="POST" onsubmit="return validateForm()">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="table_number" value="">
+                            <table class="table text-quintuple" id="bill">
+                                <thead>
+                                <tr>
+                                    <th width="5%"></th>
+                                    <th width="37.5%">Nama</th>
+                                    <th width="27.5%">Jumlah</th>
+                                    <th width="25%">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <table class="table text-quintuple">
+                                <tr>
+                                    <td style="font-weight: bold; font-size: 16px" colspan="2">Total Keseluruhan</td>
+                                    <td colspan="2" class="text-right"><label class="total price" for="price" style="font-size: 16px">Rp. 0</label></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; font-size: 16px" colspan="2">Total Diskon</td>
+                                    <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">- Rp. 0</label></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
+                                    <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 16px">Rp. 0</label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <button class="btn btn-primary btn-block" type="submit"><b style="font-size: 16px">Pesan</b></button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -186,6 +188,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{URL::asset('css/order.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/sidebar.css')}}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 @endsection
@@ -197,6 +200,11 @@
     <script>
         $(document).on('ready', function(){
             $('.rating-avg').rating({displayOnly: true, step: 0.5});
+        });
+        $("#wrapper").toggleClass("toggled");
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
         });
         $(function(){
             $('#form-review').on('submit',function(e){

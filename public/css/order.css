@@ -7,7 +7,7 @@
 }
 
 .product img {
-    max-height: 80px;
+    height: 140px;
     width: auto;
     margin: 0 0;
     vertical-align: top;
@@ -19,7 +19,6 @@ div.grid {
 
 div.grid2 {
     margin-left: auto;
-    margin-top: 2em;
 }
 
 button.product {
@@ -30,8 +29,8 @@ button.product {
 
 button.rectangle {
     background-image: linear-gradient(0deg, rgba(140, 71, 40, 0.75) 25%, rgba(140, 71, 40, 1) 25%, rgba(140, 71, 40, 0.8) 90%);
-    height: 100px;
-    width: 90px;
+    height: 160px;
+    width: 150px;
     border: 1px solid #7c4621;
     border-radius: 5px;
     color: white;
@@ -39,11 +38,11 @@ button.rectangle {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin-right: 0.6em;
+    margin-right: 2em;
     font-weight: bold;
 }
 h3 {
-    margin-left: 2em;
+    margin-left: 1em;
     color: #FFFFFF;
 }
 ul.nav li {
@@ -59,7 +58,7 @@ ul.nav li {
 }
 
 .list {
-    margin-left: 3em;
+    margin-left: 1.5em;
     margin-top: 1em;
 }
 

@@ -19,7 +19,6 @@ function showMenus(idCategory) {
 }
 
 function imageUrl(image) {
-    //str_replace('storage/product/', 'img/cache/small-product/', Storage::url($value));
     var path = image.replace('product', 'img/cache/small-product');
     return "https://"+ hostname + "/" +  path;
 }

@@ -76,31 +76,28 @@
             </div>
             <div class="ui four doubling cards">
                 @foreach($productList as $product)
-                    <a class="card product" href="{{ url('product/'.$product->id) }}">
-                        <div class="image">
+                    <div class="card product">
+                        <a href="{{ url('product/'.$product->id) }}" class="image">
                             @if($product->halal)
                                 <div class="ui transparent left corner label">
                                     <img src="{{ asset('images/halal-sign.svg') }}">
                                 </div>
                             @endif
                             <img src="{{url($product->thumbnail)}}">
-                        </div>
-                        <div class="content">
+                        </a>
+                        <a href="{{ url('product/'.$product->id) }}" class="content">
                             <div class="header">
                                 {{ $product->name }} <br>
                                 <small style="color: #F18803">{{ $product->cafe_name }}</small>
                             </div>
-                        </div>
+                        </a>
                         <div class="extra content">
-                            <span>
-                            <i class="money brown icon"></i>
-                            <b>Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
-                            </span>
-                                <span class="right floated">
-                                <div class="ui star rating right floated" data-rating="{{ floor($product->rating) }}"></div>
+                            <div class="ui heart rating" data-rating="0" data-max-rating="1"></div> {{ $product->liked }}
+                            <span class="right floated">
+                                <div class="ui star rating right floated" data-max-rating="5" data-rating="{{ floor($product->rating) }}"></div>
                             </span>
                         </div>
-                    </a>
+                    </div>
                 @endforeach
             </div>
             <div class="ui divider"></div>

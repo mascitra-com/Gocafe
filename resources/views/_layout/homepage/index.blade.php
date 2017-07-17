@@ -186,12 +186,15 @@
         $('.ui.rating.star').rating({
             maxRating: 5
         }).rating('disable');
-        $('.ui.heart.rating')
-            .rating('enable')
-        ;
+        $('.ui.heart.rating').rating({
+            clearable : true,
+            onRate: function (rating) {
+
+            }
+        });
         $('.category.item').dropdown({
-        hoverable  : true,
-        position   : 'bottom left',
+            hoverable  : true,
+            position   : 'bottom left'
         });
         $('#location')
             .dropdown({

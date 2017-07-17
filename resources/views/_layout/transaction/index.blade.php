@@ -28,17 +28,13 @@
 <body>
 <div class="container-fluid" id="wrapper">
     <div id="main-panel">
-        <nav class="navbar navbar-default" id="nav-top" style="z-index: 99">
+        <nav class="navbar navbar-default navbar-fixed-top" id="nav-top" style="z-index: 99">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <div style="margin-top: .5em">
+                    <div style="margin-top: .5em; margin-left: 1em">
+                        @if(isset($firstMenu))
+                            <a href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+                        @endif
                     <a href="{{ url('/dashboard') }}">
                         <img src="{{ asset('images/logoname-white.png') }}" alt="Kulinerae" class="ui site-logo" height="25px">
                     </a>
@@ -47,7 +43,7 @@
                 @yield('navbar-right')
             </div>
         </nav>
-        <div id="content">
+        <div id="content" style="margin-top: 3.5em">
             <div class="container-fluid">
                 @yield('content')
             </div>

@@ -60,7 +60,7 @@ class TransactionController extends Controller
         $firstMenu = $menus[0];
         foreach ($menus as $key => $value) {
             $thumbnail = Menu::getThumbnail($value->id);
-            $thumbnail = str_replace('storage/product/', 'img/cache/tiny-product/', $thumbnail[0]);
+            $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
             $menus[$key]->thumbnail = $thumbnail;
         }
         $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();

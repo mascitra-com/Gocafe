@@ -10,6 +10,6 @@ class MainAds implements FilterInterface
 
     public function applyFilter(Image $image)
     {
-        return $image->fit(700, 230)->encode('jpg', 75);
+        return $image->fit(700, 235)->encode('jpg', 75);
     }
 }

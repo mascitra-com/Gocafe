@@ -8,6 +8,8 @@
 <body style="padding:0px; margin:0px; background-color:#fff;font-family:'Open Sans',sans-serif,arial,helvetica,verdana">
 
 <!-- #region Jssor Slider Begin -->
+<!-- Generator: Jssor Slider Maker -->
+<!-- Source: https://www.jssor.com -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jssor-slider/25.0.8/jssor.slider.min.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -33,7 +35,7 @@
         function ScaleSlider() {
             var refSize = jssor_ads_slider.$Elmt.parentNode.clientWidth;
             if (refSize) {
-                refSize = Math.min(refSize, 625);
+                refSize = Math.min(refSize, 700);
                 jssor_ads_slider.$ScaleWidth(refSize);
             }
             else {
@@ -80,15 +82,15 @@
     .jssora053.jssora053dn {opacity:.5;}
     .jssora053.jssora053ds {opacity:.3;pointer-events:none;}
 </style>
-<div id="jssor_ads" style="position:relative;margin:0 auto;top:0px;left:0px;width:625px;height:250px;overflow:hidden;visibility:hidden;">
+<div id="jssor_ads" style="position:relative;margin:0 auto;top:0px;left:0px;width:700px;height:235px;overflow:hidden;visibility:hidden;">
     <!-- Loading Screen -->
     <div data-u="loading" class="jssorl-004-double-tail-spin" style="position:absolute;top:0px;left:0px;text-align:center;background-color:rgba(0,0,0,0.7);">
-        <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="images/double-tail-spin.svg" />
+        <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="img/double-tail-spin.svg" />
     </div>
-    <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:625px;height:250px;overflow:hidden;">
+    <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:700px;height:235px;overflow:hidden;">
         @foreach($banner as $item)
             <div>
-                <img src="{{ $item }}" width="625px" alt="Image">
+                <img src="{{ $item }}" alt="Image">
             </div>
         @endforeach
         <a data-u="any" href="https://www.jssor.com" style="display:none">responsive slider</a>
