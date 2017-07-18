@@ -1,7 +1,7 @@
 @extends('_layout.homepage.index')
 @section('page_title', $product->name)
 @section('content')
-    <div class="ui breadcrumb container grid">
+    <div class="ui breadcrumb container grid" id="top">
         <div class="twelve wide column">
         <a class="section" href="{{ url('/') }}">Home</a>
         <i class="right angle icon divider"></i>

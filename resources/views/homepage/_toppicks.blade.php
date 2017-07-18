@@ -41,7 +41,7 @@
                                         <div class="ui mini heart rating" data-id="{{ $product->id }}" data-rating="{{ session()->exists('rated') ? in_array($product->id, session('rated')) : 0 }}" data-max-rating="1"></div>
                                         <span id="{{$product->id}}">{{ $product->liked }}</span>
                                         <span class="right floated">
-                                            <div class="ui mini star rating" data-rating="{{ floor($product->rating) }}"></div>
+                                            <a href="{{ !Auth::user() ? url('login') : url('product/'.$product->id) }}#top" class="ui mini star rating" data-rating="{{ floor($product->rating) }}"></a>
                                         </span>
                                     </div>
                                 </div>
