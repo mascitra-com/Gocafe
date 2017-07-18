@@ -125,6 +125,8 @@ Route::group(['middleware' => ['web']], function () {
 
     //PRODUCT
     Route::get('product/{productId}', 'ProductController@detail');
+    Route::get('rate/{productId}', 'ProductController@rate');
+    Route::get('un-rate/{productId}', 'ProductController@unRate');
     //--END PRODUCT
 
     //MAIL

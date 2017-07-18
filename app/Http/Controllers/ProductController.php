@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Cafe;
 use App\Menu;
 use App\Package;
+use App\Rating;
 use App\Review;
 use App\TransactionDetail;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
@@ -66,7 +69,7 @@ class ProductController extends Controller
             $list->where('price', '<=', $filter['highPrice']);
         }
 
-        $list->orWhere(function ($c) {
+        $list->where(function ($c) {
             $query = explode(' ', Input::get('category'));
             foreach($query as $key => $element) {
                 if($key == 0) {
@@ -139,6 +142,48 @@ class ProductController extends Controller
         $reviews = Review::where('item_id', $productId)->orderBy('id', 'desc')->get();
         $topHit = TransactionDetail::getTopHitProducts();
         return view('product.detail', compact('shop', 'product', 'reviews', 'topHit'));
+    }
+
+    /**
+     * @param Request $request
+     * @param $productId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function rate($productId)
+    {
+        if(!Auth::user()){
+            return response()->json(0);
+        }
+        $rating = new Rating();
+        $rating->user_id = Auth::id();
+        $rating->user_role = Auth::user()->getTable();
+        $rating->item_id = $productId;
+        $rating->save();
+        $menu = Menu::find($productId);
+        $liked = intval($menu->liked) + 1;
+        $menu->liked = $liked;
+        $menu->save();
+        session()->push('rated', $productId);
+        return response()->json($liked);
+    }
+    /**
+     * @param $productId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function unRate($productId)
+    {
+        $rating = Rating::where('item_id', $productId)->first();
+        $rating->delete();
+        $menu = Menu::find($productId);
+        $liked = intval($menu->liked) - 1;
+        $menu->liked = $liked;
+        $menu->save();
+        $rated = session()->pull('rated');
+        if(($key = array_search($productId, $rated)) !== false) {
+            unset($rated[$key]);
+        }
+        session(['rated' => $rated]);
+        return response()->json($liked);
     }
 
 }

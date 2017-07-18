@@ -186,12 +186,13 @@
         $('.ui.rating.star').rating({
             maxRating: 5
         }).rating('disable');
-        $('.ui.heart.rating').rating({
-            clearable : true,
-            onRate: function (rating) {
-
-            }
-        });
+        $('.ui.heart.rating').rating('setting', 'onRate', function(value) {
+            var id = $(this).data('id');
+            if(value)
+                rate(id);
+            else
+                unrate(id);
+        }).rating('clearable');
         $('.category.item').dropdown({
             hoverable  : true,
             position   : 'bottom left'
@@ -212,6 +213,28 @@
             }
         });
     });
+
+    function rate(productId) {
+        $.ajax({
+            url: "https://"+ hostname + '/rate/' + productId,
+            dataType: 'json',
+            success: function (response) {
+                if(!response) {
+                    window.location.href = "https://"+ hostname + '/login';
+                }
+                document.getElementById(productId).innerHTML = response;
+            }
+        });
+    }
+    function unrate(productId) {
+        $.ajax({
+            url: "https://"+ hostname + '/un-rate/' + productId,
+            dataType: 'json',
+            success: function (response) {
+                document.getElementById(productId).innerHTML = response;
+            }
+        });
+    }
 </script>
 @yield('javascripts')
 </body>

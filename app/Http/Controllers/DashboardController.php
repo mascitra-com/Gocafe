@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cafe;
+use App\Rating;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class DashboardController untuk Halaman Dashboard
@@ -24,6 +26,14 @@ class DashboardController extends Controller
     public function index()
     {
         Cafe::setLastAccessed();
+        $listProductRatedByUser = Rating::select('item_id')->where('user_id', Auth::id())
+            ->where('user_role', Auth::user()->getTable())
+            ->get();
+        $temp = array();
+        foreach ($listProductRatedByUser as $key => $value) {
+            $temp[] = $value->item_id;
+        }
+        session(array('rated' => $temp));
         return view('dashboard.dashboard');
     }
 }

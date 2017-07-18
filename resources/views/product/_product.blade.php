@@ -19,7 +19,7 @@
         </span>
     </a>
     <div class="extra content">
-        <div class="ui heart rating" data-rating="0" data-max-rating="1"></div> {{ $product->liked }}
+        <div class="ui heart rating" data-id="{{ $product->id }}" data-rating="{{ session()->exists('rated') ? in_array($product->id, session('rated')) : 0 }}" data-max-rating="1"></div> {{ $product->liked }}
         <span class="right floated">
             <div class="ui tiny star rating" data-rating="{{ floor($product->rating) }}"></div>
             ({{ $product->reviewed }})
