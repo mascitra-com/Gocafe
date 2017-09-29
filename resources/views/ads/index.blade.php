@@ -43,7 +43,7 @@
                                     <td>Bagian {{ $ad->part }}</td>
                                     <td>
                                         <a href="{{ url("ads/$ad->id/edit") }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
-                                        <a href="{{ url("ads/destroy/$ad->id") }}" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Informasi ini? Data tersebut tidak dapat di kembalikan lagi.')"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ url("ads/delete/$ad->id") }}" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Informasi ini? Data tersebut tidak dapat di kembalikan lagi.')"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

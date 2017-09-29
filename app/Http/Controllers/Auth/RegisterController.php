@@ -70,8 +70,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'role' => 'owner',
-            'avatar_name' => 'default.jpg',
-            'avatar_mime' => 'image/jpeg'
         ]);
         Owner::create([
             'id' => idWithPrefix(1),
@@ -81,7 +79,9 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'email' => $data['email'],
             'gender' => $data['gender'],
-            'created_by' => 0
+            'created_by' => 0,
+            'avatar_name' => 'default.jpg',
+            'avatar_mime' => 'image/jpeg'
         ]);
         return $user;
     }

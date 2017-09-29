@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-/**
- * Class DashboardController untuk Halaman Dashboard
- * @package App\Http\Controllers
- */
 class AdminDashboardController extends Controller
 {
     /**
@@ -17,7 +13,7 @@ class AdminDashboardController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {

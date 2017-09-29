@@ -2,7 +2,7 @@
     <div id="nav-side-wrapper">
         <div id="nav-side-thumbnail" class="hidden-sm">
             <a href="{{ url('/') }}">
-                <img src="https://gocafe.dev/images/logoname.png" alt="Kulinerae" class="ui site-logo" height="35px">
+                <img src="{{ url('/images/logoname.png') }}" alt="Kulinerae" class="ui site-logo" height="35px">
             </a>
         </div>
         <ul class="nav">

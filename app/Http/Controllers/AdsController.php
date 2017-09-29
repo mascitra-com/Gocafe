@@ -57,7 +57,7 @@ class AdsController extends Controller
                 );
                 $request->merge($input);
                 $ads = new Ads($request->except('file'));
-                $ads->created_by = Auth::id();
+                $ads->created_by = 1;
                 $ads->save();
                 return redirect('ads')->with('status', 'Iklan baru telah di tambahkan');
             } else {
@@ -128,9 +128,15 @@ class AdsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
         //
+    }
+    public function delete($id)
+    {
+        $info = Ads::find($id);
+        $info->forceDelete();
+        return redirect('ads')->with('status', 'Iklan yang Anda pilih sudah di hapus');
     }
 
 }

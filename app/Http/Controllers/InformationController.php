@@ -40,8 +40,9 @@ class InformationController extends Controller
     public function store(Request $request)
     {
         $info = new Info($request->all());
-        $info->created_by = Auth::id();
+        $info->created_by = 1;
         $info->save();
+        return redirect('info')->with('status', 'Data Informasi telah di Tambahkan');
     }
 
     /**

@@ -149,6 +149,7 @@ Route::group(['middleware' => ['web']], function () {
 
     //ADS
     Route::resource('ads', 'AdsController');
+    Route::get('ads/delete/{id}', 'AdsController@delete');
     Route::get('adsBanner/{id}', 'AdsController@showBanner');
     //-END ADS
 });

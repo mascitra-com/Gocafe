@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cafe;
+use App\CafeBranch;
 use App\CategoryMenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,9 @@ class CategoryMenusController extends Controller
     {
         if (!Cafe::getCafeIdByUserIdNowLoggedIn()) {
             return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Filled!');
+        }
+        if (!CafeBranch::getBranchIdsByUserNowLoggedIn()) {
+            return redirect('branch')->with('status', 'You must have Cafe Branch at least one!');
         }
         $categoryID = idWithPrefix(6);
         $categories = CategoryMenu::all()->where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn());
