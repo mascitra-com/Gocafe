@@ -49,8 +49,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-roup" href="{{ url('/password/reset') }}>
-						<a href="#" class="link">lupa password?</a>
+					<div class="form-group">
+						<a href="{{ url('/password/reset') }}" class="link">lupa password?</a>
 					</div>
 				</form>
 			</div>

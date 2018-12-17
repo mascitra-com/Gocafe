@@ -1,76 +1,62 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Baru | Kulinerae.com</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-sign.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('plugins/theme/css/theme-helper.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row form-big" id="form-container">
+        <div class="col-xs-12 col-sm-6 col-md-8 background-img image-fade" id="form-left" data-image="{{URL::asset('images/bg2.jpg')}}">
+            <h2><a href="{{ url('/') }}" style="color: white">KULINERAE</a></h2>
+            <p class="text-size-20">Your perfect place to manage and promote<br>your favorite Culinary</p>
+            <div class="break-50"></div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4" id="form-right">
+            <h3 class="form-title text-quintuple">Password Baru</h3>
+            <form method="post" role="form" action="{{ url('/password/reset') }}">
+                {{ csrf_field() }}
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <label for="email" class="text-quadruple">Email</label>
+                    <input name="email" type="text" class="form-control" placeholder="Email" value="{{ old('email') }}" required autofocus>
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+							<strong>{{ $errors->first('email') }}</strong>
+						</span>
                     @endif
-
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
-                        {{ csrf_field() }}
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Reset Password
-                                </button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
-            </div>
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <label for="password" class="text-quadruple">Password</label>
+                    <input name="password" type="password" class="form-control" placeholder="Password" required>
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+							<strong>{{ $errors->first('password') }}</strong>
+						</span>
+                    @endif
+                </div>
+                <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                    <label for="password" class="text-quadruple">Konfirmasi Password</label>
+                    <input name="password_confirmation" type="password" class="form-control" placeholder="KonfPassword" required>
+                    @if ($errors->has('password_confirmation'))
+                        <span class="help-block">
+							<strong>{{ $errors->first('password_confirmation') }}</strong>
+						</span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-round" type="submit">Reset Password</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-@endsection
+</div>
+</body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="{{URL::asset('plugins/theme/js/theme-helper.js')}}"></script>
+</html>
