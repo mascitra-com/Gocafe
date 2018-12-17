@@ -1,5 +1,5 @@
 @extends('_layout/transaction/index')
-@section('page_title', 'Pemesanan')
+@section('page_title', 'Pemesanan & Pembayaran')
 
 @section('navbar-right')
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
