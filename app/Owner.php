@@ -29,6 +29,17 @@ class Owner extends Model
         return DB::table('owners')->where('user_id', Auth::user()->id)->first()->id;
     }
 
+
+	/**
+	 * Get Cafe Branch ID by Staff ID currently logged in
+	 *
+	 * @return Owner ID
+	 */
+	public static function getCafeIdByOwnerIdNowLoggedIn()
+	{
+		return DB::table('cafes')->where('owner_id', Owner::getOwnerIdNowLoggedIn())->first()->id;
+	}
+
     /**
      * Set Profile Cafe with Owner ID given in the parameter
      *
@@ -50,7 +61,7 @@ class Owner extends Model
      */
     public function getCafeByOwnerId($id)
     {
-        return $this->findOrFail($id)->cafe->firstOrFail();
+        return $this->findOrFail($id)->cafe();
     }
 
     public function user()

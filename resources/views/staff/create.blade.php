@@ -95,7 +95,7 @@
 								<label for="branch_id">Cabang</label>
 								<select name="branch_id" class="form-control">
 									@foreach ($branches as $branch)
-									<option value="{{ $branch->id }}">{{ $branch->location->name }}</option>
+									<option value="{{ $branch->id }}">{{ $branch->district->name }}</option>
 									@endforeach
 								</select>
 							</div>
@@ -105,33 +105,33 @@
 								<label for="position_id">Posisi</label>
 								<div class="input-group">
 									<select class="form-control" name="position_id">
-										@foreach ($positions as $position)
-										<option value="{{ $position->id }}">{{ $position->title }}</option>
-										@endforeach
+										<option value="1">Kasir</option>
+										<option value="2">Pramusaji</option>
+										<option value="3">Juru Masak</option>
 									</select>
-									<span class="input-group-btn">
-										<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#position">baru</button>
-									</span>
+									{{--<span class="input-group-btn">--}}
+										{{--<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#position">baru</button>--}}
+									{{--</span>--}}
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="break-30"></div>
 					<div class="form-group">
-						<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> simpan</button>
-						<button class="btn btn-default"><i class="fa fa-refresh"></i> batal</button>
+						<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Simpan</button>
+						<button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> Reset</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-12 col-md-3">
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate aut vitae, excepturi, ad molestias quisquam numquam inventore totam hic officia voluptate, veritatis esse facilis. Eius hic, nam. Libero, explicabo, nemo.</p>
-			</div>
-		</div>
-	</div>
+	{{--<div class="col-xs-12 col-md-3">--}}
+		{{--<div class="panel panel-default">--}}
+			{{--<div class="panel-body">--}}
+				{{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate aut vitae, excepturi, ad molestias quisquam numquam inventore totam hic officia voluptate, veritatis esse facilis. Eius hic, nam. Libero, explicabo, nemo.</p>--}}
+			{{--</div>--}}
+		{{--</div>--}}
+	{{--</div>--}}
 </div>
 @endsection
 
@@ -153,45 +153,45 @@
 						<label for="">Deskripsi</label>
 						<textarea name="description" class="form-control" placeholder="deskripsi posisi"></textarea>
 					</div>
-					<div class="form-group">
-						<label for="">Hak Akses</label>
-						<div class="row">
-							<div class="col-xs-12 col-md-6">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox"> Menu1
-									</label>
-								</div>
-								<div class="checkbox">
-									<label>
-										<input type="checkbox"> Menu2
-									</label>
-								</div>
-								<div class="checkbox">
-									<label>
-										<input type="checkbox"> Menu3
-									</label>
-								</div>
-							</div>
-							<div class="col-xs-12 col-md-6">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox"> Menu4
-									</label>
-								</div>
-								<div class="checkbox">
-									<label>
-										<input type="checkbox"> Menu5
-									</label>
-								</div>
-								<div class="checkbox">
-									<label>
-										<input type="checkbox"> Menu6
-									</label>
-								</div>
-							</div>
-						</div>
-					</div>
+					{{--<div class="form-group">--}}
+						{{--<label for="">Hak Akses</label>--}}
+						{{--<div class="row">--}}
+							{{--<div class="col-xs-12 col-md-6">--}}
+								{{--<div class="checkbox">--}}
+									{{--<label>--}}
+										{{--<input type="checkbox"> Menu1--}}
+									{{--</label>--}}
+								{{--</div>--}}
+								{{--<div class="checkbox">--}}
+									{{--<label>--}}
+										{{--<input type="checkbox"> Menu2--}}
+									{{--</label>--}}
+								{{--</div>--}}
+								{{--<div class="checkbox">--}}
+									{{--<label>--}}
+										{{--<input type="checkbox"> Menu3--}}
+									{{--</label>--}}
+								{{--</div>--}}
+							{{--</div>--}}
+							{{--<div class="col-xs-12 col-md-6">--}}
+								{{--<div class="checkbox">--}}
+									{{--<label>--}}
+										{{--<input type="checkbox"> Menu4--}}
+									{{--</label>--}}
+								{{--</div>--}}
+								{{--<div class="checkbox">--}}
+									{{--<label>--}}
+										{{--<input type="checkbox"> Menu5--}}
+									{{--</label>--}}
+								{{--</div>--}}
+								{{--<div class="checkbox">--}}
+									{{--<label>--}}
+										{{--<input type="checkbox"> Menu6--}}
+									{{--</label>--}}
+								{{--</div>--}}
+							{{--</div>--}}
+						{{--</div>--}}
+					{{--</div>--}}
 					<div class="form-group">
 						<button class="btn btn-primary" type="button">simpan</button>
 						<button class="btn btn-default" type="reset">batal</button>

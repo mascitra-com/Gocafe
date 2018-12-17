@@ -1,12 +1,12 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Detail Cabang')
+@section('page_title', 'Detail Lokasi')
 
 @section('content')
 <div class="row">
 	<div class="col-xs-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">Detail Cabang</h3>
+				<h3 class="panel-title">Detail Lokasi</h3>
 			</div>
 			<div class="panel-body">
 				<form action="{{ url('branch/'.$branch->id) }}" method="POST">
@@ -67,13 +67,17 @@
 						<label for="">Jumlah Meja</label>
 						<input type="number" class="form-control" name="number_of_tables" placeholder="Jumlah Meja" value="{{ $branch->number_of_tables }}">
 					</div>
+                    <div class="form-group">
+                        <label for="">Status</label><br>
+                        <input name="status" type="checkbox" {{ $branch->status == 'on' ? 'checked' : '' }} data-toggle="toggle" data-on="Buka" data-off="Tutup">
+                    </div>
 					<div class="form-group">
-						<label for="">Google Maps</label>
+						<label for="">Lokasi di Google Maps</label>
 						<textarea name="google_maps" class="form-control" id="google_maps" cols="30" rows="3">{{ $branch->google_maps }}</textarea>
 					</div>
 					{!! $branch->google_maps !!}
 					<div class="form-group">
-						<button class="btn btn-primary" type="submit"><i class="fa fa-save fa-fw"></i> Perbaharui</button>
+						<button class="btn btn-primary" type="submit"><i class="fa fa-save fa-fw"></i> Perbarui</button>
 						<a href="{{ url('branch') }}" class="btn btn-default"><i class="fa fa-refresh fa-fw"></i> Kembali</a>
 					</div>
 				</form>
@@ -84,6 +88,7 @@
 @endsection
 
 @section('styles')
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
         .table > tbody tr td {
@@ -94,5 +99,6 @@
 @endsection
 
 @section('javascripts')
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script type="text/javascript" src="{{URL::asset('js/branches.js')}}"></script>
 @endsection

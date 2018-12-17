@@ -21,7 +21,6 @@
 			<div class="panel-body table-responsive table-full">
 				<table class="table table-stripped table-hover" id="menus">
 					<thead>
-						<th>Status</th>
 						<th colspan="2">Nama</th>
 						<th>Deskripsi</th>
 						<th width="10%">Harga</th>
@@ -31,7 +30,6 @@
 					<tbody>
 						@foreach($menus as $menu)
 						<tr>
-							<td valign="middle"><button class="btn btn-xs btn-success">aktif</button></td>
 							<td width="50px"><img src="{{url($menu->thumbnail)}}" class="thumb" alt=""></td>
 							<td width="25%">
 								<span class="text-size-16">{{ $menu->name }}</span>
@@ -57,7 +55,7 @@
 				</table>
 			</div>
 			<div class="panel-footer">
-				<span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 02/01/2016 18:00</span>
+				<span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 01-11-2018 18:00</span>
 				<nav aria-label="Page navigation" class="pull-right">
 					<ul class="pagination pagination-sm">
 						<li>

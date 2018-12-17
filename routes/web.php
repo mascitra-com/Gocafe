@@ -84,6 +84,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('payment', 'TransactionController@payment');
     Route::post('payment', 'TransactionController@store');
     Route::patch('payment/{paymentId}', 'TransactionController@update');
+    Route::get('payment/{paymentId}', 'TransactionController@detail');
     Route::get('order', 'TransactionController@order');
     Route::post('order', 'TransactionController@store');
     Route::get('transaction/getMenusByTableNumber/{transactionId}', 'TransactionController@getMenusByTableNumber');
@@ -158,3 +159,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('admin-logout  ','AdminAuth\LoginController@logout');
 
     Route::get('admin-dashboard', 'AdminDashboardController@index');
+	Route::get('/clear-cache', function() {
+		$exitCode = Artisan::call('cache:clear');
+		return $exitCode;
+	});

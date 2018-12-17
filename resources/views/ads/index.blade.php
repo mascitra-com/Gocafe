@@ -24,7 +24,7 @@
                             <th width="10%">Status</th>
                             <th width="30%">Judul</th>
                             <th>Deskripsi</th>
-                            <th width="10%">Bagian</th>
+                            <th width="20%">Bagian</th>
                             <th width="15%">Aksi</th>
                         </thead>
                         <tbody>
@@ -40,7 +40,7 @@
                                     </td>
                                     <td>{{ $ad->title }}</td>
                                     <td>{{ substr($ad->description, 0, 50) }}</td>
-                                    <td>Bagian {{ $ad->part }}</td>
+                                    <td>{{ isset($ad) && $ad->page == 1 ? 'Sponsor Utama' : (isset($ad) && $ad->page == 2 ? 'Sponsor Atas' : (isset($ad) && $ad->page == 3 ? 'Sponsor Bawah' : ''))}}</td>
                                     <td>
                                         <a href="{{ url("ads/$ad->id/edit") }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
                                         <a href="{{ url("ads/delete/$ad->id") }}" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Informasi ini? Data tersebut tidak dapat di kembalikan lagi.')"><i class="fa fa-trash"></i></a>
@@ -52,7 +52,7 @@
                     </table>
                 </div>
                 <div class="panel-footer">
-                    <span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 02/01/2016 18:00</span>
+                    <span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 01-11-2018 18:00</span>
                     <nav aria-label="Page navigation" class="pull-right">
                         <ul class="pagination pagination-sm">
                             <li>

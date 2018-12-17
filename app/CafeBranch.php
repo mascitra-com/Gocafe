@@ -15,7 +15,7 @@ class CafeBranch extends Model
 
     public $incrementing = FALSE;
 
-    protected $fillable = ['id', 'cafe_id', 'address', 'phone', 'open_hours', 'close_hours', 'number_of_tables', 'google_maps', 'province_id', 'city_id', 'district_id'];
+    protected $fillable = ['id', 'cafe_id', 'address', 'phone', 'open_hours', 'close_hours', 'number_of_tables', 'status', 'google_maps', 'province_id', 'city_id', 'district_id'];
     protected $dates = ['deleted_at'];
 
     protected $guarded = ['id'];

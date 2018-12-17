@@ -78,7 +78,9 @@ class ReportController extends Controller
      */
     public function revenue()
     {
-        $transactions = Transaction::whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn())->get();
+        $transactions = Transaction::whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn())
+	        ->where('status', '!=', 0)
+	        ->get();
         return view('report.revenue', compact('transactions'));
     }
 

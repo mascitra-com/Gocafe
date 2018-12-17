@@ -11,7 +11,7 @@ class Cafe extends Model
 {
     public $incrementing = FALSE;
 
-    protected $fillable = ['id', 'shop_category_id', 'owner_id', 'slug', 'name', 'description', 'open_hours', 'close_hours', 'phone', 'facebook', 'twitter', 'instagram', 'logo_path', 'cover_path'];
+    protected $fillable = ['id', 'shop_category_id', 'owner_id', 'slug', 'name', 'description', 'status', 'open_hours', 'close_hours', 'phone', 'facebook', 'twitter', 'instagram', 'logo_path', 'cover_path'];
 
     /**
      * Get Cafe ID with Owner ID currently logged in

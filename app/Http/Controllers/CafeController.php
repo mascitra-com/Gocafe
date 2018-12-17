@@ -132,6 +132,11 @@ class CafeController extends Controller
             'shop_category_id' => 'required',
             'description' => 'min:3|required',
         ]);
+        if(!isset($request->status)) {
+	        $request->request->add([
+		        'status' => 'off'
+	        ]);
+        }
         $request->request->add([
             'slug' => str_slug($request->name, '-')
         ]);

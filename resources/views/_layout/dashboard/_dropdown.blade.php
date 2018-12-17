@@ -6,8 +6,8 @@
                aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-user text-secondary"></i><span
                         class="caret text-secondary"></span></a>
             <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
+                <li><a href="#">Aksi</a></li>
+                <li><a href="#">Aksi Lain</a></li>
             </ul>
         </li>
         <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();

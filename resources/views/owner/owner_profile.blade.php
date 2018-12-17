@@ -1,5 +1,5 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Owner Profile')
+@section('page_title', 'Profil Pemilik')
 
 @section('styles')
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -11,43 +11,43 @@
 	<div class="col-xs-12 col-md-3">
 		<div class="panel panel-default">
 			<div class="panel-body box-center">
-				<h4 class="panel-title">Profile Picture</h4>
+				<h4 class="panel-title">Foto Profil</h4>
 				<img src="{{url($avatar)}}" class="image-fit img-circle" width="80%" alt="foto">
 				<div class="break-10"></div>
 				<h4 class="text-quadruple">{{ $profile->first_name.' '.$profile->last_name }}</h4>
 				<div class="break-10"></div>
-				<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#upload">Change Profile Picture</button>
-				<button class="btn btn-default btn-xs">Delete</button>
+				<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#upload">Ubah Foto Profil</button>
+				<button class="btn btn-default btn-xs">Hapus</button>
 			</div>
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-6 col-md-5">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<h4 class="panel-title">Personal Info</h4>
+				<h4 class="panel-title">Info Personal</h4>
 				<form action="{{ url('profile/personal/'.$profile->id) }}" method="POST">
 					{{ method_field('PATCH') }}
 					{{ csrf_field() }}
 					<div class="row">
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
-								<label for="first_name" class="text-quadruple">First Name</label>
+								<label for="first_name" class="text-quadruple">Nama Depan</label>
 								<input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ $profile->first_name }}">
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6">
 							<div class="form-group">
-								<label for="last_name" class="text-quadruple">Last Name</label>
+								<label for="last_name" class="text-quadruple">Nama Belakang</label>
 								<input type="text" name="last_name" class="form-control" placeholder="Last Name" value={{ $profile->last_name }}>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="address" class="text-quadruple">Address</label>
+						<label for="address" class="text-quadruple">Alamat</label>
 						<textarea name="address" class="form-control" placeholder="Address">{{ $profile->address }}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="birthdate" class="text-quadruple">Birth Date</label>
+						<label for="birthdate" class="text-quadruple">Tanggal Lahir</label>
 						<div class="row">
 							<div class="col-xs-3">
 								<select name="birthdate_day" class="form-control">
@@ -73,17 +73,17 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="gender" class="text-quadruple">Gender</label><br>
+						<label for="gender" class="text-quadruple">Jenis Kelamin</label><br>
 						<label class="radio-inline">
-							<input type="radio" name="gender" value="0" @if ($profile->gender === '0') {{ 'checked' }}@endif> Male
+							<input type="radio" name="gender" value="0" @if ($profile->gender === '0') {{ 'checked' }}@endif> Laki-Laki
 						</label>
 						<label class="radio-inline">
-							<input type="radio" name="gender" value="1" @if ($profile->gender === '1') {{ 'checked' }}@endif> Female
+							<input type="radio" name="gender" value="1" @if ($profile->gender === '1') {{ 'checked' }}@endif> Perempuan
 						</label>
 					</div>
 					<div class="break-50"></div>
 					<div class="form-group">
-						<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save Changes</button>
+						<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Simpan Perubahan</button>
 						<button class="btn btn-default"><i class="fa fa-refresh"></i> Reset</button>
 					</div>
 				</form>
@@ -98,11 +98,11 @@
 					{{ method_field('PATCH') }}
 					{{ csrf_field() }}
 					<div class="form-group">
-						<label for="email" class="text-quadruple">Public Email</label>
+						<label for="email" class="text-quadruple">Email Publik</label>
 						<input type="text" class="form-control" name="email" placeholder="Email Address" value={{ $profile->email }}>
 					</div>
 					<div class="form-group">
-						<label for="phone" class="text-quadruple">Phone Number</label>
+						<label for="phone" class="text-quadruple">Nomor Telepon / HP</label>
 						<input type="text" class="form-control" name="phone" placeholder="Phone Number" value= {{ $profile->phone }}>
 					</div>
 					<div class="form-group">
@@ -119,7 +119,7 @@
 					</div>
 					<div class="break-20"></div>
 					<div class="form-group">
-						<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save Changes</button>
+						<button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Simpan Perubahan</button>
 						<button class="btn btn-default"><i class="fa fa-refresh"></i> Reset</button>
 					</div>
 				</form>

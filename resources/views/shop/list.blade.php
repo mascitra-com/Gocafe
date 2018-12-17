@@ -14,7 +14,7 @@
             </div>
             <div class="ui eight doubling cards">
                 @foreach($shopList as $shop)
-                    <a class="card product" href="{{ url('product/'.$shop->id) }}">
+                    <a class="card product" href="{{ url('shop/'.$shop->slug) }}">
                         <div class="image">
                             <img src="{{url($shop->logo)}}">
                         </div>

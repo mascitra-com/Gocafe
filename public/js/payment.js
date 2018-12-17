@@ -11,7 +11,7 @@ function validateForm() {
 }
 
 function update_refund() {
-    var cash_received = $('input#cash_received').val()
+    var cash_received = $('input#cash_received').val();
     var total_payment = $("label.final").html();
     total_payment = parseInt(total_payment.replace('Rp. ', '').replace('\.', '').replace('\.', ''));
     var refund = cash_received - total_payment;
@@ -111,8 +111,8 @@ function showMenus(idCategory) {
                 var id = menu.id;
                 var name = menu.name;
                 var price = $.number(menu.price, 0, '', '.');
-                var discount = "(- Rp. " + $.number(menu.price * menu.discount, 0, '', '.') + ")";
-                var markup = "<tr onclick=\"addMenuToCheck('" + id + "')\" id='tr-menu' class='tr-selection text-quintuple'><td><h5>" + name + "</h5></td><td class='price text-right'>Rp. " + price + " <br>"+ (discount != '(- Rp. 0)' ? discount  : '') +"</td></tr>";
+                var discount = "Rp. " + $.number(menu.price * menu.discount, 0, '', '.');
+                var markup = "<tr onclick=\"addMenuToCheck('" + id + "')\" id='tr-menu' class='tr-selection text-quintuple'><td><h5>" + name + "</h5></td><td class='price text-right'>Rp. " + price + " <br>"+ (discount != 'Rp. 0' ? discount  : '') +"</td></tr>";
                 $("#menus").find('tbody').append(markup);
             });
         }
@@ -138,12 +138,12 @@ function showPackages() {
 }
 
 function set_new_final_payment() {
-    var final = parseInt($("label.total").html().replace('Rp. ', '').replace('\.', '').replace('\.', '')) - parseInt($("label.discount").html().replace('- Rp. ', '').replace('\.', '').replace('\.', ''));
+    var final = parseInt($("label.total").html().replace('Rp. ', '').replace('\.', '').replace('\.', '')) - parseInt($("label.discount").html().replace('Rp. ', '').replace('\.', '').replace('\.', ''));
     final = 'Rp. ' + $.number(final, 0, '', '.');
     $("label.final").html(final);
 }
 
-function addMenuToCheck(idMenu, amount) {
+function addMenuToCheck(idMenu, amount, order = true) {
     var table_number = document.getElementById("table_number").value;
     if(!table_number) {
         alert('Silahkan Pilih Nomor Meja!')
@@ -171,10 +171,12 @@ function addMenuToCheck(idMenu, amount) {
                     var markup = "<tr><input type='hidden' name='ids_menu[]' value='" + id + "'><input type='hidden' class='discount' value='" + discount + "'><td><button class='deleteMenu'><i class='fa fa-times'></i></button></td><td>" + name + "</td><td class='input-group'><span class='input-group-btn'><button class='btn btn-default btn-xs decrease' type='button'><i class='fa fa-arrow-down'></i></button></span><input class='form-control input-xs' maxlength='' type='text' name='amount[]' value='" + count + "' min='1' max='999' title='amount' readonly/><span class='input-group-btn'><button class='btn btn-default btn-xs increase' type='button'><i class='fa fa-arrow-up'></i></button></span></td><td><label class='price' for='price'>" + price + "</label></td></tr>";
                     $("#bill").find('tbody').append(markup);
                     // Set Total Payment
-                    set_total_payment(price);
-                    set_new_discount(discount, true);
-                    set_new_final_payment();
-                    update_refund();
+                    if(order){
+                        set_total_payment(price);
+                        set_new_discount(discount, true);
+                        set_new_final_payment();
+                        update_refund();
+                    }
                 });
             }
         });
@@ -224,15 +226,42 @@ function set_total_payment(price) {
 
 function set_new_discount(discount, increment) {
     var old_discount = $("label.discount").html();
-    old_discount = parseInt(old_discount.replace('- Rp. ', '').replace('\.', '').replace('\.', ''));
+    old_discount = parseInt(old_discount.replace('Rp. ', '').replace('\.', '').replace('\.', ''));
+    console.log(old_discount);
     var new_discount = 0;
     if (increment) {
         new_discount = parseInt(old_discount) + parseInt(discount);
     } else {
         new_discount = parseInt(old_discount) - parseInt(discount);
     }
-    new_discount = '- Rp. ' + $.number(new_discount, 0, '', '.');
+
+    new_discount = 'Rp. ' + $.number(new_discount, 0, '', '.');
     $("label.discount").html(new_discount);
+}
+function getPaymentDetail(id) {
+    if(!id) {
+        // TODO Here
+    } else {
+        $.ajax({
+            url: '/payment/' + id,
+            dataType: 'json',
+            success: function (response) {
+                $.each(response.transaction, function (i, data) {
+                    // Set Total Payment
+                    var total = data.total_price;
+                    total = 'Rp. ' + $.number(total, 0, '', '.');
+                    $("label.total").html(total);
+                    var discount = data.total_discount;
+                    discount = 'Rp. ' + $.number(discount, 0, '', '.');
+                    $("label.discount").html(discount);
+                    var payment = data.total_payment;
+                    payment = 'Rp. ' + $.number(payment, 0, '', '.');
+                    $("label.final").html(payment);
+
+                });
+            }
+        });
+    }
 }
 
 function getThumbnail(idMenu) {

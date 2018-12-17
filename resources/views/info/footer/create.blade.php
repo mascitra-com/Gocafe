@@ -18,6 +18,7 @@
                     <form action="@if(isset($info)) {{url('info/'.$info->id)}} @else {{url('info')}} @endif" method="POST" enctype="multipart/form-data">
                         @if(isset($info)) {{ method_field('PATCH') }} @endif
                         {{ csrf_field() }}
+                        <input type="hidden" name="type" value="1">
                         <small for="nb" style="color: red">* Isi Salah Satu</small>
                         <br>
                         <div class="form-group">
@@ -25,22 +26,11 @@
                             <input type="text" class="form-control" name="title" placeholder="Isikan Judul Informasi" value="{{ isset($info) ? $info->title : ''}}">
                         </div>
                         <div class="form-group">
-                            <label for="link">Link Informasi <span style="color: red">*</span></label>
-                            <input type="text" class="form-control" name="link" placeholder="Isikan Link Informasi" value="{{ isset($info) ? $info->link : ''}}">
-                        </div>
-                        <div class="form-group">
                             <label for="description">Isikan Informasi <span style="color: red">*</span></label>
                             <textarea name="body" class="form-control" rows="5">{{ isset($info) ? $info->body : ''}}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="type">Jenis</label>
-                            <select name="type" id="type" class="form-control">
-                                <option value="">Pilih Jenis Informasi</option>
-                                <option value="1" {{ isset($info) && $info->type == 1 ? 'selected' : ''}}>Footer</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="part">Jenis</label>
+                            <label for="part">Bagian</label>
                             <select name="part" id="part" class="form-control">
                                 <option value="">Pilih Bagian Informasi</option>
                                 @foreach($part as $key => $value)

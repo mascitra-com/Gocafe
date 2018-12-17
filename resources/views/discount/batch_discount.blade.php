@@ -1,5 +1,5 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Batch Manage Discount')
+@section('page_title', 'Manajemen Diskon')
 
 @section('content')
 <form>
@@ -7,14 +7,14 @@
 		<div class="col-xs-12">
 			<div class="panel panel-theme">
 				<div class="panel-heading">
-					<h3 class="panel-title pull-left">Batch Manage Discount</h3>
+					<h3 class="panel-title pull-left">Manajemen Diskon</h3>
 					<div class="btn-group pull-right">
-						<button class="btn btn-default" type="submit"><i class="fa fa-check text-green"></i> Save</button>
-						<button class="btn btn-default btn-remove-all" type="button"><i class="fa fa-times text-red"></i> Clear</button>
+						<button class="btn btn-default" type="submit"><i class="fa fa-check text-green"></i> Simpan</button>
+						<button class="btn btn-default btn-remove-all" type="button"><i class="fa fa-times text-red"></i> Reset</button>
 					</div>
 					<div class="pull-right space-right-10">
 						<div class="input-group">
-							<input type="number" name="discount" class="form-control" placeholder="discount amount">
+							<input type="number" name="discount" class="form-control" placeholder="Diskon">
 							<span class="input-group-addon">%</span>
 						</div>
 					</div>
@@ -22,7 +22,7 @@
 				</div>
 				<div class="panel-body ">
 					<div class="form-group">
-						<label for="">Search menu/package</label>
+						<label for="">Cari Menu / Paket</label>
 						<div class="input-group">
 							<input type="text" id="menu" list="menu-list" class="form-control" placeholder="search menu/package" autocomplete="off">
 							<datalist id="menu-list">
@@ -75,7 +75,7 @@
 					menu_id.push(id[1]);
 					refresh();
 				}else{
-					alert('Choose menu/package!');
+					alert('Pilih Menu / Paket!');
 				}
 			});
 

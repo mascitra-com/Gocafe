@@ -33,37 +33,29 @@ class StaffController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param User $user
-     * @param Owner $owner
      * @return Response
      */
-    public function index(User $user, Owner $owner)
+    public function index()
     {
         if (!Cafe::getCafeIdByUserIdNowLoggedIn()) {
-            return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Filled!');
+            return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Failled!');
         }
         if (!CafeBranch::where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn())->count()) {
             return redirect('branch')->with('status', 'You Must At Least Have One Cafe Branch');
         }
-        $owner_id = $user->getAccountByUserId(Auth::id())->id;
-        $cafe_id = $owner->getCafeByOwnerId($owner_id)->id;
-        $staffs = Cafe::findOrFail($cafe_id)->staffs->load('branches', 'position');
+        $staffs = Cafe::findOrFail(Owner::getCafeIdByOwnerIdNowLoggedIn())->staffs->load('branches', 'position');
         return view('staff/staff', compact('staffs'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @param User $user
-     * @param Owner $owner
      * @return Response
      */
-    public function create(User $user, Owner $owner)
+    public function create()
     {
-        $owner_id = $user->getAccountByUserId(Auth::id())->id;
-        $cafe_id = $owner->getCafeByOwnerId($owner_id)->id;
-        $branches = Cafe::findOrFail($cafe_id)->branches;
-        $positions = Cafe::findOrFail($cafe_id)->positions;
+        $branches = CafeBranch::where('cafe_id', Owner::getCafeIdByOwnerIdNowLoggedIn())->get();
+        $positions = Cafe::findOrFail(Owner::getCafeIdByOwnerIdNowLoggedIn())->positions;
         return view('staff.create', compact('branches', 'positions'));
     }
 
@@ -94,12 +86,10 @@ class StaffController extends Controller
      * @return Response
      * @internal param int $id
      */
-    public function edit(User $user, Owner $owner, Staff $staff)
+    public function edit(Staff $staff)
     {
-        $owner_id = $user->getAccountByUserId(Auth::id())->id;
-        $cafe_id = $owner->getCafeByOwnerId($owner_id)->id;
-        $branches = Cafe::findOrFail($cafe_id)->branches;
-        $positions = Cafe::findOrFail($cafe_id)->positions;
+	    $branches = CafeBranch::where('cafe_id', Owner::getCafeIdByOwnerIdNowLoggedIn())->get();
+	    $positions = Cafe::findOrFail(Owner::getCafeIdByOwnerIdNowLoggedIn())->positions;
         return view('staff/detail', compact('staff', 'branches', 'positions'));
     }
 

@@ -1,9 +1,10 @@
     @extends('_layout/dashboard/index')
-    @section('page_title', 'Cafe Profile')
+    @section('page_title', 'Profil Toko')
 
     @section('styles')
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script type="text/javascript">var base_url = '{{ url()->full() }}'</script>
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     @stop
 
     @section('content')
@@ -51,6 +52,10 @@
                             <div class="form-group">
                                 <label for="">Deskripsi Toko</label>
                                 <textarea name="description" class="form-control" placeholder="Cafe Description" rows="5">{{ ($cafe == NULL) ? old('description') : $cafe->description }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Status</label><br>
+                                <input name="status" type="checkbox" {{ $cafe->status == 'on' ? 'checked' : '' }} data-toggle="toggle" data-on="Buka" data-off="Tutup">
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Simpan</button>
@@ -183,10 +188,10 @@
     @endsection
 
     @section('javascripts')
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
         <script>
             var base_url = '{{ url('/') }}';
             var token = $('meta[name="csrf-token"]').attr('content');
-
             function ajax_config() {
                 $.ajaxSetup({
                     headers: {

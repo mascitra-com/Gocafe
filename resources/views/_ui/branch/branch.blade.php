@@ -79,32 +79,7 @@
 				</table>
 			</div>
 			<div class="panel-footer">
-				<span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 02/01/2016 18:00</span>
-				<nav aria-label="Page navigation" class="pull-right">
-					<ul class="pagination pagination-sm">
-						<li>
-							<span aria-hidden="true">Show</span>
-						</li>
-						<li><a href="#">10</a></li>
-						<li><a href="#">50</a></li>
-						<li><a href="#">100</a></li>
-						<li>
-							<a href="#" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
-							</a>
-						</li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li>
-							<a href="#" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-							</a>
-						</li>
-					</ul>
-				</nav>
+				<span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 01-11-2018 18:00</span>
 				<div class="clearfix"></div>
 			</div>
 		</div>

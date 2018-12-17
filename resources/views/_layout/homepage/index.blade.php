@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1280,initial-scale=1, maximum-scale=1">
     <title>Kulinerae | @yield('page_title')</title>
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css">
@@ -24,7 +24,7 @@
                     <div class="ui link list">
                         @foreach($footer as $info)
                             @if($info->part == '1')
-                                @if($info->link)
+                                @if(!empty($info->link))
                                     <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
                                 @else
                                     <a href="{{ url("info/$info->id") }}" class="item">{{ $info->title }}</a>
@@ -38,8 +38,8 @@
                     <div class="ui link list">
                         @foreach($footer as $info)
                             @if($info->part == '2')
-                                @if($info->link)
-                                    <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
+                                @if(!empty($info->link))
+                                <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
                                 @else
                                     <a href="{{ url("info/$info->id") }}" class="item">{{ $info->title }}</a>
                                 @endif
@@ -54,8 +54,8 @@
                     <div class="ui link list">
                         @foreach($footer as $info)
                             @if($info->part == '3')
-                                @if($info->link)
-                                    <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
+                                @if(!empty($info->link))
+                                <a href="{{ url("$info->link") }}" class="item">{{ $info->title }}</a>
                                 @else
                                     <a href="{{ url("info/$info->id") }}" class="item">{{ $info->title }}</a>
                                 @endif
@@ -132,7 +132,7 @@
                     </a>
                 </div>
                 <div class="four wide column">
-                    <a href="https://www.facebook.com/kulinerae"><i class="fa fa-3x fa-facebook-square"></i></a>
+                    <a href="https://www.facebook.com/kulinerae_id"><i class="fa fa-3x fa-facebook-square"></i></a>
                     <a href="https://twitter.com/kulinerae"><i class="fa fa-3x fa-twitter-square"></i></a>
                     <a href="https://www.instagram.com/kulinerae_id/"><i class="fa fa-3x fa-instagram"></i></a>
                     <a href="#"><i class="fa fa-3x fa-google-plus-square"></i></a>
@@ -163,7 +163,7 @@
         <div class="ui container" style="color: rgba(0,0,0,.4); font-size: 9pt">
             <div class="ui left aligned grid">
                 <div class="eight wide column">
-                    <p>&copy; 2017, PT. Kulinerae</p>
+                    <p>&copy; 2017 - 2018. PT. Kulinerae Indonesia. Powered by <a href="http://mascitra.com/">Mascitra.com</a> Konsultan IT</p>
                     <p>Server process time: {{ number_format((microtime(true) - LARAVEL_START), 3) }}</p>
                 </div>
                 <div class="right floated right aligned eight wide column">

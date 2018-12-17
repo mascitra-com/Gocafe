@@ -1,5 +1,5 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Staff Management')
+@section('page_title', 'Staf')
 
 @section('styles')
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -11,17 +11,17 @@
 	<div class="col-xs-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title pull-left"><i class="fa fa-fw fa-users"></i> Staff Management</h3>
+				<h3 class="panel-title pull-left"><i class="fa fa-fw fa-users"></i> Manajemen Staf</h3>
 				<div class="btn-group btn-group-sm pull-right" role="group">
-					<a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh"></i> <span class="hidden-sm">refresh</span></a>
-					<a class="btn btn-default" href="{{ url('staff/create') }}"><i class="fa fa-fw fa-plus"></i> <span class="hidden-sm">new</span></a>
-					<button class="btn btn-default" data-toggle="modal" data-target="#import-dialog"><i class="fa fa-fw fa-upload"></i> <span class="hidden-sm">import</span></button>
+					<a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh"></i> <span class="hidden-sm">Segarkan</span></a>
+					<a class="btn btn-default" href="{{ url('staff/create') }}"><i class="fa fa-fw fa-plus"></i> <span class="hidden-sm">Tambah</span></a>
+					<button class="btn btn-default" data-toggle="modal" data-target="#import-dialog"><i class="fa fa-fw fa-upload"></i> <span class="hidden-sm">Import</span></button>
 				</div>
 				<!-- QUICK SEARCH -->
 				<form action="#" class="pull-right hidden-xs">
 					<div class="form-group">
 						<div class="input-group input-group-sm">
-							<input type="text" class="form-control" placeholder="search">
+							<input type="text" class="form-control" placeholder="Cari">
 							<span class="input-group-btn">
 								<button class="btn btn-default"><i class="fa fa-search"></i></button>
 							</span>
@@ -34,13 +34,13 @@
 				<table class="table table-stripped table-hover table-bordered">
 					<thead>
 						<tr>
-							<th class="text-center">Staff ID</th>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th class="text-center text-nowrap">Cafe Branch</th>
-							<th class="text-center text-nowrap">Position</th>
-							<th class="text-center text-nowrap">Gender</th>
-							<th class="text-center text-nowrap">Action</th>
+							<th class="text-center">ID Staf</th>
+							<th>Nama Depan</th>
+							<th>Nama Belakang</th>
+							<th class="text-center text-nowrap">Penempatan</th>
+							<th class="text-center text-nowrap">Posisi</th>
+							<th class="text-center text-nowrap">Jenis Kelamin</th>
+							<th class="text-center text-nowrap">Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -78,8 +78,8 @@
 							<td class="text-center text-nowrap">{{ $staff->id }}</td>
 							<td>{{ $staff->first_name }}</td>
 							<td>{{ $staff->last_name }}</td>
-							<td class="text-center text-nowrap">{{ $staff->branches->id }}</td>
-							<td class="text-center text-nowrap">{{ $staff->position->title }}</td>
+							<td class="text-center text-nowrap">{{ $staff->branches->district->name }}</td>
+							<td class="text-center text-nowrap">{{ $staff->position_id == 1 ? 'Kasir' : ($staff->position_id == 2 ? 'Pramusaji' : ($staff->position_id == 3 ? 'Juru Masak' : ''))}}</td>
 							<td class="text-center text-nowrap">@if($staff->gender === '0') Laki-Laki @else Perempuan @endif</td>
 							<td class="text-center text-nowrap">
 								<a href="{{ url('staff/'.$staff->id.'/edit') }}" class="btn btn-default btn-xs"><i class="fa fa-info-circle"></i></a>
@@ -91,32 +91,7 @@
 				</table>
 			</div>
 			<div class="panel-footer">
-				<span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 02/01/2016 18:00</span>
-				<nav aria-label="Page navigation" class="pull-right">
-					<ul class="pagination pagination-sm">
-						<li>
-							<span aria-hidden="true">Show</span>
-						</li>
-						<li><a href="#">10</a></li>
-						<li><a href="#">50</a></li>
-						<li><a href="#">100</a></li>
-						<li>
-							<a href="#" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
-							</a>
-						</li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li>
-							<a href="#" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-							</a>
-						</li>
-					</ul>
-				</nav>
+				<span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 01-11-2018 18:00</span>
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -142,7 +117,7 @@
 						<input type="file" name="import_excel">
 					</div>
 					<button class="btn btn-primary" type="submit">Upload</button>
-					<a href="{{ url('staff/download') }}" class="btn btn-default"><i class="fa fa-download"></i> download format file</a>
+					<a href="{{ url('staff/download') }}" class="btn btn-default"><i class="fa fa-download"></i> Download Format File</a>
 				</form>
 			</div>
 		</div>

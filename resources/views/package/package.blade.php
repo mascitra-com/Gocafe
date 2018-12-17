@@ -1,21 +1,21 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Package')
+@section('page_title', 'Paket')
 
 @section('content')
 <div class="row">
 	<div class="col-xs-12">
 		<div class="panel panel-theme">
 			<div class="panel-heading">
-				<h3 class="panel-title pull-left"><i class="fa fa-cube"></i> Package Bundle</h3>
+				<h3 class="panel-title pull-left"><i class="fa fa-cube"></i> Manajemen Paket</h3>
 				<div class="btn-group btn-group-sm pull-right" role="group">
-					<a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh" title="refresh page"></i> <span class="hidden-sm">refresh</span></a>
-					<a href="{{URL('packages/create')}}" class="btn btn-default" href="#" title="add new"><i class="fa fa-fw fa-plus"></i> <span class="hidden-sm">new</span></a>
+					<a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh" title="refresh page"></i> <span class="hidden-sm">Segarkan</span></a>
+					<a href="{{URL('packages/create')}}" class="btn btn-default" href="#" title="add new"><i class="fa fa-fw fa-plus"></i> <span class="hidden-sm">Tambah</span></a>
 				</div>
 				<!-- QUICK SEARCH -->
 				<form action="#" class="pull-right hidden-xs">
 					<div class="form-group">
 						<div class="input-group input-group-sm">
-							<input type="text" class="form-control" placeholder="search">
+							<input type="text" class="form-control" placeholder="Cari">
 							<span class="input-group-btn">
 								<button class="btn btn-default"><i class="fa fa-search"></i></button>
 							</span>
@@ -28,8 +28,8 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<td colspan="2">Package Info</td>
-							<td class="text-center">Price</td>
+							<td colspan="2">Info Paket</td>
+							<td class="text-center">Harga</td>
 							<td></td>
 						</tr>
 					</thead>
@@ -53,7 +53,6 @@
 				</table>
 			</div>
 			<div class="panel-footer">
-				<span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 02/01/2016 18:00</span>
 				<nav aria-label="Page navigation" class="pull-right">
 					<ul class="pagination pagination-sm">
 						<li>

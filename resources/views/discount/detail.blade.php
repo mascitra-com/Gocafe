@@ -1,12 +1,12 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Promotion')
+@section('page_title', 'Detail Promosi')
 
 @section('content')
     <div class="row">
         <div class="col-xs-12">
             <div class="panel panel-theme">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Edit Promotion</h4>
+                    <h4 class="panel-title">Edit Promosi</h4>
                 </div>
                 <form action="{{ url('discount/'.$discount->id) }}" method="POST">
                     {{ csrf_field() }}
@@ -15,14 +15,14 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="name">Promotion Name</label>
-                                    <input type="text" class="form-control" name="name" value="{{ $discount->name }}" placeholder="Discount Name"
+                                    <label for="name">Nama</label>
+                                    <input type="text" class="form-control" name="name" value="{{ $discount->name }}" placeholder="Nama Diskon"
                                            required/>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="value">Discount (%)</label>
+                                    <label for="value">Diskon (%)</label>
                                     <div class="input-group">
                                         <input type="number" name="value" min="1" max="100" class="form-control" value="{{ $discount->value * 100 }}"
                                                required/>
@@ -34,29 +34,29 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="start_date">Start Date</label>
+                                    <label for="start_date">Mulai</label>
                                     <input type="date" name="start_date" class="form-control" value="{{ date('Y-m-d', strtotime($discount->start_date)) }}"
-                                           placeholder="Start Date"/>
-                                    <p class="help-block">* Leave it blank if start from today</p>
+                                           placeholder="Tanggal Mulai"/>
+                                    <p class="help-block">* Kosongkan jika di mulai dari hari ini</p>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="expired_date">Expiration Date</label>
+                                    <label for="expired_date">Selesai</label>
                                     <input type="date" name="expired_date" class="form-control" value="{{ date('Y-m-d', strtotime($discount->expired_date)) }}"
-                                           placeholder="Expiration Date"/>
-                                    <p class="help-block">* Leave it blank if no expiration date</p>
+                                           placeholder="Tanggal Selesai"/>
+                                    <p class="help-block">* Kosongkan jika ingin manual menonaktifkan promosi ini</p>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="description">Description</label>
+                            <label for="description">Deskripsi</label>
                             <textarea class="form-control" name="description"
-                                      placeholder="Discount Description">{{ $discount->description }}</textarea>
+                                      placeholder="Deskripsi Diskon">{{ $discount->description }}</textarea>
                         </div>
                         <div class="panel-footer">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                            <button type="reset" class="btn btn-warning">Clear</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="reset" class="btn btn-warning">Reset</button>
                         </div>
                 </form>
             </div>

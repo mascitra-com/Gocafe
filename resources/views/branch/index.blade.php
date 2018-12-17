@@ -1,5 +1,5 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Cafe Branches')
+@section('page_title', 'Lokasi Toko')
 
 @section('content')
     @if (count($errors) > 0)
@@ -16,34 +16,34 @@
             {{ session('status') }}
         </div>
     @endif
-    <div class="content-title">Branches Management</div>
+    <div class="content-title">Manajemen Lokasi Toko</div>
     <div class="row break-20">
         <div class="col-xs-12 nopadding">
             <div class="panel panel-theme">
                 <div class="panel-heading">
-                    <h3 class="panel-title pull-left">Branches</h3>
+                    <h3 class="panel-title pull-left">Lokasi</h3>
                     <div class="btn-group btn-group-sm pull-right" role="group">
-                        <a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh"></i> <span class="hidden-sm">Refresh</span></a>
+                        <a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh"></i> <span class="hidden-sm">Segarkan</span></a>
                         <button class="btn btn-default" data-toggle="modal" data-target="#add-branches"><i
-                                    class="fa fa-fw fa-plus"></i> <span class="hidden-sm">New</span></button>
+                                    class="fa fa-fw fa-plus"></i> <span class="hidden-sm">Tambah</span></button>
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="panel-body table-responsive table-full">
                     <table class="table table-stripped">
                         <thead>
-                            <th>Nama Cabang</th>
                             <th>Lokasi</th>
                             <th>Alamat</th>
                             <th>Jam Buka</th>
                             <th>Jam Tutup</th>
                             <th>Jumlah Meja</th>
+                            <th>Status</th>
                         </thead>
                         <tbody>
                         @foreach($branches as $branch)
                             <tr>
-                                <td>Cabang {{ $branch->district->name }}</td>
                                 <td>
+                                    {{ $branch->district->name }},
                                     {{ $branch->city->name }},
                                     {{ $branch->province->name }}
                                 </td>
@@ -51,7 +51,8 @@
                                 <td>{{ $branch->open_hours }}</td>
                                 <td>{{ $branch->close_hours }}</td>
                                 <td>{{ $branch->number_of_tables }} Meja</td>
-                                <td class="text-right"><a href="{{ url('branch/'.$branch->id.'/edit') }}" class="btn btn-xs btn-default"><i class="fa fa-info-circle fa-fw"></i> detail</a></td>
+                                <td>{{ $branch->status == 'on' ? "Buka" : "Tutup" }}</td>
+                                <td class="text-right"><a href="{{ url('branch/'.$branch->id.'/edit') }}" class="btn btn-xs btn-default"><i class="fa fa-info-circle fa-fw"></i> Detail</a></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -83,13 +84,13 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">New Branches</h4>
+                    <h4 class="modal-title">Lokasi Baru</h4>
                 </div>
                 <div class="modal-body">
                     <form action="{{ url("branch") }}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="location">Location</label>
+                            <label for="location">Lokasi</label>
                             <div class="row">
                                 <div class="col-xs-12 col-md-4">
                                     <select name="province_id" class="form-control" id="provinces">
@@ -112,34 +113,34 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="">Address</label>
+                            <label for="">Alamat</label>
                             <textarea name="address" class="form-control" placeholder="Branch address"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="">Phone Number</label>
+                            <label for="">Nomor Telepon / HP</label>
                             <input type="text" class="form-control" name="phone" placeholder="Phone Number">
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="">Open Hours</label>
+                                    <label for="">Jam Buka</label>
                                     <input type="text" class="form-control" name="open_hours" placeholder="Open Hours">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="">Close Hours</label>
+                                    <label for="">Jam Tutup</label>
                                     <input type="text" class="form-control" name="close_hours" placeholder="Close Hours">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="">Number of Tables</label>
+                            <label for="">Jumlah Meja</label>
                             <input type="number" class="form-control" name="number_of_tables" placeholder="Number of Tables">
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary"><i class="fa fa-save fa-fw"></i> save</button>
-                            <button class="btn btn-default"><i class="fa fa-refresh fa-fw"></i> reset</button>
+                            <button class="btn btn-primary"><i class="fa fa-save fa-fw"></i> Simpan</button>
+                            <button class="btn btn-default"><i class="fa fa-refresh fa-fw"></i> Reset</button>
                         </div>
                     </form>
                 </div>

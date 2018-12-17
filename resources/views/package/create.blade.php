@@ -1,5 +1,5 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Create Package')
+@section('page_title', 'Tambah Paket')
 
 @section('content')
 <form>
@@ -7,32 +7,32 @@
 		<div class="col-xs-12 col-md-4">
 			<div class="panel panel-theme">
 				<div class="panel-heading">
-					<h3 class="panel-title">Package Info</h3>
+					<h3 class="panel-title">Info Paket</h3>
 				</div>
 				<div class="panel-body">
 					<div class="form-group">
-						<label for="name">Name</label>
-						<input type="text" class="form-control" name="name" placeholder="package name" required/>
+						<label for="name">Nama</label>
+						<input type="text" class="form-control" name="name" placeholder="Nama Paket" required/>
 					</div>
 					<div class="form-group">
-						<label for="description">Description</label>
-						<textarea class="form-control" name="description" placeholder="package description"></textarea>
+						<label for="description">Deskripsi</label>
+						<textarea class="form-control" name="description" placeholder="Deskripsi Paket"></textarea>
 					</div>
 					<div class="form-group">
-						<label for="">Price</label>
-						<input type="number" name="price" min="0" class="form-control" placeholder="price" required/>
+						<label for="">Harga</label>
+						<input type="number" name="price" min="0" class="form-control" placeholder="Harga Paket" required/>
 					</div>
 				</div>
 				<div class="panel-footer">
-					<button class="btn btn-primary" type="submit">Save</button>
-					<button class="btn btn-warning" type="reset">Clear</button>
+					<button class="btn btn-primary" type="submit">Simpan</button>
+					<button class="btn btn-warning" type="reset">Reset</button>
 				</div>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-8">
 			<div class="panel panel-theme">
 				<div class="panel-heading">
-					<h3 class="panel-title">Menu On Package</h3>
+					<h3 class="panel-title">Menu pada Paket</h3>
 				</div>
 				<div class="panel-body table-responsive table-full">
 					<table class="table table-striped table-hover table-menu">
@@ -42,7 +42,7 @@
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="reset"><i class="fa fa-close"></i></button>
                                     </span>
-									<input type="text" list="data-list" class="form-control" placeholder="Search Menu" autocomplete="off">
+									<input type="text" list="data-list" class="form-control" placeholder="Cari Menu" autocomplete="off">
 									<datalist id="data-list">
 										@foreach($menus as $menu)
 										<option value="{{ $menu->name . '|' . $menu->id }}" />

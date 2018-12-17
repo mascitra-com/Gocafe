@@ -56,7 +56,7 @@
 				</table>
 			</div>
 			<div class="panel-footer">
-				<span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 02/01/2016 18:00</span>
+				<span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 01-11-2018 18:00</span>
 				<nav aria-label="Page navigation" class="pull-right">
 					<ul class="pagination pagination-sm">
 						<li>

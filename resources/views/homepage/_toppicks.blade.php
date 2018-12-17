@@ -2,7 +2,7 @@
     <div class="ui text">
         <div class="ui left aligned grid" id="top-picks">
             <div class="eight wide column">
-                <h3>Jelang Ramadhan, Berbuka dan Sahur, Kulinerae!</h3>
+                <h3>Kuliner Pilihan!</h3>
             </div>
             <div class="right floated right aligned eight wide column">
                 <a href="{{ url('recommended-shop') }}">Lihat Semua</a>

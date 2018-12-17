@@ -6,12 +6,14 @@ use App\Cafe;
 use App\CafeBranch;
 use App\CategoryMenu;
 use App\Menu;
+use App\Owner;
 use App\Package;
 use App\Review;
 use App\Staff;
 use App\Transaction;
 use App\TransactionDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -29,11 +31,18 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function payment()
     {
-        // Get List of Category and All Menus from first Category
-        $categories = CategoryMenu::all()->where('cafe_id', Staff::getCafeIdByStaffIdNowLoggedIn())->sortBy('name');
-        $menus = Cafe::findOrFail(Staff::getCafeIdByStaffIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
+	    if(Auth::user()->role == 'owner'){
+//		    $cafeId = Owner::getCafeIdByOwnerIdNowLoggedIn();
+		    exit('Halaman Tidak Tersedia');
+	    } else {
+		    $cafeId = Staff::getCafeIdByStaffIdNowLoggedIn();
+	    }
+	    // Get List of Category and All Menus from first Category
+	    $categories = CategoryMenu::all()->where('cafe_id', Staff::getCafeIdByStaffIdNowLoggedIn())->sortBy('name');
+        $menus = Cafe::findOrFail($cafeId)->menus->where('category_id', $categories->first()->id);
         foreach ($menus as $key => $value) {
             $thumbnail = Menu::getThumbnail($value->id);
             $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
@@ -42,6 +51,7 @@ class TransactionController extends Controller
         $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
         $table = $this->makeTableLayout($numberOfTables);
         return view('transaction.payment', compact('categories', 'menus', 'numberOfTables', 'table'));
+        // return "hy";
     }
 
     /**
@@ -51,19 +61,25 @@ class TransactionController extends Controller
      */
     public function order()
     {
-        // Get List of Category and All Menus from first Category
-        $categories = CategoryMenu::all()->where('cafe_id', Staff::getCafeIdByStaffIdNowLoggedIn())->sortBy('name');
-        $menus = Cafe::findOrFail(Staff::getCafeIdByStaffIdNowLoggedIn())->menus->where('category_id', $categories->first()->id);
-        $thumbnail = Menu::getThumbnail($menus[0]->id);
-        $thumbnail = str_replace('storage/product/', 'img/cache/medium-product/', $thumbnail[0]);
-        $menus[0]->thumbnail = $thumbnail;
-        $firstMenu = $menus[0];
+	    if(Auth::user()->role == 'owner'){
+//		    $cafeId = Owner::getCafeIdByOwnerIdNowLoggedIn();
+		    exit('Halaman Tidak Tersedia');
+	    } else {
+		    $cafeId = Staff::getCafeIdByStaffIdNowLoggedIn();
+		    $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
+	    }
+	    // Get List of Category and All Menus from first Category
+	    $categories = CategoryMenu::all()->where('cafe_id', $cafeId)->sortBy('name');
+	    $menus = Cafe::findOrFail($cafeId)->menus->where('category_id', $categories->first()->id);
+	    $thumbnail = Menu::getThumbnail($menus->first()->id);
+	    $thumbnail = str_replace('storage/product/', 'img/cache/medium-product/', $thumbnail[0]);
+	    $menus->first()->thumbnail = $thumbnail;
+	    $firstMenu = $menus->first();
         foreach ($menus as $key => $value) {
             $thumbnail = Menu::getThumbnail($value->id);
             $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
             $menus[$key]->thumbnail = $thumbnail;
         }
-        $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
         $packages = Package::where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn())->with('menus')->get();
         return view('transaction.order', compact('categories', 'menus', 'firstMenu', 'numberOfTables', 'reviews', 'packages'));
     }
@@ -183,7 +199,7 @@ class TransactionController extends Controller
     public function update(Request $request, $transactionId)
     {
         $transaction = Transaction::find($transactionId);
-        $transaction->status = $request->type === 'cash' ? '1' : '-1'; // TODO Make This as Status Payment
+        $transaction->status = $request->type == 'cash' ? '1' : '-1'; // TODO Make This as Status Payment
         if($transaction->status == -1) {
             $transaction->card_name = $request->card_name;
             $transaction->card_number = $request->card_number;
@@ -228,5 +244,10 @@ class TransactionController extends Controller
         }
         return $res . '</table>';
     }
+
+	public function detail ($id) {
+		$transaction = Transaction::where('id', $id)->get();
+		return response()->json(['transaction' => $transaction]);
+	}
 
 }

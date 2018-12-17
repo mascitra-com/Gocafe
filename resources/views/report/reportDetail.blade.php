@@ -21,6 +21,7 @@
 							<th>Kode Item</th>
 							<th>Jumlah</th>
 							<th class="text-center" width="15%">Harga</th>
+							<th class="text-center" width="15%">Diskon</th>
 							<th class="text-center" width="15%">Total Harga</th>
 						</tr>
 					</thead>
@@ -31,20 +32,21 @@
 							<td>{{ $detail->item_id }}</td>
 							<td>{{ $detail->amount }} Item</td>
 							<td class="text-right" style="padding-right: 2em">Rp. {{ number_format($detail->price, 0, ',', '.') }},-</td>
-							<td class="text-right" style="padding-right: 2em">Rp. {{ number_format($detail->price * $detail->amount, 0, ',', '.') }},-</td>
+							<td class="text-right" style="padding-right: 2em">Rp. {{ number_format($detail->discount * $detail->price, 0, ',', '.') }},-</td>
+							<td class="text-right" style="padding-right: 2em">Rp. {{ number_format(($detail->price * $detail->amount) - ($detail->discount * $detail->price), 0, ',', '.') }},-</td>
                        </tr>
                         @endforeach @endif
 					</tbody>
                     <tfoot>
                     <tr>
-                        <th class="text-center" colspan="4">Total Transaksi</th>
+                        <th class="text-center" colspan="5">Total Transaksi</th>
                         <th class="text-center" >Rp. <span id="total"><?=!empty($transaction) ? number_format($transaction[0]->total_payment, 0, ',', '.') : ''?></span>,-</th>
                     </tr>
                     </tfoot>
 				</table>
 			</div>
 			<div class="panel-footer">
-				<span class="text-grey">last edited by admin 12-02-2017 16:30</span>
+				<span class="text-grey">last edited by admin 01-11-2018 16:30</span>
 			</div>
 		</div>
 	</div>

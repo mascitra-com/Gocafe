@@ -58,6 +58,11 @@ class BranchController extends Controller
                 ->withErrors('Location must be selected')
                 ->withInput();
         }
+	    if(!isset($request->status)) {
+		    $request->request->add([
+			    'status' => 'off'
+		    ]);
+	    }
         // Save request except 3 parameters which won't be store to the database
         $cafeBranch = new CafeBranch($request->all());
         $cafe->addBranch($cafeBranch, Cafe::getCafeIdByUserIdNowLoggedIn());
@@ -89,8 +94,13 @@ class BranchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        CafeBranch::find($id)->update($request->all());
-        return redirect('branch')->with('status', 'Branch updated!');
+	    if(!isset($request->status)) {
+		    $request->request->add([
+			    'status' => 'off'
+		    ]);
+	    }
+	    CafeBranch::find($id)->update($request->all());
+	    return redirect('branch')->with('status', 'Branch updated!');
     }
 
     /**

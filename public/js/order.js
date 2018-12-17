@@ -31,7 +31,7 @@ function getProductDetail(idMenu) {
             $.each(response.menu, function (i, menu) {
                 $('#head-menu').html(menu.name);
                 $('#price').html("Rp. " + $.number(menu.price, 0, ',', '.') + ',-');
-                $('#discount').html("- Rp. " + $.number(menu.price * menu.discount, 0, ',', '.') + ',-');
+                $('#discount').html("Rp. " + $.number(menu.price * menu.discount, 0, ',', '.') + ',-');
                 $('#menu-desc').html(menu.description);
                 $('#btn-add').html('<button class="btn btn-primary" onclick="addMenuToCheck(\'' + menu.id +'\')" onmouseup=\"alert(\'Menu/Paket Sudah di Tambahkan, Silahkan Lanjutkan Pesanan Anda.\')\"><i class="fa fa-plus"></i> Pesan</button>');
                 $('#big-thumbnail').attr('src', menu.thumbnail);

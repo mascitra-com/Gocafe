@@ -39,7 +39,7 @@
 				</table>
 			</div>
 			<div class="panel-footer">
-				<span class="text-grey">last edited by admin 12-02-2017 16:30</span>
+				<span class="text-grey">last edited by admin 01-11-2018 16:30</span>
 			</div>
 		</div>
 	</div>

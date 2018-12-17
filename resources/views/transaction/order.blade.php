@@ -71,7 +71,7 @@
                                 </tr>
                                 <tr>
                                     <td style="font-weight: bold; font-size: 16px" colspan="2">Total Diskon</td>
-                                    <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">- Rp. 0</label></td>
+                                    <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 16px">Rp. 0</label></td>
                                 </tr>
                                 <tr>
                                     <td style="font-weight: bold; font-size: 16px" colspan="2">Total Pembayaran</td>
@@ -121,7 +121,7 @@
                                     <td class="text-primary">Diskon</td>
                                     <td id="discount">
                                         @if($firstMenu->discount)
-                                            - Rp. {{ number_format($firstMenu->price * $firstMenu->discount, 0, ',', '.') }},-
+                                            Rp. {{ number_format($firstMenu->price * $firstMenu->discount, 0, ',', '.') }},-
                                         @else
                                             -
                                         @endif

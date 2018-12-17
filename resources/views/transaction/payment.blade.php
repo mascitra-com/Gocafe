@@ -50,7 +50,7 @@
                                         <td class="price text-right">
                                             Rp. {{ number_format($menu->price, 0, ',', '.') }} <br>
                                             @if($menu->discount)
-                                                (- Rp. {{ number_format($menu->discount * $menu->price, 0, ',', '.') }})
+                                                (Rp. {{ number_format($menu->discount * $menu->price, 0, ',', '.') }})
                                             @endif
                                         </td>
                                     </tr>
@@ -96,7 +96,7 @@
                                         </tr>
                                         <tr>
                                             <td style="font-weight: bold; font-size: 11pt" colspan="2">Total Diskon</td>
-                                            <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 12pt">- Rp. 0</label></td>
+                                            <td colspan="2" class="text-right"><label class="discount price" for="price" style="font-size: 12pt">Rp. 0</label></td>
                                         </tr>
                                         <tr>
                                             <td style="font-weight: bold; font-size: 11pt" colspan="2">Total Pembayaran</td>
@@ -182,13 +182,17 @@
                 url: '/transaction/getMenusByTableNumber/' + this.value,
                 dataType: 'json',
                 success: function (response) {
-                    if(response.transactionId['id']) {
+                    var transactionId = response.transactionId['id'];
+                    if(transactionId) {
                         $.each(response.items, function (i, item) {
-                            addMenuToCheck(item.item_id, item.amount);
+                            addMenuToCheck(item.item_id, item.amount, false);
                             addPackageToCheck(item.item_id, item.amount);
                         });
+                        getPaymentDetail(transactionId);
                         $('#form-payment').attr('action', url + '/payment/' + response.transactionId['id'])
-                            .append('{{ method_field('PATCH') }}');
+                    .append('{{ method_field('PATCH') }}');
+                    } else {
+                        $("label.discount").html("Rp. 0");
                     }
                 }
             })

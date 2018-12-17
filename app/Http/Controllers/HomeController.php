@@ -43,6 +43,7 @@ class HomeController extends Controller
             if($code_item === "MCF"){
                 $menu = Menu::find($value->item_id);
                 $favProducts[$key] = $menu;
+                $favProducts[$key]->type = 'Menu';
             }
             if($code_item === "PKG"){
                 // TODO Fix this so that Package will have image to view

@@ -1,21 +1,21 @@
 @extends('_layout/dashboard/index')
-@section('page_title', 'Promotion')
+@section('page_title', 'Diskon')
 
 @section('content')
 <div class="row">
 	<div class="col-xs-12">
 		<div class="panel panel-theme">
 			<div class="panel-heading">
-				<h3 class="panel-title pull-left"><i class="fa fa-fw fa-percent"></i> Promotion</h3>
+				<h3 class="panel-title pull-left"><i class="fa fa-fw fa-percent"></i> Diskon</h3>
 				<div class="btn-group btn-group-sm pull-right" role="group">
-					<a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh" title="refresh page"></i> <span class="hidden-sm">refresh</span></a>
-					<a href="{{URL('discount/create')}}" class="btn btn-default" href="#" title="add new"><i class="fa fa-fw fa-plus"></i> <span class="hidden-sm">new</span></a>
+					<a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh" title="refresh page"></i> <span class="hidden-sm">Segarkan</span></a>
+					<a href="{{URL('discount/create')}}" class="btn btn-default" href="#" title="add new"><i class="fa fa-fw fa-plus"></i> <span class="hidden-sm">Tambah</span></a>
 				</div>
 				<!-- QUICK SEARCH -->
 				<form action="#" class="pull-right hidden-xs">
 					<div class="form-group">
 						<div class="input-group input-group-sm">
-							<input type="text" class="form-control" placeholder="search">
+							<input type="text" class="form-control" placeholder="Cari">
 							<span class="input-group-btn">
 								<button class="btn btn-default"><i class="fa fa-search"></i></button>
 							</span>
@@ -29,10 +29,10 @@
 					<thead>
 						<tr>
 							<th class="text-center">#</th>
-							<th>Promotion Name</th>
-							<th>Description</th>
-							<th class="text-center">Discount (%)</th>
-							<th class="text-center">Expired Date</th>
+							<th>Nama</th>
+							<th>Deskripsi</th>
+							<th class="text-center">Diskon (%)</th>
+							<th class="text-center">Tanggal Selesai</th>
 							<th class="text-center">Status</th>
 							<th class="text-center"></th>
 						</tr>
@@ -52,7 +52,7 @@
                                     <td class="text-center">
                                         @php
                                         if($discount->expired_date){
-                                            $status = date('m/d/Y', strtotime($discount->expired_date)) < date('m/d/Y', time()) ? 'expired' : 'active';
+                                            $status = date('m/d/Y', strtotime($discount->expired_date)) < date('m/d/Y', time()) ? 'Kadaluwarsa' : 'Aktif';
                                         } else{
                                             $status = 'active';
                                         }
@@ -72,7 +72,7 @@
 				</table>
 			</div>
 			<div class="panel-footer">
-				<span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 02/01/2016 18:00</span>
+				<span class="panel-footer-text text-grey text-size-12 pull-left"><i class="fa fa-info-circle"></i> last edited at 01-11-2018 18:00</span>
 				<nav aria-label="Page navigation" class="pull-right">
 					<ul class="pagination pagination-sm">
 						<li>
