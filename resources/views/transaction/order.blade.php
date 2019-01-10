@@ -56,8 +56,8 @@
                                 <thead>
                                 <tr>
                                     <th width="5%"></th>
-                                    <th width="37.5%">Nama</th>
-                                    <th width="27.5%">Jumlah</th>
+                                    <th width="35%">Nama</th>
+                                    <th>Jumlah</th>
                                     <th width="25%">Total</th>
                                 </tr>
                                 </thead>
