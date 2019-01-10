@@ -81,11 +81,11 @@ Route::group(['middleware' => ['web']], function () {
     //--END DISCOUNTS
 
     //TRANSACTION
-    Route::get('payment', 'TransactionController@payment');
+    Route::get('payment', 'PaymentController@index');
+    Route::patch('payment/{paymentId}', 'PaymentController@update');
+    Route::get('payment/{paymentId}', 'PaymentController@detail');
+    Route::get('order', 'OrderController@index');
     Route::post('payment', 'TransactionController@store');
-    Route::patch('payment/{paymentId}', 'TransactionController@update');
-    Route::get('payment/{paymentId}', 'TransactionController@detail');
-    Route::get('order', 'TransactionController@order');
     Route::post('order', 'TransactionController@store');
     Route::get('transaction/getMenusByTableNumber/{transactionId}', 'TransactionController@getMenusByTableNumber');
     Route::get('transaction/getReviews/{itemId}', 'TransactionController@getReviewsByItemId');
