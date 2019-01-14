@@ -38,6 +38,22 @@ class ReportController extends Controller
         return view('report.report', compact('transactions'));
     }
 
+    /**
+     * Transaction Report for Staff
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function staff()
+    {
+        $transactions = Transaction::with('branch')
+            ->where('branch_id', CafeBranch::getBranchIdByUserNowLoggedIn())
+            ->where('status', '!=', 0)
+            ->latest()
+            ->whereMonth('created_at', DB::raw('MONTH(NOW())'))
+            ->get();
+        return view('report.report', compact('transactions'));
+    }
+
     public function report_filter($startDate, $endDate, $paymentType)
     {
         if($paymentType === '-') {

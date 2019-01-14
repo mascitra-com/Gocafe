@@ -36,6 +36,11 @@ class CafeBranch extends Model
         })->toArray();
     }
 
+    public static function getBranchIdByUserNowLoggedIn()
+    {
+        return CafeBranch::where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn())->first()->id;
+    }
+
     public function transaction()
     {
         return $this->hasMany(Transaction::class);

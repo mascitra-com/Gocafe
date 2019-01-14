@@ -69,7 +69,7 @@
                                 <div class="pull-right row" style="width: 225px">
                                     <label for="table_number" class="col-md-8" style="margin-top: .5em">Nomor Meja : </label>
                                     <h2 id="label_table_number"></h2>
-                                    <input type="hidden" id="table_number" value="">
+                                    <input type="hidden" id="table_number" name="table_number" value="">
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

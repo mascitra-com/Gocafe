@@ -127,7 +127,6 @@ class TransactionController extends Controller
             $data['status'] = $request->type;
         }
         $request->request->add($data);
-
         $transaction = new Transaction($request->except(array('ids_menu', 'amount', 'cash_received', 'refund', 'type')));
         $staff->saveTransaction($transaction, Staff::getStaffIdNowLoggedIn());
         foreach ($details as $detail) {

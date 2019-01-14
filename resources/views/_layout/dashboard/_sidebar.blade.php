@@ -33,6 +33,8 @@
                     <li class="nav-title">Transaksi</li>
                     <li><a href="{{ url('order') }}"><i class="fa fa-fw fa-coffee"></i><span class="hidden-sm">Pemesanan</span></a>
                     <li><a href="{{ url('payment') }}"><i class="fa fa-fw fa-money"></i><span class="hidden-sm">Pembayaran</span></a>
+                    <li class="nav-title">Laporan</li>
+                    <li><a href="{{ url('report/staff') }}"><i class="fa fa-fw fa-money"></i><span class="hidden-sm">Transaksi</span></a>
                 @endif
             @else
             </li><li class="nav-title">Information</li>
