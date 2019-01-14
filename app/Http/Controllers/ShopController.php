@@ -18,7 +18,7 @@ class ShopController extends Controller
      */
     public function recommended()
     {
-        $recommended = Cafe::where('logo_path', '<>', 'null')->limit(5)->get();
+        $recommended = Cafe::has('menus', '>=', '5')->where('logo_path', '<>', 'null')->limit(5)->get();
         foreach ($recommended as $key => $recommend) {
             $latestMenu = Menu::where('cafe_id', $recommend->id)->limit(5)->get();
             foreach ($latestMenu as $keyMenu => $value) {

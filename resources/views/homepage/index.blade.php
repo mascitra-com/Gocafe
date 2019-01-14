@@ -82,11 +82,8 @@
         .ui.transparent.left.corner.label {
             border-color: transparent;
         }
-        .img-hit, .img-pick{
+        .img-hit, .img-pick, .logo-pick {
             /* optional way, set loading as background */
-            background: url('/images/loading.gif') no-repeat 50% 50%;
-        }
-        .logo-pick {
             background: url('/images/loading.gif') no-repeat 50% 50%;
         }
     </style>
@@ -94,29 +91,10 @@
 @section('javascripts')
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
-    <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
     <script src="{{ asset('js/category.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('.img-ads').lazy({
-                delay: 250
-            });
-            $('.logo-pick').lazy({
-                delay: 250
-            });
-            $('.img-pick').lazy({
-                delay: 250
-            });
-            $('.img-hit').lazy({
-                delay: 250
-            });
-            $('img').lazy({
-                delay: 250,
-                afterLoad: function() {
-                    $('div.image').imagefill();
-                    $('a.image').imagefill();
-                }
-            });
+            $('img').lazy();
             var jssor_ads_options = {
                 $AutoPlay: 1,
                 $Idle: 3000,
