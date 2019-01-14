@@ -27,10 +27,6 @@
                     <i class="twitter icon"></i>
                     Twitter
                 </button>
-                <button class="ui google plus button">
-                    <i class="google plus icon"></i>
-                    Google Plus
-                </button>
             </div>
             <div class="ui segment" style="margin-bottom: 1em">
                 <div class="ui grid">
