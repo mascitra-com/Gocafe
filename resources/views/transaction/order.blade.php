@@ -1,23 +1,13 @@
 @extends('_layout/transaction/index')
 @section('page_title', 'Pemesanan & Pembayaran')
 
+
 @section('navbar-right')
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <div class="pull-right row" style="width: 225px; margin-top: .25em">
-                    <span for="table_number" class="col-md-6" style="margin-top: .5em; color:#fff;"><b>Nomor Meja</b></span>
-                    <select id="table_number" class="form-control col-md-6" style="width: 75px">
-                        <option value="">Pilih</option>
-                        @for($i = 1; $i <= $numberOfTables; $i++)
-                            <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
-                    </select>
-                </div>
-            </li>
-        </ul>
+    <div class="pull-right" style="margin-right: 1em">
+        <button class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#table-availability">Pilih Meja</button>
     </div>
 @endsection
+
 
 @section('content')
     <div id="wrapper">
@@ -41,7 +31,7 @@
                         <div class="row grid2">
                             <div class="list" id="product">
                                 @foreach($menus as $menu)
-                                    <button class="rectangle product" onclick="addMenuToCheck('{{ $menu->id }}')">
+                                    <button class="rectangle product" onclick="getProductDetail('{{ $menu->id }}')">
                                         <img src="{{ url($menu->thumbnail)}}" alt="Thumbnail">{{ $menu->name }}
                                     </button>
                                 @endforeach
@@ -51,12 +41,17 @@
                     <div class="col-md-4">
                         <form action="{{ url('order') }}" method="POST" onsubmit="return validateForm()">
                             {{ csrf_field() }}
-                            <input type="hidden" name="table_number" value="">
+                            <div class="panel-heading">
+                                <label for="table_number" class="col-md-6" style="margin-top: .5em">Nomor Meja : </label>
+                                <h2 id="label_table_number">-</h2>
+                                <input type="hidden" id="table_number" name="table_number" value="">
+                                <div class="clearfix"></div>
+                            </div>
                             <table class="table text-quintuple" id="bill">
                                 <thead>
                                 <tr>
                                     <th width="5%"></th>
-                                    <th width="35%">Nama</th>
+                                    <th width="30%">Nama</th>
                                     <th>Jumlah</th>
                                     <th width="25%">Total</th>
                                 </tr>
@@ -130,7 +125,7 @@
                                 <tr>
                                     <td>
                                         <div id="btn-add">
-                                            <button class="btn btn-primary" onclick="addMenuToCheck('{{ $firstMenu->id }}')" onmouseup="alert('Menu/Paket Sudah di Tambahkan, Silahkan Lanjutkan Pesanan Anda.')"><i class="fa fa-plus"></i> Pesan</button>
+                                            <button class="btn btn-primary" onclick="addMenuToCheck('{{ $firstMenu->id }}')"><i class="fa fa-plus"></i> Pesan</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -184,6 +179,21 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="table-availability">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn btn-primary pull-right" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true"><i class="fa fa-close"></i></span></button>
+                    <h2>Ketersediaan Meja</h2>
+                </div>
+                <div class="modal-body">
+                    {!! $table !!}
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('styles')
@@ -231,18 +241,35 @@
             });
         });
         var url = "{{ url('') }}";
-        $('#table_number').on('change', function() {
+
+        function getMenusByTableNumber(id) {
+            $("input#table_number").val(id);
+            $("#bill").find("tbody").empty();
+            $("label.total").html('Rp. 0');
+            $("#label_table_number").html(id);
+            $("label.discount").html('Rp. 0');
+            $("label.final").html('Rp. 0');
+            $('input[name="_method"]').remove();
+            $('#form-payment').attr('action', url + '/payment');
             $.ajax({
-                url: '/transaction/getMenusByTableNumber/' + this.value,
+                url: '/transaction/getMenusByTableNumber/' + id,
                 dataType: 'json',
                 success: function (response) {
-                    if(response.transactionId['id']) {
-                        confirm('Meja Ini Masih Terdapat Transaksi yg Belum Dibayarkan / Sudah Di Pesan!');
-                        $("select#table_number").val("");
+                    var transactionId = response.transactionId['id'];
+                    if(transactionId) {
+                        $.each(response.items, function (i, item) {
+                            addMenuToCheck(item.item_id, item.amount, false);
+                            addPackageToCheck(item.item_id, item.amount);
+                        });
+                        getPaymentDetail(transactionId);
+                        $('#form-payment').attr('action', url + '/payment/' + response.transactionId['id'])
+                            .append('{{ method_field('PATCH') }}');
+                    } else {
+                        $("label.discount").html("Rp. 0");
                     }
+                    $('#table-availability').modal('hide');
                 }
-            });
-            $('input[name ="table_number"]').val($('#table_number').val());
-        });
+            })
+        }
     </script>
 @endsection

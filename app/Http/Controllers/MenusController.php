@@ -173,7 +173,7 @@ class MenusController extends Controller
             $menus = Menu::where('category_id', $idCategory)->get();
             foreach ($menus as $key => $value) {
                 $thumbnail = Menu::getThumbnail($value->id);
-                $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
+                $thumbnail = str_replace('storage/product/', 'img/cache/tiny-product/', $thumbnail[0]);
                 $menus[$key]->thumbnail = $thumbnail;
             }
         }

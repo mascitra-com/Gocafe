@@ -2,6 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Cafe;
+use App\CafeBranch;
+use App\CategoryMenu;
+use App\Menu;
+use App\Package;
+use App\Staff;
+use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +21,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function order()
+    public function index()
     {
         if (Auth::user()->role == 'owner') {
             exit('Halaman Tidak Tersedia');
@@ -36,6 +43,37 @@ class OrderController extends Controller
         }
         $packages = Package::where('cafe_id', Cafe::getCafeIdByUserIdNowLoggedIn())->with('menus')->get();
 
-        return view('transaction.order', compact('categories', 'menus', 'firstMenu', 'numberOfTables', 'reviews', 'packages'));
+        $numberOfTables = CafeBranch::getNumberOfTablesByStaffNowLoggedIn();
+        $table = $this->makeTableLayout($numberOfTables);
+        return view('transaction.order', compact('categories', 'menus', 'firstMenu', 'numberOfTables', 'reviews', 'packages', 'table'));
+    }
+
+    /**
+     * Get Table that contains table
+     *
+     * @param $totalCell - Sum of Table
+     *
+     * @return string
+     */
+    private function makeTableLayout($totalCell)
+    {
+        $tableNotAvailable = Transaction::getTableNotAvailable(CafeBranch::getBranchIdsByUserNowLoggedIn())->toArray();
+        $t = 0;
+        $tableNotAvailable = array_column($tableNotAvailable, 'table_number');
+        $res = '<table width="100" border="1" class="table table-bordered"><tr>';
+        for ($i = 1; $i <= $totalCell; $i++) {
+            if (isset($tableNotAvailable[$t]) && in_array($i, $tableNotAvailable)) {
+                $td = '<td height="100" align="center" class="danger"><a href="#" onclick="alert(\'Meja telah terisi. Silahkan Pilih Meja Lain.\')" class="table-number"><h2>'.$i.'</h2></a>';
+                $t++;
+            } else {
+                $td = '<td height="100" align="center" class="success"><a href="#" onclick="javascript:getMenusByTableNumber('.$i.')" class="table-number"><h2>'.$i.'</h2></a>';
+            }
+            if ($i % 8 == 0) {
+                $res .= $td . '</td></tr><tr>';
+            } else {
+                $res .= $td . '</td>';
+            }
+        }
+        return $res . '</table>';
     }
 }

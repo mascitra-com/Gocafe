@@ -112,7 +112,7 @@ function showMenus(idCategory) {
                 var name = menu.name;
                 var price = $.number(menu.price, 0, '', '.');
                 var discount = "Rp. " + $.number(menu.price * menu.discount, 0, '', '.');
-                var markup = "<tr onclick=\"addMenuToCheck('" + id + "')\" id='tr-menu' class='tr-selection text-quintuple'><td><h5>" + name + "</h5></td><td class='price text-right'>Rp. " + price + " <br>"+ (discount != 'Rp. 0' ? discount  : '') +"</td></tr>";
+                var markup = "<tr onclick=\"addMenuToCheck('" + id + "')\" id='tr-menu' class='tr-selection text-quintuple'><td width='10px'><img src='"+menu.thumbnail+"' class='thumb'></td><td><h5>" + name + "</h5></td><td class='price text-right'>Rp. " + price + " <br>"+ (discount != 'Rp. 0' ? discount  : '') +"</td></tr>";
                 $("#menus").find('tbody').append(markup);
             });
         }
@@ -146,7 +146,7 @@ function set_new_final_payment() {
 function addMenuToCheck(idMenu, amount, order = true) {
     var table_number = document.getElementById("table_number").value;
     if(!table_number) {
-        alert('Silahkan Pilih Nomor Meja!')
+        $('#table-availability').modal('show');
     } else {
         $.ajax({
             url: '/menus/getMenu/' + idMenu,
@@ -178,6 +178,7 @@ function addMenuToCheck(idMenu, amount, order = true) {
                         update_refund();
                     }
                 });
+                $('#product-detail').modal('hide');
             }
         });
     }

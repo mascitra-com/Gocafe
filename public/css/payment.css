@@ -17,3 +17,24 @@ button.deleteMenu {
     cursor: pointer;
     overflow: hidden;
 }
+
+td a {
+    display: block;
+    width: 100%;
+    padding-top: 25%;
+    padding-bottom: 25%;
+    color: black;
+}
+
+td a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+td a.table-number {
+    vertical-align: middle;
+}
+
+.input-lg > option {
+    height: 100px;
+}

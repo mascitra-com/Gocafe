@@ -44,6 +44,7 @@
                                 @foreach($menus as $menu)
                                     <tr onclick="addMenuToCheck('{{ $menu->id }}')" id="tr-menu"
                                         class="tr-selection text-quintuple">
+                                        <td width="10px"><img src="{{url($menu->thumbnail)}}" class="thumb" alt=""></td>
                                         <td>
                                             <h5>{{ $menu->name }}</h5>
                                         </td>
@@ -66,13 +67,9 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title pull-left">Pembayaran</h3>
                                 <div class="pull-right row" style="width: 225px">
-                                    <label for="table_number" class="col-md-6" style="margin-top: .5em">Nomor Meja</label>
-                                    <select name="table_number" id="table_number" class="form-control col-md-6" style="width: 75px">
-                                        <option value="">Pilih</option>
-                                        @for($i = 1; $i <= $numberOfTables; $i++)
-                                            <option value="{{ $i }}">{{ $i }}</option>
-                                        @endfor
-                                    </select>
+                                    <label for="table_number" class="col-md-8" style="margin-top: .5em">Nomor Meja : </label>
+                                    <h2 id="label_table_number"></h2>
+                                    <input type="hidden" id="table_number" value="">
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -103,17 +100,14 @@
                                             <td colspan="2" class="text-right"><label class="final price" for="price" style="font-size: 14pt">Rp. 0</label></td>
                                         </tr>
                                         <tr>
-                                            <td style="font-weight: bold; font-size: 16px" colspan="2" rowspan="3">Jenis Pembayaran</td>
-                                            <td><input type="radio" name="type" id="cash" value="1" checked></td>
-                                            <td><label for="cash">Tunai</label></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding-left: 8px;"><input type="radio" name="type" id="credit" value="-1"></td>
-                                            <td><label for="type"><label for="credit">Kartu Kredit</label></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding-left: 8px;"><input type="radio" name="type" id="debit" value="-2"></td>
-                                            <td><label for="type"><label for="debit">Kartu Debit</label></label></td>
+                                            <td style="font-weight: bold; font-size: 16px" colspan="2">Jenis Pembayaran</td>
+                                            <td>
+                                                <select name="type" class="form-control input-lg">
+                                                    <option value="1">Tunai</option>
+                                                    <option value="-1">Kredit</option>
+                                                    <option value="-2">Debit</option>
+                                                </select>
+                                            </td>
                                         </tr>
                                         <tr class="credit_card">
                                             <td colspan="2"><label for="credit_name">Nama pada Kartu</label></td>
@@ -170,16 +164,18 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/df-number-format/2.1.6/jquery.number.min.js"></script>
     <script src="{{ url('js/payment.js') }}"></script>
     <script>
-        var url = "{{ url('') }}";
-        $('#table_number').on('change', function() {
+        var url = "{{ url('/') }}";
+        function getMenusByTableNumber(id) {
+            $("input#table_number").val(id);
             $("#bill").find("tbody").empty();
             $("label.total").html('Rp. 0');
+            $("#label_table_number").html(id);
             $("label.discount").html('Rp. 0');
             $("label.final").html('Rp. 0');
             $('input[name="_method"]').remove();
             $('#form-payment').attr('action', url + '/payment');
             $.ajax({
-                url: '/transaction/getMenusByTableNumber/' + this.value,
+                url: '/transaction/getMenusByTableNumber/' + id,
                 dataType: 'json',
                 success: function (response) {
                     var transactionId = response.transactionId['id'];
@@ -194,8 +190,9 @@
                     } else {
                         $("label.discount").html("Rp. 0");
                     }
+                    $('#table-availability').modal('hide');
                 }
             })
-        });
+        }
     </script>
 @endsection
