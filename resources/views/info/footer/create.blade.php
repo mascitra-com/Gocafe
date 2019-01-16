@@ -15,7 +15,7 @@
                     <h3 class="panel-title">{{ (isset($info)) ? 'Sunting' : 'Tambah' }} Menu</h3>
                 </div>
                 <div class="panel-body">
-                    <form action="@if(isset($info)) {{url('info/'.$info->id)}} @else {{url('info')}} @endif" method="POST" enctype="multipart/form-data">
+                    <form action="@if(isset($info)) {{url('admin/info/'.$info->id)}} @else {{url('admin/info')}} @endif" method="POST" enctype="multipart/form-data">
                         @if(isset($info)) {{ method_field('PATCH') }} @endif
                         {{ csrf_field() }}
                         <input type="hidden" name="type" value="1">

@@ -14,7 +14,7 @@
                     <h3 class="panel-title text-24 text-grey pull-left">Manajemen Informasi</h3>
                     <div class="btn-group btn-group-sm pull-right" role="group">
                         <a class="btn btn-default" href="#"><i class="fa fa-fw fa-refresh"></i></a>
-                        <a href="{{ url('info/create') }}" class="btn btn-default"><i class="fa fa-fw fa-plus"></i></a>
+                        <a href="{{ url('admin/info/create') }}" class="btn btn-default"><i class="fa fa-fw fa-plus"></i></a>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -33,17 +33,17 @@
                                 <tr>
                                     <td>
                                         @if(!$info->deleted_at)
-                                            <a href="{{ url("info/deactivate/$info->id")}}" class="label label-success">Aktif</a>
+                                            <a href="{{ url("admin/info/deactivate/$info->id")}}" class="label label-success">Aktif</a>
                                         @else
-                                            <a href="{{ url("info/activate/$info->id") }}" class="label label-danger">Nonaktif</a>
+                                            <a href="{{ url("admin/info/activate/$info->id") }}" class="label label-danger">Nonaktif</a>
                                         @endif
                                     </td>
                                     <td>{{ $info->title }}</td>
                                     <td>{{ substr($info->body, 0, 50) }}</td>
                                     <td>{{ $info->part == 1 ? 'Kulinerae' : ($info->part == 2 ? 'Layanan Pelanggan' : ($info->part == 3 ? 'Fitur Seru Kami' : ''))}}</td>
                                     <td>
-                                        <a href="{{ url("info/$info->id/edit") }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
-                                        <a href="{{ url("info/destroy/$info->id") }}" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Informasi ini? Data tersebut tidak dapat di kembalikan lagi.')"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ url("admin/info/$info->id/edit") }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ url("admin/info/destroy/$info->id") }}" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Informasi ini? Data tersebut tidak dapat di kembalikan lagi.')"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -25,16 +25,16 @@
         <div class="results"></div>
     </div>
     <div class="right menu">
-        @if(Auth::guard("admin_user")->user())
-            <a href="{{ url('admin-dashboard') }}" class="item">Dashboard Admin</a>
-            <span style="margin-right: 6.5em"></a>
-        @elseif (!Auth::guest())
+        @if (Auth::guard('admin')->check())
+            <a href="{{ url('admin/dashboard') }}" class="item">Dashboard Admin</a>
+            <span style="margin-right: 6.5em"></span></a>
+        @elseif(!Auth::guest())
             <a href="{{ url('dashboard') }}" class="item">Dashboard</a>
-            <span style="margin-right: 6.5em"></a>
+            <span style="margin-right: 6.5em"></span></a>
         @else
             <a href="{{ url('register') }}" class="item">Daftar</a>
             <a href="{{ url('login') }}" class="item">Masuk</a>
-            <span style="margin-right: 7.5em"></a>
+            <span style="margin-right: 7.5em"></span></a>
         @endif
     </div>
 </div>

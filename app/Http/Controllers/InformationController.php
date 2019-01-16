@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class InformationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
 
     /**
      * Display a listing of the resource.
@@ -42,7 +46,7 @@ class InformationController extends Controller
         $info = new Info($request->all());
         $info->created_by = 1;
         $info->save();
-        return redirect('info')->with('status', 'Data Informasi telah di Tambahkan');
+        return redirect('admin/info')->with('status', 'Data Informasi telah di Tambahkan');
     }
 
     /**
@@ -81,7 +85,7 @@ class InformationController extends Controller
     {
         $info = Info::find($id);
         $info->update($request->all());
-        return redirect('info')->with('status', 'Data Informasi telah di Ubah');
+        return redirect('admin/info')->with('status', 'Data Informasi telah di Ubah');
     }
 
     /**
@@ -93,7 +97,7 @@ class InformationController extends Controller
     public function activate($id)
     {
         Info::where('id', $id)->restore();
-        return redirect('info')->with('status', 'Informasi yang Anda pilih sudah di Aktifkan');
+        return redirect('admin/info')->with('status', 'Informasi yang Anda pilih sudah di Aktifkan');
     }
     /**
      * Deactivate the specified resource in storage.
@@ -104,7 +108,7 @@ class InformationController extends Controller
     public function deactivate($id)
     {
         Info::destroy($id);
-        return redirect('info')->with('status', 'Informasi yang Anda pilih sudah di Non-aktifkan');
+        return redirect('admin/info')->with('status', 'Informasi yang Anda pilih sudah di Non-aktifkan');
     }
     /**
      * Remove the specified resource from storage.
@@ -116,7 +120,7 @@ class InformationController extends Controller
     {
         $info = Info::find($id);
         $info->forceDelete();
-        return redirect('info')->with('status', 'Informasi yang Anda pilih sudah di hapus');
+        return redirect('admin/info')->with('status', 'Informasi yang Anda pilih sudah di hapus');
     }
 
     /**

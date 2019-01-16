@@ -10,11 +10,11 @@
                 <li><a href="#">Aksi Lain</a></li>
             </ul>
         </li>
-        <li><a href="{{ url('/admin-logout') }}" onclick="event.preventDefault();
+        <li><a href="#" onclick="event.preventDefault();
 								document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off text-secondary"></i></a>
         </li>
         {{-- TODO Make this with AJAX --}}
-        <form id="logout-form" action="{{ url('/admin-logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ url('/admin/logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
         </form>
     </ul>

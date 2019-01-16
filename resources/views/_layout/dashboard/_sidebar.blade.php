@@ -7,7 +7,7 @@
         </div>
         <ul class="nav">
             <li class="nav-close"><a href="#"><i class="fa fa-fw fa-close"></i></a></li>
-            <li class="nav-active"><a href="{{ Auth::guard("web")->user() ? url('dashboard') : url('admin-dashboard') }}"><i class="fa fa-fw fa-home"></i><span
+            <li class="nav-active"><a href="{{ Auth::guard("admin")->check() ? url('admin/dashboard') : url('dashboard') }}"><i class="fa fa-fw fa-home"></i><span
                             class="hidden-sm">Dasbor</span></a></li>
             @if(isset(Auth::guard("web")->user()->role))
                 @if(Auth::guard("web")->user()->role == 'owner')
@@ -36,10 +36,11 @@
                     <li class="nav-title">Laporan</li>
                     <li><a href="{{ url('report/staff') }}"><i class="fa fa-fw fa-money"></i><span class="hidden-sm">Transaksi</span></a>
                 @endif
-            @else
+            @endif
+            @if(Auth::guard("admin")->check())
             </li><li class="nav-title">Information</li>
-            <li><a href="{{ url('info') }}"><i class="fa fa-fw fa-list"></i><span class="hidden-sm">Footer</span></a>
-            <li><a href="{{ url('ads') }}"><i class="fa fa-fw fa-square"></i><span class="hidden-sm">Iklan</span></a>
+            <li><a href="{{ url('admin/info') }}"><i class="fa fa-fw fa-list"></i><span class="hidden-sm">Footer</span></a>
+            <li><a href="{{ url('admin/ads') }}"><i class="fa fa-fw fa-square"></i><span class="hidden-sm">Iklan</span></a>
             </li>
             @endif
         </ul>

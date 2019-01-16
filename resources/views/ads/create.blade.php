@@ -15,7 +15,7 @@
                     <h3 class="panel-title">{{ (isset($ads)) ? 'Sunting' : 'Tambah' }} Iklan</h3>
                 </div>
                 <div class="panel-body">
-                    <form action="@if(isset($ads)) {{url('ads/'.$ads->id)}} @else {{url('ads')}} @endif" method="POST" enctype="multipart/form-data">
+                    <form action="@if(isset($ads)) {{url('admin/ads/'.$ads->id)}} @else {{url('admin/ads')}} @endif" method="POST" enctype="multipart/form-data">
                         @if(isset($ads)) {{ method_field('PATCH') }} @endif
                         {{ csrf_field() }}
                         <br>

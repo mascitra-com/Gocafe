@@ -16,7 +16,7 @@ class AdsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:admin_user');
+        $this->middleware('admin');
     }
 
     /**
@@ -59,12 +59,12 @@ class AdsController extends Controller
                 $ads = new Ads($request->except('file'));
                 $ads->created_by = 1;
                 $ads->save();
-                return redirect('ads')->with('status', 'Iklan baru telah di tambahkan');
+                return redirect('admin/ads')->with('status', 'Iklan baru telah di tambahkan');
             } else {
-                return redirect('ads')->with('status', 'Terjadi Kesalahan');
+                return redirect('admin/ads')->with('status', 'Terjadi Kesalahan');
             }
         } else {
-            return redirect('ads')->with('status', 'Terjadi Kesalahan');
+            return redirect('admin/ads')->with('status', 'Terjadi Kesalahan');
         }
     }
 
@@ -113,12 +113,12 @@ class AdsController extends Controller
                 if($exists = Storage::disk('banner')->exists($ads->banner))
                     Storage::delete("public/$ads->banner");
                 $ads->update($request->all());
-                return redirect('ads')->with('status', 'Iklan telah di update');
+                return redirect('admin/ads')->with('status', 'Iklan telah di update');
             } else {
-                return redirect('ads')->with('status', 'Terjadi Kesalahan');
+                return redirect('admin/ads')->with('status', 'Terjadi Kesalahan');
             }
         } else {
-            return redirect('ads')->with('status', 'Terjadi Kesalahan');
+            return redirect('admin/ads')->with('status', 'Terjadi Kesalahan');
         }
     }
 
@@ -136,7 +136,7 @@ class AdsController extends Controller
     {
         $info = Ads::find($id);
         $info->forceDelete();
-        return redirect('ads')->with('status', 'Iklan yang Anda pilih sudah di hapus');
+        return redirect('admin/ads')->with('status', 'Iklan yang Anda pilih sudah di hapus');
     }
 
 }

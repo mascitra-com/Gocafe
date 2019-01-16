@@ -139,31 +139,16 @@ Route::group(['middleware' => ['web']], function () {
     //-END MAIL
 
     //INFORMATION
-    Route::get('info', 'InformationController@index');
-    Route::get('info/create', 'InformationController@create');
-    Route::get('info/{infoId}/edit', 'InformationController@edit');
-    Route::post('info', 'InformationController@store');
-    Route::patch('info/{infoId}', 'InformationController@update');
-    Route::get('info/destroy/{infoId}', 'InformationController@destroy');
-    Route::get('info/activate/{infoId}', 'InformationController@activate');
-    Route::get('info/deactivate/{infoId}', 'InformationController@deactivate');
-
     Route::get('about-us', 'InformationController@aboutUs');
     Route::get('info/{infoId}', 'InformationController@show');
     //-END INFORMATION
-
-    //ADS
-    Route::resource('ads', 'AdsController');
-    Route::get('ads/delete/{id}', 'AdsController@delete');
-    Route::get('adsBanner/{id}', 'AdsController@showBanner');
-    //-END ADS
 });
-    Route::get('admin-login','AdminAuth\LoginController@showLoginForm');
-    Route::post('admin-login','AdminAuth\LoginController@login');
-    Route::post('admin-logout  ','AdminAuth\LoginController@logout');
 
-    Route::get('admin-dashboard', 'AdminDashboardController@index');
-	Route::get('/clear-cache', function() {
-		$exitCode = Artisan::call('cache:clear');
-		return $exitCode;
-	});
+
+Route::group([
+    'prefix' => 'admin',
+], function () {
+    Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
+    Route::post('/login', 'AdminAuth\LoginController@login');
+    Route::post('/logout', 'AdminAuth\LoginController@logout');
+});

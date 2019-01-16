@@ -21,7 +21,6 @@
                 <div class="panel-body table-responsive table-full">
                     <table class="table table-stripped table-hover">
                         <thead>
-                            <th width="10%">Status</th>
                             <th width="30%">Judul</th>
                             <th>Deskripsi</th>
                             <th width="20%">Bagian</th>
@@ -31,19 +30,12 @@
                         @if($ads)
                             @foreach($ads as $ad)
                                 <tr>
-                                    <td>
-                                        @if(!$ad->deleted_at)
-                                            <a href="{{ url("ads/deactivate/$ad->id")}}" class="label label-success">Aktif</a>
-                                        @else
-                                            <a href="{{ url("ads/activate/$ad->id") }}" class="label label-danger">Nonaktif</a>
-                                        @endif
-                                    </td>
                                     <td>{{ $ad->title }}</td>
                                     <td>{{ substr($ad->description, 0, 50) }}</td>
                                     <td>{{ isset($ad) && $ad->page == 1 ? 'Sponsor Utama' : (isset($ad) && $ad->page == 2 ? 'Sponsor Atas' : (isset($ad) && $ad->page == 3 ? 'Sponsor Bawah' : ''))}}</td>
                                     <td>
-                                        <a href="{{ url("ads/$ad->id/edit") }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
-                                        <a href="{{ url("ads/delete/$ad->id") }}" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Informasi ini? Data tersebut tidak dapat di kembalikan lagi.')"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ url("admin/ads/$ad->id/edit") }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ url("admin/ads/delete/$ad->id") }}" class="btn btn-sm btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Informasi ini? Data tersebut tidak dapat di kembalikan lagi.')"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
