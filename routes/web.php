@@ -12,11 +12,18 @@
 */
 
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware'=> ['auth', 'role:owner']], function (){
+    Route::resource('menus', 'MenusController');
 
-    Route::get('/', 'HomeController@index');
-
-    Auth::routes();
+    //PROFILE
+    Route::get('profile', 'ProfileController@edit');
+    Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');
+    Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
+    Route::get('profile/avatar', [
+        'as' => 'getAvatar', 'uses' => 'ProfileController@showAvatar']); //getavatar's response
+    Route::post('profile/avatar/replace/{id}', 'ProfileController@updateAvatar');
+    Route::put('profile/avatar/change/{id}', 'ProfileController@updateAvatarName');
+    //--END PROFILE
 
     // CAFE
     Route::resource('/profile/cafe', 'CafeController');
@@ -31,31 +38,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/branch/getDistrictByCity', 'BranchController@getDistrictByCity');
     //--END BRANCH
 
-    //DASHBOARD
-    Route::get('dashboard', 'DashboardController@index');
-    //--END DASHBOARD
-
-    //PROFILE
-    Route::get('profile', 'ProfileController@edit');
-    Route::patch('profile/personal/{id}', 'ProfileController@updatePersonal');
-    Route::patch('profile/contact/{id}', 'ProfileController@updateContact');
-    Route::get('profile/avatar', [
-        'as' => 'getAvatar', 'uses' => 'ProfileController@showAvatar']); //getavatar's response
-    Route::post('profile/avatar/replace/{id}', 'ProfileController@updateAvatar');
-    Route::put('profile/avatar/change/{id}', 'ProfileController@updateAvatarName');
-    //--END PROFILE
-
     //STAFF
     Route::get('staff/download', 'StaffController@downloadExcel');
     Route::resource('staff', 'StaffController');
     Route::post('staff/import', 'StaffController@importExcel');
     //--END STAFF
-
-    //CAFE'S MENU
-    Route::resource('menus', 'MenusController');
-    Route::get('menus/getMenus/{idCategory}', 'MenusController@getMenus');
-    Route::get('menus/getMenu/{idMenu}', 'MenusController@getMenu');
-    //--END CAFE'S MENU
 
     //MENU'S CATEGORY
     Route::resource('categories', 'CategoryMenusController');
@@ -80,6 +67,22 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('batch_discount', 'BatchDiscountsController@batch');
     //--END DISCOUNTS
 
+    // REPORT
+    Route::get('chart', 'ReportController@chart');
+    Route::get('report', 'ReportController@index');
+    Route::get('report/detail/{transactionId}', 'ReportController@reportDetail');
+    Route::get('revenue', 'ReportController@revenue');
+    Route::get('revenue/detail/{transactionId}', 'ReportController@revenueDetail');
+    Route::get('filter_report/{startDate}/{endDate}/{paymentType}', 'ReportController@report_filter');
+    Route::get('filter_revenue/{startDate}/{endDate}/{paymentType}', 'ReportController@revenue_filter');
+});
+
+Route::group(['middleware'=> ['auth', 'role:staff']], function () {
+    // REPORT BY STAFF
+    Route::get('report/staff', 'ReportController@staff');
+    Route::get('report/staff/detail/{transactionId}', 'ReportController@reportDetail');
+    //--END REPORT
+
     //TRANSACTION
     Route::get('payment', 'PaymentController@index');
     Route::patch('payment/{paymentId}', 'PaymentController@update');
@@ -90,20 +93,21 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('transaction/getMenusByTableNumber/{transactionId}', 'TransactionController@getMenusByTableNumber');
     Route::get('transaction/getReviews/{itemId}', 'TransactionController@getReviewsByItemId');
     //--END TRANSACTION
+});
 
-    // REPORT
-    // REPORT BY OWNER
-    Route::get('chart', 'ReportController@chart');
-    Route::get('report', 'ReportController@index');
-    Route::get('report/detail/{transactionId}', 'ReportController@reportDetail');
-    Route::get('revenue', 'ReportController@revenue');
-    Route::get('revenue/detail/{transactionId}', 'ReportController@revenueDetail');
-    Route::get('filter_report/{startDate}/{endDate}/{paymentType}', 'ReportController@report_filter');
-    Route::get('filter_revenue/{startDate}/{endDate}/{paymentType}', 'ReportController@revenue_filter');
+Route::group(['middleware' => ['web']], function () {
 
-    // REPORT BY STAFF
-    Route::get('report/staff', 'ReportController@staff');
-    //--END REPORT
+    Route::get('/', 'HomeController@index');
+    Auth::routes();
+
+    //DASHBOARD
+    Route::get('dashboard', 'DashboardController@index');
+    //--END DASHBOARD
+
+    //CAFE'S MENU
+    Route::get('menus/getMenus/{idCategory}', 'MenusController@getMenus');
+    Route::get('menus/getMenu/{idMenu}', 'MenusController@getMenu');
+    //--END CAFE'S MENU
 
     // REVIEW
     Route::post('review', 'ReviewController@store');
@@ -143,7 +147,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('info/{infoId}', 'InformationController@show');
     //-END INFORMATION
 });
-
 
 Route::group([
     'prefix' => 'admin',

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Illuminate\Support\Facades\Auth;
 use Storage;
 
 class User extends Authenticatable
@@ -71,6 +72,11 @@ class User extends Authenticatable
     public function staff()
     {
        return $this->hasOne(Staff::class);
+    }
+
+    public function has_role($role)
+    {
+        return Auth::user()->role == $role;
     }
 
 }

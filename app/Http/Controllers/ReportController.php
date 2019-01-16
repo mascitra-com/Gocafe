@@ -51,7 +51,7 @@ class ReportController extends Controller
             ->latest()
             ->whereMonth('created_at', DB::raw('MONTH(NOW())'))
             ->get();
-        return view('report.report', compact('transactions'));
+        return view('report.staff', compact('transactions'));
     }
 
     public function report_filter($startDate, $endDate, $paymentType)
