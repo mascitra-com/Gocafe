@@ -128,7 +128,7 @@
             </div>
             <button class="ui fluid button"><i class="fa fa-heart"></i> &nbsp Tambah ke Wishlist</button>
             <div class="ui center aligned segment container">
-                <a href="{{ url('shop/' . $shop->id) }}">
+                <a href="{{ url('shop/' . $shop->slug) }}">
                 <h3 style="color: #8C4728">{{ $shop->name }}</h3>
                 <img class="ui centered tiny image" src="{{ url($shop->logo) }}"><br>
                 </a>
