@@ -29,26 +29,22 @@ class ProfileController extends Controller
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
-    public function edit(User $user)
+    public function edit()
     {
-        $role = $user->get_role(Auth::id());
-
-        if ($role === 'owner') {
-            $profile = User::find(Auth::id())->owner;
-            if($profile) {
-                $user = User::find(Auth::id());
-                $avatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($user->avatar_name));
-            }
-            return view('owner.owner_profile', compact('profile', 'avatar'));
-        } elseif ($role === 'staff') {
-            return 'ambil profil staff (progress)';
-        } else {
-            return 'error';
-        }
+        $profile = User::find(Auth::id())->owner;
+        $avatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url(Auth::user()->avatar_name));
+        return view('owner.owner_profile', compact('profile', 'avatar'));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function updatePersonal(Request $request, $id)
     {
+        $this->authorize('profile.update', [$id]);
         $birthdate = frmtPartDate($request->birthdate_day, $request->birthdate_month, $request->birthdate_year);
         $request->merge(array('birthdate' => $birthdate));
         $input = $request->except('birthdate_year', 'birthdate_month', 'birthdate_day');
@@ -56,14 +52,28 @@ class ProfileController extends Controller
         return redirect('profile');
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function updateContact(Request $request, $id)
     {
+        $this->authorize('profile.update', [$id]);
         Owner::findOrFail($id)->update($request->all());
         return redirect('profile');
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function updateAvatar(Request $request, $id)
     {
+        $this->authorize('profile.update', [$id]);
         //checking file is present
         if ($request->hasFile('avatar')) {
             //verify the file is uploading
@@ -76,7 +86,7 @@ class ProfileController extends Controller
                 );
                 $request->merge($input);
                 $user = User::findOrFail(decrypt($id));
-                if($exists = Storage::disk('owner')->exists($user->avatar_name))
+                if ($exists = Storage::disk('owner')->exists($user->avatar_name))
                     Storage::delete("public/$user->avatar_name");
                 $user->update($request->except('avatar'));
                 return response()->json(['response' => 'sukses', 'status' => TRUE]);

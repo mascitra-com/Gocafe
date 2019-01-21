@@ -37,6 +37,7 @@ class BranchController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param Cafe $cafe
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request, Cafe $cafe)
     {
@@ -91,9 +92,11 @@ class BranchController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('branch.update', [$id]);
 	    if(!isset($request->status)) {
 		    $request->request->add([
 			    'status' => 'off'

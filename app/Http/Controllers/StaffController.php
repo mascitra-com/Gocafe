@@ -64,9 +64,11 @@ class StaffController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(Request $request)
     {
+        $this->authorize('staff.create', [$request]);
         $user = new User($request->only(['email']));
         $user_id = $user->addUser($user, $request->password, 'staff');
         $birthdate = frmtPartDate($request->birthdate_day, $request->birthdate_month, $request->birthdate_year);
@@ -99,10 +101,12 @@ class StaffController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param Staff $staff
      * @return Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @internal param int $id
      */
     public function update(Request $request, Staff $staff)
     {
+        $this->authorize('staff.update', [$staff]);
         User::findOrFail($staff->user->id)->update($request->only(['email']));
         $birthdate = frmtPartDate($request->birthdate_day, $request->birthdate_month, $request->birthdate_year);
         $phone = '+62' . $request->phone_input;

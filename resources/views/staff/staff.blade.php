@@ -83,7 +83,6 @@
 							<td class="text-center text-nowrap">@if($staff->gender === '0') Laki-Laki @else Perempuan @endif</td>
 							<td class="text-center text-nowrap">
 								<a href="{{ url('staff/'.$staff->id.'/edit') }}" class="btn btn-default btn-xs"><i class="fa fa-info-circle"></i></a>
-								<button class="btn btn-default btn-xs" onclick="delete_staff('{{ $staff->id }}')" id="delete-staff"><i class="fa fa-trash"></i></button>
 							</td>
 						</tr>
 						@endforeach

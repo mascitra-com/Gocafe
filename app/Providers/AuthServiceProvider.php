@@ -15,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-    'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -26,5 +26,13 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        Gate::define('profile.update', 'App\Policies\ProfilePolicy@update');
+        Gate::define('cafe.store', 'App\Policies\CafeProfilePolicy@store');
+        Gate::define('cafe.update', 'App\Policies\CafeProfilePolicy@update');
+        Gate::define('branch.update', 'App\Policies\BranchPolicy@update');
+        Gate::define('staff.create', 'App\Policies\StaffPolicy@create');
+        Gate::define('staff.update', 'App\Policies\StaffPolicy@update');
+        Gate::define('menu.delete', 'App\Policies\MenuPolicy@delete');
     }
 }

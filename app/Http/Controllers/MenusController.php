@@ -57,7 +57,10 @@ class MenusController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     * @param Cafe $cafe
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request, Cafe $cafe)
     {
@@ -120,10 +123,11 @@ class MenusController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param Menu $menu
      * @return \Illuminate\Http\Response
-     * @internal param int $id
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, Menu $menu)
     {
+        $this->authorize('menu.update', [$menu]);
         $requestData['cost'] = str_replace('.', '', $request->cost);
         $requestData['price'] = str_replace('.', '', $request->price);
         $request->merge($requestData);
@@ -199,6 +203,7 @@ class MenusController extends Controller
      *
      * @param $image_file
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function showImage($image_file)
     {
