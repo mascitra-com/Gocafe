@@ -12,7 +12,7 @@
 */
 
 
-Route::group(['middleware'=> ['auth', 'role:owner']], function (){
+Route::group(['middleware'=> ['auth', 'role:owner', 'verified']], function (){
     Route::resource('menus', 'MenusController');
 
     //PROFILE
@@ -146,6 +146,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('about-us', 'InformationController@aboutUs');
     Route::get('info/{infoId}', 'InformationController@show');
     //-END INFORMATION
+
+    Auth::routes(['verify' => true]);
 });
 
 Route::group([
