@@ -22,10 +22,10 @@ class ProfilePolicy
     public function update(User $user, $id)
     {
         if(Auth::user()->role == 'owner'){
-            $owner = Owner::findOrFail($id)->first();
+            $owner = Owner::findOrFail($id);
             return $user->id == $owner->user_id;
         } elseif(Auth::user()->role == 'owner'){
-            $staff = Staff::findOrFail($id)->first();
+            $staff = Staff::findOrFail($id);
             return $user->id == $staff->user_id;
         } else {
             return false;

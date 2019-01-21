@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Cafe;
 use App\Owner;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -31,8 +32,8 @@ class CafeProfilePolicy
      */
     public function update(User $user, $id)
     {
-        $cafe = Cafe::findOrFail($id)->first();
-        $owner = Owner::findOrfail($cafe->owner_id)->first();
+        $cafe = Cafe::findOrFail($id);
+        $owner = Owner::findOrfail($cafe->owner_id);
         return $user->id == $owner->user_id;
     }
 }

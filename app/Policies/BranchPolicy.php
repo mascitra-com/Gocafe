@@ -21,9 +21,9 @@ class BranchPolicy
      */
     public function update(User $user, $id)
     {
-        $branch = CafeBranch::findOrfail($id)->first();
-        $cafe = Cafe::findOrFail($branch->cafe_id)->first();
-        $owner = Owner::findOrfail($cafe->owner_id)->first();
+        $branch = CafeBranch::findOrfail($id);
+        $cafe = Cafe::findOrFail($branch->cafe_id);
+        $owner = Owner::findOrfail($cafe->owner_id);
         return $user->id == $owner->user_id;
     }
 }
