@@ -6,6 +6,7 @@ use App\Cafe;
 use App\CafeBranch;
 use App\CategoryMenu;
 use App\Menu;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
@@ -49,9 +50,10 @@ class ShopController extends Controller
             $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
             $products[$key]->thumbnail = $thumbnail;
         }
+        $verified = Cafe::findOrFail($shop->id)->owner->user->email_verified_at;
         $cover = str_replace('storage/cover/', 'img/cache/huge-cover/', Storage::url($shop->cover_path));
         $logo = str_replace('storage/logo/', 'img/cache/small-logo/', Storage::url($shop->logo_path));
-        return view('shop.index', compact('cover', 'logo', 'shop', 'branches', 'categories', 'products'));
+        return view('shop.index', compact('cover', 'logo', 'shop', 'branches', 'categories', 'products', 'verified'));
     }
 
     public function allProducts($shopId)

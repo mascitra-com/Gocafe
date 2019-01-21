@@ -3,7 +3,28 @@
 
 @section('content')
 	@if(Auth::guard("web")->user()->role == 'owner')
+		@if($verified == null)
 		<div class="row">
+			<div class="col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title pull-left"><i class="fa fa-info-circle fa-fw"></i> Mohon Verifikasi Email Anda</h3>
+						<div class="clearfix"></div>
+					</div>
+					<div class="panel-body">
+						@if (session('resent'))
+							<div class="alert alert-success" role="alert">
+								Link Baru untuk Verifikasi Email sudah terkirim.
+							</div>
+						@endif
+						Sebelum melanjutkan, mohon cek email Anda untuk verifikasi.
+						Jika Anda belum menerima, <a href="{{ route('verification.resend') }}">klik disini</a>.
+					</div>
+				</div>
+			</div>
+		</div>
+		@endif
+	<div class="row">
 		<div class="col-xs-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">

@@ -75,6 +75,7 @@ class DashboardController extends Controller
 	                     ->template("material")
 	                     ->aggregateColumn('total_payment', 'sum')
 	                     ->lastByMonth(3, false);
-        return view('dashboard.dashboard', compact('favProducts', 'customers30day', 'menus30day', 'revenue'));
+        $verified = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->owner->user->email_verified_at;
+        return view('dashboard.dashboard', compact('favProducts', 'customers30day', 'menus30day', 'revenue', 'verified'));
     }
 }

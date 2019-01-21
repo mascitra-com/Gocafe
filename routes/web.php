@@ -12,7 +12,7 @@
 */
 
 
-Route::group(['middleware'=> ['auth', 'role:owner', 'verified']], function (){
+Route::group(['middleware'=> ['auth', 'role:owner']], function (){
     Route::resource('menus', 'MenusController');
 
     //PROFILE
