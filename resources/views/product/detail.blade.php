@@ -96,11 +96,12 @@
                                 <tbody>
                                     @foreach($reviews as $review)
                                         <tr>
-                                            <td width='15%'><img src='/images/blank-avatar.png' alt='' class='ui tiny circular image'></td>
+                                            <td width='15%'><img src='{{ $review->avatar }}' alt='' class='ui tiny circular image'></td>
                                             <td>
+                                                <p><h3>{{ $review->profile->first_name }} {{ $review->profile->last_name }}</h3></p>
                                                 <p><div class='ui star rating disable' data-rating='{{ $review->rating }}'></div></p>
                                                 <p>{{ $review->review }}</p>
-                                                <p><span class='label label-default'>{{ date('d-m-Y', strtotime($review->created_at)) }}</span></p>
+                                                <p><span class='label label-default'>{{ date('d-m-Y H:i', strtotime($review->created_at)) }}</span></p>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Cafe;
 use App\Menu;
+use App\Owner;
 use App\Package;
 use App\Rating;
 use App\Review;
 use App\TransactionDetail;
+use App\User;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -140,6 +142,11 @@ class ProductController extends Controller
         $shop = Cafe::find($product->cafe_id);
         $shop->logo = str_replace('storage/logo/', 'img/cache/tiny-logo/', Storage::url($shop->logo_path));
         $reviews = Review::where('item_id', $productId)->orderBy('id', 'desc')->get();
+        foreach ($reviews as $key => $review) {
+            $user = User::where('id', $review->created_by)->first();
+            $reviews[$key]->avatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($user->avatar_name));
+            $reviews[$key]->profile = Owner::where('user_id', $review->created_by)->first();
+        }
         $topHit = TransactionDetail::getTopHitProducts();
         return view('product.detail', compact('shop', 'product', 'reviews', 'topHit'));
     }

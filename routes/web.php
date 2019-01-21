@@ -75,6 +75,10 @@ Route::group(['middleware'=> ['auth', 'role:owner']], function (){
     Route::get('revenue/detail/{transactionId}', 'ReportController@revenueDetail');
     Route::get('filter_report/{startDate}/{endDate}/{paymentType}', 'ReportController@report_filter');
     Route::get('filter_revenue/{startDate}/{endDate}/{paymentType}', 'ReportController@revenue_filter');
+
+    // REVIEW
+    Route::post('review', 'ReviewController@store');
+    //--END REVIEW
 });
 
 Route::group(['middleware'=> ['auth', 'role:staff']], function () {
@@ -109,9 +113,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('menus/getMenu/{idMenu}', 'MenusController@getMenu');
     //--END CAFE'S MENU
 
-    // REVIEW
-    Route::post('review', 'ReviewController@store');
-    //--END REVIEW
 
     // Thumbnail & Image
     Route::get('menus/showImage/{image_file}', 'MenusController@showImage');
