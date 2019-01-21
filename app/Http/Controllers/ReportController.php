@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cafe;
 use App\CafeBranch;
 use App\Menu;
 use App\Package;
@@ -29,6 +30,9 @@ class ReportController extends Controller
      */
     public function index()
     {
+        if (!Cafe::getCafeIdByUserIdNowLoggedIn()) {
+            return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Filled!');
+        }
         $transactions = Transaction::with('branch')
             ->whereIn('branch_id', CafeBranch::getBranchIdsByUserNowLoggedIn())
             ->where('status', '!=', 0)

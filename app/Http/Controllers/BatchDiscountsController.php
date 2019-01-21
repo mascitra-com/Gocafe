@@ -22,6 +22,9 @@ class BatchDiscountsController extends Controller
      */
     public function index(Cafe $cafe)
     {
+        if (!Cafe::getCafeIdByUserIdNowLoggedIn()) {
+            return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Filled!');
+        }
         $menus = $cafe->findOrFail($cafe->getCafeIdByUserIdNowLoggedIn())->menus;
         $packages = $cafe->findOrFail($cafe->getCafeIdByUserIdNowLoggedIn())->packages;
         return view('discount.batch_discount', compact('menus', 'packages'));

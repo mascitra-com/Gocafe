@@ -55,7 +55,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Status</label><br>
-                                <input name="status" type="checkbox" {{ $cafe->status == 'on' ? 'checked' : '' }} data-toggle="toggle" data-on="Buka" data-off="Tutup">
+                                <input name="status" type="checkbox" {{ isset($cafe) && $cafe->status == 'on' ? 'checked' : '' }} data-toggle="toggle" data-on="Buka" data-off="Tutup">
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Simpan</button>
