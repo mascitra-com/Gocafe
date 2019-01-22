@@ -42,6 +42,7 @@
 						</tr>
 						</thead>
 						<tbody>
+						@if(isset($favProducts))
 						<?php $no = 1 ?>
 						@if($favProducts) @foreach($favProducts as $favorite)
 							<tr>
@@ -52,6 +53,7 @@
 							</tr>
 						@endforeach @endif
 						</tbody>
+						@endif
 					</table>
 				</div>
 			</div>

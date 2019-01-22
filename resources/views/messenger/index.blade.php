@@ -12,7 +12,6 @@
                             <li class="contact">
                                 <a href="{{ url('messages/'.$list->id) }}"></a>
                                 <div class="wrap">
-                                    <span class="contact-status online"></span>
                                     <img src="{{ Auth::id() != $list->users[0]->id ? $list->senderAvatar : $list->recipientAvatar}}" alt="" />
                                     <div class="meta">
                                         <p class="name">

@@ -66,6 +66,9 @@ class DashboardController extends Controller
 	                     ->template("material")
 	                     ->aggregateColumn('total_payment', 'sum')
 	                     ->lastByMonth(3, false);
+        if (!Cafe::getCafeIdByUserIdNowLoggedIn()) {
+            return redirect('profile/cafe')->with('status', 'Cafe Profile Must Be Filled!');
+        }
         $verified = Cafe::findOrFail(Cafe::getCafeIdByUserIdNowLoggedIn())->owner->user->email_verified_at;
         return view('dashboard.dashboard', compact('favProducts', 'customers30day', 'menus30day', 'revenue', 'verified'));
     }
