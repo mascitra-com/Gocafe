@@ -73,7 +73,6 @@ class ProfileController extends Controller
      */
     public function updateAvatar(Request $request, $id)
     {
-        $this->authorize('profile.update', [$id]);
         //checking file is present
         if ($request->hasFile('avatar')) {
             //verify the file is uploading

@@ -21,6 +21,8 @@
                                 class="hidden-sm">Lokasi</span></a></li>
                 <li><a href="{{ url('staff') }}"><i class="fa fa-fw fa-user-circle-o"></i><span
                                 class="hidden-sm">Staf</span></a></li>
+                <li><a href="{{ url('messages') }}"><i class="fa fa-fw fa-envelope-o"></i><span
+                                class="hidden-sm">Percakapan</span></a></li>
                 <li class="nav-title">Manajemen Menu</li>
                 <li><a href="{{ url('menus') }}"><i class="fa fa-fw fa-cutlery"></i><span
                                 class="hidden-sm">Menu</span></a></li>
