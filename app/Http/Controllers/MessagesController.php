@@ -26,7 +26,14 @@ class MessagesController extends Controller
     {
         // All threads that user is participating in
         $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
-
+        foreach ($threads as $key => $thread) {
+            $users = User::whereIn('id', $thread->participantsUserIds())->get();
+            $senderAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[0]->avatar_name));
+            $recipientAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[1]->avatar_name));
+            $threads[$key]->users = $users;
+            $threads[$key]->senderAvatar = $senderAvatar;
+            $threads[$key]->recipientAvatar = $recipientAvatar;
+        }
         return view('messenger.index', compact('threads'));
     }
 
@@ -53,6 +60,14 @@ class MessagesController extends Controller
         $recipientAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[1]->avatar_name));
         $thread->markAsRead(Auth::id());
         $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
+        foreach ($threads as $key => $thread) {
+            $users = User::whereIn('id', $thread->participantsUserIds())->get();
+            $senderAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[0]->avatar_name));
+            $recipientAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[1]->avatar_name));
+            $threads[$key]->users = $users;
+            $threads[$key]->senderAvatar = $senderAvatar;
+            $threads[$key]->recipientAvatar = $recipientAvatar;
+        }
         $recipient = User::whereIn('id', $thread->participantsUserIds())->where('id', '!=', Auth::id())->get();
         return view('messenger.index', compact('thread', 'users', 'recipientAvatar', 'senderAvatar', 'threads', $recipient));
     }
@@ -79,7 +94,6 @@ class MessagesController extends Controller
     public function store()
     {
         $input = Input::all();
-
         $thread = Thread::create([
             'subject' => $input['subject'],
         ]);
@@ -99,11 +113,9 @@ class MessagesController extends Controller
         ]);
 
         // Recipients
-        if (Input::has('recipients')) {
-            $thread->addParticipant($input['recipients']);
-        }
+        $thread->addParticipant($input['recipient']);
 
-        return redirect()->route('messages');
+        return redirect()->route('messages.show', $thread->id);
     }
 
     /**

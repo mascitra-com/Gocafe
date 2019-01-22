@@ -6,11 +6,9 @@ use App\Cafe;
 use App\CafeBranch;
 use App\Menu;
 use App\Package;
-use App\Rating;
 use App\Transaction;
 use App\TransactionDetail;
 use ConsoleTVs\Charts\Facades\Charts;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Class DashboardController untuk Halaman Dashboard
@@ -19,13 +17,6 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     /**
-     * DashboardController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
