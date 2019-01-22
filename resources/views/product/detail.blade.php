@@ -1,6 +1,7 @@
 @extends('_layout.homepage.index')
 @section('page_title', $product->name)
 @section('content')
+    <div id="fb-root"></div>
     <div class="ui breadcrumb container grid" id="top">
         <div class="twelve wide column">
         <a class="section" href="{{ url('/') }}">Home</a>
@@ -17,16 +18,17 @@
                 {{ $product->name }}<br>
                 <small style="color: #F18803">{{ $product->category->name }}</small>
             </h1>
-            <div class="ui segment">
-                Bagikan :
-                <button class="ui facebook button">
-                    <i class="facebook icon"></i>
-                    Facebook
-                </button>
-                <button class="ui twitter button">
-                    <i class="twitter icon"></i>
-                    Twitter
-                </button>
+            <div class="row">
+                <div class="column">
+                    <span class="fb-share-button" data-href="{{ Request::fullUrl() }}" data-layout="button_count" data-size="large" data-mobile-iframe="false">
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
+                    </span>
+                    <a class="twitter-share-button"
+                       href="https://twitter.com/intent/tweet?url={{ urlencode(Request::fullUrl()) }}&text={{ $product->name }} {{ $product->description }}&hashtags=Kulinerae.com"
+                       target="_blank"
+                       data-size="large">
+                    </a>
+                </div>
             </div>
             <div class="ui segment" style="margin-bottom: 1em">
                 <div class="ui grid">
@@ -133,10 +135,19 @@
                 <h3 style="color: #8C4728">{{ $shop->name }}</h3>
                 <img class="ui centered tiny image" src="{{ url($shop->logo) }}"><br>
                 </a>
-                <a target="_blank" href="https://www.facebook.com/{{ $shop->facebook }}"><i class="fa fa-facebook-square"></i> {{ $shop->facebook }}</a><br>
-                <a target="_blank" href="https://www.twitter.com/{{ $shop->twitter }}"><i class="fa fa-twitter-square"></i> {{ $shop->twitter }}</a><br>
-                <a target="_blank" href="https://www.instagram.com/{{ $shop->instagram }}"><i class="fa fa-instagram"></i> {{ $shop->instagram }}</a><br>
-                <span style="color: #F18803"><i class="fa fa-phone-square"></i> {{ $shop->phone }}</span><br><br>
+                @if($shop->facebook)
+                    <a target="_blank" href="https://www.facebook.com/{{ $shop->facebook }}"><i class="fa fa-lg fa-facebook-square"></i> {{ $shop->facebook }}</a>
+                @endif
+                @if($shop->twitter)
+                    <a target="_blank" href="https://www.twitter.com/{{ $shop->twitter }}"><i class="fa fa-lg fa-twitter-square"></i> {{ $shop->twitter }}</a><br>
+                @endif
+                @if($shop->instagram)
+                    <a target="_blank" href="https://www.instagram.com/{{ $shop->instagram }}"><i class="fa fa-lg fa-instagram"></i> {{ $shop->instagram }}</a>&nbsp;&nbsp;
+                @endif
+                @if($shop->phone)
+                    <span style="color: #F18803"><i class="fa fa-lg fa-phone-square"></i> {{ $shop->phone }}</span>
+                @endif
+                <br><br>
                 <button class="ui brown fluid button"><i class="fa fa-plus"></i> &nbsp Favoritkan</button><br>
                 <button class="ui fluid button"><i class="fa fa-envelope"></i> &nbsp Kirim Pesan</button>
             </div>
@@ -154,7 +165,12 @@
         .ui.transparent.left.corner.label {
             border-color: transparent;
         }
+        .twitter-share-button[style] { vertical-align: text-bottom !important; }
     </style>
+    <meta property="og:url"           content="{{ Request::fullUrl() }}" />
+    <meta property="og:title"         content="{{ $product->name }}" />
+    <meta property="og:description"   content="{{ $product->description }}" />
+    <meta property="og:image"         content="{{ url($product->thumbnail) }}" />
 @endsection
 
 @section('javascripts')
@@ -162,6 +178,10 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
     <script src="{{ asset('plugins/imagefill/js/jquery-imagefill.js') }}"></script>
     <script>
+        var popupMeta = {
+            width: 400,
+            height: 400
+        }
         $("#form-review").submit( function(eventObj) {
             $('<input />').attr('type', 'hidden')
                 .attr('name', "rating")
@@ -178,6 +198,29 @@
             });
             $('.ui.star.rating.disable').rating('disable');
         });
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v3.2';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+
+            return t;
+        }(document, "script", "twitter-wjs"));
         $('.img-hit').lazy({
             delay: 500,
             enableThrottle: true,
