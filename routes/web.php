@@ -12,7 +12,7 @@
 */
 
 
-Route::group(['middleware'=> ['auth', 'role:owner']], function (){
+Route::group(['middleware'=> ['web', 'auth', 'role:owner']], function (){
     Route::resource('menus', 'MenusController');
 
     //PROFILE
@@ -81,7 +81,7 @@ Route::group(['middleware'=> ['auth', 'role:owner']], function (){
     //--END REVIEW
 });
 
-Route::group(['middleware'=> ['auth', 'role:staff']], function () {
+Route::group(['middleware'=> ['web', 'auth', 'role:staff']], function () {
     // REPORT BY STAFF
     Route::get('report/staff', 'ReportController@staff');
     Route::get('report/staff/detail/{transactionId}', 'ReportController@reportDetail');
@@ -153,12 +153,13 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group([
     'prefix' => 'admin',
+    'middleware' => 'web'
 ], function () {
     Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
     Route::post('/login', 'AdminAuth\LoginController@login');
     Route::post('/logout', 'AdminAuth\LoginController@logout');
 });
-Route::group(['prefix' => 'messages', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'messages', 'middleware' => ['web','auth']], function () {
     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
     Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
     Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
