@@ -23,6 +23,9 @@
                     <span class="fb-share-button" data-href="{{ Request::fullUrl() }}" data-layout="button_count" data-size="large" data-mobile-iframe="false">
                         <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
                     </span>
+                    <a href="https://wa.me/?text={{ urlencode(Request::fullUrl()) }}" class="ui button green tiny" style="vertical-align: top" target="_blank">
+                        <span class="fa fa-whatsapp"> <b>Bagikan</b></span>
+                    </a>
                     <a class="twitter-share-button"
                        href="https://twitter.com/intent/tweet?url={{ urlencode(Request::fullUrl()) }}&text={{ $product->name }} {{ $product->description }}&hashtags=Kulinerae.com"
                        target="_blank"
