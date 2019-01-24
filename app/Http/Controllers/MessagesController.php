@@ -30,6 +30,8 @@ class MessagesController extends Controller
         foreach ($threads as $key => $thread) {
             $users = User::whereIn('id', $thread->participantsUserIds())->get();
             $senderAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[1]->avatar_name));
+            $cafe = Cafe::where('owner_id', Owner::where('user_id', $users[0]->id)->first()->id)->first();
+            $threads[$key]->cafeLogo = str_replace('storage/logo/', 'img/cache/small-logo/', Storage::url($cafe->logo_path));
             $threads[$key]->users = $users;
             $threads[$key]->senderAvatar = $senderAvatar;
         }
