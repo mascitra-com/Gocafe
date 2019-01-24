@@ -12,7 +12,7 @@
                             <li class="contact">
                                 <a href="{{ url('messages/'.$list->id) }}"></a>
                                 <div class="wrap">
-                                    <img src="{{ Auth::id() != $list->users[0]->id ? $list->senderAvatar : $list->recipientAvatar}}" alt="" />
+                                    <img src="{{ Auth::id() != $list->users[0]->id ? $list->cafeLogo : $list->senderAvatar }}" alt="" />
                                     <div class="meta">
                                         <p class="name">
                                             {{ Auth::id() != $list->users[0]->id

@@ -148,10 +148,9 @@
                     <span style="color: #F18803"><i class="fa fa-lg fa-phone-square"></i> {{ $shop->phone }}</span>
                 @endif
                 <br><br>
-                <button class="ui brown fluid button"><i class="fa fa-plus"></i> &nbsp Favoritkan</button><br>
                 <form action="{{ url('messages/create') }}" method="get">
                     <input type="hidden" name="send_to" value="{{ $shop->slug }}">
-                    <button class="ui fluid button" type="submit"><i class="fa fa-envelope"></i> &nbsp Kirim Pesan</button>
+                    <button class="ui fluid button brown" type="submit"><i class="fa fa-envelope"></i> &nbsp Kirim Pesan</button>
                 </form>
             </div>
         </div>

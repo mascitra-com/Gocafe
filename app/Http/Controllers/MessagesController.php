@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cafe;
+use App\Owner;
 use App\User;
 use Carbon\Carbon;
 use Cmgmyr\Messenger\Models\Message;
@@ -28,11 +29,9 @@ class MessagesController extends Controller
         $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
         foreach ($threads as $key => $thread) {
             $users = User::whereIn('id', $thread->participantsUserIds())->get();
-            $senderAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[0]->avatar_name));
-            $recipientAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[1]->avatar_name));
+            $senderAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[1]->avatar_name));
             $threads[$key]->users = $users;
             $threads[$key]->senderAvatar = $senderAvatar;
-            $threads[$key]->recipientAvatar = $recipientAvatar;
         }
         return view('messenger.index', compact('threads'));
     }
@@ -49,27 +48,23 @@ class MessagesController extends Controller
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
-
             return redirect()->route('messages');
         }
 
         $users = User::whereIn('id', $thread->participantsUserIds())->get();
-
-        // don't show the current user in list
-        $senderAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[0]->avatar_name));
-        $recipientAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[1]->avatar_name));
+        $senderAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[1]->avatar_name));
+        $cafe = Cafe::where('owner_id', Owner::where('user_id', $users[0]->id)->first()->id)->first();
+        $cafeLogo = str_replace('storage/logo/', 'img/cache/small-logo/', Storage::url($cafe->logo_path));
         $thread->markAsRead(Auth::id());
         $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
-        foreach ($threads as $key => $thread) {
-            $users = User::whereIn('id', $thread->participantsUserIds())->get();
-            $senderAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[0]->avatar_name));
-            $recipientAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($users[1]->avatar_name));
-            $threads[$key]->users = $users;
-            $threads[$key]->senderAvatar = $senderAvatar;
-            $threads[$key]->recipientAvatar = $recipientAvatar;
+        foreach ($threads as $key => $list) {
+            $usersThread = User::whereIn('id', $list->participantsUserIds())->get();
+            $threads[$key]->users = $usersThread;
+            $threads[$key]->senderAvatar = str_replace('storage/owner/', 'img/cache/small-avatar/', Storage::url($usersThread[1]->avatar_name));
+            $cafe = Cafe::where('owner_id', Owner::where('user_id', $users[0]->id)->first()->id)->first();
+            $threads[$key]->cafeLogo = str_replace('storage/logo/', 'img/cache/small-logo/', Storage::url($cafe->logo_path));
         }
-        $recipient = User::whereIn('id', $thread->participantsUserIds())->where('id', '!=', Auth::id())->get();
-        return view('messenger.index', compact('thread', 'users', 'recipientAvatar', 'senderAvatar', 'threads', $recipient));
+        return view('messenger.index', compact('thread', 'users', 'cafeLogo', 'senderAvatar', 'threads'));
     }
 
     /**

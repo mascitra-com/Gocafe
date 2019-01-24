@@ -1,12 +1,12 @@
 @if(Auth::id() != $users[0]->id)
     <div class="contact-profile">
-        <img src="{{url($senderAvatar)}}" alt=""/>
-        <p>{{ $users[0]->owner->first_name }} {{ $users[0]->owner->last_name }}</p>
+        <img src="{{url($cafeLogo)}}" alt=""/>
+        <p>{{ $thread->subject }}</p>
     </div>
 @else
     <div class="contact-profile">
-        <img src="{{url($recipientAvatar)}}" alt=""/>
-        <p>{{ $users[1]->owner->first_name }} {{ $users[1]->owner->last_name }}</p>
+        <img src="{{url($senderAvatar)}}" alt=""/>
+        <p>{{ $thread->users[0]->owner->first_name }} {{ $thread->users[0]->owner->last_name }}</p>
     </div>
 @endif
 <div class="messages">
