@@ -18,6 +18,9 @@
                                             {{ Auth::id() != $list->users[0]->id
                                             ? $list->subject
                                             : $list->users[1]->owner->first_name .' '. $list->users[1]->owner->last_name }}
+                                            @if($count = $list->userUnreadMessagesCount(Auth::id()))
+                                            ({{ $count }} pesan baru)
+                                            @endif
                                         </p>
                                         <p class="preview">{{ $list->latestMessage->body }}</p>
                                     </div>
