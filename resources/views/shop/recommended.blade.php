@@ -5,7 +5,7 @@
         <div class="ui text">
             <div class="ui left aligned grid" style="margin-bottom: 1em">
                 <div class="eight wide column">
-                    <h3>Jelang Ramadhan, Berbuka dan Sahur, Kulinerae!</h3>
+                    <h3>Rekomendasi Toko & Kafe dengan Menu Paling banyak disukai!</h3>
                 </div>
             </div>
             <div id="list">
@@ -81,21 +81,30 @@
                 success: function (response) {
                     $.each(response.recommended, function (i, recommended) {
                         var products = "";
+                        var markup = "<div class='ui card stack fluid'><a href='https://"+ hostname + "/shop/"+recommended.slug+"' class='image' style='width: 230px; height: 270px'><img src='"+ recommended.logo +"'></a><div class='content'><div class='ui five column grid'>";
                         $.each(recommended.latestMenu, function (i, menu) {
-                            var image = "<a class='image' style='width: 149px; height: 120px'><img src='"+ menu.thumbnail +"'></a>";
                             var price = 0;
                             if(menu.discount) {
                                 price = "<del style='color: grey' class='price'>Rp. "+ $.number(menu.price) +"</del>&nbsp;<b class='price'>Rp. "+ $.number(menu.price - (menu.price * menu.discount)) +"</b>";
                             } else {
                                 price = "<b class='price'>Rp. "+ $.number(menu.price) +"</b>";
                             }
+                            var image = "<div class='image' style='width: 149px; height: 120px'><img src='"+ menu.thumbnail +"'></div>";
                             var content = "<div class='content'><div class='header'>" + menu.name + "</div><span>" + price + "</span></div>";
-                            products += "<a class='column' href='https://'"+ hostname + "/product/"+menu.id+"><div class='ui fluid card'>" + image + content +"</div></a>";
+                            var liked = "<div class=\"ui mini heart rating\" data-rating=\"0\" data-max-rating=\"1\"></div>" + menu.liked;
+                            var rating = "<span class='right floated'><div class='ui mini star rating' data-rating='"+Math.floor(menu.rating)+"'></div> ("+menu.reviewed+")</span>";
+                            var extra = "<div class=\"extra content\">" + liked + rating + "</div>";
+                            markup += "<a class='column' href='https://"+ hostname + "/product/"+menu.id+"'><div class='ui fluid card'>" + image + content + extra + "</div></a>";
+                            $('.ui.heart.rating').rating('enable');
+                            $('.ui.star.rating').rating({
+                                maxRating: 5
+                            }).rating('disable');
+
                         });
-                        var markup = "<div class='ui card stack fluid'><div class='image' style='width: 230px; height: 270px'><img src='"+ recommended.logo +"'></div><div class='content'><div class='ui five column grid'>" + products + "</div></div></div>";
+                        markup += "</div></div></div>";
                         $('#list').append(markup);
-                        offset += {{ count($recommended) }};
                     });
+                    offset += {{ count($recommended) }};
                     $('div.image').imagefill();
                     $('a.image').imagefill();
                 }

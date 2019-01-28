@@ -19,9 +19,12 @@ class ShopController extends Controller
      */
     public function recommended()
     {
-        $recommended = Cafe::has('menus', '>=', '5')->where('logo_path', '<>', 'null')->limit(5)->get();
+        $recommended = Cafe::has('menus', '>=', 5)->where('logo_path', '<>', 'null')->limit(5)->get()->sortBy(function($recommend)
+        {
+            return $recommend->menus->sum('rating') + $recommend->menus->sum('liked');
+        }, null, True);
         foreach ($recommended as $key => $recommend) {
-            $latestMenu = Menu::where('cafe_id', $recommend->id)->limit(5)->get();
+            $latestMenu = Menu::where('cafe_id', $recommend->id)->orderBy('liked', 'desc')->orderBy('rating', 'desc')->limit(5)->get();
             foreach ($latestMenu as $keyMenu => $value) {
                 $thumbnail = Menu::getThumbnail($value->id);
                 $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
@@ -69,8 +72,10 @@ class ShopController extends Controller
 
     public function load($offset)
     {
-        $recommended = Cafe::where('logo_path', '<>', 'null')
-            ->offset($offset)->limit(3)->with('latestMenu')->get();
+        $recommended = Cafe::has('menus', '>=', 5)->where('logo_path', '<>', 'null')->limit(5)->offset($offset)->get()->sortBy(function($recommend)
+        {
+            return $recommend->menus->sum('rating');
+        }, null, True);
         foreach ($recommended as $key => $recommend) {
             $latestMenu = Menu::where('cafe_id', $recommend->id)->limit(5)->get();
             foreach ($latestMenu as $keyMenu => $value) {
