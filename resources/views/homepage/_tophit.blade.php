@@ -4,7 +4,6 @@
             <h3>Paling Banyak Diminati</h3>
         </div>
         <div class="right floated right aligned eight wide column">
-            <a href="#">Lihat Semua</a>
         </div>
     </div>
     <div class="ui six doubling cards">

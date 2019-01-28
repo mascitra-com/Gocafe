@@ -19,11 +19,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $cafes = Cafe::has('menus', '>=', '1')->where('logo_path', '<>', 'null')->limit(15)->get();
+        $cafes = Cafe::with('menus')->where('logo_path', '<>', 'null')->limit(15)->get()->sortBy(function($recommend)
+        {
+            return $recommend->menus->sum('rating') + $recommend->menus->sum('liked');
+        }, null, True);
         foreach ($cafes as $key => $cafe) {
             $cafes[$key]->logo = str_replace('storage/logo/', 'img/cache/small-logo/', Storage::url($cafe->logo_path));
         }
-        $recommended = Cafe::has('menus', '>=', '5')->where('logo_path', '<>', 'null')->limit(5)->get();
+        $recommended = Cafe::has('menus', '>=', 5)->where('logo_path', '<>', 'null')->limit(5)->get()->sortBy(function($recommend)
+        {
+            return $recommend->menus->sum('rating') + $recommend->menus->sum('liked');
+        }, null, True);
         foreach ($recommended as $key => $recommend) {
             $latestMenu = Menu::where('cafe_id', $recommend->id)->limit(5)->get();
             foreach ($latestMenu as $keyMenu => $value) {
@@ -34,22 +40,25 @@ class HomeController extends Controller
             $recommended[$key]->latestMenu = $latestMenu;
             $recommended[$key]->logo = str_replace('storage/logo/', 'img/cache/medium-logo/', Storage::url($recommend->logo_path));
         }
-        // Most Hit By User
-        $topHit = TransactionDetail::getTopHitProducts();
         // Favorite Menus by Total Order
-        $favProducts = TransactionDetail::getTrendingProducts(1);
+        $favProducts = TransactionDetail::getTrendingProducts(3);
         foreach ($favProducts as $key => $value){
             $code_item = substr($value->item_id, 0,3);
             if($code_item === "MCF"){
                 $menu = Menu::find($value->item_id);
                 $favProducts[$key] = $menu;
                 $favProducts[$key]->type = 'Menu';
+                $thumbnail = Menu::getThumbnail($value->item_id);
+                $thumbnail = str_replace('storage/product/', 'img/cache/small-product/', $thumbnail[0]);
+                $favProducts[$key]->thumbnail = $thumbnail;
             }
             if($code_item === "PKG"){
                 // TODO Fix this so that Package will have image to view
                 unset($favProducts[$key]);
             }
         }
+        // Most Hit By User
+        $topHit = TransactionDetail::getTopHitProducts();
         $categories = DB::table('categories_menus')->select(DB::raw('distinct(name)'))->get()->toArray();
         $location = DB::table('indonesia_provinces')->select('id', 'name')->get()->toArray();
         $ads = Ads::where('page', '1')->get();

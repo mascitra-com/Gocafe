@@ -19,7 +19,7 @@ class ShopController extends Controller
      */
     public function recommended()
     {
-        $recommended = Cafe::has('menus', '>=', 5)->where('logo_path', '<>', 'null')->limit(5)->get()->sortBy(function($recommend)
+        $recommended = Cafe::has('menus', '>=', 1)->where('logo_path', '<>', 'null')->limit(5)->get()->sortBy(function($recommend)
         {
             return $recommend->menus->sum('rating') + $recommend->menus->sum('liked');
         }, null, True);
@@ -72,7 +72,7 @@ class ShopController extends Controller
 
     public function load($offset)
     {
-        $recommended = Cafe::has('menus', '>=', 5)->where('logo_path', '<>', 'null')->limit(5)->offset($offset)->get()->sortBy(function($recommend)
+        $recommended = Cafe::has('menus', '>=', 1)->where('logo_path', '<>', 'null')->limit(5)->offset($offset)->get()->sortBy(function($recommend)
         {
             return $recommend->menus->sum('rating');
         }, null, True);

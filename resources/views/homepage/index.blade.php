@@ -22,14 +22,14 @@
     @include('homepage._recommended')
     {{--Top Picks with Their Products--}}
     @include('homepage._toppicks')
+    {{--Hot List--}}
+    @include('homepage._hotlist')
     {{--Top Hit--}}
     @include('homepage._tophit')
     {{--Category--}}
     @include('homepage._category')
     {{--Location--}}
     @include('homepage._location')
-    {{--Hot List--}}
-    {{--@include('homepage._hotlist')--}}
     {{--Slogan--}}
     <div class="ui vertical quote segment container" style="padding: 5em 0em">
         <div class="ui grid container">
