@@ -79,6 +79,10 @@ Route::group(['middleware'=> ['web', 'auth', 'role:owner']], function (){
     // REVIEW
     Route::post('review', 'ReviewController@store');
     //--END REVIEW
+
+    // BOOKING
+    Route::get('booking', 'BookingController@index');
+    // -END BOOKING
 });
 
 Route::group(['middleware'=> ['web', 'auth', 'role:staff']], function () {
@@ -147,6 +151,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('about-us', 'InformationController@aboutUs');
     Route::get('info/{infoId}', 'InformationController@show');
     //-END INFORMATION
+
+    //CART
+    Route::get('cart', 'CartController@index');
+    //-END CART
 
     Auth::routes(['verify' => true]);
 });
