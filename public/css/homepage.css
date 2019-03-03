@@ -46,14 +46,14 @@ div#location {
     padding: 1em;
 }
 a, .ui.breadcrumb a {
-    color: #F18803;
+    color: #8C4728 !important;
 }
 .ui.selectable.table tbody tr:hover, .ui.table tbody tr td.selectable:hover {
     background: transparent !important;
     color: #8C4728 !important;
 }
 a:hover, .ui.breadcrumb a:hover {
-    color: #8C4728;
+    color: #F18803;
 }
 .ui.card>.content>a.header:hover, .ui.cards>.card>.content>a.header:hover {
     color: #8C4728;

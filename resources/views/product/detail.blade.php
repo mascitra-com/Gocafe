@@ -14,25 +14,6 @@
     <div class="ui grid container">
         {{-- Main Content --}}
         <div class="twelve wide column">
-            <h1 style="color: #8C4728">
-                {{ $product->name }}<br>
-                <small style="color: #F18803">{{ $product->category->name }}</small>
-            </h1>
-            <div class="row">
-                <div class="column">
-                    <span class="fb-share-button" data-href="{{ Request::fullUrl() }}" data-layout="button_count" data-size="large" data-mobile-iframe="false">
-                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
-                    </span>
-                    <a href="https://wa.me/?text={{ urlencode(Request::fullUrl()) }}" class="ui button green tiny" style="vertical-align: top" target="_blank">
-                        <span class="fa fa-whatsapp"> <b>Bagikan</b></span>
-                    </a>
-                    <a class="twitter-share-button"
-                       href="https://twitter.com/intent/tweet?url={{ urlencode(Request::fullUrl()) }}&text={{ $product->name }} {{ $product->description }}&hashtags=Kulinerae.com"
-                       target="_blank"
-                       data-size="large">
-                    </a>
-                </div>
-            </div>
             <div class="ui segment" style="margin-bottom: 1em">
                 <div class="ui grid">
                     <div class="row">
@@ -63,8 +44,51 @@
                             </div>
                         </div>
                         <div class="ten wide column">
-                            <h4>Deskripsi Produk</h4>
+                            <h2 style="color: #8C4728; margin-bottom: 0">
+                                {{ $product->name }}<br>
+                            </h2>
+                            <span class="ui mini star rating" data-rating="{{ floor($product->rating) }}"></span>
+                            <div class="ui divider"></div>
+
+                            @if($product->discount)
+                                <del style="color: grey">Rp. {{ number_format($product->price, 0, ',', '.') }}</del>
+                                <span class="ui large label" style="color: #8C4728">
+                                    <b>Rp. {{ number_format($product->price - ($product->price * $product->discount), 0, ',', '.') }}</b>
+                                </span>
+                            @else
+                                <span style="color: #8C4728; font-size: 20pt">
+                                    <b>Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
+                                </span>
+                            @endif
+                            <p class="price-last-update">Perubahan Harga Terakhir: {{ date('d-m-Y, H:i') }}</p>
                             <p>{{ $product->description }}</p>
+                            <div class="row">
+                                <div class="handle-counter" id="counter-amount">
+                                    <button class="counter-minus btn btn-primary">-</button>
+                                    <input type="text" value="1" id="amount">
+                                    <button class="counter-plus btn btn-primary">+</button>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 1em">
+                                <div class="ui grid">
+                                    <div class="six column">
+                                        <button class="ui fluid button brown large"> &nbsp Beli Sekarang</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ui grid">
+                                    <div class="eight wide column">
+                                        <button class="ui fluid button large" type="submit" id="add-to-cart"> &nbsp Tambahkan ke Keranjang</button>
+                                    </div>
+                                    <div class="eight wide column">
+                                        <form action="{{ url('messages/create') }}" method="get">
+                                            <input type="hidden" name="send_to" value="{{ $shop->slug }}">
+                                            <button class="ui fluid button large" type="submit"><i class="fa fa-envelope"></i> &nbsp Kirim Pesan</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -119,44 +143,58 @@
         </div>
         {{-- Sidebar --}}
         <div class="four wide column">
-            <div class="ui center aligned segment">
-                @if($product->discount)
-                    <del style="color: grey">Rp. {{ number_format($product->price, 0, ',', '.') }}</del>
-                    <h2 style="color: #8C4728; margin-top: .1em">
-                    <b>Rp. {{ number_format($product->price - ($product->price * $product->discount), 0, ',', '.') }}</b>
-                    </h2>
-                @else
-                    <h2 style="color: #8C4728">
-                    <b>Rp. {{ number_format($product->price, 0, ',', '.') }}</b>
-                    </h2>
-                @endif
-                <p class="price-last-update">Perubahan Harga Terakhir: {{ date('d-m-Y, H:i') }}</p>
-            </div>
-            <button class="ui fluid button"><i class="fa fa-heart"></i> &nbsp Tambah ke Wishlist</button>
-            <div class="ui center aligned segment container">
-                <a href="{{ url('shop/' . $shop->slug) }}">
-                <h3 style="color: #8C4728">{{ $shop->name }}</h3>
-                <img class="ui centered tiny image" src="{{ url($shop->logo) }}"><br>
+            <div class="row">
+                <a href="https://wa.me/?text={{ urlencode(Request::fullUrl()) }}" class="ui button green tiny" style="vertical-align: top; color: white !important;" target="_blank">
+                    <span class="fa fa-whatsapp"></span>
                 </a>
-                @if($shop->facebook)
-                    <a target="_blank" href="https://www.facebook.com/{{ $shop->facebook }}"><i class="fa fa-lg fa-facebook-square"></i> {{ $shop->facebook }}</a>
-                @endif
-                @if($shop->twitter)
-                    <a target="_blank" href="https://www.twitter.com/{{ $shop->twitter }}"><i class="fa fa-lg fa-twitter-square"></i> {{ $shop->twitter }}</a><br>
-                @endif
-                @if($shop->instagram)
-                    <a target="_blank" href="https://www.instagram.com/{{ $shop->instagram }}"><i class="fa fa-lg fa-instagram"></i> {{ $shop->instagram }}</a>&nbsp;&nbsp;
-                @endif
-                @if($shop->phone)
-                    <span style="color: #F18803"><i class="fa fa-lg fa-phone-square"></i> {{ $shop->phone }}</span>
-                @endif
-                <br><br>
-                <form action="{{ url('messages/create') }}" method="get">
-                    <input type="hidden" name="send_to" value="{{ $shop->slug }}">
-                    <button class="ui fluid button brown" type="submit"><i class="fa fa-envelope"></i> &nbsp Kirim Pesan</button>
-                </form>
+                <a class="twitter-share-button"
+                   href="https://twitter.com/intent/tweet?url={{ urlencode(Request::fullUrl()) }}&text={{ $product->name }} {{ $product->description }}&hashtags=Kulinerae.com"
+                   target="_blank"
+                   data-size="large">
+                </a>
+                <span class="fb-share-button" data-href="{{ Request::fullUrl() }}" data-layout="button" data-size="large" data-mobile-iframe="false">
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
+                </span>
             </div>
-        </div>
+            <h5>DIJUAL OLEH</h5>
+            <div class="ui items">
+                <div class="item">
+                    <div class="ui tiny image">
+                        <img class="ui centered tiny image" src="{{ url($shop->logo) }}">
+                    </div>
+                    <div class="content">
+                    <div class="header">
+                        <a href="{{ url('shop/' . $shop->slug) }}">
+                        <h3 style="color: #8C4728">{{ $shop->name }}</h3>
+                        </a>
+                    </div>
+                    <div class="meta">
+                        <div class="row" style="margin-bottom: .5em">
+                            @if($shop->facebook)
+                                <a target="_blank" href="https://www.facebook.com/{{ $shop->facebook }}"><i class="fa fa-lg fa-facebook-square"></i></a>
+                            @endif
+                            @if($shop->twitter)
+                                <a target="_blank" href="https://www.twitter.com/{{ $shop->twitter }}"><i class="fa fa-lg fa-twitter-square"></i></a>
+                            @endif
+                            @if($shop->instagram)
+                                <a target="_blank" href="https://www.instagram.com/{{ $shop->instagram }}"><i class="fa fa-lg fa-instagram"></i></a>&nbsp;
+                            @endif
+                        </div>
+                        <div class="row">
+                            @if($shop->phone)
+                                <span style="margin-top: .5em"><i class="fa fa-lg fa-phone-square"></i> {{ $shop->phone }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="extra">
+                            <div class="column">Aktif Sejak : <br>{{ date('d M Y H:i', strtotime($shop->created_at)) }}
+                            </div>
+                            <div class="column">Terakhir Login :
+                                <br>{{ date('d M Y H:i', strtotime($shop->last_accessed)) }}</div>
+                    </div>
+                    </div>
+                </div>
+            </div>
     </div>
     @include('homepage._tophit')
 @endsection
@@ -187,6 +225,24 @@
             width: 400,
             height: 400
         }
+        $('#add-to-cart').on('click', function () {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            var item_id = $('#item_id').val();
+            var amount = $('#amount').val();
+            $.ajax({
+                url: '/cart/store',
+                dataType: 'json',
+                type: 'post',
+                data: {_token: CSRF_TOKEN, item:item_id, amount:amount},
+                success: function (response) {
+                    $('#total_payment').html(response.total);
+                },
+                error: function (e) {
+                    window.location.replace('https://kulinerae.com/login');
+                }
+            }).done(cart);
+        });
+
         $("#form-review").submit( function(eventObj) {
             $('<input />').attr('type', 'hidden')
                 .attr('name', "rating")
@@ -202,6 +258,17 @@
                 maxRating: 5
             });
             $('.ui.star.rating.disable').rating('disable');
+            $('#counter-amount').handleCounter({
+                minimum: 1,
+                maximize: null,
+                onMinimum: function(){
+
+                },
+                onMaximize: function(){
+
+                }
+            })
+
         });
         (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];

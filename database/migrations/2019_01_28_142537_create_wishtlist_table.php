@@ -13,13 +13,15 @@ class CreateWishtlistTable extends Migration
      */
     public function up()
     {
-        Schema::create('wishtlist', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('item_id');
-            $table->integer('user_id');
-            $table->enum('status', ['0', '1']);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('admin_password_resets')) {
+            Schema::create('wishtlist', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('item_id');
+                $table->integer('user_id');
+                $table->enum('status', ['0', '1']);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

@@ -80,8 +80,13 @@ Route::group(['middleware'=> ['web', 'auth', 'role:owner']], function (){
     Route::post('review', 'ReviewController@store');
     //--END REVIEW
 
+    //CART
+    Route::post('cart/store', 'CartController@store');
+    Route::get('cart/modal', 'CartController@modal');
+    //-END CART
+
     // BOOKING
-    Route::get('booking', 'BookingController@index');
+    Route::get('checkout', 'CheckoutController@index');
     // -END BOOKING
 });
 

@@ -54,6 +54,11 @@ class Menu extends Model
 
     public function packages()
     {
-        return $this->belongsToMany(Package::class)->withTimestamps();;
+        return $this->belongsToMany(Package::class)->withTimestamps();
+    }
+
+    public function cartitem()
+    {
+        return $this->morphMany('CartItems', 'cartable');
     }
 }

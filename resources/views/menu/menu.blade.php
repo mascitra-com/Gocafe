@@ -141,6 +141,7 @@
             $(this).attr('src', '{{ URL::asset('images/blank-menu.png') }}');
         });
     });
+
 	function ajax_config() {
 		$.ajaxSetup({
 			headers: {

@@ -62,6 +62,7 @@
                                 <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> Kembalikan</button>
                             </div>
                         </form>
+                        @if(isset($cafe->id))
                         <div class="panel-body box-center">
                             <div class="row">
                                 <div class="col-md-4">
@@ -80,6 +81,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

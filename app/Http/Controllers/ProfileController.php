@@ -44,7 +44,6 @@ class ProfileController extends Controller
      */
     public function updatePersonal(Request $request, $id)
     {
-        $this->authorize('profile.update', [$id]);
         $birthdate = frmtPartDate($request->birthdate_day, $request->birthdate_month, $request->birthdate_year);
         $request->merge(array('birthdate' => $birthdate));
         $input = $request->except('birthdate_year', 'birthdate_month', 'birthdate_day');
@@ -60,7 +59,6 @@ class ProfileController extends Controller
      */
     public function updateContact(Request $request, $id)
     {
-        $this->authorize('profile.update', [$id]);
         Owner::findOrFail($id)->update($request->all());
         return redirect('profile');
     }

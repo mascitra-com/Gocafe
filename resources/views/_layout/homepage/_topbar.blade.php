@@ -29,8 +29,15 @@
             <a href="{{ url('admin/dashboard') }}" class="item">Dashboard Admin</a>
             <span style="margin-right: 6.5em"></span></a>
         @elseif(!Auth::guest())
-            <a href="{{ url('dashboard') }}" class="item">Dashboard</a>
-            <span style="margin-right: 6.5em"></span></a>
+            <div class="item"><a href="{{ url('dashboard') }}">Dashboard</a></div>
+            <div class="item">
+                @if(!Request::is('cart'))
+                <a href="#" onclick="cart()" class="button">
+                    <span class="fa fa-shopping-cart"></span>
+                </a>
+                @endif
+            </div>
+            <span style="margin-right: 6.5em"></span>
         @else
             <a href="{{ url('register') }}" class="item">Daftar</a>
             <a href="{{ url('login') }}" class="item">Masuk</a>

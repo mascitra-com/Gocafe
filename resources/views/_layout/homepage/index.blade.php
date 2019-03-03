@@ -66,7 +66,7 @@
                 <div class="four wide column">
                     <div class="ui header">
                         <h4 style="margin-bottom: .1em">Hubungi kami</h4>
-                        <h2 style="margin-top: .1em; margin-bottom: .1em">(0331) 450050</h2>
+                        <h2 style="margin-top: .1em; margin-bottom: .1em">(0331) 4350050</h2>
                         <h5 style="margin-top: .1em">SMS 081230033880</h5>
                     </div>
                     <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
@@ -163,7 +163,7 @@
         <div class="ui container" style="color: rgba(0,0,0,.4); font-size: 9pt">
             <div class="ui left aligned grid">
                 <div class="eight wide column">
-                    <p>&copy; 2017 - 2018. PT. Kulinerae Indonesia. Powered by <a href="http://mascitra.com/">Mascitra.com</a> Konsultan IT</p>
+                    <p>&copy; 2017 - <?=date('Y')?>. CV. Nusantara Tama. Powered by <a href="http://mascitra.com/">Mascitra.com</a> Konsultan IT</p>
                     <p>Server process time: {{ number_format((microtime(true) - LARAVEL_START), 3) }}</p>
                 </div>
                 <div class="right floated right aligned eight wide column">

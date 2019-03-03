@@ -41,7 +41,6 @@ class CafeController extends Controller
      */
     public function updateLogo(Request $request, $id)
     {
-        $this->authorize('cafe.update', [$id]);
         //checking file is present
         if ($request->hasFile('logo')) {
             //verify the file is uploading
@@ -72,7 +71,6 @@ class CafeController extends Controller
      */
     public function updateCover(Request $request, $id)
     {
-        $this->authorize('cafe.update', [$id]);
         //checking file is present
         if ($request->hasFile('cover')) {
             //verify the file is uploading
@@ -101,12 +99,10 @@ class CafeController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param Owner $owner
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request, Owner $owner)
     {
-        $this->authorize('cafe.store', $owner);
         // Validate the required data
         $this->validate($request, [
             'name' => 'min:3|max:255|required',
@@ -137,7 +133,6 @@ class CafeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('cafe.update', [$id]);
         // Validate the required data
         $this->validate($request, [
             'name' => 'min:3|max:255|required',
@@ -167,7 +162,6 @@ class CafeController extends Controller
      */
     public function updateContact(Request $request, $id)
     {
-        $this->authorize('cafe.update', [$id]);
         // Validate the required data
         $this->validate($request, [
             'phone' => 'max:20',

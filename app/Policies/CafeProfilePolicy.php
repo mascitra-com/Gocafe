@@ -18,9 +18,9 @@ class CafeProfilePolicy
      * @param Owner $owner
      * @return bool
      */
-    public function store(User $user, Owner $owner)
+    public function store(User $user, int $owner_id)
     {
-        return $user->id == $owner->user_id;
+        return $user->id == $owner_id;
     }
 
     /**

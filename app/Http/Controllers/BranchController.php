@@ -96,7 +96,6 @@ class BranchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('branch.update', [$id]);
 	    if(!isset($request->status)) {
 		    $request->request->add([
 			    'status' => 'off'

@@ -127,7 +127,6 @@ class MenusController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        $this->authorize('menu.update', [$menu]);
         $requestData['cost'] = str_replace('.', '', $request->cost);
         $requestData['price'] = str_replace('.', '', $request->price);
         $request->merge($requestData);

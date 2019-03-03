@@ -43,7 +43,7 @@
                         <div style="font-size: 8pt; margin-top: .5em" class="ui equal width grid">
                             <div class="column">Aktif Sejak : <br>{{ date('d M Y H:i', strtotime($shop->created_at)) }}
                             </div>
-                            <div class="column">Terakhir diakses :
+                            <div class="column">Terakhir Login :
                                 <br>{{ date('d M Y H:i', strtotime($shop->last_accessed)) }}</div>
                         </div>
                         <div class="ui grid">
